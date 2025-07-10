@@ -41,71 +41,211 @@
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
 
-    <!-- JSON-LD Structured Data -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": "Konut İnşaat Projeleri",
-        "description": "AR-KAR İnşaat konut projeleri: Samsun Çarşamba'da modern 2+1 ve 1+1 daire projeleri, Atakum Beypınar konut projesi, tekstil fabrikası inşaatı.",
-        "url": "https://www.arkar.com.tr/projeler.html",
-        "mainEntity": {
-            "@type": "Organization",
-            "name": "AR-KAR İnşaat",
-            "url": "https://www.arkar.com.tr"
-        },
-        "breadcrumb": {
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-                {
-                    "@type": "ListItem",
-                    "position": 1,
-                    "name": "Ana Sayfa",
-                    "item": "https://www.arkar.com.tr/"
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 2,
-                    "name": "Konut İnşaat Projeleri",
-                    "item": "https://www.arkar.com.tr/projeler.html"
-                }
-            ]
-        },
-        "hasOfferCatalog": {
-            "@type": "OfferCatalog",
-            "name": "AR-KAR Konut Projeleri",
-            "itemListElement": [
-                {
-                    "@type": "Offer",
-                    "itemOffered": {
-                        "@type": "Product",
-                        "name": "Çarşamba Kirazlıkçay Konut Projesi",
-                        "description": "18 daire 2+1 ve 1+1 konut projesi",
-                        "category": "Konut İnşaat Projesi"
-                    }
-                },
-                {
-                    "@type": "Offer",
-                    "itemOffered": {
-                        "@type": "Product",
-                        "name": "Tekstil Fabrikası Projesi",
-                        "description": "3900 m2 kapalı alan tekstil fabrika projesi",
-                        "category": "Endüstriyel İnşaat Projesi"
-                    }
-                },
-                {
-                    "@type": "Offer",
-                    "itemOffered": {
-                        "@type": "Product",
-                        "name": "Atakum Beypınar Konut Projesi",
-                        "description": "18 daire 2+1 konut projesi",
-                        "category": "Konut İnşaat Projesi"
-                    }
-                }
-            ]
+    <!-- Custom CSS for Responsive Project Cards -->
+    <style>
+        /* Responsive project card styles */
+        .portfolio-item {
+            margin-bottom: 40px;
+            height: auto;
+            clear: both;
+            isolation: isolate;
         }
-    }
-    </script>
+
+        .portfolio-box {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .portfolio-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .portfolio-box img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .portfolio-title {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(255,255,255,0.98), rgba(255,255,255,0.95));
+            padding: 20px;
+            border-radius: 0 0 10px 10px;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+            border-top: 3px solid var(--primary);
+            z-index: 3;
+        }
+
+        .portfolio-title h2 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            line-height: 1.3;
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        .portfolio-title span {
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+            color: #666;
+        }
+
+        .portfolio-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.3s ease;
+            z-index: 4;
+        }
+
+        .portfolio-box:hover .portfolio-btn {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .portfolio-btn i {
+            font-size: 20px;
+            color: white;
+        }
+
+        /* Filter buttons responsive styles */
+        .portfolio-filter {
+            margin-bottom: 50px;
+        }
+
+        .portfolio-filter button {
+            margin: 5px;
+            padding: 10px 20px;
+            border: 2px solid var(--primary);
+            background: transparent;
+            color: var(--primary);
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .portfolio-filter button:hover,
+        .portfolio-filter button.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Mobile responsive adjustments */
+        @media (max-width: 768px) {
+            .portfolio-box {
+                height: 350px;
+            }
+
+            .portfolio-box img {
+                height: 200px;
+            }
+
+            .portfolio-title {
+                height: 150px;
+                padding: 15px;
+            }
+
+            .portfolio-title h2 {
+                font-size: 1rem;
+                line-height: 1.2;
+            }
+
+            .portfolio-title span {
+                font-size: 0.85rem;
+            }
+
+            .portfolio-filter button {
+                margin: 3px;
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .portfolio-box {
+                height: 320px;
+            }
+
+            .portfolio-box img {
+                height: 180px;
+            }
+
+            .portfolio-title {
+                height: 140px;
+                padding: 12px;
+            }
+
+            .portfolio-title h2 {
+                font-size: 0.95rem;
+            }
+
+            .portfolio-title span {
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Equal height columns - Fixed overlapping issue */
+        .portfolio-container {
+            position: relative;
+            overflow: hidden;
+            clear: both;
+        }
+
+        .portfolio-container::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .portfolio-item {
+            position: relative;
+            z-index: 1;
+            display: block;
+            float: none;
+        }
+
+        .portfolio-box {
+            position: relative;
+            z-index: 2;
+            background: white;
+            border: 1px solid #f0f0f0;
+        }
+
+        /* Breadcrumb responsive improvements */
+        .breadcrumb-item {
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 576px) {
+            .breadcrumb-item {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -144,7 +284,7 @@
     <!-- Navbar End -->
 
     <!-- Breadcrumb Start -->
-    <div class="container-fluid bg-dark py-3 px-5">
+    <div class="container-fluid bg-dark py-3 px-3 px-md-5">
         <div class="row">
             <div class="col-12">
                 <nav aria-label="breadcrumb">
@@ -159,7 +299,7 @@
     <!-- Breadcrumb End -->
 
     <!-- Portfolio Start -->
-    <div class="container-fluid bg-light py-6 px-5">
+    <div class="container-fluid bg-light py-6 px-3 px-md-5">
 
         <div class="text-center mx-auto mb-5" style="max-width: 600px;">
             <h1 class="display-5 text-uppercase mb-4"><span class="text-primary">AR-KAR İnşaat</span> Konut Projelerimiz</h1>
@@ -193,88 +333,88 @@
             </div>
         </div>
 
-        <div class="row g-5 portfolio-container">
+        <div class="row g-4 portfolio-container" style="position: relative; z-index: 1;">
 
-            <div class="col-xl-4 col-lg-6 col-md-6 portfolio-item ongoing">
+            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 portfolio-item completed" style="margin-bottom: 30px;">
                 <div class="position-relative portfolio-box">
-                    <img class="img-fluid w-100" src="img/proje/proje1.jpg" alt="Çarşamba Kirazlıkçay Konut Projesi">
-                    <a class="portfolio-title shadow-sm" href="">
-                        <h2 class="h4 text-uppercase">Çarşamba Kirazlıkçay Mahallesi 18 Daire Konut Projesi</h2>
+                    <img class="img-fluid" src="img/proje/proje1.jpg" alt="Çarşamba Kirazlıkçay Konut Projesi">
+                    <div class="portfolio-title">
+                        <h2 class="text-uppercase">Çarşamba Kirazlıkçay Mahallesi 18 Daire Konut Projesi</h2>
                         <span class="text-body"><i class="fa fa-map-marker-alt text-primary me-2"></i>Kirazlıkçay Mah. Çarşamba, Samsun</span>
                         <span class="text-body d-block"><i class="fa fa-home text-primary me-2"></i>2+1 ve 1+1 Daireler</span>
-                    </a>
+                    </div>
                     <a class="portfolio-btn" href="img/proje/proje1.jpg" data-lightbox="portfolio">
-                        <i class="bi bi-plus text-white"></i>
+                        <i class="bi bi-plus"></i>
                     </a>
                 </div>
             </div>
 
-            <div class="col-xl-4 col-lg-6 col-md-6 portfolio-item completed">
+            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 portfolio-item completed" style="margin-bottom: 30px;">
                 <div class="position-relative portfolio-box">
-                    <img class="img-fluid w-100" src="img/proje/proje2.jpg" alt="Tekstil Fabrikası İnşaat Projesi">
-                    <a class="portfolio-title shadow-sm" href="">
-                        <h2 class="h4 text-uppercase">3900 m² Kapalı Alan Tekstil Fabrikası Projesi</h2>
+                    <img class="img-fluid" src="img/proje/proje2.jpg" alt="Tekstil Fabrikası İnşaat Projesi">
+                    <div class="portfolio-title">
+                        <h2 class="text-uppercase">3900 m² Kapalı Alan Tekstil Fabrikası Projesi</h2>
                         <span class="text-body"><i class="fa fa-map-marker-alt text-primary me-2"></i>Çarşamba, Samsun</span>
                         <span class="text-body d-block"><i class="fa fa-industry text-primary me-2"></i>Endüstriyel İnşaat</span>
-                    </a>
+                    </div>
                     <a class="portfolio-btn" href="img/proje/proje2.jpg" data-lightbox="portfolio">
-                        <i class="bi bi-plus text-white"></i>
+                        <i class="bi bi-plus"></i>
                     </a>
                 </div>
             </div>
 
-            <div class="col-xl-4 col-lg-6 col-md-6 portfolio-item ongoing">
+            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 portfolio-item ongoing" style="margin-bottom: 30px;">
                 <div class="position-relative portfolio-box">
-                    <img class="img-fluid w-100" src="img/proje/proje3.jpg" alt="Atakum Beypınar Konut Projesi">
-                    <a class="portfolio-title shadow-sm" href="">
-                        <h2 class="h4 text-uppercase">Atakum Beypınar 18 Daire 2+1 Konut Projesi</h2>
+                    <img class="img-fluid" src="img/proje/proje3.jpg" alt="Atakum Beypınar Konut Projesi">
+                    <div class="portfolio-title">
+                        <h2 class="text-uppercase">Atakum Beypınar 18 Daire 2+1 Konut Projesi</h2>
                         <span class="text-body"><i class="fa fa-map-marker-alt text-primary me-2"></i>Beypınar Mah. Atakum, Samsun</span>
                         <span class="text-body d-block"><i class="fa fa-home text-primary me-2"></i>2+1 Daireler</span>
-                    </a>
+                    </div>
                     <a class="portfolio-btn" href="img/proje/proje3.jpg" data-lightbox="portfolio">
-                        <i class="bi bi-plus text-white"></i>
+                        <i class="bi bi-plus"></i>
                     </a>
                 </div>
             </div>
 
-            <div class="col-xl-4 col-lg-6 col-md-6 portfolio-item ongoing">
+            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 portfolio-item ongoing" style="margin-bottom: 30px;">
                 <div class="position-relative portfolio-box">
-                    <img class="img-fluid w-100" src="img/portfolio-4.jpg" alt="AR-KAR İnşaat Projesi">
-                    <a class="portfolio-title shadow-sm" href="">
-                        <h2 class="h4 text-uppercase">Modern Konut Projesi</h2>
+                    <img class="img-fluid" src="img/portfolio-4.jpg" alt="AR-KAR İnşaat Modern Konut Projesi">
+                    <div class="portfolio-title">
+                        <h2 class="text-uppercase">Modern Konut Projesi</h2>
                         <span class="text-body"><i class="fa fa-map-marker-alt text-primary me-2"></i>Çarşamba, Samsun</span>
                         <span class="text-body d-block"><i class="fa fa-home text-primary me-2"></i>Konut İnşaatı</span>
-                    </a>
+                    </div>
                     <a class="portfolio-btn" href="img/portfolio-4.jpg" data-lightbox="portfolio">
-                        <i class="bi bi-plus text-white"></i>
+                        <i class="bi bi-plus"></i>
                     </a>
                 </div>
             </div>
 
-            <div class="col-xl-4 col-lg-6 col-md-6 portfolio-item completed">
+            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 portfolio-item completed" style="margin-bottom: 30px;">
                 <div class="position-relative portfolio-box">
-                    <img class="img-fluid w-100" src="img/portfolio-5.jpg" alt="Tamamlanan İnşaat Projesi">
-                    <a class="portfolio-title shadow-sm" href="">
-                        <h2 class="h4 text-uppercase">Tamamlanan Konut Projesi</h2>
+                    <img class="img-fluid" src="img/portfolio-5.jpg" alt="Tamamlanan İnşaat Projesi">
+                    <div class="portfolio-title">
+                        <h2 class="text-uppercase">Tamamlanan Konut Projesi</h2>
                         <span class="text-body"><i class="fa fa-map-marker-alt text-primary me-2"></i>Çarşamba, Samsun</span>
                         <span class="text-body d-block"><i class="fa fa-check text-primary me-2"></i>Teslim Edildi</span>
-                    </a>
+                    </div>
                     <a class="portfolio-btn" href="img/portfolio-5.jpg" data-lightbox="portfolio">
-                        <i class="bi bi-plus text-white"></i>
+                        <i class="bi bi-plus"></i>
                     </a>
                 </div>
             </div>
 
-            <div class="col-xl-4 col-lg-6 col-md-6 portfolio-item completed">
+            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 portfolio-item completed" style="margin-bottom: 30px;">
                 <div class="position-relative portfolio-box">
-                    <img class="img-fluid w-100" src="img/portfolio-6.jpg" alt="AR-KAR Konut Projesi">
-                    <a class="portfolio-title shadow-sm" href="">
-                        <h2 class="h4 text-uppercase">Kaliteli Konut Projesi</h2>
+                    <img class="img-fluid" src="img/portfolio-6.jpg" alt="AR-KAR Kaliteli Konut Projesi">
+                    <div class="portfolio-title">
+                        <h2 class="text-uppercase">Kaliteli Konut Projesi</h2>
                         <span class="text-body"><i class="fa fa-map-marker-alt text-primary me-2"></i>Çarşamba, Samsun</span>
                         <span class="text-body d-block"><i class="fa fa-star text-primary me-2"></i>Prestijli Proje</span>
-                    </a>
+                    </div>
                     <a class="portfolio-btn" href="img/portfolio-6.jpg" data-lightbox="portfolio">
-                        <i class="bi bi-plus text-white"></i>
+                        <i class="bi bi-plus"></i>
                     </a>
                 </div>
             </div>
@@ -285,7 +425,7 @@
     <!-- Portfolio End -->
     
      <!-- Footer Start -->
-    <div class="footer container-fluid position-relative bg-dark bg-light-radial text-white-50 py-6 px-5">
+    <div class="footer container-fluid position-relative bg-dark bg-light-radial text-white-50 py-6 px-3 px-md-5">
         <div class="row g-5">
             <div class="col-lg-6 pe-lg-5">
                 <a href="index.html" class="navbar-brand">
@@ -351,6 +491,75 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+
+    <!-- Custom Portfolio JavaScript -->
+    <script>
+        $(document).ready(function() {
+            // Initialize Isotope
+            var $portfolioContainer = $('.portfolio-container');
+            
+            $portfolioContainer.isotope({
+                itemSelector: '.portfolio-item',
+                layoutMode: 'fitRows',
+                filter: '*'
+            });
+
+            // Filter items on button click
+            $('#portfolio-flters li').click(function() {
+                $("#portfolio-flters li").removeClass('active');
+                $(this).addClass('active');
+
+                var filterValue = $(this).attr('data-filter');
+                $portfolioContainer.isotope({
+                    filter: filterValue,
+                    animationOptions: {
+                        duration: 300,
+                        easing: 'linear',
+                        queue: false
+                    }
+                });
+            });
+
+            // Lightbox configuration
+            lightbox.option({
+                'resizeDuration': 200,
+                'wrapAround': true,
+                'fadeDuration': 300,
+                'imageFadeDuration': 300
+            });
+
+            // Add smooth animations
+            $('.portfolio-item').each(function(index) {
+                $(this).css('animation-delay', (index * 0.1) + 's');
+            });
+
+            // Responsive adjustments
+            function adjustLayout() {
+                if ($(window).width() <= 768) {
+                    $('.portfolio-box').css('height', '350px');
+                } else if ($(window).width() <= 576) {
+                    $('.portfolio-box').css('height', '320px');
+                } else {
+                    $('.portfolio-box').css('height', '400px');
+                }
+            }
+
+            // Call on load and resize
+            adjustLayout();
+            $(window).resize(adjustLayout);
+
+            // Smooth scroll for internal links
+            $('a[href^="#"]').on('click', function(event) {
+                var target = $(this.getAttribute('href'));
+                if (target.length) {
+                    event.preventDefault();
+                    $('html, body').stop().animate({
+                        scrollTop: target.offset().top - 100
+                    }, 1000);
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

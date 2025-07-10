@@ -1,12 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 
 <head>
     <meta charset="utf-8">
-    <title>WEBUILD -  Construction Company Website Template Free</title>
+    <title>PVC Kapı ve Pencere Sistemleri | AR-KAR İnşaat Samsun | Kaliteli PVC Doğrama</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Free HTML Templates" name="keywords">
-    <meta content="Free HTML Templates" name="description">
+    <meta content="pvc kapı pencere samsun, pvc doğrama çarşamba, pvc pencere sistemleri, pvc kapı montajı, enerji verimli pencere, cam balkon sistemleri, pvc doğrama fiyatları, kaliteli pvc kapı" name="keywords">
+    <meta content="AR-KAR İnşaat PVC kapı ve pencere sistemleri: Samsun Çarşamba'da en kaliteli PVC doğrama, enerji verimli pencere sistemleri, cam balkon çözümleri. 36 yıllık deneyimle profesyonel montaj." name="description">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="AR-KAR İnşaat">
+    <meta name="geo.region" content="TR-55">
+    <meta name="geo.placename" content="Çarşamba, Samsun">
+    <meta name="geo.position" content="41.1986;36.7153">
+    <meta name="ICBM" content="41.1986, 36.7153">
+    <link rel="canonical" href="https://www.arkar.com.tr/pvc.html">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="PVC Kapı ve Pencere Sistemleri | AR-KAR İnşaat Samsun">
+    <meta property="og:description" content="AR-KAR İnşaat PVC kapı ve pencere sistemleri: Samsun Çarşamba'da en kaliteli PVC doğrama, enerji verimli pencere sistemleri, cam balkon çözümleri.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.arkar.com.tr/pvc.html">
+    <meta property="og:image" content="https://www.arkar.com.tr/img/service-1.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="tr_TR">
+    <meta property="og:site_name" content="AR-KAR İnşaat">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="PVC Kapı ve Pencere Sistemleri | AR-KAR İnşaat Samsun">
+    <meta name="twitter:description" content="Samsun'da en kaliteli PVC doğrama sistemleri: enerji verimli pencereler, güvenli kapılar, cam balkon çözümleri.">
+    <meta name="twitter:image" content="https://www.arkar.com.tr/img/service-1.jpg">
 
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
@@ -29,329 +53,650 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <!-- Custom CSS for PVC Services -->
+    <style>
+        /* PVC Card Styles */
+        .pvc-card {
+            transition: all 0.3s ease;
+            border: none;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .pvc-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1) !important;
+        }
+
+        .pvc-card .card-img-container {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .pvc-card .card-img-top {
+            transition: transform 0.3s ease;
+        }
+
+        .pvc-card:hover .card-img-top {
+            transform: scale(1.08);
+        }
+
+        .pvc-badge {
+            background: linear-gradient(135deg, var(--primary), #d63384);
+            font-weight: 600;
+            font-size: 0.9rem;
+            border-radius: 0 0 15px 0 !important;
+            backdrop-filter: blur(10px);
+        }
+
+        .pvc-card .card-title {
+            color: var(--dark);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 15px;
+        }
+
+        .pvc-card .list-unstyled li {
+            padding: 6px 0;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .pvc-card .list-unstyled li:hover {
+            padding-left: 10px;
+        }
+
+        .pvc-card .btn {
+            font-weight: 600;
+            padding: 12px 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pvc-card .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(204, 39, 43, 0.3);
+        }
+
+        .pvc-card .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .pvc-card .btn:hover::before {
+            left: 100%;
+        }
+
+        /* Features Section Styles */
+        .features-section .bg-primary .rounded-circle {
+            background: linear-gradient(135deg, var(--primary), #d63384) !important;
+            transition: all 0.3s ease;
+        }
+
+        .features-section .rounded-circle:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 10px 20px rgba(204, 39, 43, 0.3);
+        }
+
+        /* Process Section Styles */
+        .process-section .bg-white {
+            transition: all 0.3s ease;
+        }
+
+        .process-section .rounded-circle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 25px rgba(204, 39, 43, 0.2);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .pvc-card .card-body {
+                padding: 20px;
+            }
+            
+            .pvc-badge {
+                font-size: 0.8rem;
+                padding: 8px 12px;
+            }
+
+            .display-5 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .pvc-card .card-body {
+                padding: 30px;
+            }
+        }
+
+        /* Animation for PVC cards */
+        .pvc-card {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .pvc-card:nth-child(1) { animation-delay: 0.1s; }
+        .pvc-card:nth-child(2) { animation-delay: 0.2s; }
+        .pvc-card:nth-child(3) { animation-delay: 0.3s; }
+        .pvc-card:nth-child(4) { animation-delay: 0.4s; }
+        .pvc-card:nth-child(5) { animation-delay: 0.5s; }
+        .pvc-card:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Section background gradients */
+        .pvc-services-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            position: relative;
+        }
+
+        .pvc-services-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to bottom, rgba(204, 39, 43, 0.05), transparent);
+        }
+
+        /* Call to action enhanced styles */
+        .cta-enhanced {
+            background: linear-gradient(135deg, #f8f9fa, #fff);
+            border: 2px solid #e9ecef;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-enhanced::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(204,39,43,0.05)"/></svg>') repeat;
+            animation: float 30s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* Enhanced button styles */
+        .btn-enhanced {
+            position: relative;
+            overflow: hidden;
+            font-weight: 600;
+        }
+
+        .btn-enhanced::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn-enhanced:hover::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* Icon animations */
+        .icon-bounce {
+            animation: iconBounce 2s infinite;
+        }
+
+        @keyframes iconBounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <!-- Topbar Start -->
-    <div class="container-fluid px-5 d-none d-lg-block">
-        <div class="row gx-5">
-            <div class="col-lg-4 text-center py-3">
-                <div class="d-inline-flex align-items-center">
-                    <i class="bi bi-geo-alt fs-1 text-primary me-3"></i>
-                    <div class="text-start">
-                        <h6 class="text-uppercase fw-bold">Our Office</h6>
-                        <span>123 Street, New York, USA</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 text-center border-start border-end py-3">
-                <div class="d-inline-flex align-items-center">
-                    <i class="bi bi-envelope-open fs-1 text-primary me-3"></i>
-                    <div class="text-start">
-                        <h6 class="text-uppercase fw-bold">Email Us</h6>
-                        <span>info@example.com</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 text-center py-3">
-                <div class="d-inline-flex align-items-center">
-                    <i class="bi bi-phone-vibrate fs-1 text-primary me-3"></i>
-                    <div class="text-start">
-                        <h6 class="text-uppercase fw-bold">Call Us</h6>
-                        <span>+012 345 6789</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Topbar End -->
-
-
-    <!-- Navbar Start -->
-    <div class="container-fluid sticky-top bg-dark bg-light-radial shadow-sm px-5 pe-lg-0">
-        <nav class="navbar navbar-expand-lg bg-dark bg-light-radial navbar-dark py-3 py-lg-0">
-            <a href="index.html" class="navbar-brand">
-                <h1 class="m-0 display-4 text-uppercase text-white"><i class="bi bi-building text-primary me-2"></i>WEBUILD</h1>
+   <!-- Navbar Start -->
+    <div class="container-fluid sticky-top bg-dark navbar-dark shadow-sm px-2 px-sm-3 px-md-5 pe-lg-0">
+        <nav class="navbar navbar-expand-lg py-2 py-lg-0">
+            <a href="index.html" class="navbar-brand me-2">
+                <img src="./img/logo.png" alt="AR-KAR İnşaat Logo" style="max-height:80px;">
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto py-0">
-                    <a href="index.html" class="nav-item nav-link">Home</a>
-                    <a href="about.html" class="nav-item nav-link">About</a>
-                    <a href="service.html" class="nav-item nav-link">Service</a>
+                    <a href="index.html" class="nav-item nav-link">Anasayfa</a>
+                    <a href="index.html#about" class="nav-item nav-link">Hakkımızda</a>
+                    <a href="index.html#mission-vision" class="nav-item nav-link">Misyon & Vizyon</a>
+                    <a href="index.html#dealerships" class="nav-item nav-link">Bayilikler</a>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Pages</a>
+                        <a href="#service" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Hizmetler</a>
                         <div class="dropdown-menu m-0">
-                            <a href="project.html" class="dropdown-item">Our Project</a>
-                            <a href="team.html" class="dropdown-item">The Team</a>
-                            <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                            <a href="blog.html" class="dropdown-item">Blog Grid</a>
-                            <a href="detail.html" class="dropdown-item active">Blog Detail</a>
+                            <a href="projeler.html" class="dropdown-item">Konut İnşaat Projeleri</a>
+                            <a href="muteahhitlik.html" class="dropdown-item">Anahtar Teslim İnşaat</a>
+                            <a href="insaat.html" class="dropdown-item">Hırdavat & İnşaat Malzemeleri</a>
+                            <a href="pvc.html" class="dropdown-item active bg-primary text-white">PVC Kapı ve Pencere Sistemleri</a>
+                            <a href="tarim.html" class="dropdown-item">Tarım Ürünleri Alım Satımı</a>
+                            <a href="ziraat.html" class="dropdown-item">Zirai İlaç, Gübre ve Tohum</a>
                         </div>
                     </div>
-                    <a href="contact.html" class="nav-item nav-link">Contact</a>
-                    <a href="" class="nav-item nav-link bg-primary text-white px-5 ms-3 d-none d-lg-block">Get A Quote <i class="bi bi-arrow-right"></i></a>
+                    <a href="index.html#contact" class="nav-item nav-link">İletişim</a>
+                    <a href="" class="nav-item nav-link bg-primary text-white px-4 px-lg-5 ms-2 ms-lg-3 d-none d-lg-block" style="font-size:1rem;">Bize ulaşın <i class="bi bi-arrow-right"></i></a>
                 </div>
             </div>
         </nav>
     </div>
     <!-- Navbar End -->
 
-
-    <!-- Page Header Start -->
-    <div class="container-fluid page-header">
-        <h1 class="display-3 text-uppercase text-white mb-3">Blog Detail</h1>
-        <div class="d-inline-flex text-white">
-            <h6 class="text-uppercase m-0"><a href="">Home</a></h6>
-            <h6 class="text-white m-0 px-3">/</h6>
-            <h6 class="text-uppercase text-white m-0">Blog Detail</h6>
+    <!-- Breadcrumb Start -->
+    <div class="container-fluid bg-dark py-3 px-3 px-md-5">
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="index.html" class="text-primary">Anasayfa</a></li>
+                        <li class="breadcrumb-item active text-white" aria-current="page">PVC Kapı ve Pencere Sistemleri</li>
+                    </ol>
+                </nav>
+            </div>
         </div>
     </div>
-    <!-- Page Header Start -->
+    <!-- Breadcrumb End -->
 
 
-    <!-- Blog Start -->
-    <div class="container-fluid py-6 px-5">
-        <div class="row g-5">
-            <div class="col-lg-8">
-                <!-- Blog Detail Start -->
-                <div class="mb-5">
-                    <img class="img-fluid w-100 rounded mb-5" src="img/blog-2.jpg" alt="">
-                    <h1 class="text-uppercase mb-4">Diam dolor duo ipsum clita sed lorem tempor. Clita kasd diam justo diam
-                        lorem sed amet sed rebum eos.</h1>
-                    <p>Sadipscing labore amet rebum est et justo gubergren. Et eirmod ipsum sit diam ut
-                        magna lorem. Nonumy vero labore lorem sanctus rebum et lorem magna kasd, stet
-                        amet magna accusam consetetur eirmod. Kasd accusam sit ipsum sadipscing et at at
-                        sanctus et. Ipsum sit gubergren dolores et, consetetur justo invidunt at et
-                        aliquyam ut et vero clita. Diam sea sea no sed dolores diam nonumy, gubergren
-                        sit stet no diam kasd vero.</p>
-                    <p>Voluptua est takimata stet invidunt sed rebum nonumy stet, clita aliquyam dolores
-                        vero stet consetetur elitr takimata rebum sanctus. Sit sed accusam stet sit
-                        nonumy kasd diam dolores, sanctus lorem kasd duo dolor dolor vero sit et. Labore
-                        ipsum duo sanctus amet eos et. Consetetur no sed et aliquyam ipsum justo et,
-                        clita lorem sit vero amet amet est dolor elitr, stet et no diam sit. Dolor erat
-                        justo dolore sit invidunt.</p>
-                    <p>Diam dolor est labore duo invidunt ipsum clita et, sed et lorem voluptua tempor
-                        invidunt at est sanctus sanctus. Clita dolores sit kasd diam takimata justo diam
-                        lorem sed. Magna amet sed rebum eos. Clita no magna no dolor erat diam tempor
-                        rebum consetetur, sanctus labore sed nonumy diam lorem amet eirmod. No at tempor
-                        sea diam kasd, takimata ea nonumy elitr sadipscing gubergren erat. Gubergren at
-                        lorem invidunt sadipscing rebum sit amet ut ut, voluptua diam dolores at
-                        sadipscing stet. Clita dolor amet dolor ipsum vero ea ea eos.</p>
-                </div>
-                <!-- Blog Detail End -->
-
-                <!-- Comment List Start -->
-                <div class="mb-5">
-                    <h3 class="text-uppercase mb-4">3 Comments</h3>
-                    <div class="d-flex mb-4">
-                        <img src="img/user.jpg" class="img-fluid" style="width: 45px; height: 45px;">
-                        <div class="ps-3">
-                            <h6><a href="">John Doe</a> <small><i>01 Jan 2045</i></small></h6>
-                            <p>Diam amet duo labore stet elitr invidunt ea clita ipsum voluptua, tempor labore
-                                accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed eirmod</p>
-                            <button class="btn btn-sm btn-light">Reply</button>
-                        </div>
-                    </div>
-                    <div class="d-flex mb-4">
-                        <img src="img/user.jpg" class="img-fluid" style="width: 45px; height: 45px;">
-                        <div class="ps-3">
-                            <h6><a href="">John Doe</a> <small><i>01 Jan 2045</i></small></h6>
-                            <p>Diam amet duo labore stet elitr invidunt ea clita ipsum voluptua, tempor labore
-                                accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed eirmod</p>
-                            <button class="btn btn-sm btn-light">Reply</button>
-                        </div>
-                    </div>
-                    <div class="d-flex ms-5 mb-4">
-                        <img src="img/user.jpg" class="img-fluid" style="width: 45px; height: 45px;">
-                        <div class="ps-3">
-                            <h6><a href="">John Doe</a> <small><i>01 Jan 2045</i></small></h6>
-                            <p>Diam amet duo labore stet elitr invidunt ea clita ipsum voluptua, tempor labore
-                                accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed eirmod</p>
-                            <button class="btn btn-sm btn-light">Reply</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Comment List End -->
-
-                <!-- Comment Form Start -->
-                <div class="bg-light p-5">
-                    <h3 class="text-uppercase mb-4">Leave a comment</h3>
-                    <form>
-                        <div class="row g-3">
-                            <div class="col-12 col-sm-6">
-                                <input type="text" class="form-control bg-white border-0" placeholder="Your Name" style="height: 55px;">
-                            </div>
-                            <div class="col-12 col-sm-6">
-                                <input type="email" class="form-control bg-white border-0" placeholder="Your Email" style="height: 55px;">
-                            </div>
-                            <div class="col-12">
-                                <input type="text" class="form-control bg-white border-0" placeholder="Website" style="height: 55px;">
-                            </div>
-                            <div class="col-12">
-                                <textarea class="form-control bg-white border-0" rows="5" placeholder="Comment"></textarea>
-                            </div>
-                            <div class="col-12">
-                                <button class="btn btn-primary w-100 py-3" type="submit">Leave Your Comment</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <!-- Comment Form End -->
-            </div>
-
-            <!-- Sidebar Start -->
-            <div class="col-lg-4">
-                <!-- Search Form Start -->
-                <div class="mb-5">
-                    <div class="input-group">
-                        <input type="text" class="form-control p-3" placeholder="Keyword">
-                        <button class="btn btn-primary px-3"><i class="fa fa-search"></i></button>
-                    </div>
-                </div>
-                <!-- Search Form End -->
-
-                <!-- Category Start -->
-                <div class="mb-5">
-                    <h3 class="text-uppercase mb-4">Categories</h3>
-                    <div class="d-flex flex-column justify-content-start bg-light p-4">
-                        <a class="h6 text-uppercase mb-4" href="#"><i class="fa fa-angle-right me-2"></i>Web Design</a>
-                        <a class="h6 text-uppercase mb-4" href="#"><i class="fa fa-angle-right me-2"></i>Web Development</a>
-                        <a class="h6 text-uppercase mb-4" href="#"><i class="fa fa-angle-right me-2"></i>Web Development</a>
-                        <a class="h6 text-uppercase mb-4" href="#"><i class="fa fa-angle-right me-2"></i>Keyword Research</a>
-                        <a class="h6 text-uppercase mb-0" href="#"><i class="fa fa-angle-right me-2"></i>Email Marketing</a>
-                    </div>
-                </div>
-                <!-- Category End -->
-
-                <!-- Recent Post Start -->
-                <div class="mb-5">
-                    <h3 class="text-uppercase mb-4">Recent Post</h3>
-                    <div class="bg-light p-4">
-                        <div class="d-flex mb-3">
-                            <img class="img-fluid" src="img/blog-1.jpg" style="width: 100px; height: 100px; object-fit: cover;" alt="">
-                            <a href="" class="h6 d-flex align-items-center bg-white text-uppercase px-3 mb-0">Lorem ipsum dolor sit amet consec adipis
-                            </a>
-                        </div>
-                        <div class="d-flex mb-3">
-                            <img class="img-fluid" src="img/blog-2.jpg" style="width: 100px; height: 100px; object-fit: cover;" alt="">
-                            <a href="" class="h6 d-flex align-items-center bg-white text-uppercase px-3 mb-0">Lorem ipsum dolor sit amet consec adipis
-                            </a>
-                        </div>
-                        <div class="d-flex mb-3">
-                            <img class="img-fluid" src="img/blog-3.jpg" style="width: 100px; height: 100px; object-fit: cover;" alt="">
-                            <a href="" class="h6 d-flex align-items-center bg-white text-uppercase px-3 mb-0">Lorem ipsum dolor sit amet consec adipis
-                            </a>
-                        </div>
-                        <div class="d-flex mb-3">
-                            <img class="img-fluid" src="img/blog-1.jpg" style="width: 100px; height: 100px; object-fit: cover;" alt="">
-                            <a href="" class="h6 d-flex align-items-center bg-white text-uppercase px-3 mb-0">Lorem ipsum dolor sit amet consec adipis
-                            </a>
-                        </div>
-                        <div class="d-flex mb-3">
-                            <img class="img-fluid" src="img/blog-2.jpg" style="width: 100px; height: 100px; object-fit: cover;" alt="">
-                            <a href="" class="h6 d-flex align-items-center bg-white text-uppercase px-3 mb-0">Lorem ipsum dolor sit amet consec adipis
-                            </a>
-                        </div>
-                        <div class="d-flex">
-                            <img class="img-fluid" src="img/blog-3.jpg" style="width: 100px; height: 100px; object-fit: cover;" alt="">
-                            <a href="" class="h6 d-flex align-items-center bg-white text-uppercase px-3 mb-0">Lorem ipsum dolor sit amet consec adipis
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Recent Post End -->
-
-                <!-- Image Start -->
-                <div class="mb-5">
-                    <img src="img/blog-1.jpg" alt="" class="img-fluid rounded">
-                </div>
-                <!-- Image End -->
-
-                <!-- Tags Start -->
-                <div class="mb-5">
-                    <h3 class="text-uppercase mb-4">Tag Cloud</h3>
-                    <div class="d-flex flex-wrap m-n1">
-                        <a href="" class="btn btn-outline-dark m-1">Design</a>
-                        <a href="" class="btn btn-outline-dark m-1">Development</a>
-                        <a href="" class="btn btn-outline-dark m-1">Marketing</a>
-                        <a href="" class="btn btn-outline-dark m-1">SEO</a>
-                        <a href="" class="btn btn-outline-dark m-1">Writing</a>
-                        <a href="" class="btn btn-outline-dark m-1">Consulting</a>
-                        <a href="" class="btn btn-outline-dark m-1">Design</a>
-                        <a href="" class="btn btn-outline-dark m-1">Development</a>
-                        <a href="" class="btn btn-outline-dark m-1">Marketing</a>
-                        <a href="" class="btn btn-outline-dark m-1">SEO</a>
-                        <a href="" class="btn btn-outline-dark m-1">Writing</a>
-                        <a href="" class="btn btn-outline-dark m-1">Consulting</a>
-                    </div>
-                </div>
-                <!-- Tags End -->
-
-                <!-- Plain Text Start -->
-                <div>
-                    <h3 class="text-uppercase mb-4">Plain Text</h3>
-                    <div class="bg-light rounded text-center" style="padding: 30px;">
-                        <p>Vero sea et accusam justo dolor accusam lorem consetetur, dolores sit amet sit dolor clita kasd justo, diam accusam no sea ut tempor magna takimata, amet sit et diam dolor ipsum amet diam</p>
-                        <a href="" class="btn btn-primary py-2 px-4">Read More</a>
-                    </div>
-                </div>
-                <!-- Plain Text End -->
-            </div>
-            <!-- Sidebar End -->
+    <!-- PVC Services Section Start -->
+    <div class="container-fluid py-6 px-3 px-md-5 pvc-services-section">
+        <div class="text-center mx-auto mb-5" style="max-width: 800px;">
+            <h1 class="display-5 text-uppercase mb-4">
+                <span class="text-primary">PVC Kapı ve Pencere</span> Sistemleri
+            </h1>
+            <p class="mb-4">
+                AR-KAR İnşaat olarak 36 yıllık deneyimimizle Samsun Çarşamba'da en kaliteli PVC kapı ve pencere sistemlerini sunuyoruz. 
+                Enerji verimli, güvenli ve estetik PVC doğrama çözümleriyle yaşam alanlarınızı konforlu hale getiriyoruz.
+            </p>
         </div>
+
+        <!-- Service Cards -->
+        <div class="row g-4 mb-5">
+            
+            <!-- PVC Pencere Sistemleri -->
+            <div class="col-xl-4 col-lg-6 col-md-6" id="pvc-pencere">
+                <div class="pvc-card card h-100 shadow-sm rounded-3 overflow-hidden">
+                    <div class="card-img-container position-relative">
+                        <img src="img/service-1.jpg" alt="PVC Pencere Sistemleri - AR-KAR İnşaat" class="card-img-top" style="height: 250px; object-fit: cover;">
+                        <div class="pvc-badge position-absolute top-0 start-0 bg-primary text-white px-3 py-2 rounded-end">
+                            <i class="fas fa-window-maximize me-2"></i>PVC Pencere
+                        </div>
+                    </div>
+                    <div class="card-body p-4">
+                        <h3 class="card-title h4 text-uppercase mb-3">PVC Pencere Sistemleri</h3>
+                        <p class="card-text text-muted mb-3">
+                            Enerji verimli çift cam PVC pencere sistemleri ile ısı ve ses yalıtımı sağlıyoruz. 
+                            Modern tasarım ve uzun ömürlü kullanım için kaliteli malzemeler kullanıyoruz.
+                        </p>
+                        <ul class="list-unstyled mb-4">
+                            <li><i class="fa fa-check text-primary me-2"></i>Çift Cam Teknolojisi</li>
+                            <li><i class="fa fa-check text-primary me-2"></i>Enerji Verimliliği</li>
+                            <li><i class="fa fa-check text-primary me-2"></i>Ses Yalıtımı</li>
+                            <li><i class="fa fa-check text-primary me-2"></i>UV Dayanıklılığı</li>
+                        </ul>
+                        <div class="d-grid gap-2">
+                            <a href="tel:+905444393333" class="btn btn-primary">
+                                <i class="fa fa-phone me-2"></i>Fiyat Bilgisi Al
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PVC Kapı Sistemleri -->
+            <div class="col-xl-4 col-lg-6 col-md-6" id="pvc-kapi">
+                <div class="pvc-card card h-100 shadow-sm rounded-3 overflow-hidden">
+                    <div class="card-img-container position-relative">
+                        <img src="img/service-2.jpg" alt="PVC Kapı Sistemleri - AR-KAR İnşaat" class="card-img-top" style="height: 250px; object-fit: cover;">
+                        <div class="pvc-badge position-absolute top-0 start-0 bg-primary text-white px-3 py-2 rounded-end">
+                            <i class="fas fa-door-open me-2"></i>PVC Kapı
+                        </div>
+                    </div>
+                    <div class="card-body p-4">
+                        <h3 class="card-title h4 text-uppercase mb-3">PVC Kapı Sistemleri</h3>
+                        <p class="card-text text-muted mb-3">
+                            Güvenli ve yalıtımlı PVC kapı sistemleri ile hem estetik hem de fonksiyonel çözümler sunuyoruz. 
+                            Çeşitli renk ve desen seçenekleriyle ihtiyaçlarınıza uygun kapılar üretiyoruz.
+                        </p>
+                        <ul class="list-unstyled mb-4">
+                            <li><i class="fa fa-check text-primary me-2"></i>Güvenlik Sistemleri</li>
+                            <li><i class="fa fa-check text-primary me-2"></i>Termal Kesim</li>
+                            <li><i class="fa fa-check text-primary me-2"></i>Çoklu Kilit Sistemi</li>
+                            <li><i class="fa fa-check text-primary me-2"></i>Renk Seçenekleri</li>
+                        </ul>
+                        <div class="d-grid gap-2">
+                            <a href="https://wa.me/905444393333" class="btn btn-primary">
+                                <i class="fab fa-whatsapp me-2"></i>WhatsApp'tan Yazın
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cam Balkon Sistemleri -->
+            <div class="col-xl-4 col-lg-6 col-md-6" id="cam-balkon">
+                <div class="pvc-card card h-100 shadow-sm rounded-3 overflow-hidden">
+                    <div class="card-img-container position-relative">
+                        <img src="img/service-3.jpg" alt="Cam Balkon Sistemleri - AR-KAR İnşaat" class="card-img-top" style="height: 250px; object-fit: cover;">
+                        <div class="pvc-badge position-absolute top-0 start-0 bg-primary text-white px-3 py-2 rounded-end">
+                            <i class="fas fa-building me-2"></i>Cam Balkon
+                        </div>
+                    </div>
+                    <div class="card-body p-4">
+                        <h3 class="card-title h4 text-uppercase mb-3">Cam Balkon Sistemleri</h3>
+                        <p class="card-text text-muted mb-3">
+                            Modern cam balkon sistemleri ile balkonlarınızı kapatarak yaşam alanınızı genişletiyoruz. 
+                            Sürme ve katlanır sistem seçenekleriyle praktik çözümler sunuyoruz.
+                        </p>
+                        <ul class="list-unstyled mb-4">
+                            <li><i class="fa fa-check text-primary me-2"></i>Sürme Sistem</li>
+                            <li><i class="fa fa-check text-primary me-2"></i>Katlanır Sistem</li>
+                            <li><i class="fa fa-check text-primary me-2"></i>Temperli Cam</li>
+                            <li><i class="fa fa-check text-primary me-2"></i>Hava Koşullarına Dayanıklı</li>
+                        </ul>
+                        <div class="d-grid gap-2">
+                            <a href="mailto:arkargida@gmail.com" class="btn btn-primary">
+                                <i class="fa fa-envelope me-2"></i>E-posta Gönder
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PVC Panjur Sistemleri -->
+            <div class="col-xl-4 col-lg-6 col-md-6" id="pvc-panjur">
+                <div class="pvc-card card h-100 shadow-sm rounded-3 overflow-hidden">
+                    <div class="card-img-container position-relative">
+                        <img src="img/service-4.jpg" alt="PVC Panjur Sistemleri - AR-KAR İnşaat" class="card-img-top" style="height: 250px; object-fit: cover;">
+                        <div class="pvc-badge position-absolute top-0 start-0 bg-primary text-white px-3 py-2 rounded-end">
+                            <i class="fas fa-sliders-h me-2"></i>PVC Panjur
+                        </div>
+                    </div>
+                    <div class="card-body p-4">
+                        <h3 class="card-title h4 text-uppercase mb-3">PVC Panjur Sistemleri</h3>
+                        <p class="card-text text-muted mb-3">
+                            Güvenlik ve estetik açısından ideal PVC panjur sistemleri ile pencerelerinizi koruyoruz. 
+                            Otomatik ve manuel açılım seçenekleriyle konforu sağlıyoruz.
+                        </p>
+                        <ul class="list-unstyled mb-4">
+                            <li><i class="fa fa-check text-primary me-2"></i>Otomatik Sistemler</li>
+                            <li><i class="fa fa-check text-primary me-2"></i>Manuel Kullanım</li>
+                            <li><i class="fa fa-check text-primary me-2"></i>Güvenlik Özelliği</li>
+                            <li><i class="fa fa-check text-primary me-2"></i>Estetik Tasarım</li>
+                        </ul>
+                        <div class="d-grid gap-2">
+                            <a href="tel:+905444393333" class="btn btn-primary">
+                                <i class="fa fa-phone me-2"></i>Detaylar İçin Arayın
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pergola Sistemleri -->
+            <div class="col-xl-4 col-lg-6 col-md-6" id="pergola">
+                <div class="pvc-card card h-100 shadow-sm rounded-3 overflow-hidden">
+                    <div class="card-img-container position-relative">
+                        <img src="img/service-5.jpg" alt="Pergola Sistemleri - AR-KAR İnşaat" class="card-img-top" style="height: 250px; object-fit: cover;">
+                        <div class="pvc-badge position-absolute top-0 start-0 bg-primary text-white px-3 py-2 rounded-end">
+                            <i class="fas fa-umbrella me-2"></i>Pergola
+                        </div>
+                    </div>
+                    <div class="card-body p-4">
+                        <h3 class="card-title h4 text-uppercase mb-3">Pergola Sistemleri</h3>
+                        <p class="card-text text-muted mb-3">
+                            Açık hava alanlarınız için modern pergola sistemleri ile gölge ve konfor sağlıyoruz. 
+                            Alüminyum ve PVC malzemelerle dayanıklı çözümler sunuyoruz.
+                        </p>
+                        <ul class="list-unstyled mb-4">
+                            <li><i class="fa fa-check text-primary me-2"></i>Alüminyum Konstrüksiyon</li>
+                            <li><i class="fa fa-check text-primary me-2"></i>Su Geçirmez Örtü</li>
+                            <li><i class="fa fa-check text-primary me-2"></i>LED Aydınlatma</li>
+                            <li><i class="fa fa-check text-primary me-2"></i>Motorlu Sistem</li>
+                        </ul>
+                        <div class="d-grid gap-2">
+                            <a href="https://wa.me/905444393333" class="btn btn-primary">
+                                <i class="fab fa-whatsapp me-2"></i>Ücretsiz Keşif
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Özel Tasarım -->
+            <div class="col-xl-4 col-lg-6 col-md-6" id="ozel-tasarim">
+                <div class="pvc-card card h-100 shadow-sm rounded-3 overflow-hidden">
+                    <div class="card-img-container position-relative">
+                        <img src="img/service-6.jpg" alt="Özel Tasarım PVC Sistemler - AR-KAR İnşaat" class="card-img-top" style="height: 250px; object-fit: cover;">
+                        <div class="pvc-badge position-absolute top-0 start-0 bg-primary text-white px-3 py-2 rounded-end">
+                            <i class="fas fa-drafting-compass me-2"></i>Özel Tasarım
+                        </div>
+                    </div>
+                    <div class="card-body p-4">
+                        <h3 class="card-title h4 text-uppercase mb-3">Özel Tasarım PVC Sistemler</h3>
+                        <p class="card-text text-muted mb-3">
+                            Özel ihtiyaçlarınıza yönelik tasarım ve üretim hizmetleri ile benzersiz çözümler sunuyoruz. 
+                            Mimarinize uygun özel ölçü ve tasarım seçenekleri.
+                        </p>
+                        <ul class="list-unstyled mb-4">
+                            <li><i class="fa fa-check text-primary me-2"></i>Özel Ölçü Üretim</li>
+                            <li><i class="fa fa-check text-primary me-2"></i>Tasarım Danışmanlığı</li>
+                            <li><i class="fa fa-check text-primary me-2"></i>3D Görselleştirme</li>
+                            <li><i class="fa fa-check text-primary me-2"></i>Mimari Uyum</li>
+                        </ul>
+                        <div class="d-grid gap-2">
+                            <a href="mailto:arkargida@gmail.com" class="btn btn-primary">
+                                <i class="fa fa-envelope me-2"></i>Proje Danışmanlığı
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Features Section -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <div class="bg-light p-4 p-md-5 rounded-3">
+                    <h2 class="text-center text-uppercase mb-4">
+                        Neden <span class="text-primary">AR-KAR İnşaat</span> PVC Sistemleri?
+                    </h2>
+                    <div class="row g-4">
+                        <div class="col-lg-3 col-md-6">
+                            <div class="text-center">
+                                <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                                    <i class="fas fa-medal fa-2x"></i>
+                                </div>
+                                <h4>36 Yıllık Deneyim</h4>
+                                <p class="text-muted">Sektörde kazandığımız deneyimle en kaliteli hizmeti sunuyoruz.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="text-center">
+                                <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                                    <i class="fas fa-tools fa-2x"></i>
+                                </div>
+                                <h4>Profesyonel Montaj</h4>
+                                <p class="text-muted">Uzman ekibimizle hızlı ve güvenli montaj hizmeti sağlıyoruz.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="text-center">
+                                <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                                    <i class="fas fa-shield-alt fa-2x"></i>
+                                </div>
+                                <h4>Kalite Garantisi</h4>
+                                <p class="text-muted">Tüm ürünlerimizde uzun süreli garanti ve kalite taahhüdü veriyoruz.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="text-center">
+                                <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                                    <i class="fas fa-handshake fa-2x"></i>
+                                </div>
+                                <h4>Müşteri Memnuniyeti</h4>
+                                <p class="text-muted">Müşteri memnuniyetini ön planda tutarak hizmet kalitemizi sürdürüyoruz.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Process Section -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <div class="bg-primary text-white p-4 p-md-5 rounded-3">
+                    <h2 class="text-center text-white text-uppercase mb-4">
+                        PVC Kapı Pencere <span style="color: #ffd700;">Montaj Sürecimiz</span>
+                    </h2>
+                    <div class="row g-4">
+                        <div class="col-lg-3 col-md-6">
+                            <div class="text-center">
+                                <div class="bg-white text-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                                    <i class="fas fa-ruler-combined fa-2x"></i>
+                                </div>
+                                <h4 class="text-white">1. Ölçü Alma</h4>
+                                <p>Uzman ekibimiz ücretsiz keşif yaparak hassas ölçüler alır.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="text-center">
+                                <div class="bg-white text-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                                    <i class="fas fa-palette fa-2x"></i>
+                                </div>
+                                <h4 class="text-white">2. Tasarım & Seçim</h4>
+                                <p>İhtiyaçlarınıza uygun model, renk ve cam seçeneklerini belirliyoruz.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="text-center">
+                                <div class="bg-white text-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                                    <i class="fas fa-industry fa-2x"></i>
+                                </div>
+                                <h4 class="text-white">3. Üretim</h4>
+                                <p>Modern makinelerle özel ölçüde kaliteli üretim gerçekleştiriyoruz.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="text-center">
+                                <div class="bg-white text-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                                    <i class="fas fa-wrench fa-2x"></i>
+                                </div>
+                                <h4 class="text-white">4. Montaj & Teslim</h4>
+                                <p>Profesyonel montaj ile ürünlerinizi güvenle teslim ediyoruz.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="row">
+            <div class="col-12">
+                <div class="bg-light p-4 p-md-5 rounded-3 text-center cta-enhanced">
+                    <h3 class="mb-3">PVC Kapı Pencere Sistemleri İçin Hemen İletişime Geçin!</h3>
+                    <p class="mb-4 text-muted">36 yıllık deneyimimizle en kaliteli PVC doğrama sistemlerini sizlere sunuyoruz. Ücretsiz keşif ve fiyat teklifi için hemen arayın.</p>
+                    <div class="row g-3 justify-content-center">
+                        <div class="col-auto">
+                            <a href="tel:+905444393333" class="btn btn-primary btn-lg px-4 btn-enhanced">
+                                <i class="fa fa-phone me-2"></i>0544 439 33 33
+                            </a>
+                        </div>
+                        <div class="col-auto">
+                            <a href="https://wa.me/905444393333" class="btn btn-outline-primary btn-lg px-4 btn-enhanced">
+                                <i class="fab fa-whatsapp me-2"></i>WhatsApp
+                            </a>
+                        </div>
+                        <div class="col-auto">
+                            <a href="mailto:arkargida@gmail.com" class="btn btn-outline-primary btn-lg px-4 btn-enhanced">
+                                <i class="fa fa-envelope me-2"></i>E-posta
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
-    <!-- Blog End -->
+    <!-- PVC Services Section End -->
 
 
-    <!-- Footer Start -->
+<!-- Footer Start -->
     <div class="footer container-fluid position-relative bg-dark bg-light-radial text-white-50 py-6 px-5">
         <div class="row g-5">
             <div class="col-lg-6 pe-lg-5">
                 <a href="index.html" class="navbar-brand">
-                    <h1 class="m-0 display-4 text-uppercase text-white"><i class="bi bi-building text-primary me-2"></i>WEBUILD</h1>
+                    <img src="./img/logo.png" alt="logo">
                 </a>
-                <p>Aliquyam sed elitr elitr erat sed diam ipsum eirmod eos lorem nonumy. Tempor sea ipsum diam  sed clita dolore eos dolores magna erat dolore sed stet justo et dolor.</p>
-                <p><i class="fa fa-map-marker-alt me-2"></i>123 Street, New York, USA</p>
-                <p><i class="fa fa-phone-alt me-2"></i>+012 345 67890</p>
-                <p><i class="fa fa-envelope me-2"></i>info@example.com</p>
+                <p><i class="fa fa-map-marker-alt me-2"></i>Çarşamba,Samsun</p>
                 <div class="d-flex justify-content-start mt-4">
-                    <a class="btn btn-lg btn-primary btn-lg-square rounded-0 me-2" href="#"><i class="fab fa-twitter"></i></a>
-                    <a class="btn btn-lg btn-primary btn-lg-square rounded-0 me-2" href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-lg btn-primary btn-lg-square rounded-0 me-2" href="#"><i class="fab fa-linkedin-in"></i></a>
-                    <a class="btn btn-lg btn-primary btn-lg-square rounded-0" href="#"><i class="fab fa-instagram"></i></a>
+                    <a class="btn btn-lg btn-primary btn-lg-square rounded-0 me-2" href="mailto:arkargida@gmail.com"><i class="fa fa-envelope"></i></a>                    
+                    <a class="btn btn-lg btn-primary btn-lg-square rounded-0 me-2" href="https://wa.me/905444393333?text="><i class="fab fa-whatsapp"></i></a>
+                    <a class="btn btn-lg btn-primary btn-lg-square rounded-0" href="https://www.instagram.com/arkarltd"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
             <div class="col-lg-6 ps-lg-5">
                 <div class="row g-5">
                     <div class="col-sm-6">
-                        <h4 class="text-white text-uppercase mb-4">Quick Links</h4>
+                        <h4 class="text-white text-uppercase mb-4">Hızlı Linkler</h4>
                         <div class="d-flex flex-column justify-content-start">
-                            <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right me-2"></i>Home</a>
-                            <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right me-2"></i>About Us</a>
-                            <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right me-2"></i>Our Services</a>
-                            <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right me-2"></i>Meet The Team</a>
-                            <a class="text-white-50" href="#"><i class="fa fa-angle-right me-2"></i>Contact Us</a>
+                            <a class="text-white-50 mb-2" href="index.html"><i class="fa fa-angle-right me-2"></i>Anasayfa</a>
+                            <a class="text-white-50 mb-2" href="index.html#about"><i class="fa fa-angle-right me-2"></i>Hakkımızda</a>
+                            <a class="text-white-50 mb-2" href="index.html#service"><i class="fa fa-angle-right me-2"></i>Hizmetlerimiz</a>
+                            <a class="text-white-50 mb-2" href="projeler.html"><i class="fa fa-angle-right me-2"></i>Projelerimiz</a>
+                            <a class="text-white-50" href="index.html#contact"><i class="fa fa-angle-right me-2"></i>İletişim</a>
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <h4 class="text-white text-uppercase mb-4">Popular Links</h4>
+                        <h4 class="text-white text-uppercase mb-4">PVC Sistemlerimiz</h4>
                         <div class="d-flex flex-column justify-content-start">
-                            <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right me-2"></i>Home</a>
-                            <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right me-2"></i>About Us</a>
-                            <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right me-2"></i>Our Services</a>
-                            <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right me-2"></i>Meet The Team</a>
-                            <a class="text-white-50" href="#"><i class="fa fa-angle-right me-2"></i>Contact Us</a>
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <h4 class="text-white text-uppercase mb-4">Newsletter</h4>
-                        <div class="w-100">
-                            <div class="input-group">
-                                <input type="text" class="form-control border-light" style="padding: 20px 30px;" placeholder="Your Email Address"><button class="btn btn-primary px-4">Sign Up</button>
-                            </div>
+                            <a class="text-white-50 mb-2" href="#pvc-pencere"><i class="fa fa-angle-right me-2"></i>PVC Pencere Sistemleri</a>
+                            <a class="text-white-50 mb-2" href="#pvc-kapi"><i class="fa fa-angle-right me-2"></i>PVC Kapı Sistemleri</a>
+                            <a class="text-white-50 mb-2" href="#cam-balkon"><i class="fa fa-angle-right me-2"></i>Cam Balkon Sistemleri</a>
+                            <a class="text-white-50 mb-2" href="#pvc-panjur"><i class="fa fa-angle-right me-2"></i>PVC Panjur Sistemleri</a>
+                            <a class="text-white-50" href="#pergola"><i class="fa fa-angle-right me-2"></i>Pergola Sistemleri</a>
                         </div>
                     </div>
                 </div>
@@ -361,15 +706,11 @@
     <div class="container-fluid bg-dark bg-light-radial text-white border-top border-primary px-0">
         <div class="d-flex flex-column flex-md-row justify-content-between">
             <div class="py-4 px-5 text-center text-md-start">
-                <p class="mb-0">&copy; <a class="text-primary" href="#">Your Site Name</a>. All Rights Reserved.</p>
-            </div>
-            <div class="py-4 px-5 bg-primary footer-shape position-relative text-center text-md-end">
-                <p class="mb-0">Designed by <a class="text-dark" href="https://htmlcodex.com">HTML Codex</a></p>
+                <p>&copy; 2025 Ar-Kar. Tüm hakları saklıdır.</p>
             </div>
         </div>
     </div>
     <!-- Footer End -->
-
 
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
@@ -389,6 +730,109 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "PVC Kapı ve Pencere Sistemleri",
+        "description": "AR-KAR İnşaat PVC kapı ve pencere sistemleri: Samsun Çarşamba'da en kaliteli PVC doğrama, enerji verimli pencere sistemleri, cam balkon çözümleri.",
+        "url": "https://www.arkar.com.tr/pvc.html",
+        "mainEntity": {
+            "@type": "LocalBusiness",
+            "@id": "https://www.arkar.com.tr/#organization",
+            "name": "AR-KAR İnşaat Gıda Tarım Ürünleri ve Taş. Tic. Ltd. Şti.",
+            "alternateName": "AR-KAR İnşaat",
+            "url": "https://www.arkar.com.tr",
+            "telephone": "+90 544 439 33 33",
+            "email": "arkargida@gmail.com",
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Çarşamba",
+                "addressRegion": "Samsun",
+                "addressCountry": "TR"
+            },
+            "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 41.1986,
+                "longitude": 36.7153
+            },
+            "openingHours": "Mo-Sa 08:00-18:00",
+            "areaServed": {
+                "@type": "GeoCircle",
+                "geoMidpoint": {
+                    "@type": "GeoCoordinates",
+                    "latitude": 41.1986,
+                    "longitude": 36.7153
+                },
+                "geoRadius": "50000"
+            }
+        },
+        "breadcrumb": {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Ana Sayfa",
+                    "item": "https://www.arkar.com.tr/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "PVC Kapı ve Pencere Sistemleri",
+                    "item": "https://www.arkar.com.tr/pvc.html"
+                }
+            ]
+        },
+        "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "AR-KAR PVC Kapı Pencere Sistemleri",
+            "itemListElement": [
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "PVC Pencere Sistemleri",
+                        "description": "Enerji verimli, çift cam PVC pencere sistemleri ve montaj hizmetleri",
+                        "category": "PVC Doğrama",
+                        "provider": {
+                            "@type": "Organization",
+                            "name": "AR-KAR İnşaat"
+                        }
+                    }
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "PVC Kapı Sistemleri",
+                        "description": "Güvenli, yalıtımlı PVC kapı sistemleri ve profesyonel montaj",
+                        "category": "PVC Doğrama",
+                        "provider": {
+                            "@type": "Organization",
+                            "name": "AR-KAR İnşaat"
+                        }
+                    }
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Cam Balkon Sistemleri",
+                        "description": "Modern cam balkon sistemleri ve sürme sistemleri",
+                        "category": "PVC Doğrama",
+                        "provider": {
+                            "@type": "Organization",
+                            "name": "AR-KAR İnşaat"
+                        }
+                    }
+                }
+            ]
+        }
+    }
+    </script>
 </body>
 
 </html>

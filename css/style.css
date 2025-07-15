@@ -344,3 +344,27 @@ a.nav-link.bg-primary:hover {
     /* Red shape element disabled */
     display: none !important;
 }
+
+/* Project Section Styles */
+.project-item {
+    cursor: pointer;
+}
+
+.project-item:hover .project-overlay {
+    opacity: 1 !important;
+}
+
+.project-overlay {
+    transition: opacity 0.3s ease-in-out;
+}
+
+.project-overlay .btn {
+    transform: translateY(20px);
+    transition: transform 0.3s ease-in-out;
+}
+
+.project-item:hover .project-overlay .btn {
+    transform: translateY(0);
+}
+
+/* Footer Styles */

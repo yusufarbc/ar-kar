@@ -373,7 +373,7 @@
                         </div>
                     </div>
                     <a href="index.html#contact" class="nav-item nav-link">İletişim</a>
-                    <a href="" class="nav-item nav-link bg-primary text-white px-4 px-lg-5 ms-2 ms-lg-3 d-none d-lg-block" style="font-size:1rem;">Bize ulaşın <i class="bi bi-arrow-right"></i></a>
+                    <button class="nav-item nav-link bg-primary text-white px-4 px-lg-5 ms-2 ms-lg-3 d-none d-lg-block" style="font-size:1rem; border:none;" data-bs-toggle="modal" data-bs-target="#contactModal">Bize ulaşın <i class="bi bi-arrow-right"></i></button>
                 </div>
             </div>
         </nav>
@@ -395,18 +395,6 @@
     </div>
     <!-- Breadcrumb End -->
 
-    <!-- Price Ticker Start -->
-    <div class="price-ticker">
-        <div class="container-fluid">
-            <div class="ticker-content">
-                <span class="me-5"><i class="fas fa-seedling me-2"></i>Güncel Mısır Fiyatı: 7.50 TL/kg</span>
-                <span class="me-5"><i class="fas fa-wheat-awn me-2"></i>Güncel Buğday Fiyatı: 8.20 TL/kg</span>
-                <span class="me-5"><i class="fas fa-nut me-2"></i>Güncel Fındık Fiyatı: 85.00 TL/kg</span>
-                <span class="me-5"><i class="fas fa-phone me-2"></i>Güncel Fiyatlar İçin: 0544 439 33 33</span>
-            </div>
-        </div>
-    </div>
-    <!-- Price Ticker End -->
 
     <!-- Agricultural Services Section Start -->
     <div class="container-fluid agri-services-section py-6 px-3 px-md-5">
@@ -422,14 +410,39 @@
 
         <!-- Product Cards -->
         <div class="row g-4 mb-5">
+
+             <!-- Fındık Alım Satımı -->
+            <div class="col-xl-4 col-lg-6 col-md-6" id="findik-alim">
+                <div class="agri-card card h-100 shadow-sm rounded-3 overflow-hidden">
+                    <div class="card-img-container position-relative">
+                       <img src="img/tarim/findik.png" alt="Fındık Alım Satımı - AR-KAR" class="card-img-top">
+                        <div class="agri-badge position-absolute top-0 start-0 text-white px-3 py-2 rounded-end">
+                            <i class=" me-2"></i>Fındık
+                        </div>
+                    </div>
+                    <div class="card-body p-4">
+                        <h3 class="card-title h4 text-uppercase mb-3">Fındık Alım Satımı</h3>
+                        <p class="card-text text-muted mb-3">
+                            Karadeniz bölgesinin en kaliteli fındıklarını alım satımını yapıyoruz. 
+                            İç ve kabuklu fındık çeşitleri için uygun fiyat teklifi veriyoruz.
+                        </p>
+                        <ul class="list-unstyled mb-4">
+                            <li><i class="fa fa-check text-success me-2"></i>Güncel Piyasa Fiyatı</li>
+                            <li><i class="fa fa-check text-success me-2"></i>Kalite Kontrol</li>
+                            <li><i class="fa fa-check text-success me-2"></i>Hızlı Ödeme</li>
+                            <li><i class="fa fa-check text-success me-2"></i>Nakliye Desteği</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
             
             <!-- Mısır Alım Satımı -->
             <div class="col-xl-4 col-lg-6 col-md-6" id="misir-alim">
                 <div class="agri-card card h-100 shadow-sm rounded-3 overflow-hidden">
                     <div class="card-img-container position-relative">
-                        <img src="img/service-1.jpg" alt="Mısır Alım Satımı - AR-KAR" class="card-img-top">
+                        <img src="img/tarim/misir.png" alt="Mısır Alım Satımı - AR-KAR" class="card-img-top">
                         <div class="agri-badge position-absolute top-0 start-0 text-white px-3 py-2 rounded-end">
-                            <i class="fas fa-seedling me-2"></i>Mısır
+                            <i class="fa fa-seedling me-2"></i>Mısır
                         </div>
                     </div>
                     <div class="card-body p-4">
@@ -444,11 +457,6 @@
                             <li><i class="fa fa-check text-success me-2"></i>Hızlı Ödeme</li>
                             <li><i class="fa fa-check text-success me-2"></i>Nakliye Desteği</li>
                         </ul>
-                        <div class="d-grid gap-2">
-                            <a href="tel:+905444393333" class="btn btn-success">
-                                <i class="fa fa-phone me-2"></i>Mısır Fiyatı Al
-                            </a>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -457,9 +465,9 @@
             <div class="col-xl-4 col-lg-6 col-md-6" id="bugday-alim">
                 <div class="agri-card card h-100 shadow-sm rounded-3 overflow-hidden">
                     <div class="card-img-container position-relative">
-                        <img src="img/service-2.jpg" alt="Buğday Alım Satımı - AR-KAR" class="card-img-top">
+                        <img src="img/tarim/bugday.png" alt="Buğday Alım Satımı - AR-KAR" class="card-img-top">
                         <div class="agri-badge position-absolute top-0 start-0 text-white px-3 py-2 rounded-end">
-                            <i class="fas fa-wheat-awn me-2"></i>Buğday
+                            <i class="me-2"></i>Buğday
                         </div>
                     </div>
                     <div class="card-body p-4">
@@ -469,136 +477,11 @@
                             Protein oranı yüksek buğdaylara özel fiyat avantajı sağlıyoruz.
                         </p>
                         <ul class="list-unstyled mb-4">
-                            <li><i class="fa fa-check text-success me-2"></i>Protein Analizi</li>
-                            <li><i class="fa fa-check text-success me-2"></i>Nem Ölçümü</li>
-                            <li><i class="fa fa-check text-success me-2"></i>Adil Fiyatlama</li>
-                            <li><i class="fa fa-check text-success me-2"></i>Güvenli Ödeme</li>
+                            <li><i class="fa fa-check text-success me-2"></i>Güncel Piyasa Fiyatı</li>
+                            <li><i class="fa fa-check text-success me-2"></i>Kalite Kontrol</li>
+                            <li><i class="fa fa-check text-success me-2"></i>Hızlı Ödeme</li>
+                            <li><i class="fa fa-check text-success me-2"></i>Nakliye Desteği</li>
                         </ul>
-                        <div class="d-grid gap-2">
-                            <a href="https://wa.me/905444393333" class="btn btn-success">
-                                <i class="fab fa-whatsapp me-2"></i>WhatsApp'tan Yazın
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Fındık Alım Satımı -->
-            <div class="col-xl-4 col-lg-6 col-md-6" id="findik-alim">
-                <div class="agri-card card h-100 shadow-sm rounded-3 overflow-hidden">
-                    <div class="card-img-container position-relative">
-                        <img src="img/service-3.jpg" alt="Fındık Alım Satımı - AR-KAR" class="card-img-top">
-                        <div class="agri-badge position-absolute top-0 start-0 text-white px-3 py-2 rounded-end">
-                            <i class="fas fa-nut me-2"></i>Fındık
-                        </div>
-                    </div>
-                    <div class="card-body p-4">
-                        <h3 class="card-title h4 text-uppercase mb-3">Fındık Alım Satımı</h3>
-                        <p class="card-text text-muted mb-3">
-                            Karadeniz bölgesinin en kaliteli fındıklarını alım satımını yapıyoruz. 
-                            İç ve kabuklu fındık çeşitleri için uygun fiyat teklifi veriyoruz.
-                        </p>
-                        <ul class="list-unstyled mb-4">
-                            <li><i class="fa fa-check text-success me-2"></i>İç Fındık</li>
-                            <li><i class="fa fa-check text-success me-2"></i>Kabuklu Fındık</li>
-                            <li><i class="fa fa-check text-success me-2"></i>Kalite Sınıflandırma</li>
-                            <li><i class="fa fa-check text-success me-2"></i>Piyasa Fiyatı</li>
-                        </ul>
-                        <div class="d-grid gap-2">
-                            <a href="mailto:arkargida@gmail.com" class="btn btn-success">
-                                <i class="fa fa-envelope me-2"></i>E-posta Gönder
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Diğer Tahıllar -->
-            <div class="col-xl-4 col-lg-6 col-md-6" id="diger-tahillar">
-                <div class="agri-card card h-100 shadow-sm rounded-3 overflow-hidden">
-                    <div class="card-img-container position-relative">
-                        <img src="img/service-4.jpg" alt="Diğer Tahıllar - AR-KAR" class="card-img-top">
-                        <div class="agri-badge position-absolute top-0 start-0 text-white px-3 py-2 rounded-end">
-                            <i class="fas fa-leaf me-2"></i>Tahıllar
-                        </div>
-                    </div>
-                    <div class="card-body p-4">
-                        <h3 class="card-title h4 text-uppercase mb-3">Diğer Tahıllar</h3>
-                        <p class="card-text text-muted mb-3">
-                            Arpa, çavdar, yulaf gibi diğer tahıl ürünlerinin alım satımını da gerçekleştiriyoruz. 
-                            Çeşitli tarım ürünleri için fiyat teklifi alabilirsiniz.
-                        </p>
-                        <ul class="list-unstyled mb-4">
-                            <li><i class="fa fa-check text-success me-2"></i>Arpa Alımı</li>
-                            <li><i class="fa fa-check text-success me-2"></i>Çavdar Alımı</li>
-                            <li><i class="fa fa-check text-success me-2"></i>Yulaf Alımı</li>
-                            <li><i class="fa fa-check text-success me-2"></i>Diğer Ürünler</li>
-                        </ul>
-                        <div class="d-grid gap-2">
-                            <a href="tel:+905444393333" class="btn btn-success">
-                                <i class="fa fa-phone me-2"></i>Fiyat Bilgisi Al
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Pazarlama Hizmetleri -->
-            <div class="col-xl-4 col-lg-6 col-md-6" id="pazarlama">
-                <div class="agri-card card h-100 shadow-sm rounded-3 overflow-hidden">
-                    <div class="card-img-container position-relative">
-                        <img src="img/service-5.jpg" alt="Pazarlama Hizmetleri - AR-KAR" class="card-img-top">
-                        <div class="agri-badge position-absolute top-0 start-0 text-white px-3 py-2 rounded-end">
-                            <i class="fas fa-chart-line me-2"></i>Pazarlama
-                        </div>
-                    </div>
-                    <div class="card-body p-4">
-                        <h3 class="card-title h4 text-uppercase mb-3">Pazarlama Hizmetleri</h3>
-                        <p class="card-text text-muted mb-3">
-                            Tarım ürünlerinizi en iyi fiyata pazarlama konusunda danışmanlık veriyoruz. 
-                            Piyasa analizi ve fiyat takibi ile en uygun zamanı belirliyoruz.
-                        </p>
-                        <ul class="list-unstyled mb-4">
-                            <li><i class="fa fa-check text-success me-2"></i>Piyasa Analizi</li>
-                            <li><i class="fa fa-check text-success me-2"></i>Fiyat Takibi</li>
-                            <li><i class="fa fa-check text-success me-2"></i>Pazarlama Danışmanlığı</li>
-                            <li><i class="fa fa-check text-success me-2"></i>Satış Zamanlaması</li>
-                        </ul>
-                        <div class="d-grid gap-2">
-                            <a href="https://wa.me/905444393333" class="btn btn-success">
-                                <i class="fab fa-whatsapp me-2"></i>Danışmanlık Al
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Lojistik Hizmetler -->
-            <div class="col-xl-4 col-lg-6 col-md-6" id="lojistik">
-                <div class="agri-card card h-100 shadow-sm rounded-3 overflow-hidden">
-                    <div class="card-img-container position-relative">
-                        <img src="img/service-6.jpg" alt="Lojistik Hizmetler - AR-KAR" class="card-img-top">
-                        <div class="agri-badge position-absolute top-0 start-0 text-white px-3 py-2 rounded-end">
-                            <i class="fas fa-truck me-2"></i>Lojistik
-                        </div>
-                    </div>
-                    <div class="card-body p-4">
-                        <h3 class="card-title h4 text-uppercase mb-3">Lojistik Hizmetler</h3>
-                        <p class="card-text text-muted mb-3">
-                            Tarım ürünlerinizin nakliye ve depolama hizmetlerini güvenli şekilde yönetiyoruz. 
-                            Çiftlikten müşteriye kadar tüm lojistik süreçleri organize ediyoruz.
-                        </p>
-                        <ul class="list-unstyled mb-4">
-                            <li><i class="fa fa-check text-success me-2"></i>Nakliye Hizmeti</li>
-                            <li><i class="fa fa-check text-success me-2"></i>Depolama</li>
-                            <li><i class="fa fa-check text-success me-2"></i>Yükleme-Boşaltma</li>
-                            <li><i class="fa fa-check text-success me-2"></i>Sigortalı Taşıma</li>
-                        </ul>
-                        <div class="d-grid gap-2">
-                            <a href="mailto:arkargida@gmail.com" class="btn btn-success">
-                                <i class="fa fa-envelope me-2"></i>Lojistik Teklifi Al
-                            </a>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -654,54 +537,6 @@
             </div>
         </div>
 
-        <!-- Process Section -->
-        <div class="row mb-5">
-            <div class="col-12">
-                <div class="cta-agri text-white p-4 p-md-5 rounded-3">
-                    <h2 class="text-center text-white text-uppercase mb-4">
-                        Tarım Ürünleri <span style="color: #ffd700;">Alım Sürecimiz</span>
-                    </h2>
-                    <div class="row g-4">
-                        <div class="col-lg-3 col-md-6">
-                            <div class="text-center process-section">
-                                <div class="bg-white text-success rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
-                                    <i class="fas fa-phone fa-2x"></i>
-                                </div>
-                                <h4 class="text-white">1. İletişim</h4>
-                                <p>Satmak istediğiniz ürün için bizi arayarak bilgi alın.</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="text-center process-section">
-                                <div class="bg-white text-success rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
-                                    <i class="fas fa-search fa-2x"></i>
-                                </div>
-                                <h4 class="text-white">2. Değerlendirme</h4>
-                                <p>Ürününüzü yerinde görerek kalite ve miktar tespiti yapıyoruz.</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="text-center process-section">
-                                <div class="bg-white text-success rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
-                                    <i class="fas fa-tags fa-2x"></i>
-                                </div>
-                                <h4 class="text-white">3. Fiyat Teklifi</h4>
-                                <p>Güncel piyasa koşullarına göre en iyi fiyat teklifini sunuyoruz.</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="text-center process-section">
-                                <div class="bg-white text-success rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
-                                    <i class="fas fa-truck fa-2x"></i>
-                                </div>
-                                <h4 class="text-white">4. Teslim & Ödeme</h4>
-                                <p>Ürünlerinizi teslim alarak hızlı ödemelerinizi gerçekleştiriyoruz.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <!-- Call to Action -->
         <div class="row">
@@ -750,6 +585,9 @@
                     <a class="btn btn-lg btn-success btn-lg-square rounded-0 me-2" href="https://wa.me/905444393333" title="WhatsApp" target="_blank">
                         <i class="fab fa-whatsapp"></i>
                     </a>
+                    <a class="btn btn-lg btn-success btn-lg-square rounded-0 me-2" href="https://www.facebook.com/arkarltd/" title="Facebook" target="_blank">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
                     <a class="btn btn-lg btn-success btn-lg-square rounded-0" href="https://www.instagram.com/arkarltd" title="Instagram" target="_blank">
                         <i class="fab fa-instagram"></i>
                     </a>
@@ -768,13 +606,14 @@
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <h4 class="text-white text-uppercase mb-4">Tarım Ürünlerimiz</h4>
+                        <h4 class="text-white text-uppercase mb-4">Hizmetlerimiz</h4>
                         <div class="d-flex flex-column justify-content-start">
-                            <a class="text-white-50 mb-2" href="#misir-alim"><i class="fa fa-angle-right me-2"></i>Mısır Alım Satımı</a>
-                            <a class="text-white-50 mb-2" href="#bugday-alim"><i class="fa fa-angle-right me-2"></i>Buğday Alım Satımı</a>
-                            <a class="text-white-50 mb-2" href="#findik-alim"><i class="fa fa-angle-right me-2"></i>Fındık Alım Satımı</a>
-                            <a class="text-white-50 mb-2" href="#diger-tahillar"><i class="fa fa-angle-right me-2"></i>Diğer Tahıllar</a>
-                            <a class="text-white-50" href="#pazarlama"><i class="fa fa-angle-right me-2"></i>Pazarlama Hizmetleri</a>
+                            <a class="text-white-50 mb-2" href="projeler.html"><i class="fa fa-angle-right me-2"></i>Konut İnşaat Projeleri</a>
+                            <a class="text-white-50 mb-2" href="muteahhitlik.html"><i class="fa fa-angle-right me-2"></i>Anahtar Teslim İnşaat</a>
+                            <a class="text-white-50 mb-2" href="pvc.html"><i class="fa fa-angle-right me-2"></i>PVC Kapı Pencere</a>
+                            <a class="text-white-50 mb-2" href="tarim.html"><i class="fa fa-angle-right me-2"></i>Tarım Ürünleri</a>
+                            <a class="text-white-50 mb-2" href="ziraat.html"><i class="fa fa-angle-right me-2"></i>Zirai İlaç</a>
+                            <a class="text-white-50" href="insaat.html"><i class="fa fa-angle-right me-2"></i>İnşaat Malzemeleri</a>
                         </div>
                     </div>
                 </div>
@@ -789,6 +628,84 @@
         </div>
     </div>
     <!-- Footer End -->
+
+    <!-- Contact Modal Start -->
+    <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title" id="contactModalLabel">
+                        <i class="fa fa-phone me-2"></i>AR-KAR İnşaat - Hızlı İletişim
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-4">
+                        <!-- İletişim Bilgileri -->
+                        <div class="col-md-6">
+                            <h6 class="text-success mb-3"><i class="fa fa-map-marker-alt me-2"></i>Adreslerimiz</h6>
+                            <div class="mb-3">
+                                <strong>Çarşı Şubesi:</strong><br>
+                                Orta Mah. Dr. Orhan Atılgan Cad. No:24/A<br>
+                                Çarşamba/SAMSUN<br>
+                                <small class="text-muted">Tel: 0362 846 03 93</small>
+                            </div>
+                            <div class="mb-3">
+                                <strong>Arım Şubesi:</strong><br>
+                                Aşağı Kavacık Mah. No:46/A<br>
+                                Çarşamba/SAMSUN<br>
+                                <small class="text-muted">Tel: 0362 834 18 48</small>
+                            </div>
+                        </div>
+                        
+                        <!-- Hızlı İletişim -->
+                        <div class="col-md-6">
+                            <h6 class="text-success mb-3"><i class="fa fa-phone me-2"></i>Hızlı İletişim</h6>
+                            <div class="d-grid gap-2">
+                                <a href="tel:+905444393333" class="btn btn-success">
+                                    <i class="fa fa-phone me-2"></i>0544 439 33 33 - Ara
+                                </a>
+                                <a href="https://wa.me/905444393333" class="btn btn-success" target="_blank">
+                                    <i class="fab fa-whatsapp me-2"></i>WhatsApp'tan Yazın
+                                </a>
+                                <a href="mailto:arkargida@gmail.com" class="btn btn-primary">
+                                    <i class="fa fa-envelope me-2"></i>E-posta Gönder
+                                </a>
+                                <a href="https://www.facebook.com/arkarltd/" class="btn btn-outline-primary" target="_blank">
+                                    <i class="fab fa-facebook-f me-2"></i>Facebook'ta Takip Et
+                                </a>
+                                <a href="https://www.instagram.com/arkarltd" class="btn btn-outline-primary" target="_blank">
+                                    <i class="fab fa-instagram me-2"></i>Instagram'da Takip Et
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Çalışma Saatleri -->
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <div class="bg-light p-3 rounded">
+                                <h6 class="text-success mb-2"><i class="fa fa-clock me-2"></i>Çalışma Saatleri</h6>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <small><strong>Pazartesi - Cumartesi:</strong> 08:00 - 18:00</small>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <small><strong>Pazar:</strong> Kapalı</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                    <a href="index.html#contact" class="btn btn-success" data-bs-dismiss="modal">İletişim Formuna Git</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Contact Modal End -->
 
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-success btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>

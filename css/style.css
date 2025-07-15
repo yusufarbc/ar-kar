@@ -177,21 +177,15 @@ a.nav-link.bg-primary:hover {
 }
 
 .bg-dark-radial {
-    background-image: -webkit-repeating-radial-gradient(center center, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) 1px, transparent 1px, transparent 100%);
-    background-image: -moz-repeating-radial-gradient(center center, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) 1px, transparent 1px, transparent 100%);
-    background-image: -ms-repeating-radial-gradient(center center, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) 1px, transparent 1px, transparent 100%);
-    background-image: -o-repeating-radial-gradient(center center, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) 1px, transparent 1px, transparent 100%);
-    background-image: repeating-radial-gradient(center center, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) 1px, transparent 1px, transparent 100%);
-    background-size: 3px 3px;
+    /* Radial gradient disabled - was causing visual issues */
+    background-image: none !important;
+    background-size: initial !important;
 }
 
 .bg-light-radial {
-    background-image: -webkit-repeating-radial-gradient(center center, rgba(256, 256, 256, 0.2), rgba(256, 256, 256, 0.2) 1px, transparent 1px, transparent 100%);
-    background-image: -moz-repeating-radial-gradient(center center, rgba(256, 256, 256, 0.2), rgba(256, 256, 256, 0.2) 1px, transparent 1px, transparent 100%);
-    background-image: -ms-repeating-radial-gradient(center center, rgba(256, 256, 256, 0.2), rgba(256, 256, 256, 0.2) 1px, transparent 1px, transparent 100%);
-    background-image: -o-repeating-radial-gradient(center center, rgba(256, 256, 256, 0.2), rgba(256, 256, 256, 0.2) 1px, transparent 1px, transparent 100%);
-    background-image: repeating-radial-gradient(center center, rgba(256, 256, 256, 0.2), rgba(256, 256, 256, 0.2) 1px, transparent 1px, transparent 100%);
-    background-size: 3px 3px;
+    /* Radial gradient disabled - was causing visual issues */
+    background-image: none !important;
+    background-size: initial !important;
 }
 
 .navbar-dark .navbar-nav .nav-link {
@@ -341,23 +335,12 @@ a.nav-link.bg-primary:hover {
 
 @media (min-width: 992px) {
     .footer::after {
-        position: absolute;
-        content: "";
-        width: 1px;
-        height: 100%;
-        top: 0;
-        left: 50%;
-        background: var(--primary)
+        /* Vertical red line disabled */
+        display: none !important;
     }
 }
 
 .footer-shape::before {
-    position: absolute;
-    content: "";
-    width: 80px;
-    height: 100%;
-    top: 0;
-    left: -40px;
-    background: var(--primary);
-    transform: skew(40deg);
+    /* Red shape element disabled */
+    display: none !important;
 }

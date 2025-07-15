@@ -370,7 +370,7 @@
                         </div>
                     </div>
                     <a href="index.html#contact" class="nav-item nav-link">İletişim</a>
-                    <a href="" class="nav-item nav-link bg-primary text-white px-4 px-lg-5 ms-2 ms-lg-3 d-none d-lg-block" style="font-size:1rem;">Bize ulaşın <i class="bi bi-arrow-right"></i></a>
+                    <button class="nav-item nav-link bg-primary text-white px-4 px-lg-5 ms-2 ms-lg-3 d-none d-lg-block" style="font-size:1rem; border:none;" data-bs-toggle="modal" data-bs-target="#contactModal">Bize ulaşın <i class="bi bi-arrow-right"></i></button>
                 </div>
             </div>
         </nav>
@@ -661,13 +661,16 @@
         <div class="row g-5">
             <div class="col-lg-6 pe-lg-5">
                 <a href="index.html" class="navbar-brand">
-                    <img src="./img/logo.png" alt="logo">
+                    <img src="./img/logo.png" alt="AR-KAR İnşaat Logo">
                 </a>
-                <p><i class="fa fa-map-marker-alt me-2"></i>Çarşamba,Samsun</p>
+                <p><i class="fa fa-map-marker-alt me-2"></i>Çarşamba, Samsun</p>
+                <p><i class="fa fa-phone me-2"></i>0544 439 33 33</p>
+                <p><i class="fa fa-envelope me-2"></i>arkargida@gmail.com</p>
                 <div class="d-flex justify-content-start mt-4">
                     <a class="btn btn-lg btn-primary btn-lg-square rounded-0 me-2" href="mailto:arkargida@gmail.com"><i class="fa fa-envelope"></i></a>                    
                     <a class="btn btn-lg btn-primary btn-lg-square rounded-0 me-2" href="https://wa.me/905444393333?text="><i class="fab fa-whatsapp"></i></a>
-                    <a class="btn btn-lg btn-primary btn-lg-square rounded-0" href="https://www.instagram.com/arkarltd"><i class="fab fa-instagram"></i></a>
+                    <a class="btn btn-lg btn-primary btn-lg-square rounded-0 me-2" href="https://www.facebook.com/arkarltd/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-lg btn-primary btn-lg-square rounded-0" href="https://www.instagram.com/arkarltd" target="_blank"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
             <div class="col-lg-6 ps-lg-5">
@@ -683,13 +686,14 @@
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <h4 class="text-white text-uppercase mb-4">Anahtar Teslim Hizmetler</h4>
+                        <h4 class="text-white text-uppercase mb-4">Hizmetlerimiz</h4>
                         <div class="d-flex flex-column justify-content-start">
-                            <a class="text-white-50 mb-2" href="#villa"><i class="fa fa-angle-right me-2"></i>Villa İnşaatı</a>
-                            <a class="text-white-50 mb-2" href="#konut"><i class="fa fa-angle-right me-2"></i>Konut İnşaatı</a>
-                            <a class="text-white-50 mb-2" href="#endustriyel"><i class="fa fa-angle-right me-2"></i>Endüstriyel İnşaat</a>
-                            <a class="text-white-50 mb-2" href="#ticari"><i class="fa fa-angle-right me-2"></i>Ticari Bina İnşaatı</a>
-                            <a class="text-white-50" href="#renovasyon"><i class="fa fa-angle-right me-2"></i>Renovasyon & Tadilat</a>
+                            <a class="text-white-50 mb-2" href="projeler.html"><i class="fa fa-angle-right me-2"></i>Konut İnşaat Projeleri</a>
+                            <a class="text-white-50 mb-2" href="muteahhitlik.html"><i class="fa fa-angle-right me-2"></i>Anahtar Teslim İnşaat</a>
+                            <a class="text-white-50 mb-2" href="pvc.html"><i class="fa fa-angle-right me-2"></i>PVC Kapı Pencere</a>
+                            <a class="text-white-50 mb-2" href="tarim.html"><i class="fa fa-angle-right me-2"></i>Tarım Ürünleri</a>
+                            <a class="text-white-50 mb-2" href="ziraat.html"><i class="fa fa-angle-right me-2"></i>Zirai İlaç</a>
+                            <a class="text-white-50" href="insaat.html"><i class="fa fa-angle-right me-2"></i>İnşaat Malzemeleri</a>
                         </div>
                     </div>
                 </div>
@@ -699,11 +703,89 @@
     <div class="container-fluid bg-dark bg-light-radial text-white border-top border-primary px-0">
         <div class="d-flex flex-column flex-md-row justify-content-between">
             <div class="py-4 px-5 text-center text-md-start">
-                <p>&copy; 2025 Ar-Kar. Tüm hakları saklıdır.</p>
+                <p>&copy; 2025 AR-KAR İnşaat. Tüm hakları saklıdır.</p>
             </div>
         </div>
     </div>
     <!-- Footer End -->
+
+    <!-- Contact Modal Start -->
+    <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="contactModalLabel">
+                        <i class="fa fa-phone me-2"></i>AR-KAR İnşaat - Hızlı İletişim
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-4">
+                        <!-- İletişim Bilgileri -->
+                        <div class="col-md-6">
+                            <h6 class="text-primary mb-3"><i class="fa fa-map-marker-alt me-2"></i>Adreslerimiz</h6>
+                            <div class="mb-3">
+                                <strong>Çarşı Şubesi:</strong><br>
+                                Orta Mah. Dr. Orhan Atılgan Cad. No:24/A<br>
+                                Çarşamba/SAMSUN<br>
+                                <small class="text-muted">Tel: 0362 846 03 93</small>
+                            </div>
+                            <div class="mb-3">
+                                <strong>Arım Şubesi:</strong><br>
+                                Aşağı Kavacık Mah. No:46/A<br>
+                                Çarşamba/SAMSUN<br>
+                                <small class="text-muted">Tel: 0362 834 18 48</small>
+                            </div>
+                        </div>
+                        
+                        <!-- Hızlı İletişim -->
+                        <div class="col-md-6">
+                            <h6 class="text-primary mb-3"><i class="fa fa-phone me-2"></i>Hızlı İletişim</h6>
+                            <div class="d-grid gap-2">
+                                <a href="tel:+905444393333" class="btn btn-success">
+                                    <i class="fa fa-phone me-2"></i>0544 439 33 33 - Ara
+                                </a>
+                                <a href="https://wa.me/905444393333" class="btn btn-success" target="_blank">
+                                    <i class="fab fa-whatsapp me-2"></i>WhatsApp'tan Yazın
+                                </a>
+                                <a href="mailto:arkargida@gmail.com" class="btn btn-primary">
+                                    <i class="fa fa-envelope me-2"></i>E-posta Gönder
+                                </a>
+                                <a href="https://www.facebook.com/arkarltd/" class="btn btn-outline-primary" target="_blank">
+                                    <i class="fab fa-facebook-f me-2"></i>Facebook'ta Takip Et
+                                </a>
+                                <a href="https://www.instagram.com/arkarltd" class="btn btn-outline-primary" target="_blank">
+                                    <i class="fab fa-instagram me-2"></i>Instagram'da Takip Et
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Çalışma Saatleri -->
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <div class="bg-light p-3 rounded">
+                                <h6 class="text-primary mb-2"><i class="fa fa-clock me-2"></i>Çalışma Saatleri</h6>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <small><strong>Pazartesi - Cumartesi:</strong> 08:00 - 18:00</small>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <small><strong>Pazar:</strong> Kapalı</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                    <a href="index.html#contact" class="btn btn-primary" data-bs-dismiss="modal">İletişim Formuna Git</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Contact Modal End -->
 
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>

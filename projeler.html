@@ -5,18 +5,18 @@
     <meta charset="utf-8">
     <title>Konut İnşaat Projeleri | AR-KAR İnşaat Samsun | Samsun'da Modern Konut Projeleri</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="konut projeleri samsun, konut inşaat çarşamba, ar-kar konut projesi, samsun daire projeleri, çarşamba konut inşaat, modern konut projesi, tekstil fabrika inşaat, atakum konut projesi" name="keywords">
-    <meta content="AR-KAR İnşaat konut projeleri: Samsun Çarşamba'da modern 2+1 ve 1+1 daire projeleri, Atakum Beypınar konut projesi, tekstil fabrikası inşaatı. 36 yıllık deneyimle kaliteli konut projeleri." name="description">
+    <meta content="konut projeleri samsun, çarşamba konut inşaat, atakum konut projesi, ar-kar konut, adapark konut, beypınar konut, kirazlıkçay konut, körfez konut, bulutoğlu konut, akıllı ev sistemi, 2+1 daire, 3+1 daire, modern konut çarşamba" name="keywords">
+    <meta content="AR-KAR İnşaat konut projeleri: Çarşamba Kirazlıkçay, Adapark, Bulutoğlu, Atakum Beypınar ve Körfez'de modern konut projeleri. Akıllı ev sistemli, 2+1, 3+1 daireler. 36 yıllık deneyimle kaliteli inşaat." name="description">
     <meta name="robots" content="index, follow">
     <meta name="author" content="AR-KAR İnşaat">
     <link rel="canonical" href="https://www.arkar.com.tr/projeler.html">
     
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Konut İnşaat Projeleri | AR-KAR İnşaat Samsun | Çarşamba'da Modern Konut Projeleri">
-    <meta property="og:description" content="AR-KAR İnşaat konut projeleri: Samsun Çarşamba'da modern 2+1 ve 1+1 daire projeleri, Atakum Beypınar konut projesi, tekstil fabrikası inşaatı.">
+    <meta property="og:description" content="AR-KAR İnşaat konut projeleri: Çarşamba Kirazlıkçay, Adapark, Bulutoğlu, Atakum Beypınar ve Körfez'de modern konut projeleri. Akıllı ev sistemli, 2+1, 3+1 daireler.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.arkar.com.tr/projeler.html">
-    <meta property="og:image" content="https://www.arkar.com.tr/img/proje/proje1.jpg">
+    <meta property="og:image" content="https://www.arkar.com.tr/img/proje/kirazlikcay.jpg">
     <meta property="og:locale" content="tr_TR">
 
     <!-- Favicon -->
@@ -40,6 +40,93 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+
+    <!-- Performance Optimizations -->
+    <style>
+        /* Lazy Loading Enhancement */
+        img[loading="lazy"] {
+            transition: opacity 0.3s ease;
+        }
+        
+        /* Portfolio optimizations */
+        .portfolio-box {
+            overflow: hidden;
+            border-radius: 8px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: white;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .portfolio-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        
+        .portfolio-box img {
+            transition: transform 0.3s ease;
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .portfolio-box:hover img {
+            transform: scale(1.05);
+        }
+        
+        .portfolio-title {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .portfolio-title h2 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .portfolio-title span {
+            font-size: 0.9rem;
+            color: #666;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .portfolio-title p {
+            margin-top: auto;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+        
+        /* Accessibility improvements */
+        .portfolio-title:focus,
+        .portfolio-btn:focus {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+        }
+        
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            .portfolio-box,
+            .portfolio-box img {
+                transition: none !important;
+            }
+        }
+        
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .portfolio-box {
+                margin-bottom: 2rem;
+            }
+            
+            .portfolio-title h2 {
+                font-size: 1rem;
+            }
+        }
+    </style>
 
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
@@ -80,7 +167,7 @@
                     "itemOffered": {
                         "@type": "Product",
                         "name": "Çarşamba Kirazlıkçay Konut Projesi",
-                        "description": "18 daire 2+1 ve 1+1 konut projesi",
+                        "description": "Doğayla iç içe, manzaralı konumda 8 adet 2+1 ve 10 adet 1+1 toplam 18 daire",
                         "category": "Konut İnşaat Projesi"
                     }
                 },
@@ -88,17 +175,53 @@
                     "@type": "Offer",
                     "itemOffered": {
                         "@type": "Product",
-                        "name": "Tekstil Fabrikası Projesi",
-                        "description": "3900 m2 kapalı alan tekstil fabrika projesi",
-                        "category": "Endüstriyel İnşaat Projesi"
+                        "name": "Atakum Beypınar Konut Projesi",
+                        "description": "Modern mimari anlayışla 18 adet 120 m² 2+1 daire projesi",
+                        "category": "Konut İnşaat Projesi"
                     }
                 },
                 {
                     "@type": "Offer",
                     "itemOffered": {
                         "@type": "Product",
-                        "name": "Atakum Beypınar Konut Projesi",
-                        "description": "18 daire 2+1 konut projesi",
+                        "name": "Çarşamba Adapark 2+0 Konut Projesi",
+                        "description": "6 adet 80 m² 2+0 daire ve 1 dükkan prestijli konumda",
+                        "category": "Konut İnşaat Projesi"
+                    }
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Product",
+                        "name": "Atakum Körfez Konut Projesi",
+                        "description": "19 adet 1+1 daire, tramvay ve marinaya yakın konum",
+                        "category": "Konut İnşaat Projesi"
+                    }
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Product",
+                        "name": "Çarşamba Bulutoğlu Konut Projesi",
+                        "description": "8 adet 3+1 daire ve 1 dükkan stratejik konumda",
+                        "category": "Konut İnşaat Projesi"
+                    }
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Product",
+                        "name": "Çarşamba Adapark Ala Konut Projesi",
+                        "description": "12 adet 160 m² 3+1 daire, akıllı ev sistemi ile",
+                        "category": "Konut İnşaat Projesi"
+                    }
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Product",
+                        "name": "Çarşamba Adapark Ala Plus Konut Projesi",
+                        "description": "12 adet 135 m² 3+1 daire, kaymakamlık karşısında",
                         "category": "Konut İnşaat Projesi"
                     }
                 }
@@ -164,121 +287,115 @@
     <!-- Portfolio Start -->
     <div class="container-fluid bg-light py-6 px-5">
 
-        <div class="text-center mx-auto mb-5" style="max-width: 600px;">
+        <div class="text-center mx-auto mb-5" style="max-width: 800px;">
             <h1 class="display-5 text-uppercase mb-4"><span class="text-primary">AR-KAR İnşaat</span> Konut Projelerimiz</h1>
-            <p class="mb-4">Samsun Çarşamba'da 36 yıllık deneyimimizle hayata geçirdiğimiz modern konut projeleri, tekstil fabrikası inşaatları ve devam eden projelerimizi keşfedin.</p>
+            <p class="mb-4">Samsun Çarşamba ve Atakum'da 36 yıllık deneyimimizle hayata geçirdiğimiz modern konut projeleri. Doğayla iç içe, konforlu yaşam alanları ve kaliteli inşaat anlayışımızla projelerimizi keşfedin.</p>
         </div>
 
-        <div class="row gx-5">
-            <div class="col-12 text-center">
-                <div class="d-inline-block bg-dark-radial text-center pt-4 px-5 mb-5">
-                    <ul class="list-inline mb-0" id="portfolio-flters">
-                        <li class="btn btn-outline-primary bg-white p-2 active mx-2 mb-4" data-filter="*">
-                            <img src="img/portfolio-1.jpg" style="width: 150px; height: 100px;" alt="Tüm Projeler">
-                            <div class="position-absolute top-0 start-0 end-0 bottom-0 m-2 d-flex align-items-center justify-content-center" style="background: rgba(4, 15, 40, .3);">
-                                <h3 class="text-white text-uppercase m-0">Tüm Projeler</h3>
-                            </div>
-                        </li>
-                        <li class="btn btn-outline-primary bg-white p-2 mx-2 mb-4" data-filter=".ongoing">
-                            <img src="img/portfolio-2.jpg" style="width: 150px; height: 100px;" alt="Devam Eden Projeler">
-                            <div class="position-absolute top-0 start-0 end-0 bottom-0 m-2 d-flex align-items-center justify-content-center" style="background: rgba(4, 15, 40, .3);">
-                                <h3 class="text-white text-uppercase m-0">Devam Eden Projeler</h3>
-                            </div>
-                        </li>
-                        <li class="btn btn-outline-primary bg-white p-2 mx-2 mb-4" data-filter=".completed">
-                            <img src="img/portfolio-3.jpg" style="width: 150px; height: 100px;" alt="Tamamlanan Projeler">
-                            <div class="position-absolute top-0 start-0 end-0 bottom-0 m-2 d-flex align-items-center justify-content-center" style="background: rgba(4, 15, 40, .3);">
-                                <h3 class="text-white text-uppercase m-0">Tamamlanan Projeler</h3>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 portfolio-container align-items-stretch">
 
-        <div class="row g-5 portfolio-container">
-
-            <div class="col-xl-4 col-lg-6 col-md-6 portfolio-item ongoing">
-                <div class="position-relative portfolio-box">
-                    <img class="img-fluid w-100" src="img/proje/proje1.jpg" alt="Çarşamba Kirazlıkçay Konut Projesi">
-                    <a class="portfolio-title shadow-sm" href="#">
-                        <h2 class="h4 text-uppercase">Çarşamba Kirazlıkçay Mahallesi 18 Daire Konut Projesi</h2>
-                        <span class="text-body"><i class="fa fa-map-marker-alt text-primary me-2"></i>Kirazlıkçay Mah. Çarşamba, Samsun</span>
-                        <span class="text-body d-block"><i class="fa fa-home text-primary me-2"></i>2+1 ve 1+1 Daireler</span>
+            <!-- Çarşamba Kirazlıkçay Konut Projesi -->
+            <div class="col portfolio-item carsamba d-flex">
+                <div class="portfolio-box flex-fill d-flex flex-column h-100">
+                    <a href="img/proje/kirazlikcay.jpg" data-lightbox="portfolio" class="portfolio-image">
+                        <img class="img-fluid w-100" src="img/proje/kirazlikcay.jpg" alt="Çarşamba Kirazlıkçay Konut Projesi" loading="lazy">
                     </a>
-                    <a class="portfolio-btn" href="img/proje/proje1.jpg" data-lightbox="portfolio">
-                        <i class="bi bi-plus text-white"></i>
-                    </a>
+                    <div class="portfolio-title flex-grow-1 d-flex flex-column">
+                        <h2 class="text-uppercase">Kirazlıkçay Konut Projesi</h2>
+                        <span><i class="fa fa-map-marker-alt text-primary me-2"></i>Çarşamba, Samsun</span>
+                        <span><i class="fa fa-home text-primary me-2"></i>18 Daire (8x2+1, 10x1+1)</span>
+                        <p class="mt-3 text-muted">Doğayla iç içe, manzaralı konumda tasarlanmış huzurlu yaşam alanları. Çarşamba TOKİ'nin arka tarafında yer almaktadır. Çevresinde MKE, Yarı Olimpik Yüzme Havuzu, Organize Sanayi Bölgesi, Tekstilkent Sanayisi bulunmaktadır. Yaşanabilir ve müstakil alanın tam ortasındadır.</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="col-xl-4 col-lg-6 col-md-6 portfolio-item completed">
-                <div class="position-relative portfolio-box">
-                    <img class="img-fluid w-100" src="img/proje/proje2.jpg" alt="Tekstil Fabrikası İnşaat Projesi">
-                    <a class="portfolio-title shadow-sm" href="#">
-                        <h2 class="h4 text-uppercase">3900 m² Kapalı Alan Tekstil Fabrikası Projesi</h2>
-                        <span class="text-body"><i class="fa fa-map-marker-alt text-primary me-2"></i>Çarşamba, Samsun</span>
-                        <span class="text-body d-block"><i class="fa fa-industry text-primary me-2"></i>Endüstriyel İnşaat</span>
+            <!-- Atakum Beypınar Konut Projesi -->
+            <div class="col portfolio-item atakum d-flex">
+                <div class="portfolio-box flex-fill d-flex flex-column h-100">
+                    <a href="img/proje/Beypınar .jpg" data-lightbox="portfolio" class="portfolio-image">
+                        <img class="img-fluid w-100" src="img/proje/Beypınar .jpg" alt="Atakum Beypınar Konut Projesi" loading="lazy">
                     </a>
-                    <a class="portfolio-btn" href="img/proje/proje2.jpg" data-lightbox="portfolio">
-                        <i class="bi bi-plus text-white"></i>
-                    </a>
+                    <div class="portfolio-title flex-grow-1 d-flex flex-column">
+                        <h2 class="text-uppercase">Beypınar Konut Projesi</h2>
+                        <span><i class="fa fa-map-marker-alt text-primary me-2"></i>Atakum, Samsun</span>
+                        <span><i class="fa fa-home text-primary me-2"></i>18 Daire (2+1, 120 m²)</span>
+                        <p class="mt-2 text-muted">Modern mimari anlayışla tasarlanmış, konforlu yaşam alanları sunan konut projemiz. Gökdelenler bölgesi, Recep Tayyip Erdoğan bulvarına yakın konumda. Dairelerimiz 2+1 olmasına rağmen 120 m² ferah alana sahiptir. Her şey mimar ve iç mimar işbirliğiyle kaliteli ve özenle yapılmıştır.</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="col-xl-4 col-lg-6 col-md-6 portfolio-item ongoing">
-                <div class="position-relative portfolio-box">
-                    <img class="img-fluid w-100" src="img/proje/proje3.jpg" alt="Atakum Beypınar Konut Projesi">
-                    <a class="portfolio-title shadow-sm" href="#">
-                        <h2 class="h4 text-uppercase">Atakum Beypınar 18 Daire 2+1 Konut Projesi</h2>
-                        <span class="text-body"><i class="fa fa-map-marker-alt text-primary me-2"></i>Beypınar Mah. Atakum, Samsun</span>
-                        <span class="text-body d-block"><i class="fa fa-home text-primary me-2"></i>2+1 Daireler</span>
+            <!-- Çarşamba Adapark 2+0 Konut Projesi -->
+            <div class="col portfolio-item carsamba d-flex">
+                <div class="portfolio-box flex-fill d-flex flex-column h-100">
+                    <a href="img/proje/adapark2-0.jpg" data-lightbox="portfolio" class="portfolio-image">
+                        <img class="img-fluid w-100" src="img/proje/adapark2-0.jpg" alt="Çarşamba Adapark 2+0 Konut Projesi" loading="lazy">
                     </a>
-                    <a class="portfolio-btn" href="img/proje/proje3.jpg" data-lightbox="portfolio">
-                        <i class="bi bi-plus text-white"></i>
-                    </a>
+                    <div class="portfolio-title flex-grow-1 d-flex flex-column">
+                        <h2 class="text-uppercase">Adapark 2+0 Konut Projesi</h2>
+                        <span><i class="fa fa-map-marker-alt text-primary me-2"></i>Çarşamba, Samsun</span>
+                        <span><i class="fa fa-home text-primary me-2"></i>6 Daire (2+0, 80 m²) + Dükkan</span>
+                        <p class="mt-2 text-muted">Doğayla iç içe, manzaralı konumda tasarlanmış huzurlu yaşam alanları. Bölgenin en prestijli konumundadır. Daireler bulunduğu bölgenin kalite ve konseptinin üstünde yapılmıştır. Tüm bölgelere yürüme mesafesindedir.</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="col-xl-4 col-lg-6 col-md-6 portfolio-item ongoing">
-                <div class="position-relative portfolio-box">
-                    <img class="img-fluid w-100" src="img/portfolio-4.jpg" alt="AR-KAR İnşaat Projesi">
-                    <a class="portfolio-title shadow-sm" href="">
-                        <h2 class="h4 text-uppercase">Modern Konut Projesi</h2>
-                        <span class="text-body"><i class="fa fa-map-marker-alt text-primary me-2"></i>Çarşamba, Samsun</span>
-                        <span class="text-body d-block"><i class="fa fa-home text-primary me-2"></i>Konut İnşaatı</span>
+            <!-- Atakum Körfez Konut Projesi -->
+            <div class="col portfolio-item atakum d-flex">
+                <div class="portfolio-box flex-fill d-flex flex-column h-100">
+                    <a href="img/proje/korfez.png" data-lightbox="portfolio" class="portfolio-image">
+                        <img class="img-fluid w-100" src="img/proje/korfez.png" alt="Atakum Körfez Konut Projesi" loading="lazy">
                     </a>
-                    <a class="portfolio-btn" href="img/portfolio-4.jpg" data-lightbox="portfolio">
-                        <i class="bi bi-plus text-white"></i>
-                    </a>
+                    <div class="portfolio-title flex-grow-1 d-flex flex-column">
+                        <h2 class="text-uppercase">Körfez Konut Projesi</h2>
+                        <span><i class="fa fa-map-marker-alt text-primary me-2"></i>Atakum, Samsun</span>
+                        <span><i class="fa fa-home text-primary me-2"></i>19 Daire (1+1)</span>
+                        <p class="mt-2 text-muted">Modern mimari anlayışla tasarlanmış, konforlu yaşam alanları sunan konut projemiz. Dairelerimiz yer ve yapısına göre bölgesinde bulunan çoğu binadan kaliteli ve kullanışlı şekilde inşa edilmiştir. Pelitköy tramvay durağına 1 dakika, Körfez marinaya 5 dakika yürüme mesafesindedir.</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="col-xl-4 col-lg-6 col-md-6 portfolio-item completed">
-                <div class="position-relative portfolio-box">
-                    <img class="img-fluid w-100" src="img/portfolio-5.jpg" alt="Tamamlanan İnşaat Projesi">
-                    <a class="portfolio-title shadow-sm" href="">
-                        <h2 class="h4 text-uppercase">Tamamlanan Konut Projesi</h2>
-                        <span class="text-body"><i class="fa fa-map-marker-alt text-primary me-2"></i>Çarşamba, Samsun</span>
-                        <span class="text-body d-block"><i class="fa fa-check text-primary me-2"></i>Teslim Edildi</span>
+            <!-- Çarşamba Bulutoğlu Konut Projesi -->
+            <div class="col portfolio-item carsamba d-flex">
+                <div class="portfolio-box flex-fill d-flex flex-column h-100">
+                    <a href="img/proje/bulutoglu.png" data-lightbox="portfolio" class="portfolio-image">
+                        <img class="img-fluid w-100" src="img/proje/bulutoglu.png" alt="Çarşamba Bulutoğlu Konut Projesi" loading="lazy">
                     </a>
-                    <a class="portfolio-btn" href="img/portfolio-5.jpg" data-lightbox="portfolio">
-                        <i class="bi bi-plus text-white"></i>
-                    </a>
+                    <div class="portfolio-title flex-grow-1 d-flex flex-column">
+                        <h2 class="text-uppercase">Bulutoğlu Konut Projesi</h2>
+                        <span><i class="fa fa-map-marker-alt text-primary me-2"></i>Çarşamba, Samsun</span>
+                        <span><i class="fa fa-home text-primary me-2"></i>8 Daire (3+1) + Dükkan</span>
+                        <p class="mt-2 text-muted">Stratejik konumda, modern tasarım ve kaliteli malzemelerle inşa edilen konut projemiz. Bölgenin en işlek köy ve şehri birleştiren caddesinde bulunmaktadır. Dairelerimiz kaliteli ve özenle inşa edilmiştir.</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="col-xl-4 col-lg-6 col-md-6 portfolio-item completed">
-                <div class="position-relative portfolio-box">
-                    <img class="img-fluid w-100" src="img/portfolio-6.jpg" alt="AR-KAR Konut Projesi">
-                    <a class="portfolio-title shadow-sm" href="">
-                        <h2 class="h4 text-uppercase">Kaliteli Konut Projesi</h2>
-                        <span class="text-body"><i class="fa fa-map-marker-alt text-primary me-2"></i>Çarşamba, Samsun</span>
-                        <span class="text-body d-block"><i class="fa fa-star text-primary me-2"></i>Prestijli Proje</span>
+            <!-- Çarşamba Adapark Ala Konut Projesi -->
+            <div class="col portfolio-item carsamba d-flex">
+                <div class="portfolio-box flex-fill d-flex flex-column h-100">
+                    <a href="img/proje/ala.png" data-lightbox="portfolio" class="portfolio-image">
+                        <img class="img-fluid w-100" src="img/proje/ala.png" alt="Çarşamba Adapark Ala Konut Projesi" loading="lazy">
                     </a>
-                    <a class="portfolio-btn" href="img/portfolio-6.jpg" data-lightbox="portfolio">
-                        <i class="bi bi-plus text-white"></i>
+                    <div class="portfolio-title flex-grow-1 d-flex flex-column">
+                        <h2 class="text-uppercase">Adapark Ala Konut Projesi</h2>
+                        <span><i class="fa fa-map-marker-alt text-primary me-2"></i>Çarşamba, Samsun</span>
+                        <span><i class="fa fa-home text-primary me-2"></i>12 Daire (3+1, 160 m²)</span>
+                        <p class="mt-2 text-muted">Doğayla iç içe, manzaralı konumda tasarlanmış huzurlu yaşam alanları. Bölgenin en prestijli konumunda, karşısında yeni kaymakamlık binası bulunmaktadır. Daireler bulunduğu bölgenin kalite ve konseptinin üstünde yapılmıştır. Akıllı ev sistemi bulunmaktadır. Tüm bölgelere yürüme mesafesindedir.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Çarşamba Adapark Ala Plus Konut Projesi -->
+            <div class="col portfolio-item carsamba d-flex">
+                <div class="portfolio-box flex-fill d-flex flex-column h-100">
+                    <a href="img/proje/alaplus.png" data-lightbox="portfolio" class="portfolio-image">
+                        <img class="img-fluid w-100" src="img/proje/alaplus.png" alt="Çarşamba Adapark Ala Plus Konut Projesi" loading="lazy">
                     </a>
+                    <div class="portfolio-title flex-grow-1 d-flex flex-column">
+                        <h2 class="text-uppercase">Adapark Ala Plus Konut Projesi</h2>
+                        <span><i class="fa fa-map-marker-alt text-primary me-2"></i>Çarşamba, Samsun</span>
+                        <span><i class="fa fa-home text-primary me-2"></i>12 Daire (3+1, 135 m²)</span>
+                        <p class="mt-2 text-muted">Doğayla iç içe, manzaralı konumda tasarlanmış huzurlu yaşam alanları. Bölgenin en prestijli konumunda, karşı çaprazında yeni kaymakamlık binası ve kaymakam konutu bulunmaktadır. Daireler bulunduğu bölgenin kalite ve konseptinin üstünde yapılmıştır. Tüm bölgelere yürüme mesafesindedir.</p>
+                    </div>
                 </div>
             </div>
 
@@ -286,8 +403,12 @@
 
     </div>
     <!-- Portfolio End -->
-    
-     <!-- Footer Start -->
+
+
+  
+
+
+    <!-- Footer Start -->
     <div class="footer container-fluid position-relative bg-dark text-white-50 py-6 px-5">
         <div class="row g-5">
             <div class="col-lg-6 pe-lg-5">
@@ -335,8 +456,6 @@
         </div>
     </div>
     
-    <!-- Contact Modal Start -->
-
     <!-- Contact Modal Start -->
     <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -407,8 +526,6 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
-                    <a href="index.html#contact" class="btn btn-primary" data-bs-dismiss="modal">İletişim Formuna Git</a>
                 </div>
             </div>
         </div>

@@ -51,96 +51,8 @@
     left: 25%;
 }
 
-/* Bootstrap Button Override - Turuncu renklerin önlenmesi */
-.btn-primary,
-.btn-primary:not(:disabled):not(.disabled):active,
-.btn-primary:not(:disabled):not(.disabled).active,
-.show > .btn-primary.dropdown-toggle {
-    color: #FFFFFF !important;
-    background-color: var(--primary) !important;
-    border-color: var(--primary) !important;
-}
-
-.btn-primary:hover,
-.btn-primary:focus,
-.btn-primary:active,
-.btn-primary.active,
-.btn-primary:not(:disabled):not(.disabled):active:focus,
-.btn-primary:not(:disabled):not(.disabled).active:focus,
-.show > .btn-primary.dropdown-toggle:focus {
-    color: #FFFFFF !important;
-    background-color: var(--primary) !important;
-    border-color: var(--primary) !important;
-    box-shadow: 0 0 0 0.2rem rgba(204, 39, 43, 0.5) !important;
-}
-
-/* Bootstrap varsayılan turuncu rengini ezmek için */
-.btn-warning {
-    color: #FFFFFF !important;
-    background-color: var(--primary) !important;
-    border-color: var(--primary) !important;
-}
-
-.btn-warning:hover,
-.btn-warning:focus,
-.btn-warning:active,
-.btn-warning.active {
-    color: #FFFFFF !important;
-    background-color: var(--primary) !important;
-    border-color: var(--primary) !important;
-    box-shadow: 0 0 0 0.2rem rgba(204, 39, 43, 0.5) !important;
-}
-
-/* Tüm buton varyasyonları için güçlü CSS kuralları */
-button.btn-primary,
-a.btn-primary,
-input.btn-primary,
-.btn.btn-primary {
-    color: #FFFFFF !important;
-    background-color: var(--primary) !important;
-    border-color: var(--primary) !important;
-}
-
-button.btn-primary:hover,
-a.btn-primary:hover,
-input.btn-primary:hover,
-.btn.btn-primary:hover,
-button.btn-primary:focus,
-a.btn-primary:focus,
-input.btn-primary:focus,
-.btn.btn-primary:focus,
-button.btn-primary:active,
-a.btn-primary:active,
-input.btn-primary:active,
-.btn.btn-primary:active {
-    color: #FFFFFF !important;
-    background-color: var(--primary) !important;
-    border-color: var(--primary) !important;
-    box-shadow: 0 0 0 0.2rem rgba(204, 39, 43, 0.5) !important;
-}
-
-/* bg-primary sınıfı için özel kurallar */
-.bg-primary {
-    background-color: var(--primary) !important;
-}
-
-.bg-primary:hover {
-    background-color: var(--primary) !important;
-}
-
-/* Link elementleri için bg-primary kuralları */
-a.bg-primary,
-a.nav-link.bg-primary {
-    color: #FFFFFF !important;
-    background-color: var(--primary) !important;
-    text-decoration: none !important;
-}
-
-a.bg-primary:hover,
-a.nav-link.bg-primary:hover {
-    color: #FFFFFF !important;
-    background-color: var(--primary) !important;
-    text-decoration: none !important;
+.btn-primary {
+    color: #FFFFFF;
 }
 
 .btn-square {
@@ -177,15 +89,21 @@ a.nav-link.bg-primary:hover {
 }
 
 .bg-dark-radial {
-    /* Radial gradient disabled - was causing visual issues */
-    background-image: none !important;
-    background-size: initial !important;
+    background-image: -webkit-repeating-radial-gradient(center center, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) 1px, transparent 1px, transparent 100%);
+    background-image: -moz-repeating-radial-gradient(center center, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) 1px, transparent 1px, transparent 100%);
+    background-image: -ms-repeating-radial-gradient(center center, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) 1px, transparent 1px, transparent 100%);
+    background-image: -o-repeating-radial-gradient(center center, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) 1px, transparent 1px, transparent 100%);
+    background-image: repeating-radial-gradient(center center, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) 1px, transparent 1px, transparent 100%);
+    background-size: 3px 3px;
 }
 
 .bg-light-radial {
-    /* Radial gradient disabled - was causing visual issues */
-    background-image: none !important;
-    background-size: initial !important;
+    background-image: -webkit-repeating-radial-gradient(center center, rgba(256, 256, 256, 0.2), rgba(256, 256, 256, 0.2) 1px, transparent 1px, transparent 100%);
+    background-image: -moz-repeating-radial-gradient(center center, rgba(256, 256, 256, 0.2), rgba(256, 256, 256, 0.2) 1px, transparent 1px, transparent 100%);
+    background-image: -ms-repeating-radial-gradient(center center, rgba(256, 256, 256, 0.2), rgba(256, 256, 256, 0.2) 1px, transparent 1px, transparent 100%);
+    background-image: -o-repeating-radial-gradient(center center, rgba(256, 256, 256, 0.2), rgba(256, 256, 256, 0.2) 1px, transparent 1px, transparent 100%);
+    background-image: repeating-radial-gradient(center center, rgba(256, 256, 256, 0.2), rgba(256, 256, 256, 0.2) 1px, transparent 1px, transparent 100%);
+    background-size: 3px 3px;
 }
 
 .navbar-dark .navbar-nav .nav-link {
@@ -260,70 +178,90 @@ a.nav-link.bg-primary:hover {
 }
 
 .portfolio-item {
-    margin-bottom: 60px;
+    margin-bottom: 30px;
+}
+
+.portfolio-box {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.portfolio-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.portfolio-box img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
 }
 
 .portfolio-title {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 120px;
-    padding: 0 30px;
-    right: 30px;
-    left: 30px;
-    bottom: -60px;
-    background: #FFFFFF;
+    position: relative;
+    bottom: auto;
+    left: auto;
+    right: auto;
+    background: white;
+    color: #333;
+    padding: 20px;
     z-index: 3;
 }
 
-.portfolio-btn {
-    position: absolute;
-    display: inline-block;
-    top: 50%;
-    left: 50%;
-    margin-top: -60px;
-    margin-left: -60px;
-    font-size: 120px;
-    line-height: 0;
-    transition: .1s;
-    transition-delay: .3s;
-    z-index: 2;
-    opacity: 0;
+.portfolio-title h2 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: #333;
+    font-weight: 600;
 }
 
-.portfolio-item:hover .portfolio-btn {
-    opacity: 1;
+.portfolio-title span {
+    font-size: 0.9rem;
+    color: #666;
+    display: block;
+    margin-bottom: 5px;
 }
 
-.portfolio-box::before,
-.portfolio-box::after {
-    position: absolute;
-    content: "";
-    width: 0;
-    height: 100%;
-    top: 0;
-    transition: .5s;
-    z-index: 1;
-    background: rgba(4, 15, 40, .7);
+.portfolio-title span:last-child {
+    margin-bottom: 0;
 }
 
-.portfolio-box::before {
-    left: 0;
+/* Image container for click functionality */
+.portfolio-image {
+    position: relative;
+    cursor: pointer;
 }
 
-.portfolio-box::after {
-    right: 0;
+.portfolio-image img {
+    transition: transform 0.3s ease;
 }
 
-.portfolio-item:hover .portfolio-box::before {
-    left: 0;
-    width: 50%;
+.portfolio-box:hover .portfolio-image img {
+    transform: scale(1.05);
 }
 
-.portfolio-item:hover .portfolio-box::after {
-    right: 0;
-    width: 50%;
+/* Removed complex portfolio effects for cleaner design */
+
+/* Project Item Styles */
+.project-item {
+    transition: all 0.3s ease;
+}
+
+.project-item:hover .project-overlay {
+    opacity: 1 !important;
+}
+
+.project-overlay {
+    transition: all 0.3s ease;
+}
+
+.project-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 @media (min-width: 992px) {
@@ -335,308 +273,23 @@ a.nav-link.bg-primary:hover {
 
 @media (min-width: 992px) {
     .footer::after {
-        /* Vertical red line disabled */
-        display: none !important;
+        position: absolute;
+        content: "";
+        width: 1px;
+        height: 100%;
+        top: 0;
+        left: 50%;
+        background: var(--primary)
     }
 }
 
 .footer-shape::before {
-    /* Red shape element disabled */
-    display: none !important;
-}
-
-/* Project Section Styles */
-.project-item {
-    cursor: pointer;
-}
-
-.project-item:hover .project-overlay {
-    opacity: 1 !important;
-}
-
-.project-overlay {
-    transition: opacity 0.3s ease-in-out;
-}
-
-.project-overlay .btn {
-    transform: translateY(20px);
-    transition: transform 0.3s ease-in-out;
-}
-
-.project-item:hover .project-overlay .btn {
-    transform: translateY(0);
-}
-
-/* Footer Styles */
-
-/* Modern Portfolio Styles for Construction Page */
-.construction-portfolio {
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    padding: 80px 0;
-}
-
-.construction-category {
-    margin-bottom: 60px;
-}
-
-.category-title {
-    position: relative;
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--dark);
-    text-align: center;
-    margin-bottom: 50px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-.category-title::before {
-    content: '';
     position: absolute;
-    bottom: -15px;
-    left: 50%;
-    transform: translateX(-50%);
+    content: "";
     width: 80px;
-    height: 4px;
-    background: linear-gradient(90deg, var(--primary), #ff6b6b);
-    border-radius: 2px;
-}
-
-.category-title::after {
-    content: '';
-    position: absolute;
-    bottom: -25px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 40px;
-    height: 4px;
-    background: var(--secondary);
-    border-radius: 2px;
-}
-
-.modern-portfolio-card {
-    background: #ffffff;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    transition: all 0.4s ease;
-    margin-bottom: 30px;
-    position: relative;
-}
-
-.modern-portfolio-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
-}
-
-.portfolio-image {
-    position: relative;
-    overflow: hidden;
-    height: 280px;
-}
-
-.portfolio-image img {
-    width: 100%;
     height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-}
-
-.modern-portfolio-card:hover .portfolio-image img {
-    transform: scale(1.1);
-}
-
-.portfolio-overlay {
-    position: absolute;
     top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(45deg, rgba(204, 39, 43, 0.9), rgba(60, 60, 68, 0.9));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: all 0.4s ease;
-}
-
-.modern-portfolio-card:hover .portfolio-overlay {
-    opacity: 1;
-}
-
-.portfolio-overlay .btn {
-    background: rgba(255, 255, 255, 0.2);
-    border: 2px solid #ffffff;
-    color: #ffffff;
-    padding: 12px 30px;
-    border-radius: 50px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transform: translateY(20px);
-    transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
-}
-
-.modern-portfolio-card:hover .portfolio-overlay .btn {
-    transform: translateY(0);
-    background: #ffffff;
-    color: var(--primary);
-}
-
-.portfolio-content {
-    padding: 30px 25px;
-    text-align: center;
-}
-
-.portfolio-title {
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: var(--dark);
-    margin-bottom: 15px;
-    line-height: 1.3;
-}
-
-.portfolio-description {
-    color: var(--secondary);
-    font-size: 1rem;
-    line-height: 1.6;
-    margin-bottom: 20px;
-}
-
-.portfolio-features {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    justify-content: center;
-    margin-bottom: 20px;
-}
-
-.feature-tag {
-    background: linear-gradient(135deg, var(--primary), #ff6b6b);
-    color: #ffffff;
-    padding: 5px 15px;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.portfolio-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 20px;
-    border-top: 1px solid #e9ecef;
-}
-
-.portfolio-location {
-    display: flex;
-    align-items: center;
-    color: var(--secondary);
-    font-size: 0.9rem;
-}
-
-.portfolio-location i {
-    color: var(--primary);
-    margin-right: 8px;
-}
-
-.portfolio-year {
-    background: var(--secondary);
-    color: #ffffff;
-    padding: 5px 12px;
-    border-radius: 15px;
-    font-size: 0.85rem;
-    font-weight: 600;
-}
-
-/* Category Filter Styles */
-.category-filter {
-    text-align: center;
-    margin-bottom: 50px;
-}
-
-.filter-btn {
-    background: transparent;
-    border: 2px solid var(--primary);
-    color: var(--primary);
-    padding: 12px 25px;
-    margin: 5px 10px;
-    border-radius: 50px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: all 0.3s ease;
-    cursor: pointer;
-}
-
-.filter-btn:hover,
-.filter-btn.active {
+    left: -40px;
     background: var(--primary);
-    color: #ffffff;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(204, 39, 43, 0.3);
-}
-
-/* Animation for category sections */
-.construction-category {
-    animation: fadeInUp 0.8s ease-in-out;
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .category-title {
-        font-size: 2rem;
-    }
-    
-    .portfolio-image {
-        height: 220px;
-    }
-    
-    .portfolio-content {
-        padding: 20px 15px;
-    }
-    
-    .portfolio-features {
-        justify-content: flex-start;
-    }
-    
-    .portfolio-meta {
-        flex-direction: column;
-        gap: 10px;
-        text-align: center;
-    }
-    
-    .filter-btn {
-        padding: 10px 20px;
-        margin: 3px 5px;
-        font-size: 0.9rem;
-    }
-}
-
-@media (max-width: 576px) {
-    .category-title {
-        font-size: 1.7rem;
-    }
-    
-    .construction-portfolio {
-        padding: 60px 0;
-    }
-    
-    .construction-category {
-        margin-bottom: 40px;
-    }
+    transform: skew(40deg);
 }

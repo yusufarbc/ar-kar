@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="tr">
 
 <head>
@@ -32,36 +32,6 @@
     <meta name="twitter:description" content="Samsun'da en kaliteli inşaat malzemeleri: kaba inşaat, ince inşaat, hırdavat, elektrik, tesisat ve yalıtım ürünleri. Çimento, gaz beton, seramik ve daha fazlası.">
     <meta name="twitter:image" content="https://www.arkar.com.tr/img/nalbur/boya.png">
 
-    <!-- Additional SEO Meta Tags -->
-    <meta name="format-detection" content="telephone=yes">
-    <meta name="theme-color" content="#cc272b">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="msapplication-TileColor" content="#cc272b">
-    <meta name="application-name" content="AR-KAR İnşaat">
-    
-    <!-- Structured Data Breadcrumbs -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-            {
-                "@type": "ListItem",
-                "position": 1,
-                "name": "Ana Sayfa",
-                "item": "https://www.arkar.com.tr/"
-            },
-            {
-                "@type": "ListItem",
-                "position": 2,
-                "name": "Hırdavat & İnşaat Malzemeleri",
-                "item": "https://www.arkar.com.tr/insaat.html"
-            }
-        ]
-    }
-    </script>
-
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
 
@@ -79,403 +49,102 @@
     <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.red.css" rel="stylesheet">
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
 
-    <!-- Custom CSS for Responsive Material Cards -->
+    <!-- Critical CSS Optimizations -->
     <style>
-        /* Responsive material card styles */
-        .material-card {
-            transition: all 0.3s ease;
-            border: none;
-            background: white;
-            overflow: hidden;
-            height: 100%;
+        /* Lazy Loading Optimization */
+        img[loading="lazy"] {
+            filter: blur(5px);
+            transition: filter 0.3s ease;
         }
-
-        .material-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        img[loading="lazy"]:not([data-loaded]) {
+            filter: blur(5px);
         }
-
-        .material-card .card-img-container {
-            position: relative;
-            overflow: hidden;
-            height: 280px;
-        }
-
-        .material-card .card-img-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .material-card:hover .card-img-container img {
-            transform: scale(1.05);
-        }
-
-        .material-category-badge {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            background: var(--primary);
-            color: white;
-            padding: 8px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            z-index: 2;
-        }
-
-        .material-card-content {
-            padding: 25px;
-            height: auto;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .material-card-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--dark);
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            line-height: 1.3;
-        }
-
-        .material-brand-info {
-            color: var(--primary);
-            font-weight: 600;
-            margin-bottom: 12px;
-            font-size: 0.95rem;
-        }
-
-        .material-description {
-            color: #666;
-            font-size: 0.9rem;
-            line-height: 1.5;
-            margin-bottom: 15px;
-            flex-grow: 1;
-        }
-
-        .material-features {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: auto;
-        }
-
-        .feature-tag {
-            background: #f8f9fa;
-            color: var(--primary);
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 0.8rem;
-            border: 1px solid #e9ecef;
-        }
-
-        /* Section styling */
-        .materials-section {
-            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-            position: relative;
-        }
-
-        .materials-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 100px;
-            background: linear-gradient(to bottom, rgba(204, 39, 43, 0.05), transparent);
-        }
-
-        .section-header {
-            position: relative;
-            z-index: 2;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--dark);
-            margin-bottom: 20px;
-        }
-
-        .section-subtitle {
-            font-size: 1.1rem;
-            color: #666;
-            line-height: 1.6;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .material-card .card-img-container {
-                height: 220px;
-            }
-
-            .material-card-content {
-                padding: 20px;
-            }
-
-            .material-card-title {
-                font-size: 1.1rem;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .section-subtitle {
-                font-size: 1rem;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .material-card .card-img-container {
-                height: 200px;
-            }
-
-            .material-card-content {
-                padding: 15px;
-            }
-
-            .material-card-title {
-                font-size: 1rem;
-            }
-
-            .section-title {
-                font-size: 1.8rem;
-            }
-
-            .material-features {
-                gap: 5px;
-            }
-
-            .feature-tag {
-                font-size: 0.75rem;
-                padding: 3px 8px;
-            }
-        }
-
-        /* Loading animation */
-        .material-card {
-            opacity: 0;
-            animation: fadeInUp 0.6s ease forwards;
-        }
-
-        .material-card:nth-child(1) { animation-delay: 0.1s; }
-        .material-card:nth-child(2) { animation-delay: 0.2s; }
-        .material-card:nth-child(3) { animation-delay: 0.3s; }
-        .material-card:nth-child(4) { animation-delay: 0.4s; }
-        .material-card:nth-child(5) { animation-delay: 0.5s; }
-        .material-card:nth-child(6) { animation-delay: 0.6s; }
-        .material-card:nth-child(7) { animation-delay: 0.7s; }
-        .material-card:nth-child(8) { animation-delay: 0.8s; }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Container responsive padding */
-        .materials-container {
-            padding-left: 15px;
-            padding-right: 15px;
-        }
-
-        @media (min-width: 768px) {
-            .materials-container {
-                padding-left: 40px;
-                padding-right: 40px;
-            }
-        }
-
-        @media (min-width: 1200px) {
-            .materials-container {
-                padding-left: 60px;
-                padding-right: 60px;
-            }
-        }
-
-        /* Enhanced Responsive Design */
-        @media (max-width: 1199px) {
-            .modern-portfolio-card .portfolio-image {
-                height: 260px;
-            }
-            
-            .category-title {
-                font-size: 2.2rem;
-            }
-        }
-
-        @media (max-width: 991px) {
-            .modern-portfolio-card .portfolio-image {
-                height: 240px;
-            }
-            
-            .category-title {
-                font-size: 2rem;
-            }
-            
-            .portfolio-content {
-                padding: 20px;
-            }
-            
-            .construction-portfolio {
-                padding: 60px 0;
-            }
-        }
-
-        @media (max-width: 767px) {
-            .modern-portfolio-card .portfolio-image {
-                height: 220px;
-            }
-            
-            .category-title {
-                font-size: 1.8rem;
-                margin-bottom: 30px;
-            }
-            
-            .portfolio-content {
-                padding: 15px;
-            }
-            
-            .portfolio-title {
-                font-size: 1.2rem;
-            }
-            
-            .portfolio-description {
-                font-size: 0.9rem;
-                line-height: 1.5;
-            }
-            
-            .construction-portfolio {
-                padding: 40px 0;
-            }
-            
-            .construction-category {
-                margin-bottom: 40px;
-            }
-            
-            .portfolio-features {
-                gap: 6px;
-                margin-bottom: 15px;
-            }
-            
-            .feature-tag {
-                font-size: 0.75rem;
-                padding: 4px 8px;
-            }
-            
-            .portfolio-meta {
-                flex-direction: column;
-                gap: 10px;
-                text-align: center;
-            }
-        }
-
-        @media (max-width: 575px) {
-            .modern-portfolio-card .portfolio-image {
-                height: 200px;
-            }
-            
-            .category-title {
-                font-size: 1.6rem;
-                line-height: 1.2;
-            }
-            
-            .portfolio-title {
-                font-size: 1.1rem;
-                line-height: 1.3;
-            }
-            
-            .portfolio-description {
-                font-size: 0.85rem;
-            }
-            
-            .construction-portfolio {
-                padding: 30px 0;
-            }
-            
-            .portfolio-overlay .btn {
-                padding: 8px 20px;
-                font-size: 0.9rem;
-            }
-        }
-
-        /* Performance & Accessibility Improvements */
-        .modern-portfolio-card img {
-            transition: transform 0.3s ease;
+        img[loading="lazy"][data-loaded] {
+            filter: none;
         }
         
-        .modern-portfolio-card:focus-within,
-        .modern-portfolio-card:hover {
+        /* Preload Critical Images */
+        .logo-img {
+            font-display: swap;
+        }
+        
+        /* Performance Optimizations */
+        .material-card-img {
+            will-change: transform;
+            transform: translateZ(0);
+        }
+        
+        /* Accessibility Improvements */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        
+        /* Focus improvements */
+        .material-card:focus-within,
+        .contact-card:focus-within {
             outline: 2px solid var(--primary);
             outline-offset: 2px;
         }
         
-        .portfolio-overlay .btn:focus {
-            outline: 2px solid #ffffff;
-            outline-offset: 2px;
-        }
-        
-        /* Print Styles */
-        @media print {
-            .construction-portfolio {
-                background: none !important;
-                color: #000 !important;
-            }
-            
-            .portfolio-overlay,
-            .modern-portfolio-card:hover .portfolio-overlay {
-                display: none !important;
-            }
-            
-            .modern-portfolio-card {
-                break-inside: avoid;
-                margin-bottom: 20px;
-            }
-        }
-
-        /* High Contrast Mode Support */
-        @media (prefers-contrast: high) {
-            .modern-portfolio-card {
-                border: 2px solid #000;
-            }
-            
-            .feature-tag {
-                border: 1px solid #000;
-                background: #fff;
-                color: #000;
-            }
-        }
-
         /* Reduced Motion Support */
         @media (prefers-reduced-motion: reduce) {
-            .modern-portfolio-card,
-            .modern-portfolio-card img,
-            .portfolio-overlay {
+            .material-card,
+            .material-card img,
+            .material-card-content {
                 transition: none !important;
                 animation: none !important;
             }
-            
-            .modern-portfolio-card:hover {
-                transform: none !important;
-            }
         }
+    </style>
+
+    <!-- Optimized CSS for Material Cards -->
+    <style>
+        /* Material Cards */
+        .material-card{transition:all .3s ease;border:0;background:#fff;overflow:hidden;height:100%}
+        .material-card:hover{transform:translateY(-10px);box-shadow:0 15px 35px rgba(0,0,0,.1)}
+        .material-card .card-img-container{position:relative;overflow:hidden;height:280px}
+        .material-card .card-img-container img{width:100%;height:100%;object-fit:cover;transition:transform .3s ease}
+        .material-card:hover .card-img-container img{transform:scale(1.05)}
+        .material-category-badge{position:absolute;top:15px;left:15px;background:var(--primary);color:#fff;padding:8px 12px;border-radius:20px;font-size:.85rem;font-weight:600;text-transform:uppercase;
+z-index:2}
+        .material-card-content{padding:25px;height:auto;display:flex;flex-direction:column}
+        .material-card-title{font-size:1.25rem;font-weight:700;color:var(--dark);margin-bottom:10px;text-transform:uppercase;line-height:1.3}
+        .material-brand-info{color:var(--primary);font-weight:600;margin-bottom:12px;font-size:.95rem}
+        .material-description{color:#666;font-size:.9rem;line-height:1.5;margin-bottom:15px;flex-grow:1}
+        .material-features{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto}
+        .feature-tag{background:#f8f9fa;color:var(--primary);padding:4px 10px;border-radius:12px;font-size:.8rem;border:1px solid #e9ecef}
+        .materials-section{background:linear-gradient(135deg,#f8f9fa 0%,#fff 100%);position:relative}
+        .materials-section::before{content:'';position:absolute;top:0;left:0;right:0;height:100px;background:linear-gradient(to bottom,rgba(204,39,43,.05),transparent)}
+        .section-header{position:relative;z-index:2}
+        .section-title{font-size:2.5rem;font-weight:700;color:var(--dark);margin-bottom:20px}
+        .section-subtitle{font-size:1.1rem;color:#666;line-height:1.6;max-width:800px;margin:0 auto}
+        .section-divider{position:relative;margin:60px 0;text-align:center}
+        .section-divider::before{content:'';position:absolute;top:50%;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent 0%,var(--primary) 20%,var(--primary) 80%,transparent 100%);transform:translateY(-50%)}
+        .section-divider-content{display:inline-block;background:#fff;padding:0 30px;color:var(--primary);font-weight:600;font-size:1.1rem}
+        .category-section{position:relative;padding:40px 0}
+        .category-section:not(:first-child){border-top:3px solid #f8f9fa;margin-top:50px;position:relative}
+        .category-section:not(:first-child)::before{content:'';position:absolute;top:-1.5px;left:50%;transform:translateX(-50%);width:100px;height:3px;background:var(--primary)}
+        @media(max-width:768px){.material-card .card-img-container{height:220px}.material-card-content{padding:20px}.material-card-title{font-size:1.1rem}.section-title{font-size:2rem}.section-subtitle{font-size:1rem}.section-divider{margin:40px 0}.section-divider-content{padding:0 20px;font-size:1rem}.category-section{padding:30px 0}.category-section:not(:first-child){margin-top:40px}.category-section:not(:first-child)::before{width:80px}}
+        @media(max-width:576px){.material-card .card-img-container{height:200px}.material-card-content{padding:15px}.material-card-title{font-size:1rem}.section-title{font-size:1.8rem}.material-features{gap:5px}.feature-tag{font-size:.75rem;padding:3px 8px}.section-divider{margin:30px 0}.section-divider-content{padding:0 15px;font-size:.9rem}.category-section{padding:25px 0}.category-section:not(:first-child){margin-top:30px}.category-section:not(:first-child)::before{width:60px}}
+        .material-card{opacity:0;animation:fadeInUp .6s ease forwards}
+        .material-card:nth-child(1){animation-delay:.1s}.material-card:nth-child(2){animation-delay:.2s}.material-card:nth-child(3){animation-delay:.3s}.material-card:nth-child(4){animation-delay:.4s}.material-card:nth-child(5){animation-delay:.5s}.material-card:nth-child(6){animation-delay:.6s}.material-card:nth-child(7){animation-delay:.7s}.material-card:nth-child(8){animation-delay:.8s}
+        @keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+        .materials-container{padding:15px}
+        @media(min-width:768px){.materials-container{padding:40px}}
+        @media(min-width:1200px){.materials-container{padding:60px}}
     </style>
 
     <!-- JSON-LD Structured Data -->
@@ -604,11 +273,12 @@
 </head>
 
 <body>
-   <!-- Navbar Start -->
+   <!-- Header Start -->
+   <header role="banner">
     <div class="container-fluid sticky-top bg-dark navbar-dark shadow-sm px-2 px-sm-3 px-md-5 pe-lg-0">
-        <nav class="navbar navbar-expand-lg py-2 py-lg-0">
-            <a href="index.html" class="navbar-brand me-2">
-                <img src="./img/logo.png" alt="AR-KAR İnşaat Logo" style="max-height:80px;">
+        <nav class="navbar navbar-expand-lg py-2 py-lg-0" role="navigation" aria-label="Ana navigasyon">
+            <a href="index.html" class="navbar-brand me-2" aria-label="AR-KAR İnşaat ana sayfa">
+                <img src="./img/logo.png" alt="AR-KAR İnşaat Logo" class="logo-img" style="max-height:80px;" width="120" height="80">
             </a>
             <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
@@ -640,14 +310,16 @@
         </nav>
     </div>
     <!-- Navbar End -->
+    </header>
 
+    <!-- Main Content Start -->
+    <main role="main" id="main-content">
     <!-- Breadcrumb Start -->
-    <div class="container-fluid bg-dark py-3 px-3 px-md-5">
+    <nav aria-label="breadcrumb" class="container-fluid bg-dark py-3 px-3 px-md-5">
         <div class="row">
             <div class="col-12">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb mb-0">
-                        <li class="breadcrumb-item"><a href="index.html" class="text-primary">Anasayfa</a></li>
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="index.html" class="text-primary">Anasayfa</a></li>
                         <li class="breadcrumb-item active text-white" aria-current="page">Hırdavat & İnşaat Malzemeleri</li>
                     </ol>
                 </nav>
@@ -657,10 +329,10 @@
     <!-- Breadcrumb End -->
 
     <!-- Portfolio Start -->
-    <section class="construction-portfolio">
+    <section class="materials-section py-6" aria-labelledby="materials-title">
         <div class="container-fluid materials-container">
             <div class="section-header text-center mx-auto mb-5" style="max-width: 800px;">
-                <h1 class="category-title">
+                <h1 id="materials-title" class="section-title">
                     <span class="text-primary">En Kaliteli</span> İnşaat Malzemeleri
                 </h1>
                 <p class="section-subtitle">
@@ -669,10 +341,12 @@
                 </p>
             </div>
 
+ 
+
             <!-- KABA İNŞAAT MALZEMELERİ -->
-            <div class="construction-category">
+            <div class="category-section mb-5">
                 <div class="text-center mb-4">
-                    <h2 class="category-title">
+                    <h2 class="display-6 text-uppercase mb-3">
                         <i class="fa fa-cube text-primary me-3"></i>
                         <span class="text-primary">Kaba İnşaat</span> Malzemeleri
                     </h2>
@@ -681,29 +355,26 @@
                 <div class="row g-4">
                     <!-- Çimento, Kireç, Alçı -->
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-                        <div class="modern-portfolio-card">
-                            <div class="portfolio-image">
-                                <img src="img/service-1.jpg" alt="Çimento, Kireç, Alçı - AR-KAR İnşaat" loading="lazy" width="300" height="280">
-                                <div class="portfolio-overlay">
-                                    <a href="#" class="btn" aria-label="Çimento, Kireç, Alçı detaylarını görüntüle">Detayları Gör</a>
+                        <div class="material-card card h-100 shadow-sm rounded-3">
+                            <div class="card-img-container">
+                                <img src="img/nalbur/cimento.png" alt="Çimento, Kireç, Alçı - AR-KAR İnşaat" class="card-img-top"  width="300" height="280">
+                                <div class="material-category-badge">
+                                    <i class="fa fa-cube me-1"></i>Bağlayıcı
                                 </div>
                             </div>
-                            <div class="portfolio-content">
-                                <h3 class="portfolio-title">Çimento, Kireç, Alçı</h3>
-                                <p class="portfolio-description">
-                                    Portland çimento, hidrat kireç, sönmüş kireç, alçı ve özel çimento türleri. Güçlü bağlayıcı özellikler.
-                                </p>
-                                <div class="portfolio-features">
-                                    <span class="feature-tag">Portland</span>
-                                    <span class="feature-tag">Hidrat Kireç</span>
-                                    <span class="feature-tag">Alçı</span>
-                                    <span class="feature-tag">Özel Çimento</span>
+                            <div class="material-card-content">
+                                <h3 class="material-card-title">Bağlayıcı Malzemeler</h3>
+                                <div class="material-brand-info">
+                                    <i class="fa fa-star text-warning me-1"></i>
+                                    Akçansa, OYAK, ABS, AKKİSAN
                                 </div>
-                                <div class="portfolio-meta">
-                                    <div class="portfolio-location">
-                                        <i class="fa fa-star"></i>Akçansa, Göltaş, Lafarge
-                                    </div>
-                                    <div class="portfolio-year">Bağlayıcı</div>
+                                <p class="material-description">
+                                    Kompoze çimento, hidrat kireç, sönmüş kireç ve alçı türleri. Güçlü bağlayıcı özellikler.
+                                </p>
+                                <div class="material-features">
+                                    <span class="feature-tag">Kireç</span>
+                                    <span class="feature-tag">Alçı</span>
+                                    <span class="feature-tag">Çimento</span>
                                 </div>
                             </div>
                         </div>
@@ -711,29 +382,27 @@
 
                     <!-- Kum, Çakıl, Mıcır -->
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-                        <div class="modern-portfolio-card">
-                            <div class="portfolio-image">
-                                <img src="img/service-2.jpg" alt="Kum, Çakıl, Mıcır - AR-KAR İnşaat" loading="lazy" width="300" height="280">
-                                <div class="portfolio-overlay">
-                                    <a href="#" class="btn" aria-label="Kum, Çakıl, Mıcır detaylarını görüntüle">Detayları Gör</a>
+                        <div class="material-card card h-100 shadow-sm rounded-3">
+                            <div class="card-img-container">
+                                <img src="img/nalbur/kum.png" alt="Kum, Çakıl, Mıcır - AR-KAR İnşaat" class="card-img-top">
+                                <div class="material-category-badge">
+                                    <i class="fa fa-mountain me-1"></i>Agrega
                                 </div>
                             </div>
-                            <div class="portfolio-content">
-                                <h3 class="portfolio-title">Kum, Çakıl, Mıcır</h3>
-                                <p class="portfolio-description">
-                                    İnşaat kumu, ince kum, çakıl, mıcır, kırma taş ve agrega ürünleri. Beton ve harç karışımları için.
+                            <div class="material-card-content">
+                                <h3 class="material-card-title">Agrega</h3>
+                                <div class="material-brand-info">
+                                    <i class="fa fa-star text-warning me-1"></i>
+                                    Kaliteli Ocaklar
+                                </div>
+                                <p class="material-description">
+                                    İnşaat kumu, ince kum, çakıl, mıcır ve kırma taş ürünleri. Beton ve harç karışımları için.
                                 </p>
-                                <div class="portfolio-features">
-                                    <span class="feature-tag">İnşaat Kumu</span>
+                                <div class="material-features">
+                                    <span class="feature-tag">Kum</span>
                                     <span class="feature-tag">Çakıl</span>
                                     <span class="feature-tag">Mıcır</span>
                                     <span class="feature-tag">Kırma Taş</span>
-                                </div>
-                                <div class="portfolio-meta">
-                                    <div class="portfolio-location">
-                                        <i class="fa fa-star"></i>Kaliteli Ocaklar
-                                    </div>
-                                    <div class="portfolio-year">Agrega</div>
                                 </div>
                             </div>
                         </div>
@@ -741,29 +410,26 @@
 
                     <!-- Tuğla, Briket, Gaz Beton -->
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-                        <div class="modern-portfolio-card">
-                            <div class="portfolio-image">
-                                <img src="img/service-3.jpg" alt="Tuğla, Briket, Gaz Beton - AR-KAR İnşaat" loading="lazy" width="300" height="280">
-                                <div class="portfolio-overlay">
-                                    <a href="#" class="btn">Detayları Gör</a>
+                        <div class="material-card card h-100 shadow-sm rounded-3">
+                            <div class="card-img-container">
+                                <img src="img/nalbur/tugla.png" alt="Tuğla, Kiremit, Gaz Beton - AR-KAR İnşaat" class="card-img-top">
+                                <div class="material-category-badge">
+                                    <i class="fa fa-th-large me-1"></i>Duvar
                                 </div>
                             </div>
-                            <div class="portfolio-content">
-                                <h3 class="portfolio-title">Tuğla, Briket, Gaz Beton</h3>
-                                <p class="portfolio-description">
-                                    Kırmızı tuğla, briket, gaz beton (YTONG), delikli tuğla ve duvar yapı elemanları.
-                                </p>
-                                <div class="portfolio-features">
-                                    <span class="feature-tag">YTONG</span>
-                                    <span class="feature-tag">Briket</span>
-                                    <span class="feature-tag">Kırmızı Tuğla</span>
-                                    <span class="feature-tag">Delikli Tuğla</span>
+                            <div class="material-card-content">
+                                <h3 class="material-card-title">Duvar Malzemeleri</h3>
+                                <div class="material-brand-info">
+                                    <i class="fa fa-star text-warning me-1"></i>
+                                    YTONG, Osmancık, Boyabat
                                 </div>
-                                <div class="portfolio-meta">
-                                    <div class="portfolio-location">
-                                        <i class="fa fa-star"></i>YTONG, Toprak, Kırşehir
-                                    </div>
-                                    <div class="portfolio-year">Duvar</div>
+                                <p class="material-description">
+                                    Kırmızı tuğla, kiremit, gaz beton (YTONG), baca tuğlası ve duvar yapı elemanları.
+                                </p>
+                                <div class="material-features">
+                                    <span class="feature-tag">Gaz Beton</span>
+                                    <span class="feature-tag">Tuğla</span>
+                                    <span class="feature-tag">Kiremit</span>
                                 </div>
                             </div>
                         </div>
@@ -771,29 +437,26 @@
 
                     <!-- İnşaat Demiri, Hasır, Tel -->
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-                        <div class="modern-portfolio-card">
-                            <div class="portfolio-image">
-                                <img src="img/service-4.jpg" alt="İnşaat Demiri, Hasır, Tel - AR-KAR İnşaat" loading="lazy" width="300" height="280">
-                                <div class="portfolio-overlay">
-                                    <a href="#" class="btn">Detayları Gör</a>
+                        <div class="material-card card h-100 shadow-sm rounded-3">
+                            <div class="card-img-container">
+                                <img src="img/nalbur/demir.png" alt="İnşaat Demiri, Hasır, Tel - AR-KAR İnşaat" class="card-img-top">
+                                <div class="material-category-badge">
+                                    <i class="fa fa-industry me-1"></i>Demir
                                 </div>
                             </div>
-                            <div class="portfolio-content">
-                                <h3 class="portfolio-title">İnşaat Demiri, Hasır, Tel</h3>
-                                <p class="portfolio-description">
-                                    Nervürlü inşaat demiri, hasır çelik, beton demiri, tel örgü ve çelik profil ürünleri.
-                                </p>
-                                <div class="portfolio-features">
-                                    <span class="feature-tag">Nervürlü Demir</span>
-                                    <span class="feature-tag">Hasır Çelik</span>
-                                    <span class="feature-tag">Tel Örgü</span>
-                                    <span class="feature-tag">Çelik Profil</span>
+                            <div class="material-card-content">
+                                <h3 class="material-card-title">Donatı Malzemeleri</h3>
+                                <div class="material-brand-info">
+                                    <i class="fa fa-star text-warning me-1"></i>
+                                    İçdaş, Kroman, Ekinciler
                                 </div>
-                                <div class="portfolio-meta">
-                                    <div class="portfolio-location">
-                                        <i class="fa fa-star"></i>İçdaş, Kroman, Ekinciler
-                                    </div>
-                                    <div class="portfolio-year">Demir</div>
+                                <p class="material-description">
+                                    Nervürlü inşaat demiri, hasır demir, beton demiri, tel örgü ve profil ürünleri.
+                                </p>
+                                <div class="material-features">
+                                    <span class="feature-tag">Demir</span>
+                                    <span class="feature-tag">Hasır Demir</span>
+                                    <span class="feature-tag">Tel</span>
                                 </div>
                             </div>
                         </div>
@@ -802,9 +465,9 @@
             </div>
 
             <!-- İNCE İNŞAAT MALZEMELERİ -->
-            <div class="construction-category">
+            <div class="category-section mb-5">
                 <div class="text-center mb-4">
-                    <h2 class="category-title">
+                    <h2 class="display-6 text-uppercase mb-3">
                         <i class="fa fa-palette text-primary me-3"></i>
                         <span class="text-primary">İnce İnşaat</span> Malzemeleri
                     </h2>
@@ -813,29 +476,27 @@
                 <div class="row g-4">
                     <!-- Kalebodur, Fayans, Seramik -->
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-                        <div class="modern-portfolio-card">
-                            <div class="portfolio-image">
-                                <img src="img/service-5.jpg" alt="Kalebodur, Fayans, Seramik - AR-KAR İnşaat" loading="lazy" width="300" height="280">
-                                <div class="portfolio-overlay">
-                                    <a href="#" class="btn">Detayları Gör</a>
+                        <div class="material-card card h-100 shadow-sm rounded-3">
+                            <div class="card-img-container">
+                                <img src="img/nalbur/kalebodur.png" alt="Kalebodur, Fayans, Seramik - AR-KAR İnşaat" class="card-img-top">
+                                <div class="material-category-badge">
+                                    <i class="fa fa-th me-1"></i>Kaplama
                                 </div>
                             </div>
-                            <div class="portfolio-content">
-                                <h3 class="portfolio-title">Kalebodur, Fayans, Seramik</h3>
-                                <p class="portfolio-description">
+                            <div class="material-card-content">
+                                <h3 class="material-card-title">Kalebodur, Fayans, Seramik</h3>
+                                <div class="material-brand-info">
+                                    <i class="fa fa-star text-warning me-1"></i>
+                                    Kalebodur, Vitra, Kale
+                                </div>
+                                <p class="material-description">
                                     Kalebodur seramik, fayans, duvar ve yer karoları, mozaik ve özel tasarım seramikler.
                                 </p>
-                                <div class="portfolio-features">
+                                <div class="material-features">
                                     <span class="feature-tag">Kalebodur</span>
                                     <span class="feature-tag">Fayans</span>
                                     <span class="feature-tag">Yer Karosu</span>
                                     <span class="feature-tag">Mozaik</span>
-                                </div>
-                                <div class="portfolio-meta">
-                                    <div class="portfolio-location">
-                                        <i class="fa fa-star"></i>Kalebodur, Vitra, Kale
-                                    </div>
-                                    <div class="portfolio-year">Kaplama</div>
                                 </div>
                             </div>
                         </div>
@@ -843,29 +504,27 @@
 
                     <!-- Klozet, Banyo Dolapları, Duşakabin -->
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-                        <div class="modern-portfolio-card">
-                            <div class="portfolio-image">
-                                <img src="img/service-6.jpg" alt="Banyo Ürünleri - AR-KAR İnşaat" loading="lazy" width="300" height="280">
-                                <div class="portfolio-overlay">
-                                    <a href="#" class="btn">Detayları Gör</a>
+                        <div class="material-card card h-100 shadow-sm rounded-3">
+                            <div class="card-img-container">
+                                <img src="img/nalbur/banyo.png" alt="Banyo Ürünleri - AR-KAR İnşaat" class="card-img-top">
+                                <div class="material-category-badge">
+                                    <i class="fa fa-bath me-1"></i>Banyo
                                 </div>
                             </div>
-                            <div class="portfolio-content">
-                                <h3 class="portfolio-title">Klozet, Banyo Dolapları, Duşakabin</h3>
-                                <p class="portfolio-description">
+                            <div class="material-card-content">
+                                <h3 class="material-card-title">Klozet, Banyo Dolapları, Duşakabin</h3>
+                                <div class="material-brand-info">
+                                    <i class="fa fa-star text-warning me-1"></i>
+                                    Vitra, Ece, Kale
+                                </div>
+                                <p class="material-description">
                                     Klozet, lavabo, banyo dolapları, duşakabin, duş başlık ve stilleri, banyo aksesuarları.
                                 </p>
-                                <div class="portfolio-features">
+                                <div class="material-features">
                                     <span class="feature-tag">Klozet</span>
                                     <span class="feature-tag">Lavabo</span>
                                     <span class="feature-tag">Duşakabin</span>
                                     <span class="feature-tag">Aksesuar</span>
-                                </div>
-                                <div class="portfolio-meta">
-                                    <div class="portfolio-location">
-                                        <i class="fa fa-star"></i>Vitra, Ece, Kale
-                                    </div>
-                                    <div class="portfolio-year">Banyo</div>
                                 </div>
                             </div>
                         </div>
@@ -873,29 +532,27 @@
 
                     <!-- Granit, Mermer, Parke -->
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-                        <div class="modern-portfolio-card">
-                            <div class="portfolio-image">
-                                <img src="img/hizmet-1.jpg" alt="Granit, Mermer, Parke - AR-KAR İnşaat" loading="lazy" width="300" height="280">
-                                <div class="portfolio-overlay">
-                                    <a href="#" class="btn">Detayları Gör</a>
+                        <div class="material-card card h-100 shadow-sm rounded-3">
+                            <div class="card-img-container">
+                                <img src="img/nalbur/döseme.png" alt="Granit, Mermer, Parke - AR-KAR İnşaat" class="card-img-top">
+                                <div class="material-category-badge">
+                                    <i class="fa fa-gem me-1"></i>Doğal Taş
                                 </div>
                             </div>
-                            <div class="portfolio-content">
-                                <h3 class="portfolio-title">Granit, Mermer, Parke</h3>
-                                <p class="portfolio-description">
+                            <div class="material-card-content">
+                                <h3 class="material-card-title">Granit, Mermer, Parke</h3>
+                                <div class="material-brand-info">
+                                    <i class="fa fa-star text-warning me-1"></i>
+                                    Antique, Peli, Laminart
+                                </div>
+                                <p class="material-description">
                                     Granit, mermer, traverten, laminat parke, masif parke ve doğal taş ürünleri.
                                 </p>
-                                <div class="portfolio-features">
+                                <div class="material-features">
                                     <span class="feature-tag">Granit</span>
                                     <span class="feature-tag">Mermer</span>
                                     <span class="feature-tag">Laminat</span>
                                     <span class="feature-tag">Masif Parke</span>
-                                </div>
-                                <div class="portfolio-meta">
-                                    <div class="portfolio-location">
-                                        <i class="fa fa-star"></i>Antique, Peli, Laminart
-                                    </div>
-                                    <div class="portfolio-year">Doğal Taş</div>
                                 </div>
                             </div>
                         </div>
@@ -903,41 +560,38 @@
 
                     <!-- Alçıpan, Boya, Yapıştırıcılar -->
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-                        <div class="modern-portfolio-card">
-                            <div class="portfolio-image">
-                                <img src="img/nalbur/boya.png" alt="Alçıpan, Boya, Yapıştırıcılar - AR-KAR İnşaat" loading="lazy" width="300" height="280">
-                                <div class="portfolio-overlay">
-                                    <a href="#" class="btn">Detayları Gör</a>
+                        <div class="material-card card h-100 shadow-sm rounded-3">
+                            <div class="card-img-container">
+                                <img src="img/nalbur/boya.png" alt="Alçıpan, Boya, Yapıştırıcılar - AR-KAR İnşaat" class="card-img-top">
+                                <div class="material-category-badge">
+                                    <i class="fa fa-paint-brush me-1"></i>Bitirme
                                 </div>
                             </div>
-                            <div class="portfolio-content">
-                                <h3 class="portfolio-title">Alçıpan, Boya, Yapıştırıcılar</h3>
-                                <p class="portfolio-description">
+                            <div class="material-card-content">
+                                <h3 class="material-card-title">Alçıpan, Boya, Yapıştırıcılar</h3>
+                                <div class="material-brand-info">
+                                    <i class="fa fa-star text-warning me-1"></i>
+                                    Rigips, Polisan, Filli Boya
+                                </div>
+                                <p class="material-description">
                                     Alçıpan levhalar, profiller, boya, astar, derz dolgu, yapıştırıcılar, mastik, silikon.
                                 </p>
-                                <div class="portfolio-features">
+                                <div class="material-features">
                                     <span class="feature-tag">Alçıpan</span>
                                     <span class="feature-tag">Boya</span>
                                     <span class="feature-tag">Yapıştırıcı</span>
                                     <span class="feature-tag">Silikon</span>
                                 </div>
-                                <div class="portfolio-meta">
-                                    <div class="portfolio-location">
-                                        <i class="fa fa-star"></i>Rigips, Polisan, Filli Boya
-                                    </div>
-                                    <div class="portfolio-year">Bitirme</div>
-                                </div>
                             </div>
-                        </div>                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            
+
             <!-- HIRDAVAT MALZEMELERİ -->
-            <div class="construction-category">
+            <div class="category-section mb-5">
                 <div class="text-center mb-4">
-                    <h2 class="category-title">
+                    <h2 class="display-6 text-uppercase mb-3">
                         <i class="fa fa-tools text-primary me-3"></i>
                         <span class="text-primary">Hırdavat</span> Malzemeleri
                     </h2>
@@ -946,29 +600,27 @@
                 <div class="row g-4">
                     <!-- Vida, Dübel, Çivi, Cıvata -->
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-                        <div class="modern-portfolio-card">
-                            <div class="portfolio-image">
-                                <img src="img/hizmet-2.jpg" alt="Vida, Dübel, Çivi, Cıvata - AR-KAR İnşaat" loading="lazy" width="300" height="280">
-                                <div class="portfolio-overlay">
-                                    <a href="#" class="btn">Detayları Gör</a>
+                        <div class="material-card card h-100 shadow-sm rounded-3">
+                            <div class="card-img-container">
+                                <img src="img/nalbur/vida.png" alt="Vida, Dübel, Çivi, Cıvata - AR-KAR İnşaat" class="card-img-top">
+                                <div class="material-category-badge">
+                                    <i class="fa fa-cog me-1"></i>Bağlantı
                                 </div>
                             </div>
-                            <div class="portfolio-content">
-                                <h3 class="portfolio-title">Vida, Dübel, Çivi, Cıvata</h3>
-                                <p class="portfolio-description">
+                            <div class="material-card-content">
+                                <h3 class="material-card-title">Vida, Dübel, Çivi, Cıvata</h3>
+                                <div class="material-brand-info">
+                                    <i class="fa fa-star text-warning me-1"></i>
+                                    Fischer, Würth, İntertool
+                                </div>
+                                <p class="material-description">
                                     Vida çeşitleri, dübel, çivi, cıvata, somun ve tüm bağlantı elemanları.
                                 </p>
-                                <div class="portfolio-features">
+                                <div class="material-features">
                                     <span class="feature-tag">Vida</span>
                                     <span class="feature-tag">Dübel</span>
                                     <span class="feature-tag">Çivi</span>
                                     <span class="feature-tag">Cıvata</span>
-                                </div>
-                                <div class="portfolio-meta">
-                                    <div class="portfolio-location">
-                                        <i class="fa fa-star"></i>Fischer, Würth, İntertool
-                                    </div>
-                                    <div class="portfolio-year">Bağlantı</div>
                                 </div>
                             </div>
                         </div>
@@ -976,29 +628,27 @@
 
                     <!-- El Aletleri -->
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-                        <div class="modern-portfolio-card">
-                            <div class="portfolio-image">
-                                <img src="img/hizmet-3.jpg" alt="El Aletleri - AR-KAR İnşaat" loading="lazy" width="300" height="280">
-                                <div class="portfolio-overlay">
-                                    <a href="#" class="btn">Detayları Gör</a>
+                        <div class="material-card card h-100 shadow-sm rounded-3">
+                            <div class="card-img-container">
+                                <img src="img/nalbur/alet.png" alt="El Aletleri - AR-KAR İnşaat" class="card-img-top">
+                                <div class="material-category-badge">
+                                    <i class="fa fa-hammer me-1"></i>El Aleti
                                 </div>
                             </div>
-                            <div class="portfolio-content">
-                                <h3 class="portfolio-title">El Aletleri</h3>
-                                <p class="portfolio-description">
+                            <div class="material-card-content">
+                                <h3 class="material-card-title">El Aletleri</h3>
+                                <div class="material-brand-info">
+                                    <i class="fa fa-star text-warning me-1"></i>
+                                    Bosch, Makita, Stanley
+                                </div>
+                                <p class="material-description">
                                     Çekiç, pense, tornavida, anahtar takımları, metre, su terazisi ve el aletleri.
                                 </p>
-                                <div class="portfolio-features">
+                                <div class="material-features">
                                     <span class="feature-tag">Çekiç</span>
                                     <span class="feature-tag">Pense</span>
                                     <span class="feature-tag">Tornavida</span>
                                     <span class="feature-tag">Anahtar</span>
-                                </div>
-                                <div class="portfolio-meta">
-                                    <div class="portfolio-location">
-                                        <i class="fa fa-star"></i>Bosch, Makita, Stanley
-                                    </div>
-                                    <div class="portfolio-year">El Aleti</div>
                                 </div>
                             </div>
                         </div>
@@ -1006,29 +656,27 @@
 
                     <!-- Kilit, Menteşe, Kapı Kolu -->
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-                        <div class="modern-portfolio-card">
-                            <div class="portfolio-image">
-                                <img src="img/hizmet-4.jpg" alt="Kilit, Menteşe, Kapı Kolu - AR-KAR İnşaat" loading="lazy" width="300" height="280">
-                                <div class="portfolio-overlay">
-                                    <a href="#" class="btn">Detayları Gör</a>
+                        <div class="material-card card h-100 shadow-sm rounded-3">
+                            <div class="card-img-container">
+                                <img src="img/nalbur/kilit.png" alt="Kilit, Menteşe, Kapı Kolu - AR-KAR İnşaat" class="card-img-top">
+                                <div class="material-category-badge">
+                                    <i class="fa fa-door-open me-1"></i>Kapı
                                 </div>
                             </div>
-                            <div class="portfolio-content">
-                                <h3 class="portfolio-title">Kilit, Menteşe, Kapı Kolu</h3>
-                                <p class="portfolio-description">
-                                    Kapı kilitleri, menteşe, kapı kolu, gömme kilit, asma kilit ve güvenlik sistemleri.
+                            <div class="material-card-content">
+                                <h3 class="material-card-title">Kilit, Menteşe, Kapı Kolu</h3>
+                                <div class="material-brand-info">
+                                    <i class="fa fa-star text-warning me-1"></i>
+                                    Yale, Kale Kilit, Dorma
+                                </div>
+                                <p class="material-description">
+                                    Kapı kilitleri, mentemşe, kapı kolu, gömme kilit, asma kilit ve güvenlik sistemleri.
                                 </p>
-                                <div class="portfolio-features">
+                                <div class="material-features">
                                     <span class="feature-tag">Kapı Kilidi</span>
                                     <span class="feature-tag">Menteşe</span>
                                     <span class="feature-tag">Kapı Kolu</span>
                                     <span class="feature-tag">Güvenlik</span>
-                                </div>
-                                <div class="portfolio-meta">
-                                    <div class="portfolio-location">
-                                        <i class="fa fa-star"></i>Yale, Kale Kilit, Dorma
-                                    </div>
-                                    <div class="portfolio-year">Kapı</div>
                                 </div>
                             </div>
                         </div>
@@ -1036,29 +684,27 @@
 
                     <!-- Rulo, Fırça, Bant -->
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-                        <div class="modern-portfolio-card">
-                            <div class="portfolio-image">
-                                <img src="img/hizmet-5.jpg" alt="Rulo, Fırça, Bant - AR-KAR İnşaat" loading="lazy" width="300" height="280">
-                                <div class="portfolio-overlay">
-                                    <a href="#" class="btn">Detayları Gör</a>
+                        <div class="material-card card h-100 shadow-sm rounded-3">
+                            <div class="card-img-container">
+                                <img src="img/nalbur/firca.png" alt="Rulo, Fırça, Bant - AR-KAR İnşaat" class="card-img-top">
+                                <div class="material-category-badge">
+                                    <i class="fa fa-paint-roller me-1"></i>Boyama
                                 </div>
                             </div>
-                            <div class="portfolio-content">
-                                <h3 class="portfolio-title">Rulo, Fırça, Maskeleme Bandı</h3>
-                                <p class="portfolio-description">
+                            <div class="material-card-content">
+                                <h3 class="material-card-title">Rulo, Fırça, Maskeleme Bandı</h3>
+                                <div class="material-brand-info">
+                                    <i class="fa fa-star text-warning me-1"></i>
+                                    Harris, Schuller, 3M
+                                </div>
+                                <p class="material-description">
                                     Boya rulosu, fırça çeşitleri, maskeleme bandı, köpük, silikon ve yapıştırıcı ürünler.
                                 </p>
-                                <div class="portfolio-features">
+                                <div class="material-features">
                                     <span class="feature-tag">Rulo</span>
                                     <span class="feature-tag">Fırça</span>
                                     <span class="feature-tag">Bant</span>
                                     <span class="feature-tag">Köpük</span>
-                                </div>
-                                <div class="portfolio-meta">
-                                    <div class="portfolio-location">
-                                        <i class="fa fa-star"></i>Harris, Schuller, 3M
-                                    </div>
-                                    <div class="portfolio-year">Boyama</div>
                                 </div>
                             </div>
                         </div>
@@ -1067,9 +713,9 @@
             </div>
 
             <!-- ELEKTRİK MALZEMELERİ -->
-            <div class="construction-category">
+            <div class="category-section mb-5">
                 <div class="text-center mb-4">
-                    <h2 class="category-title">
+                    <h2 class="display-6 text-uppercase mb-3">
                         <i class="fa fa-bolt text-primary me-3"></i>
                         <span class="text-primary">Elektrik</span> Malzemeleri
                     </h2>
@@ -1078,29 +724,27 @@
                 <div class="row g-4">
                     <!-- Kablo, Priz, Anahtar -->
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-                        <div class="modern-portfolio-card">
-                            <div class="portfolio-image">
-                                <img src="img/hizmet-6.jpg" alt="Kablo, Priz, Anahtar - AR-KAR İnşaat" loading="lazy" width="300" height="280">
-                                <div class="portfolio-overlay">
-                                    <a href="#" class="btn">Detayları Gör</a>
+                        <div class="material-card card h-100 shadow-sm rounded-3">
+                            <div class="card-img-container">
+                                <img src="img/nalbur/kablo.png" alt="Kablo, Priz, Anahtar - AR-KAR İnşaat" class="card-img-top">
+                                <div class="material-category-badge">
+                                    <i class="fa fa-plug me-1"></i>Tesisat
                                 </div>
                             </div>
-                            <div class="portfolio-content">
-                                <h3 class="portfolio-title">Kablo, Priz, Anahtar</h3>
-                                <p class="portfolio-description">
+                            <div class="material-card-content">
+                                <h3 class="material-card-title">Kablo, Priz, Anahtar</h3>
+                                <div class="material-brand-info">
+                                    <i class="fa fa-star text-warning me-1"></i>
+                                    Schneider, Legrand, Viko
+                                </div>
+                                <p class="material-description">
                                     Elektrik kablosu, priz, anahtar, dimmer, timer ve elektrik tesisat malzemeleri.
                                 </p>
-                                <div class="portfolio-features">
+                                <div class="material-features">
                                     <span class="feature-tag">Kablo</span>
                                     <span class="feature-tag">Priz</span>
                                     <span class="feature-tag">Anahtar</span>
                                     <span class="feature-tag">Dimmer</span>
-                                </div>
-                                <div class="portfolio-meta">
-                                    <div class="portfolio-location">
-                                        <i class="fa fa-star"></i>Schneider, Legrand, Viko
-                                    </div>
-                                    <div class="portfolio-year">Tesisat</div>
                                 </div>
                             </div>
                         </div>
@@ -1108,29 +752,27 @@
 
                     <!-- Sigorta, Panolar -->
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-                        <div class="modern-portfolio-card">
-                            <div class="portfolio-image">
-                                <img src="img/service-1.jpg" alt="Sigorta, Panolar - AR-KAR İnşaat" loading="lazy" width="300" height="280">
-                                <div class="portfolio-overlay">
-                                    <a href="#" class="btn">Detayları Gör</a>
+                        <div class="material-card card h-100 shadow-sm rounded-3">
+                            <div class="card-img-container">
+                                <img src="img/nalbur/sigorta.png" alt="Sigorta, Panolar - AR-KAR İnşaat" class="card-img-top">
+                                <div class="material-category-badge">
+                                    <i class="fa fa-shield-alt me-1"></i>Güvenlik
                                 </div>
                             </div>
-                            <div class="portfolio-content">
-                                <h3 class="portfolio-title">Sigorta, Panolar</h3>
-                                <p class="portfolio-description">
+                            <div class="material-card-content">
+                                <h3 class="material-card-title">Sigorta, Panolar</h3>
+                                <div class="material-brand-info">
+                                    <i class="fa fa-star text-warning me-1"></i>
+                                    Schneider, ABB, Siemens
+                                </div>
+                                <p class="material-description">
                                     Otomatik sigorta, kaçak akım rölesi, elektrik panoları ve dağıtım ekipmanları.
                                 </p>
-                                <div class="portfolio-features">
+                                <div class="material-features">
                                     <span class="feature-tag">Otomatik</span>
                                     <span class="feature-tag">Kaçak Akım</span>
                                     <span class="feature-tag">Pano</span>
                                     <span class="feature-tag">Dağıtım</span>
-                                </div>
-                                <div class="portfolio-meta">
-                                    <div class="portfolio-location">
-                                        <i class="fa fa-star"></i>Schneider, ABB, Siemens
-                                    </div>
-                                    <div class="portfolio-year">Güvenlik</div>
                                 </div>
                             </div>
                         </div>
@@ -1138,32 +780,18 @@
 
                     <!-- LED, Armatür, Aydınlatma -->
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-                        <div class="modern-portfolio-card">
-                            <div class="portfolio-image">
-                                <img src="img/service-2.jpg" alt="LED, Armatür, Aydınlatma - AR-KAR İnşaat" loading="lazy" width="300" height="280">
-                                <div class="portfolio-overlay">
-                                    <a href="#" class="btn">Detayları Gör</a>
+                        <div class="material-card card h-100 shadow-sm rounded-3">
+                            <div class="card-img-container">
+                                <img src="img/nalbur/ampul.png" alt="LED, Armatür, Aydınlatma - AR-KAR İnşaat" class="card-img-top">
+                                <div class="material-category-badge">
+                                    <i class="fa fa-lightbulb me-1"></i>Aydınlatma
                                 </div>
                             </div>
-                            <div class="portfolio-content">
-                                <h3 class="portfolio-title">LED Ampul, Armatür, Aydınlatma</h3>
-                                <p class="portfolio-description">
-                                    LED ampul, spot, panel LED, armatür, avize ve dış mekan aydınlatma ürünleri.
-                                </p>
-                                <div class="portfolio-features">
-                                    <span class="feature-tag">LED</span>
-                                    <span class="feature-tag">Spot</span>
-                                    <span class="feature-tag">Panel</span>
-                                    <span class="feature-tag">Armatür</span>
-                                </div>
-                                <div class="portfolio-meta">
-                                    <div class="portfolio-location">
-                                        <i class="fa fa-star"></i>Philips, Osram, Megalux
-                                    </div>
-                                    <div class="portfolio-year">Aydınlatma</div>
-                                </div>
-                            </div>
-                        </div>
+                            <div class="material-card-content">
+                                <h3 class="material-card-title">LED Ampul, Armatür, Aydınlatma</h3>
+                                <div class="material-brand-info">
+                                    <i class="fa fa-star text-warning me-1"></i>
+                                    Philips, Osram, Megalux
                                 </div>
                                 <p class="material-description">
                                     LED ampul, spot, panel LED, armatür, avize ve dış mekan aydınlatma ürünleri.
@@ -1180,37 +808,38 @@
 
                     <!-- Buat, Kablo Kanalı -->
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-                        <div class="modern-portfolio-card">
-                            <div class="portfolio-image">
-                                <img src="img/service-3.jpg" alt="Buat, Kablo Kanalı - AR-KAR İnşaat" loading="lazy" width="300" height="280">
-                                <div class="portfolio-overlay">
-                                    <a href="#" class="btn">Detayları Gör</a>
+                        <div class="material-card card h-100 shadow-sm rounded-3">
+                            <div class="card-img-container">
+                                <img src="img/nalbur/buat.png" alt="Buat, Kablo Kanalı - AR-KAR İnşaat" class="card-img-top">
+                                <div class="material-category-badge">
+                                    <i class="fa fa-project-diagram me-1"></i>Kanal
                                 </div>
                             </div>
-                            <div class="portfolio-content">
-                                <h3 class="portfolio-title">Tesisat Borusu, Buat, Kablo Kanalı</h3>
-                                <p class="portfolio-description">
+                            <div class="material-card-content">
+                                <h3 class="material-card-title">Tesisat Borusu, Buat, Kablo Kanalı</h3>
+                                <div class="material-brand-info">
+                                    <i class="fa fa-star text-warning me-1"></i>
+                                    Pipelife, Borsan, Kalde
+                                </div>
+                                <p class="material-description">
                                     Elektrik tesisat borusu, buat, kablo kanalı, spiral boru ve elektrik koruma malzemeleri.
                                 </p>
-                                <div class="portfolio-features">
+                                <div class="material-features">
                                     <span class="feature-tag">Buat</span>
                                     <span class="feature-tag">Kablo Kanalı</span>
                                     <span class="feature-tag">Spiral</span>
                                     <span class="feature-tag">Koruma</span>
                                 </div>
-                                <div class="portfolio-meta">
-                                    <div class="portfolio-location">
-                                        <i class="fa fa-star"></i>Pipelife, Borsan, Kalde
-                                    </div>
-                                    <div class="portfolio-year">Kanal</div>
-                                </div>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+
             <!-- TESİSAT MALZEMELERİ -->
-            <div class="construction-category">
+            <div class="category-section mb-5">
                 <div class="text-center mb-4">
-                    <h2 class="category-title">
+                    <h2 class="display-6 text-uppercase mb-3">
                         <i class="fa fa-wrench text-primary me-3"></i>
                         <span class="text-primary">Tesisat</span> Malzemeleri
                     </h2>
@@ -1219,32 +848,19 @@
                 <div class="row g-4">
                     <!-- PPRC ve PVC Borular -->
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-                        <div class="modern-portfolio-card">
-                            <div class="portfolio-image">
-                                <img src="img/service-4.jpg" alt="PPRC ve PVC Borular - AR-KAR İnşaat" loading="lazy" width="300" height="280">
-                                <div class="portfolio-overlay">
-                                    <a href="#" class="btn">Detayları Gör</a>
+                        <div class="material-card card h-100 shadow-sm rounded-3">
+                            <div class="card-img-container">
+                                <img src="img/nalbur/pprc.png" alt="PPRC ve PVC Borular - AR-KAR İnşaat" class="card-img-top">
+                                <div class="material-category-badge">
+                                    <i class="fa fa-pipe me-1"></i>Boru
                                 </div>
                             </div>
-                            <div class="portfolio-content">
-                                <h3 class="portfolio-title">PPRC ve PVC Borular</h3>
-                                <p class="portfolio-description">
-                                    PPRC boru, PVC boru, kanalizasyon borusu, sıcak-soğuk su boruları ve boru bağlantıları.
-                                </p>
-                                <div class="portfolio-features">
-                                    <span class="feature-tag">PPRC</span>
-                                    <span class="feature-tag">PVC</span>
-                                    <span class="feature-tag">Kanalizasyon</span>
-                                    <span class="feature-tag">Sıcak Su</span>
+                            <div class="material-card-content">
+                                <h3 class="material-card-title">PPRC ve PVC Borular</h3>
+                                <div class="material-brand-info">
+                                    <i class="fa fa-star text-warning me-1"></i>
+                                    Pilsa, Valplast, Firat
                                 </div>
-                                <div class="portfolio-meta">
-                                    <div class="portfolio-location">
-                                        <i class="fa fa-star"></i>Pilsa, Valplast, Firat
-                                    </div>
-                                    <div class="portfolio-year">Boru</div>
-                                </div>
-                            </div>
-                        </div>
                                 <p class="material-description">
                                     PPRC boru, PVC boru, kanalizasyon borusu, sıcak-soğuk su boruları ve boru bağlantıları.
                                 </p>
@@ -1262,7 +878,7 @@
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
                         <div class="material-card card h-100 shadow-sm rounded-3">
                             <div class="card-img-container">
-                                <img src="img/service-5.jpg" alt="Dirsek, Rakor, Vana - AR-KAR İnşaat" class="card-img-top" loading="lazy" width="300" height="280">
+                                <img src="img/nalbur/dirsek.png" alt="Dirsek, Rakor, Vana - AR-KAR İnşaat" class="card-img-top">
                                 <div class="material-category-badge">
                                     <i class="fa fa-cogs me-1"></i>Bağlantı
                                 </div>
@@ -1290,7 +906,7 @@
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
                         <div class="material-card card h-100 shadow-sm rounded-3">
                             <div class="card-img-container">
-                                <img src="img/service-6.jpg" alt="Batarya, Musluk, Sifon - AR-KAR İnşaat" class="card-img-top" loading="lazy" width="300" height="280">
+                                <img src="img/nalbur/musluk.png" alt="Batarya, Musluk, Sifon - AR-KAR İnşaat" class="card-img-top">
                                 <div class="material-category-badge">
                                     <i class="fa fa-faucet me-1"></i>Musluk
                                 </div>
@@ -1314,38 +930,9 @@
                         </div>
                     </div>
 
-                    <!-- Lavabo Gideri, Taharet -->
-                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-                        <div class="material-card card h-100 shadow-sm rounded-3">
-                            <div class="card-img-container">
-                                <img src="img/hizmet-1.jpg" alt="Lavabo Gideri, Taharet - AR-KAR İnşaat" class="card-img-top" loading="lazy" width="300" height="280">
-                                <div class="material-category-badge">
-                                    <i class="fa fa-tint me-1"></i>Gider
-                                </div>
-                            </div>
-                            <div class="material-card-content">
-                                <h3 class="material-card-title">Lavabo Gideri, Taharet Musluğu</h3>
-                                <div class="material-brand-info">
-                                    <i class="fa fa-star text-warning me-1"></i>
-                                    Vitra, Eca, Türk Seramik
-                                </div>
-                                <p class="material-description">
-                                    Lavabo gideri, taharet musluğu, duş gideri, banyo aksesuarları ve su gider sistemleri.
-                                </p>
-                                <div class="material-features">
-                                    <span class="feature-tag">Lavabo Gider</span>
-                                    <span class="feature-tag">Taharet</span>
-                                    <span class="feature-tag">Duş Gider</span>
-                                    <span class="feature-tag">Aksesuar</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+                 
             <!-- YALITIM MALZEMELERİ -->
-            <div class="mb-5">
+            <div class="category-section mb-5">
                 <div class="text-center mb-4">
                     <h2 class="display-6 text-uppercase mb-3">
                         <i class="fa fa-shield-alt text-primary me-3"></i>
@@ -1358,7 +945,7 @@
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
                         <div class="material-card card h-100 shadow-sm rounded-3">
                             <div class="card-img-container">
-                                <img src="img/hizmet-2.jpg" alt="Isı Yalıtımı - AR-KAR İnşaat" class="card-img-top" loading="lazy" width="300" height="280">
+                                <img src="img/nalbur/isiyalitim.png" alt="Isı Yalıtımı - AR-KAR İnşaat" class="card-img-top">
                                 <div class="material-category-badge">
                                     <i class="fa fa-thermometer-half me-1"></i>Isı
                                 </div>
@@ -1386,7 +973,7 @@
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
                         <div class="material-card card h-100 shadow-sm rounded-3">
                             <div class="card-img-container">
-                                <img src="img/hizmet-3.jpg" alt="Su Yalıtımı - AR-KAR İnşaat" class="card-img-top" loading="lazy" width="300" height="280">
+                                <img src="img/nalbur/membran.png" alt="Su Yalıtımı - AR-KAR İnşaat" class="card-img-top">
                                 <div class="material-category-badge">
                                     <i class="fa fa-tint-slash me-1"></i>Su
                                 </div>
@@ -1414,7 +1001,7 @@
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
                         <div class="material-card card h-100 shadow-sm rounded-3">
                             <div class="card-img-container">
-                                <img src="img/hizmet-4.jpg" alt="Ses Yalıtımı - AR-KAR İnşaat" class="card-img-top">
+                                <img src="img/nalbur/sesyalitim.png" alt="Ses Yalıtımı - AR-KAR İnşaat" class="card-img-top">
                                 <div class="material-category-badge">
                                     <i class="fa fa-volume-mute me-1"></i>Ses
                                 </div>
@@ -1439,6 +1026,7 @@
                     </div>
                 </div>
             </div>
+
 
             <!-- Call to Action Section -->
             <div class="row mt-5">

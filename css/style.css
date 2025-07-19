@@ -264,6 +264,75 @@
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
+/* Mobile responsive styles for projects */
+@media (max-width: 767px) {
+    .project-item {
+        margin-bottom: 2rem;
+    }
+    
+    .project-item img {
+        height: 300px !important;
+        object-fit: cover;
+    }
+    
+    .project-overlay {
+        opacity: 1 !important;
+        background: rgba(204, 39, 43, 0.9) !important;
+        position: relative !important;
+        transform: none !important;
+        margin-top: -4px;
+    }
+    
+    .project-overlay h4 {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+    }
+    
+    .project-overlay p {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+    
+    .project-item:hover {
+        transform: none;
+        box-shadow: none;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .project-item img {
+        height: 400px !important;
+        object-fit: cover;
+    }
+    
+    .project-overlay h4 {
+        font-size: 1.3rem;
+    }
+    
+    .project-overlay p {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 575px) {
+    #projects .text-center.mx-auto.mb-5 h2 {
+        font-size: 1.8rem;
+    }
+    
+    .project-overlay h4 {
+        font-size: 1.1rem;
+    }
+    
+    .project-overlay p {
+        font-size: 0.85rem;
+        line-height: 1.4;
+    }
+    
+    .project-item img {
+        height: 250px !important;
+    }
+}
+
 @media (min-width: 992px) {
     .testimonial,
     .contact-form {

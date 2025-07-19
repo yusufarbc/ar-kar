@@ -57,6 +57,7 @@
             height: 100%;
             display: flex;
             flex-direction: column;
+            min-height: 100%;
         }
         
         .portfolio-box:hover {
@@ -67,8 +68,9 @@
         .portfolio-box img {
             transition: transform 0.3s ease;
             width: 100%;
-            height: 200px;
+            height: 600px;
             object-fit: cover;
+            flex-shrink: 0;
         }
         
         .portfolio-box:hover img {
@@ -80,12 +82,15 @@
             flex-grow: 1;
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
+            min-height: 0;
         }
         
         .portfolio-title h2 {
             font-size: 1.1rem;
             margin-bottom: 10px;
             color: #333;
+            flex-shrink: 0;
         }
         
         .portfolio-title span {
@@ -93,12 +98,16 @@
             color: #666;
             display: block;
             margin-bottom: 5px;
+            flex-shrink: 0;
         }
         
         .portfolio-title p {
             margin-top: auto;
             font-size: 0.85rem;
             line-height: 1.4;
+            flex-grow: 1;
+            display: flex;
+            align-items: flex-end;
         }
         
         /* Accessibility improvements */
@@ -122,8 +131,19 @@
                 margin-bottom: 2rem;
             }
             
+            .portfolio-box img {
+                height: 300px;
+            }
+            
             .portfolio-title h2 {
                 font-size: 1rem;
+            }
+        }
+        
+        /* Tablet optimizations */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .portfolio-box img {
+                height: 400px;
             }
         }
     </style>

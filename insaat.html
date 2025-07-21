@@ -20,17 +20,14 @@
     <meta property="og:description" content="AR-KAR İnşaat Malzemeleri: Samsun Çarşamba'da kaba inşaat, ince inşaat, hırdavat, elektrik, tesisat ve yalıtım malzemeleri. Çimento, gaz beton, seramik, kalebodur ve daha fazlası.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.arkar.com.tr/insaat.html">
-    <meta property="og:image" content="https://www.arkar.com.tr/img/nalbur/boya.png">
+    <meta property="og:image" content="https://www.arkar.com.tr/img/boya.webp">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:locale" content="tr_TR">
     <meta property="og:site_name" content="AR-KAR İnşaat">
     
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Hırdavat & İnşaat Malzemeleri | AR-KAR İnşaat Samsun">
-    <meta name="twitter:description" content="Samsun'da en kaliteli inşaat malzemeleri: kaba inşaat, ince inşaat, hırdavat, elektrik, tesisat ve yalıtım ürünleri. Çimento, gaz beton, seramik ve daha fazlası.">
-    <meta name="twitter:image" content="https://www.arkar.com.tr/img/nalbur/boya.png">
+    
+
 
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
@@ -56,16 +53,11 @@
 
     <!-- Critical CSS Optimizations -->
     <style>
-        /* Lazy Loading Optimization */
+        /* Lazy Loading Optimization - Bulanıklık ve sislilik efekti tamamen kaldırıldı */
         img[loading="lazy"] {
-            filter: blur(5px);
-            transition: filter 0.3s ease;
-        }
-        img[loading="lazy"]:not([data-loaded]) {
-            filter: blur(5px);
-        }
-        img[loading="lazy"][data-loaded] {
+            opacity: 1;
             filter: none;
+            transition: none;
         }
         
         /* Preload Critical Images */
@@ -278,7 +270,7 @@ z-index:2}
     <div class="container-fluid sticky-top bg-dark navbar-dark shadow-sm px-2 px-sm-3 px-md-5 pe-lg-0">
         <nav class="navbar navbar-expand-lg py-1 py-lg-0" role="navigation" aria-label="Ana navigasyon">
             <a href="index.html" class="navbar-brand me-2" aria-label="AR-KAR İnşaat ana sayfa">
-                <img src="./img/logo.png" alt="AR-KAR İnşaat Logo" style="max-height:85px; padding: 8px;">
+                <img src="./img/logo.webp" alt="AR-KAR İnşaat Logo" style="max-height:85px; padding: 8px;">
             </a>
             <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
@@ -357,7 +349,7 @@ z-index:2}
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
                         <div class="material-card card h-100 shadow-sm rounded-3">
                             <div class="card-img-container">
-                                <img src="img/nalbur/cimento.png" alt="Çimento, Kireç, Alçı - AR-KAR İnşaat" class="card-img-top"  width="300" height="280">
+                                <img src="img/cimento.webp" alt="Çimento, Kireç, Alçı - AR-KAR İnşaat" class="card-img-top" width="300" height="280" loading="lazy">
                                 <div class="material-category-badge">
                                     <i class="fa fa-cube me-1"></i>Bağlayıcı
                                 </div>
@@ -384,7 +376,7 @@ z-index:2}
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
                         <div class="material-card card h-100 shadow-sm rounded-3">
                             <div class="card-img-container">
-                                <img src="img/nalbur/kum.png" alt="Kum, Çakıl, Mıcır - AR-KAR İnşaat" class="card-img-top">
+                                <img src="img/kum.webp" alt="Kum, Çakıl, Mıcır - AR-KAR İnşaat" class="card-img-top" loading="lazy">
                                 <div class="material-category-badge">
                                     <i class="fa fa-mountain me-1"></i>Agrega
                                 </div>
@@ -408,7 +400,7 @@ z-index:2}
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
                         <div class="material-card card h-100 shadow-sm rounded-3">
                             <div class="card-img-container">
-                                <img src="img/nalbur/duvar.png" alt="Tuğla, Kiremit, Gaz Beton - AR-KAR İnşaat" class="card-img-top">
+                                <img src="img/duvar.webp" alt="Tuğla, Kiremit, Gaz Beton - AR-KAR İnşaat" class="card-img-top" loading="lazy">
                                 <div class="material-category-badge">
                                     <i class="fa fa-th-large me-1"></i>Duvar
                                 </div>
@@ -435,7 +427,7 @@ z-index:2}
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
                         <div class="material-card card h-100 shadow-sm rounded-3">
                             <div class="card-img-container">
-                                <img src="img/nalbur/demir.png" alt="İnşaat Demiri, Hasır, Tel - AR-KAR İnşaat" class="card-img-top">
+                                <img src="img/demir.webp" alt="İnşaat Demiri, Hasır, Tel - AR-KAR İnşaat" class="card-img-top" loading="lazy">
                                 <div class="material-category-badge">
                                     <i class="fa fa-industry me-1"></i>Donatı
                                 </div>
@@ -476,7 +468,7 @@ z-index:2}
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
                         <div class="material-card card h-100 shadow-sm rounded-3">
                             <div class="card-img-container">
-                                <img src="img/nalbur/kalebodur.png" alt="Zemin ve Duvar Kaplamaları - AR-KAR İnşaat" class="card-img-top">
+                                <img src="img/kalebodur.webp" alt="Zemin ve Duvar Kaplamaları - AR-KAR İnşaat" class="card-img-top" loading="lazy">
                                 <div class="material-category-badge">
                                     <i class="fa fa-th me-1"></i>Döşeme
                                 </div>
@@ -504,7 +496,7 @@ z-index:2}
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
                         <div class="material-card card h-100 shadow-sm rounded-3">
                             <div class="card-img-container">
-                                <img src="img/nalbur/alcipan.png" alt="Bölme ve Yüzey Malzemeleri - AR-KAR İnşaat" class="card-img-top">
+                                <img src="img/alcipan.webp" alt="Bölme ve Yüzey Malzemeleri - AR-KAR İnşaat" class="card-img-top" loading="lazy">
                                 <div class="material-category-badge">
                                     <i class="fa fa-border-none me-1"></i>Bölme
                                 </div>
@@ -531,7 +523,7 @@ z-index:2}
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
                         <div class="material-card card h-100 shadow-sm rounded-3">
                             <div class="card-img-container">
-                                <img src="img/nalbur/boya.png" alt="Boyama Ürünleri - AR-KAR İnşaat" class="card-img-top">
+                                <img src="img/boya.webp" alt="Boyama Ürünleri - AR-KAR İnşaat" class="card-img-top" loading="lazy">
                                 <div class="material-category-badge">
                                     <i class="fa fa-paint-brush me-1"></i>Boya
                                 </div>
@@ -560,7 +552,7 @@ z-index:2}
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
                         <div class="material-card card h-100 shadow-sm rounded-3">
                             <div class="card-img-container">
-                                <img src="img/nalbur/parke-kapi.png" alt="Parke Çeşitleri - AR-KAR İnşaat" class="card-img-top">
+                                <img src="img/parke-kapi.webp" alt="Parke Çeşitleri - AR-KAR İnşaat" class="card-img-top" loading="lazy">
                                 <div class="material-category-badge">
                                     <i class="fa fa-layer-group me-1"></i>Parke
                                 </div>
@@ -599,7 +591,7 @@ z-index:2}
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
                         <div class="material-card card h-100 shadow-sm rounded-3">
                             <div class="card-img-container">
-                                <img src="img/nalbur/vida.png" alt="Bağlantı Elemanları - AR-KAR İnşaat" class="card-img-top">
+                                <img src="img/vida.webp" alt="Bağlantı Elemanları - AR-KAR İnşaat" class="card-img-top" loading="lazy">
                                 <div class="material-category-badge">
                                     <i class="fa fa-cog me-1"></i>Bağlantı
                                 </div>
@@ -629,7 +621,7 @@ z-index:2}
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
                         <div class="material-card card h-100 shadow-sm rounded-3">
                             <div class="card-img-container">
-                                <img src="img/nalbur/alet.png" alt="El Aletleri - AR-KAR İnşaat" class="card-img-top">
+                                <img src="img/alet.webp" alt="El Aletleri - AR-KAR İnşaat" class="card-img-top" loading="lazy">
                                 <div class="material-category-badge">
                                     <i class="fa fa-hammer me-1"></i>El Aleti
                                 </div>
@@ -657,7 +649,7 @@ z-index:2}
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
                         <div class="material-card card h-100 shadow-sm rounded-3">
                             <div class="card-img-container">
-                                <img src="img/nalbur/elektiriklialet.png" alt="Elektrikli El Aletleri - AR-KAR İnşaat" class="card-img-top">
+                                <img src="img/elektiriklialet.webp" alt="Elektrikli El Aletleri - AR-KAR İnşaat" class="card-img-top" loading="lazy">
                                 <div class="material-category-badge">
                                     <i class="fa fa-hammer me-1"></i>Elektrikli El Aleti
                                 </div>
@@ -685,7 +677,7 @@ z-index:2}
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
                         <div class="material-card card h-100 shadow-sm rounded-3">
                             <div class="card-img-container">
-                                <img src="img/nalbur/silikon.png" alt="Silikon ve Yapıştırma Malzemeleri - AR-KAR İnşaat" class="card-img-top">
+                                <img src="img/silikon.webp" alt="Silikon ve Yapıştırma Malzemeleri - AR-KAR İnşaat" class="card-img-top" loading="lazy">
                                 <div class="material-category-badge">
                                     <i class="fa fa-fill-drip me-1"></i>Dolgu
                                 </div>
@@ -725,7 +717,7 @@ z-index:2}
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
                         <div class="material-card card h-100 shadow-sm rounded-3">
                             <div class="card-img-container">
-                                <img src="img/nalbur/pprc.png" alt="Temiz Su Tesisatı - AR-KAR İnşaat" class="card-img-top">
+                                <img src="img/pprc.webp" alt="Temiz Su Tesisatı - AR-KAR İnşaat" class="card-img-top" loading="lazy">
                                 <div class="material-category-badge">
                                     <i class="fa fa-pipe me-1"></i>Temiz Su
                                 </div>
@@ -753,7 +745,7 @@ z-index:2}
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
                         <div class="material-card card h-100 shadow-sm rounded-3">
                             <div class="card-img-container">
-                                <img src="img/nalbur/gider.png" alt="Pis Su Tesisatı - AR-KAR İnşaat" class="card-img-top">
+                                <img src="img/gider.webp" alt="Pis Su Tesisatı - AR-KAR İnşaat" class="card-img-top" loading="lazy">
                                 <div class="material-category-badge">
                                     <i class="fa fa-drain me-1"></i>Pis Su
                                 </div>
@@ -780,7 +772,7 @@ z-index:2}
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
                         <div class="material-card card h-100 shadow-sm rounded-3">
                             <div class="card-img-container">
-                                <img src="img/nalbur/musluk.png" alt="Armatür Grubu - AR-KAR İnşaat" class="card-img-top">
+                                <img src="img/musluk.webp" alt="Armatür Grubu - AR-KAR İnşaat" class="card-img-top" loading="lazy">
                                 <div class="material-category-badge">
                                     <i class="fa fa-faucet me-1"></i>Armatür
                                 </div>
@@ -823,7 +815,7 @@ z-index:2}
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
                         <div class="material-card card h-100 shadow-sm rounded-3">
                             <div class="card-img-container">
-                                <img src="img/nalbur/kablo.png" alt="Tesisat Malzemeleri - AR-KAR İnşaat" class="card-img-top">
+                                <img src="img/kablo.webp" alt="Tesisat Malzemeleri - AR-KAR İnşaat" class="card-img-top" loading="lazy">
                                 <div class="material-category-badge">
                                     <i class="fa fa-plug me-1"></i>Tesisat
                                 </div>
@@ -852,7 +844,7 @@ z-index:2}
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
                         <div class="material-card card h-100 shadow-sm rounded-3">
                             <div class="card-img-container">
-                                <img src="img/nalbur/ampul.png" alt="Aydınlatma Ürünleri - AR-KAR İnşaat" class="card-img-top">
+                                <img src="img/ampul.webp" alt="Aydınlatma Ürünleri - AR-KAR İnşaat" class="card-img-top" loading="lazy">
                                 <div class="material-category-badge">
                                     <i class="fa fa-lightbulb me-1"></i>Aydınlatma
                                 </div>
@@ -894,7 +886,7 @@ z-index:2}
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
                         <div class="material-card card h-100 shadow-sm rounded-3">
                             <div class="card-img-container">
-                                <img src="img/nalbur/cati.png" alt="Çatı Malzemeleri - AR-KAR İnşaat" class="card-img-top">
+                                <img src="img/cati.webp" alt="Çatı Malzemeleri - AR-KAR İnşaat" class="card-img-top" loading="lazy">
                                 <div class="material-category-badge">
                                     <i class="fa fa-layer-group me-1"></i>Çatı
                                 </div>
@@ -922,7 +914,7 @@ z-index:2}
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
                         <div class="material-card card h-100 shadow-sm rounded-3">
                             <div class="card-img-container">
-                                <img src="img/nalbur/isiyalitim.png" alt="Çatı Yalıtımı - AR-KAR İnşaat" class="card-img-top">
+                                <img src="img/isiyalitim.webp" alt="Çatı Yalıtımı - AR-KAR İnşaat" class="card-img-top" loading="lazy">
                                 <div class="material-category-badge">
                                     <i class="fa fa-shield-alt me-1"></i>Yalıtım
                                 </div>
@@ -981,7 +973,7 @@ z-index:2}
         <div class="row g-5">
             <div class="col-lg-6 pe-lg-5">
                 <a href="index.html" class="navbar-brand">
-                    <img src="./img/logo.png" alt="AR-KAR İnşaat Logo">
+                    <img src="./img/logo.webp" alt="AR-KAR İnşaat Logo" loading="lazy">
                 </a>
                 <p><i class="fa fa-map-marker-alt me-2"></i>Çarşamba, Samsun</p>
                 <p><i class="fa fa-phone me-2"></i>0542 182 68 55</p>

@@ -54,6 +54,137 @@
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
 
+    <!-- Performance Optimizations -->
+    <style>
+        /* Critical CSS for above-the-fold content */
+        .navbar-brand img {
+            transition: transform 0.3s ease;
+        }
+        
+        .navbar-brand img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Lazy Loading Enhancement */
+        img[loading="lazy"] {
+            transition: opacity 0.3s ease;
+        }
+
+        /* Agriculture product cards */
+        .agriculture-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+        }
+
+        .agriculture-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .agriculture-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .agriculture-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .product-badge {
+            background: var(--bs-primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        /* Process timeline */
+        .process-timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .timeline-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--bs-primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-right: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .timeline-content h4 {
+            color: var(--bs-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Accessibility improvements */
+        .btn:focus,
+        .nav-link:focus,
+        .agriculture-card:focus {
+            outline: 2px solid var(--bs-primary);
+            outline-offset: 2px;
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .timeline-item {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .timeline-icon {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+            
+            .display-5 {
+                font-size: 2rem;
+            }
+            
+            .py-6 {
+                padding-top: 3rem !important;
+                padding-bottom: 3rem !important;
+            }
+        }
+    </style>
+
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
     {
@@ -68,7 +199,7 @@
             "name": "AR-KAR İnşaat Gıda Tarım Ürünleri ve Taş. Tic. Ltd. Şti.",
             "alternateName": "AR-KAR İnşaat",
             "url": "https://www.arkar.com.tr",
-            "telephone": "+90 544 439 33 33",
+            "telephone": ["+90 362 846 03 93", "+90 362 834 18 48"],
             "email": "arkargida@gmail.com",
             "address": {
                 "@type": "PostalAddress",

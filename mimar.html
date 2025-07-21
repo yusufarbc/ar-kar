@@ -9,6 +9,10 @@
     <meta content="AR-KAR İnşaat Mimari Proje Hizmetleri ile Samsun Çarşamba'da profesyonel mimari projeler, yapı ruhsat işlemleri, teknik çizimler, 3D modelleme ve tasarım hizmetleri sunuyoruz. 36 yıllık tecrübe ile uzman mimar kadromuz hizmetinizde." name="description">
     <meta name="robots" content="index, follow">
     <meta name="author" content="AR-KAR İnşaat">
+    <meta name="geo.region" content="TR-55">
+    <meta name="geo.placename" content="Çarşamba, Samsun">
+    <meta name="geo.position" content="41.1986;36.7153">
+    <meta name="ICBM" content="41.1986, 36.7153">
     <link rel="canonical" href="https://www.arkar.com.tr/mimar.html">
     
     <!-- Open Graph Meta Tags -->
@@ -16,8 +20,17 @@
     <meta property="og:description" content="Samsun Çarşamba'da mimari proje, yapı ruhsatı, teknik çizim ve tasarım hizmetleri. Uzman mimar kadromuzla.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.arkar.com.tr/mimar.html">
-    <meta property="og:image" content="https://www.arkar.com.tr/img/logo.png">
+    <meta property="og:image" content="https://www.arkar.com.tr/img/mimariproje.webp">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta property="og:locale" content="tr_TR">
+    <meta property="og:site_name" content="AR-KAR İnşaat">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AR-KAR Mimari Proje Hizmetleri | Profesyonel Tasarım ve Ruhsat">
+    <meta name="twitter:description" content="Samsun'da mimari proje, yapı ruhsatı, teknik çizim ve tasarım hizmetleri. 36 yıllık tecrübe ile uzman mimar kadromuz.">
+    <meta name="twitter:image" content="https://www.arkar.com.tr/img/mimariproje.webp">
 
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
@@ -40,6 +53,199 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+
+    <!-- Performance Optimizations -->
+    <style>
+        /* Critical CSS for above-the-fold content */
+        .navbar-brand img {
+            transition: transform 0.3s ease;
+        }
+        
+        .navbar-brand img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Lazy Loading Enhancement */
+        img[loading="lazy"] {
+            transition: opacity 0.3s ease;
+        }
+
+        /* Architectural service cards */
+        .arch-service-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .arch-service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--bs-primary), var(--bs-info));
+        }
+
+        .arch-service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--bs-primary), var(--bs-info));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+        }
+
+        /* Project showcase */
+        .project-showcase {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .showcase-item {
+            text-align: center;
+        }
+
+        .showcase-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--bs-primary);
+            line-height: 1;
+        }
+
+        .showcase-text {
+            font-weight: 600;
+            color: #333;
+            margin-top: 0.5rem;
+        }
+
+        /* Process steps */
+        .process-step {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .process-step:hover {
+            transform: translateX(5px);
+        }
+
+        .step-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--bs-primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+            font-weight: bold;
+        }
+
+        /* Expertise areas */
+        .expertise-area {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--bs-primary);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .expertise-title {
+            color: var(--bs-primary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Accessibility improvements */
+        .btn:focus,
+        .nav-link:focus,
+        .arch-service-card:focus {
+            outline: 2px solid var(--bs-primary);
+            outline-offset: 2px;
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .arch-service-card {
+                padding: 1.5rem;
+            }
+            
+            .project-showcase {
+                padding: 2rem;
+            }
+            
+            .showcase-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+            
+            .showcase-number {
+                font-size: 2rem;
+            }
+            
+            .process-step {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .step-icon {
+                margin: 0 auto 1rem;
+            }
+            
+            .display-5 {
+                font-size: 2rem;
+            }
+            
+            .py-6 {
+                padding-top: 3rem !important;
+                padding-bottom: 3rem !important;
+            }
+        }
+    </style>
 
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
@@ -90,7 +296,7 @@
     <div class="container-fluid sticky-top bg-dark navbar-dark shadow-sm px-2 px-sm-3 px-md-5 pe-lg-0">
         <nav class="navbar navbar-expand-lg py-1 py-lg-0">
             <a href="index.html" class="navbar-brand me-2">
-                <img src="./img/logo.png" alt="AR-KAR İnşaat Logo" style="max-height:85px; padding: 8px;">
+                <img src="./img/logo.webp" alt="AR-KAR İnşaat Logo" style="max-height:85px; padding: 8px;">
             </a>
             <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
@@ -140,7 +346,7 @@
     <!-- Breadcrumb End -->
 
     <!-- Hero Section Start -->
-    <div class="container-fluid py-6 px-5" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('img/proje/teksstilkent.jpg'); background-size: cover; background-position: center;">
+    <div class="container-fluid py-6 px-5" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('img/teksstilkent.webp'); background-size: cover; background-position: center;">
         <div class="row justify-content-center">
             <div class="col-lg-8 text-center">
                 <h1 class="display-4 text-white text-uppercase mb-4">Profesyonel <span class="text-primary">Mimari Proje</span> Hizmetleri</h1>
@@ -217,7 +423,7 @@
             </div>
             <div class="col-lg-3 pb-4" style="min-height: 400px;">
                 <div class="position-relative h-100 ms-5">
-                    <img class="position-absolute w-100 h-100 mt-5 ms-n5" src="img/hizmet/mimariproje.png" style="object-fit: cover;" alt="Mimari Proje Hizmetleri">
+                    <img class="position-absolute w-100 h-100 mt-5 ms-n5" src="img/mimariproje.webp" style="object-fit: cover;" alt="Mimari Proje Hizmetleri">
                 </div>
             </div>
         </div>
@@ -231,7 +437,7 @@
         <div class="row g-5">
             <div class="col-lg-4 pb-4" style="min-height: 400px;">
                 <div class="position-relative h-100 me-5">
-                    <img class="position-absolute w-100 h-100 mt-5 me-n5" src="img/mimari.png" style="object-fit: cover;" alt="AR-KAR Mimari Proje Avantajları">
+                    <img class="position-absolute w-100 h-100 mt-5 me-n5" src="img/mimari.webp" style="object-fit: cover;" alt="AR-KAR Mimari Proje Avantajları">
                 </div>
             </div>
             <div class="col-lg-8">
@@ -302,7 +508,7 @@
         <div class="row g-5">
             <div class="col-lg-6 pe-lg-5">
                 <a href="index.html" class="navbar-brand">
-                    <img src="./img/logo.png" alt="AR-KAR İnşaat Logo">
+                    <img src="./img/logo.webp" alt="AR-KAR İnşaat Logo">
                 </a>
                 <p><i class="fa fa-map-marker-alt me-2"></i>Çarşamba, Samsun</p>
                 <p><i class="fa fa-phone me-2"></i>0542 182 68 55</p>

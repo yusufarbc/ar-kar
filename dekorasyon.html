@@ -9,6 +9,10 @@
     <meta content="AR-KAR İnşaat Dekorasyon Hizmetleri ile Samsun Çarşamba'da iç mekan tasarımı, ev dekorasyonu, duvar boyası, zemin kaplama ve aydınlatma çözümleri. Yaşam alanlarınızı güzelleştiren kaliteli dekorasyon malzemeleri." name="description">
     <meta name="robots" content="index, follow">
     <meta name="author" content="AR-KAR İnşaat">
+    <meta name="geo.region" content="TR-55">
+    <meta name="geo.placename" content="Çarşamba, Samsun">
+    <meta name="geo.position" content="41.1986;36.7153">
+    <meta name="ICBM" content="41.1986, 36.7153">
     <link rel="canonical" href="https://www.arkar.com.tr/dekorasyon.html">
     
     <!-- Open Graph Meta Tags -->
@@ -16,8 +20,17 @@
     <meta property="og:description" content="Samsun Çarşamba'da iç mekan tasarımı, ev dekorasyonu ve dekorasyon malzemeleri. Yaşam alanlarınızı güzelleştiriyoruz.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.arkar.com.tr/dekorasyon.html">
-    <meta property="og:image" content="https://www.arkar.com.tr/img/logo.png">
+    <meta property="og:image" content="https://www.arkar.com.tr/img/dekorasyon.webp">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta property="og:locale" content="tr_TR">
+    <meta property="og:site_name" content="AR-KAR İnşaat">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AR-KAR Dekorasyon Hizmetleri | İç Mekan Tasarımı ve Dekor">
+    <meta name="twitter:description" content="Samsun'da iç mekan tasarımı, ev dekorasyonu ve dekorasyon malzemeleri ile yaşam alanlarınızı güzelleştiriyoruz.">
+    <meta name="twitter:image" content="https://www.arkar.com.tr/img/dekorasyon.webp">
 
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
@@ -40,6 +53,233 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+
+    <!-- Performance Optimizations -->
+    <style>
+        /* Critical CSS for above-the-fold content */
+        .navbar-brand img {
+            transition: transform 0.3s ease;
+        }
+        
+        .navbar-brand img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Lazy Loading Enhancement */
+        img[loading="lazy"] {
+            transition: opacity 0.3s ease;
+        }
+
+        /* Decoration service cards */
+        .decoration-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .decoration-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--bs-primary), var(--bs-warning), var(--bs-info));
+        }
+
+        .decoration-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+
+        .decoration-icon {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--bs-primary), var(--bs-warning));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2.5rem;
+        }
+
+        /* Color palette showcase */
+        .color-palette {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .color-swatch {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .color-swatch:hover {
+            transform: scale(1.2);
+        }
+
+        /* Material samples */
+        .material-sample {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            margin-bottom: 1rem;
+        }
+
+        .material-sample:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .material-icon {
+            font-size: 3rem;
+            color: var(--bs-primary);
+            margin-bottom: 1rem;
+        }
+
+        /* Design inspiration gallery */
+        .inspiration-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+
+        .inspiration-item {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .inspiration-item:hover {
+            transform: scale(1.05);
+        }
+
+        .inspiration-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .inspiration-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .inspiration-item:hover .inspiration-overlay {
+            transform: translateY(0);
+        }
+
+        /* Style categories */
+        .style-category {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .category-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--bs-primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2rem;
+        }
+
+        /* Accessibility improvements */
+        .btn:focus,
+        .nav-link:focus,
+        .decoration-card:focus,
+        .color-swatch:focus {
+            outline: 2px solid var(--bs-primary);
+            outline-offset: 2px;
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .decoration-card {
+                padding: 1.5rem;
+            }
+            
+            .style-category {
+                padding: 1.5rem;
+            }
+            
+            .inspiration-gallery {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .color-palette {
+                gap: 0.5rem;
+            }
+            
+            .color-swatch {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .display-5 {
+                font-size: 2rem;
+            }
+            
+            .py-6 {
+                padding-top: 3rem !important;
+                padding-bottom: 3rem !important;
+            }
+        }
+
+        /* Tablet optimizations */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .inspiration-gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
 
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
@@ -90,7 +330,7 @@
     <div class="container-fluid sticky-top bg-dark navbar-dark shadow-sm px-2 px-sm-3 px-md-5 pe-lg-0">
         <nav class="navbar navbar-expand-lg py-1 py-lg-0">
             <a href="index.html" class="navbar-brand me-2">
-                <img src="./img/logo.png" alt="AR-KAR İnşaat Logo" style="max-height:85px; padding: 8px;">
+                <img src="./img/logo.webp" alt="AR-KAR İnşaat Logo" style="max-height:85px; padding: 8px;">
             </a>
             <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
@@ -190,7 +430,7 @@
             </div>
             <div class="col-lg-4 pb-4" style="min-height: 400px;">
                 <div class="position-relative h-100 ms-5">
-                    <img class="position-absolute w-100 h-100 mt-5 ms-n5" src="img/dizayn.png" style="object-fit: cover;">
+                    <img class="position-absolute w-100 h-100 mt-5 ms-n5" src="img/dizayn.webp" style="object-fit: cover;">
                 </div>
             </div>
         </div>
@@ -334,7 +574,7 @@
         <div class="row g-5">
             <div class="col-lg-6 pe-lg-5">
                 <a href="index.html" class="navbar-brand">
-                    <img src="./img/logo.png" alt="AR-KAR İnşaat Logo">
+                    <img src="./img/logo.webp" alt="AR-KAR İnşaat Logo">
                 </a>
                 <p><i class="fa fa-map-marker-alt me-2"></i>Çarşamba, Samsun</p>
                 <p><i class="fa fa-phone me-2"></i>0542 182 68 55</p>

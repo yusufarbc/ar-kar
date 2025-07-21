@@ -9,6 +9,10 @@
     <meta content="AR-KAR İnşaat Otomotiv Alım Satım bölümü olarak Samsun Çarşamba'da binek ve ticari araçlarda güvenilir alım-satım hizmetleri sunuyoruz. Ekspertizli, belgeli ve güvenilir araç portföyümüzle hizmetinizdeyiz." name="description">
     <meta name="robots" content="index, follow">
     <meta name="author" content="AR-KAR İnşaat">
+    <meta name="geo.region" content="TR-55">
+    <meta name="geo.placename" content="Çarşamba, Samsun">
+    <meta name="geo.position" content="41.1986;36.7153">
+    <meta name="ICBM" content="41.1986, 36.7153">
     <link rel="canonical" href="https://www.arkar.com.tr/otomotiv.html">
     
     <!-- Open Graph Meta Tags -->
@@ -16,8 +20,17 @@
     <meta property="og:description" content="Samsun Çarşamba'da binek ve ticari araç alım-satım hizmetleri. Ekspertizli, belgeli ve güvenilir araç portföyü.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.arkar.com.tr/otomotiv.html">
-    <meta property="og:image" content="https://www.arkar.com.tr/img/logo.png">
+    <meta property="og:image" content="https://www.arkar.com.tr/img/otomotiv.webp">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta property="og:locale" content="tr_TR">
+    <meta property="og:site_name" content="AR-KAR İnşaat">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AR-KAR Otomotiv Alım Satım | Binek ve Ticari Araç">
+    <meta name="twitter:description" content="Samsun'da binek ve ticari araç alım-satım hizmetleri: ekspertizli, belgeli ve güvenilir araç portföyü.">
+    <meta name="twitter:image" content="https://www.arkar.com.tr/img/otomotiv.webp">
 
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
@@ -40,6 +53,159 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+
+    <!-- Performance Optimizations -->
+    <style>
+        /* Critical CSS for above-the-fold content */
+        .navbar-brand img {
+            transition: transform 0.3s ease;
+        }
+        
+        .navbar-brand img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Lazy Loading Enhancement */
+        img[loading="lazy"] {
+            transition: opacity 0.3s ease;
+        }
+
+        /* Automotive service cards */
+        .automotive-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+            height: 100%;
+            border-top: 4px solid var(--bs-primary);
+        }
+
+        .automotive-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .automotive-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--bs-primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+        }
+
+        /* Vehicle showcase */
+        .vehicle-showcase {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .showcase-icon {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: var(--bs-primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            font-size: 3rem;
+        }
+
+        /* Trust badges */
+        .trust-badge {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 1rem;
+        }
+
+        .badge-icon {
+            color: var(--bs-success);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Contact CTA */
+        .contact-cta {
+            background: var(--bs-primary);
+            color: white;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .contact-cta .btn {
+            background: white;
+            color: var(--bs-primary);
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 25px;
+            font-weight: 600;
+        }
+
+        .contact-cta .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        /* Accessibility improvements */
+        .btn:focus,
+        .nav-link:focus,
+        .automotive-card:focus {
+            outline: 2px solid var(--bs-primary);
+            outline-offset: 2px;
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .automotive-card {
+                padding: 1.5rem;
+            }
+            
+            .vehicle-showcase {
+                padding: 2rem;
+            }
+            
+            .showcase-icon {
+                width: 80px;
+                height: 80px;
+                font-size: 2rem;
+            }
+            
+            .display-5 {
+                font-size: 2rem;
+            }
+            
+            .py-6 {
+                padding-top: 3rem !important;
+                padding-bottom: 3rem !important;
+            }
+        }
+    </style>
 
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
@@ -90,7 +256,7 @@
     <div class="container-fluid sticky-top bg-dark navbar-dark shadow-sm px-2 px-sm-3 px-md-5 pe-lg-0">
         <nav class="navbar navbar-expand-lg py-1 py-lg-0">
             <a href="index.html" class="navbar-brand me-2">
-                <img src="./img/logo.png" alt="AR-KAR İnşaat Logo" style="max-height:85px; padding: 8px;">
+                <img src="./img/logo.webp" alt="AR-KAR İnşaat Logo" style="max-height:85px; padding: 8px;">
             </a>
             <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
@@ -190,7 +356,7 @@
             </div>
             <div class="col-lg-4 pb-4" style="min-height: 400px;">
                 <div class="position-relative h-100 ms-5">
-                    <img class="position-absolute w-100 h-100 mt-5 ms-n5" src="img/arabalimsatim.png" style="object-fit: cover;">
+                    <img class="position-absolute w-100 h-100 mt-5 ms-n5" src="img/arabalimsatim.webp" style="object-fit: cover;">
                 </div>
             </div>
         </div>
@@ -220,7 +386,7 @@
         <div class="row g-5">
             <div class="col-lg-6 pe-lg-5">
                 <a href="index.html" class="navbar-brand">
-                    <img src="./img/logo.png" alt="AR-KAR İnşaat Logo">
+                    <img src="./img/logo.webp" alt="AR-KAR İnşaat Logo">
                 </a>
                 <p><i class="fa fa-map-marker-alt me-2"></i>Çarşamba, Samsun</p>
                 <p><i class="fa fa-phone me-2"></i>0542 182 68 55</p>

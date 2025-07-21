@@ -109,7 +109,7 @@
 .navbar-dark .navbar-nav .nav-link {
     position: relative;
     padding: 35px 15px;
-    font-size: 18px;
+    font-size: 14px;
     text-transform: uppercase;
     color: var(--light);
     outline: none;
@@ -124,7 +124,8 @@
 @media (max-width: 991.98px) {
     .navbar-dark .navbar-nav .nav-link  {
         margin-left: 0;
-        padding: 10px 0;
+        padding: 8px 0;
+        font-size: 13px;
     }
 }
 

@@ -78,16 +78,6 @@
     text-align: center;
 }
 
-.back-to-top {
-    position: fixed;
-    display: none;
-    left: 50%;
-    bottom: 0;
-    margin-left: -22px;
-    border-radius: 0;
-    z-index: 99;
-}
-
 .bg-dark-radial {
     background-image: -webkit-repeating-radial-gradient(center center, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) 1px, transparent 1px, transparent 100%);
     background-image: -moz-repeating-radial-gradient(center center, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) 1px, transparent 1px, transparent 100%);

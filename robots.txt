@@ -1,0 +1,16 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://www.arkar.com.tr/sitemap.xml
+
+# Disallow unnecessary files
+Disallow: /lib/
+Disallow: /css/bootstrap.red.css
+Disallow: /css/bootstrap.min.css
+Disallow: /scss/
+
+# Allow important directories
+Allow: /img/
+Allow: /css/style.css
+Allow: /js/

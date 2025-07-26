@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://www.arkar.com.tr/sitemap.xml
+Sitemap: https://ar-kar.com/sitemap.xml
 
 # Disallow unnecessary files
 Disallow: /lib/

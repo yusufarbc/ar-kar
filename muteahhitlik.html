@@ -104,11 +104,19 @@
                 transition-duration: 0.01ms !important;
             }
         }
-
+        
         /* Mobile optimizations */
         @media (max-width: 768px) {
+            .service-item {
+                margin-bottom: 2rem;
+            }
+            
             .display-5 {
                 font-size: 2rem;
+            }
+            
+            .display-6 {
+                font-size: 1.8rem;
             }
             
             .py-6 {
@@ -116,9 +124,71 @@
                 padding-bottom: 3rem !important;
             }
             
+            .px-5 {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+            
+            .text-uppercase {
+                text-transform: none !important;
+            }
+            
             .footer .navbar-brand img {
                 max-height: 60px !important;
                 width: auto;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .display-5 {
+                font-size: 1.5rem;
+            }
+            
+            .display-6 {
+                font-size: 1.3rem;
+            }
+            
+            .py-6 {
+                padding-top: 2rem !important;
+                padding-bottom: 2rem !important;
+            }
+        }
+        
+        /* WhatsApp floating button */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25d366;
+            color: white;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 1000;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .whatsapp-float:hover {
+            background-color: #20c55e;
+            color: white;
+            transform: scale(1.1);
+            text-decoration: none;
+        }
+        
+        @media (max-width: 768px) {
+            .whatsapp-float {
+                width: 55px;
+                height: 55px;
+                bottom: 15px;
+                right: 15px;
+                font-size: 25px;
             }
         }
     </style>
@@ -674,6 +744,11 @@
         </div>
     </div>
     <!-- Footer End -->
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/905535080905?text=Merhaba%2C%20anahtar%20teslim%20inşaat%20hizmetleriniz%20hakkında%20bilgi%20almak%20istiyorum." class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp İletişim">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

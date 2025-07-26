@@ -1,14 +1,116 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
     <meta charset="UTF-8">
     <title>Sık Sorulan Sorular - AR-KAR İnşaat | Samsun Çarşamba</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="AR-KAR İnşaat hakkında sık sorulan sorular ve cevapları. İnşaat, PVC, tarım ve diğer hizmetlerimiz hakkında merak ettikleriniz." name="description">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="AR-KAR İnşaat">
     
-    <!-- Aynı head bölümü diğer sayfalar gibi olacak -->
-    <!-- ... -->
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet"> 
+
+    <!-- Icon Font Stylesheet -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.red.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+    
+    <style>
+        /* FAQ specific styles */
+        .accordion-item {
+            border: none;
+            border-radius: 10px !important;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .accordion-button {
+            font-weight: 600;
+            font-size: 1.1rem;
+            border-radius: 10px !important;
+            background-color: #f8f9fa;
+        }
+        
+        .accordion-button:not(.collapsed) {
+            background-color: var(--bs-primary);
+            color: white;
+        }
+        
+        .accordion-body {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #666;
+        }
+        
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .display-5 {
+                font-size: 2rem;
+            }
+            
+            .py-6 {
+                padding-top: 3rem !important;
+                padding-bottom: 3rem !important;
+            }
+            
+            .accordion-button {
+                font-size: 1rem;
+            }
+        }
+        
+        /* WhatsApp floating button */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25d366;
+            color: white;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 1000;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .whatsapp-float:hover {
+            background-color: #20c55e;
+            color: white;
+            transform: scale(1.1);
+            text-decoration: none;
+        }
+        
+        @media (max-width: 768px) {
+            .whatsapp-float {
+                width: 55px;
+                height: 55px;
+                bottom: 15px;
+                right: 15px;
+                font-size: 25px;
+            }
+        }
+    </style>
 </head>
+
 <body>
     <!-- Navbar (aynı) -->
     
@@ -72,6 +174,72 @@
         </div>
     </div>
     
-    <!-- Footer (aynı) -->
+    <!-- Footer Start -->
+    <div class="footer container-fluid position-relative bg-dark text-white-50 py-6 px-5">
+        <div class="row g-5">
+            <div class="col-lg-6 pe-lg-5">
+                <a href="index.html" class="navbar-brand">
+                    <img src="./img/logo.webp" alt="AR-KAR İnşaat Logo" loading="lazy">
+                </a>
+                <p><i class="fa fa-map-marker-alt me-2"></i>Çarşamba, Samsun</p>
+                <p><i class="fa fa-phone me-2"></i>0542 182 68 55</p>
+                <p><i class="fa fa-envelope me-2"></i>arkargida@gmail.com</p>
+                <div class="d-flex justify-content-start mt-4">
+                    <a class="btn btn-lg btn-primary btn-lg-square rounded-0 me-2" href="mailto:arkargida@gmail.com"><i class="fa fa-envelope"></i></a>                    
+                    <a class="btn btn-lg btn-primary btn-lg-square rounded-0 me-2" href="https://wa.me/905421826855?text=" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a class="btn btn-lg btn-primary btn-lg-square rounded-0 me-2" href="https://www.facebook.com/arkarltd/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-lg btn-primary btn-lg-square rounded-0" href="https://www.instagram.com/arkarltd" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-6 ps-lg-5">
+                <div class="row g-5">
+                    <div class="col-sm-6">
+                        <h4 class="text-white text-uppercase mb-4">Hızlı Linkler</h4>
+                        <div class="d-flex flex-column justify-content-start">
+                            <a class="text-white-50 mb-2" href="index.html"><i class="fa fa-angle-right me-2"></i>Anasayfa</a>
+                            <a class="text-white-50 mb-2" href="index.html#about"><i class="fa fa-angle-right me-2"></i>Hakkımızda</a>
+                            <a class="text-white-50 mb-2" href="index.html#projects"><i class="fa fa-angle-right me-2"></i>Projelerimiz</a>
+                            <a class="text-white-50 mb-2" href="index.html#service"><i class="fa fa-angle-right me-2"></i>Hizmetlerimiz</a>
+                            <a class="text-white-50" href="index.html#contact"><i class="fa fa-angle-right me-2"></i>İletişim</a>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <h4 class="text-white text-uppercase mb-4">Hizmetlerimiz</h4>
+                        <div class="d-flex flex-column justify-content-start">
+                            <a class="text-white-50 mb-2" href="projeler.html"><i class="fa fa-angle-right me-2"></i>İnşaat Projeleri</a>
+                            <a class="text-white-50 mb-2" href="muteahhitlik.html"><i class="fa fa-angle-right me-2"></i>Anahtar Teslim İnşaat</a>
+                            <a class="text-white-50 mb-2" href="pvc.html"><i class="fa fa-angle-right me-2"></i>PVC Kapı Pencere</a>
+                            <a class="text-white-50 mb-2" href="tarim.html"><i class="fa fa-angle-right me-2"></i>Tarım Ürünleri</a>
+                            <a class="text-white-50" href="ziraat.html"><i class="fa fa-angle-right me-2"></i>Zirai İlaç</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container-fluid bg-dark text-white border-top border-primary px-0">
+        <div class="d-flex flex-column flex-md-row justify-content-between">
+            <div class="py-4 px-5 text-center text-md-start">
+                <p>&copy; 2025 AR-KAR İnşaat. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/905535080905?text=Merhaba%2C%20AR-KAR%20İnşaat%20hakkında%20bilgi%20almak%20istiyorum." class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp İletişim">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
 </body>
 </html>

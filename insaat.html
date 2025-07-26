@@ -145,6 +145,44 @@ z-index:2}
         .materials-container{padding:15px}
         @media(min-width:768px){.materials-container{padding:40px}}
         @media(min-width:1200px){.materials-container{padding:60px}}
+        
+        /* WhatsApp floating button */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25d366;
+            color: white;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 1000;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .whatsapp-float:hover {
+            background-color: #20c55e;
+            color: white;
+            transform: scale(1.1);
+            text-decoration: none;
+        }
+        
+        @media (max-width: 768px) {
+            .whatsapp-float {
+                width: 55px;
+                height: 55px;
+                bottom: 15px;
+                right: 15px;
+                font-size: 25px;
+            }
+        }
     </style>
 
     <!-- JSON-LD Structured Data -->
@@ -1113,6 +1151,11 @@ z-index:2}
         </div>
     </div>
     <!-- Footer End -->
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/905535080905?text=Merhaba%2C%20hırdavat%20ve%20inşaat%20malzemeleri%20hizmetleriniz%20hakkında%20bilgi%20almak%20istiyorum." class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp İletişim">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
 
     <!-- JavaScript Libraries -->

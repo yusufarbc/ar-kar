@@ -131,9 +131,7 @@ ar-kar/
 - **📸 Instagram**: [@arkarltd](https://www.instagram.com/arkarltd)
 - **💬 WhatsApp**: [+90 542 182 68 55](https://wa.me/905421826855)
 
-## 🔧 Kurulum ve Geliştirme
-
-### Yerel Geliştirme
+## 🔧 Yerel Geliştirme
 
 ```bash
 # Projeyi klonlayın
@@ -148,12 +146,6 @@ python -m http.server 8000
 # Tarayıcıda açın
 # http://localhost:8000
 ```
-
-### GitHub Pages Deployment
-
-Proje otomatik olarak GitHub Pages üzerinden yayınlanmaktadır:
-- **Canlı Site**: [yusufarbc.github.io/ar-kar](https://yusufarbc.github.io/ar-kar/)
-- **Güncelleme**: Her `main` branch'e push sonrası otomatik deploy
 
 ## 📈 SEO ve Performance
 

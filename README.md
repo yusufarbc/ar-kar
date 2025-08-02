@@ -3,7 +3,7 @@
 <div align="center">
   <img src="img/logo.webp" alt="AR-KAR İnşaat Logo" width="200"/>
   
-  [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-success)](https://yusufarbc.github.io/ar-kar/)
+  [![Website](https://img.shields.io/badge/Website-Live-success)](https://ar-kar.com)
   [![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
   [![Bootstrap](https://img.shields.io/badge/Bootstrap-7952B3?logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
 </div>
@@ -87,7 +87,7 @@ ar-kar/
 
 ### Online
 - **E-posta**: arkargida@gmail.com
-- **Website**: [yusufarbc.github.io/ar-kar](https://yusufarbc.github.io/ar-kar/)
+- **Website**: [https://ar-kar.com](https://ar-kar.com)
 - **Facebook**: [@arkarltd](https://www.facebook.com/arkarltd/)
 - **Instagram**: [@arkarltd](https://www.instagram.com/arkarltd)
 

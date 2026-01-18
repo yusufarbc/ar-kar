@@ -63,6 +63,9 @@
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
 
+    <!-- Humans.txt -->
+    <link type="text/plain" rel="author" href="humans.txt">
+
     <!-- Google Analytics (opsiyonel) -->
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <!--
@@ -189,6 +192,55 @@
                     }
                 }
             ]
+        }
+    }
+    </script>
+
+    <!-- LocalBusiness Schema for Local SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "AR-KAR İnşaat",
+        "image": "https://ar-kar.com/img/logo.webp",
+        "@id": "https://ar-kar.com",
+        "url": "https://ar-kar.com",
+        "telephone": "+90 362 834 18 48",
+        "priceRange": "$$",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Orta Mah. Dr. Orhan Atılgan Cad. No:24/A",
+            "addressLocality": "Çarşamba",
+            "addressRegion": "Samsun",
+            "postalCode": "55500",
+            "addressCountry": "TR"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 41.1986,
+            "longitude": 36.7153
+        },
+        "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday"
+            ],
+            "opens": "08:00",
+            "closes": "18:00"
+        },
+        "sameAs": [
+            "https://www.facebook.com/arkarltd/",
+            "https://www.instagram.com/arkarltd"
+        ],
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "reviewCount": "127"
         }
     }
     </script>

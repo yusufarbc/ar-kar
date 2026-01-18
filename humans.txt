@@ -1,0 +1,25 @@
+# humanstxt.org
+
+/* TEAM */
+    Firma: AR-KAR İnşaat Gıda Tarım Ürünleri ve Taş. Tic. Ltd. Şti.
+    Lokasyon: Samsun, Çarşamba, Türkiye
+    İletişim: arkargida@gmail.com
+    Web: https://ar-kar.com
+
+/* THANKS */
+    36 yıldır bizlere güvenen tüm müşterilerimize teşekkür ederiz.
+
+/* SITE */
+    Son Güncelleme: 2026-01-18
+    Diller: Türkçe
+    Standartlar: HTML5, CSS3, JavaScript
+    Yapısal Veri: Schema.org JSON-LD
+    IDE: Modern Web Development
+    Bileşenler: Bootstrap 5, Font Awesome, Owl Carousel
+    Hosting: GitHub Pages
+    
+/* HAKKIMIZDA */
+    Kuruluş: 1987
+    Tecrübe: 36+ yıl
+    Sektörler: İnşaat, Tarım, PVC, Otomotiv, Mimari, Dekorasyon
+    Misyon: Kaliteli inşaat ve güvenilir hizmet

@@ -4,6 +4,12 @@ Allow: /
 # Sitemap
 Sitemap: https://ar-kar.com/sitemap.xml
 
+# LLM Context
+# See llm.txt for AI-readable company information
+
+# Humans
+# See humans.txt for team and site information
+
 # Disallow unnecessary files
 Disallow: /lib/
 Disallow: /css/bootstrap.red.css

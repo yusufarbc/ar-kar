@@ -112,7 +112,7 @@
 }
 
 @media (max-width: 991.98px) {
-    .navbar-dark .navbar-nav .nav-link  {
+    .navbar-dark .navbar-nav .nav-link {
         margin-left: 0;
         padding: 8px 0;
         font-size: 13px;
@@ -176,14 +176,14 @@
     position: relative;
     overflow: hidden;
     border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     background: white;
 }
 
 .portfolio-box:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
 .portfolio-box img {
@@ -260,12 +260,12 @@
     .project-item {
         margin-bottom: 2rem;
     }
-    
+
     .project-item img {
-        height: 300px !important;
+        height: 220px !important;
         object-fit: cover;
     }
-    
+
     .project-overlay {
         opacity: 1 !important;
         background: rgba(204, 39, 43, 0.9) !important;
@@ -273,17 +273,17 @@
         transform: none !important;
         margin-top: -4px;
     }
-    
+
     .project-overlay h4 {
         font-size: 1.2rem;
         margin-bottom: 1rem;
     }
-    
+
     .project-overlay p {
         font-size: 0.9rem;
         margin-bottom: 1rem;
     }
-    
+
     .project-item:hover {
         transform: none;
         box-shadow: none;
@@ -292,14 +292,14 @@
 
 @media (min-width: 768px) and (max-width: 991px) {
     .project-item img {
-        height: 400px !important;
+        height: 280px !important;
         object-fit: cover;
     }
-    
+
     .project-overlay h4 {
         font-size: 1.3rem;
     }
-    
+
     .project-overlay p {
         font-size: 0.95rem;
     }
@@ -309,22 +309,23 @@
     #projects .text-center.mx-auto.mb-5 h2 {
         font-size: 1.8rem;
     }
-    
+
     .project-overlay h4 {
         font-size: 1.1rem;
     }
-    
+
     .project-overlay p {
         font-size: 0.85rem;
         line-height: 1.4;
     }
-    
+
     .project-item img {
-        height: 250px !important;
+        height: 200px !important;
     }
 }
 
 @media (min-width: 992px) {
+
     .testimonial,
     .contact-form {
         margin-left: -90px;
@@ -358,228 +359,231 @@
 
 /* Genel mobil uyumlar */
 @media (max-width: 768px) {
+
     /* Navbar mobil uyumları */
     .navbar-dark .navbar-nav .nav-link {
         padding: 10px 15px;
         font-size: 14px;
-        border-bottom: 1px solid rgba(255,255,255,0.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
-    
+
     .navbar-nav {
         text-align: center;
     }
-    
+
     .navbar-toggler {
         border: none;
         padding: 4px 8px;
     }
-    
+
     /* Container padding ayarları */
     .container-fluid {
         padding-left: 15px !important;
         padding-right: 15px !important;
     }
-    
+
     /* Başlık boyutları */
     .display-1 {
         font-size: 2.5rem !important;
     }
-    
+
     .display-2 {
         font-size: 2.2rem !important;
     }
-    
+
     .display-3 {
         font-size: 2rem !important;
     }
-    
+
     .display-4 {
         font-size: 1.8rem !important;
     }
-    
+
     .display-5 {
         font-size: 1.6rem !important;
     }
-    
+
     .display-6 {
         font-size: 1.4rem !important;
     }
-    
+
     /* Carousel mobil uyumları */
     .carousel-caption h1 {
         font-size: 2rem !important;
     }
-    
+
     .carousel-caption h4 {
         font-size: 1.1rem !important;
     }
-    
+
     .carousel-caption p {
         font-size: 0.9rem !important;
         margin-bottom: 1.5rem;
     }
-    
+
     .carousel-caption .btn {
         padding: 8px 20px;
         font-size: 0.9rem;
     }
-    
+
     /* Service card mobil uyumları */
     .service-item {
         margin-bottom: 2rem;
         padding: 1.5rem;
     }
-    
+
     .service-item .service-icon {
         margin-top: -30px;
         width: 80px;
         height: 80px;
     }
-    
+
     .service-item .service-icon i {
         font-size: 2rem !important;
     }
-    
+
     /* About section mobil uyumları */
     .about-text h1 {
         font-size: 1.8rem;
         margin-bottom: 1rem;
     }
-    
+
     .about-text p {
         font-size: 0.95rem;
         line-height: 1.6;
     }
-    
+
     /* Grid sistem mobil uyumları */
     .row.g-5 {
         --bs-gutter-x: 1rem;
     }
-    
+
     /* Buton mobil uyumları */
     .btn-lg {
         padding: 10px 20px;
         font-size: 1rem;
     }
-    
+
     /* Footer mobil uyumları */
     .footer .col-lg-6,
     .footer .col-sm-6 {
         margin-bottom: 2rem;
     }
-    
+
     .footer h4 {
         font-size: 1.1rem;
         margin-bottom: 1rem;
     }
-    
+
     .footer a {
         font-size: 0.9rem;
         padding: 0.3rem 0;
     }
-    
+
     /* Modal mobil uyumları */
     .modal-dialog {
         margin: 1rem;
     }
-    
+
     .modal-content {
         border-radius: 10px;
     }
-    
+
     /* Form mobil uyumları */
     .form-control {
         padding: 12px 15px;
         font-size: 0.95rem;
     }
-    
-    .form-floating > label {
+
+    .form-floating>label {
         font-size: 0.9rem;
     }
 }
 
 /* Çok küçük ekranlar için özel kurallar */
 @media (max-width: 576px) {
+
     /* Ekstra küçük başlıklar */
     .display-1 {
         font-size: 2rem !important;
     }
-    
+
     .display-2 {
         font-size: 1.8rem !important;
     }
-    
+
     .display-3 {
         font-size: 1.6rem !important;
     }
-    
+
     .display-4 {
         font-size: 1.4rem !important;
     }
-    
+
     .display-5 {
         font-size: 1.3rem !important;
     }
-    
+
     .display-6 {
         font-size: 1.2rem !important;
     }
-    
+
     /* Container padding daha da küçült */
     .container-fluid {
         padding-left: 10px !important;
         padding-right: 10px !important;
     }
-    
+
     /* Carousel çok küçük ekranlar */
     .carousel-caption {
         padding: 1rem;
     }
-    
+
     .carousel-caption h1 {
         font-size: 1.5rem !important;
     }
-    
+
     .carousel-caption h4 {
         font-size: 1rem !important;
     }
-    
+
     .carousel-caption p {
         font-size: 0.85rem !important;
-        display: none; /* Çok küçük ekranlarda paragrafı gizle */
+        display: none;
+        /* Çok küçük ekranlarda paragrafı gizle */
     }
-    
+
     /* Service items daha kompakt */
     .service-item {
         padding: 1rem;
     }
-    
+
     .service-item h4 {
         font-size: 1.1rem;
     }
-    
+
     .service-item p {
         font-size: 0.9rem;
     }
-    
+
     /* Butonları tam genişlik yap */
     .btn-lg {
         width: 100%;
         margin-bottom: 1rem;
     }
-    
+
     /* Modal tam ekran benzeri */
     .modal-dialog {
         margin: 0.5rem;
         max-width: calc(100% - 1rem);
     }
-    
+
     /* Grid sistem sıfırla */
     .row {
         margin-left: -5px;
         margin-right: -5px;
     }
-    
+
     .col,
     [class*="col-"] {
         padding-left: 5px;
@@ -589,31 +593,32 @@
 
 /* Tablet boyutları için özel kurallar */
 @media (min-width: 768px) and (max-width: 991px) {
+
     /* Tablet navbar */
     .navbar-dark .navbar-nav .nav-link {
         padding: 15px 10px;
         font-size: 13px;
     }
-    
+
     /* Tablet başlıklar */
     .display-1 {
         font-size: 3rem !important;
     }
-    
+
     .display-2 {
         font-size: 2.5rem !important;
     }
-    
+
     /* Tablet service items */
     .service-item {
         padding: 2rem 1.5rem;
     }
-    
+
     /* Tablet carousel */
     .carousel-caption h1 {
         font-size: 2.5rem !important;
     }
-    
+
     .carousel-caption h4 {
         font-size: 1.3rem !important;
     }
@@ -643,26 +648,27 @@
         margin: 0;
         border-radius: 0;
     }
-    
+
     .dropdown-item {
         color: var(--light);
         padding: 8px 20px;
-        border-bottom: 1px solid rgba(255,255,255,0.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
-    
+
     .dropdown-item:hover,
     .dropdown-item.active {
         background: var(--primary);
         color: white;
     }
-    
+
     .nav-item.dropdown .nav-link {
-        border-bottom: 1px solid rgba(255,255,255,0.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 }
 
 /* Erişilebilirlik iyileştirmeleri */
 @media (max-width: 768px) {
+
     /* Focus göstergeleri */
     .btn:focus,
     .nav-link:focus,
@@ -670,7 +676,7 @@
         outline: 2px solid var(--primary);
         outline-offset: 2px;
     }
-    
+
     /* Dokunma hedefleri */
     .btn,
     .nav-link,
@@ -680,7 +686,7 @@
         align-items: center;
         justify-content: center;
     }
-    
+
     .nav-link {
         justify-content: flex-start;
         padding-left: 15px;
@@ -689,28 +695,30 @@
 
 /* Performans optimizasyonları */
 @media (max-width: 768px) {
+
     /* Animasyonları azalt */
     * {
         transition-duration: 0.2s !important;
     }
-    
+
     /* Gölgeleri azalt */
     .service-item,
     .btn,
     .modal-content {
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
     }
 }
 
 /* Print media query */
 @media print {
+
     .navbar,
     .footer,
     .btn,
     .modal {
         display: none !important;
     }
-    
+
     .container-fluid {
         padding: 0 !important;
     }

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="tr">
 
 <head>
@@ -368,16 +368,20 @@
 
     <!-- Carousel Mobile Optimization CSS -->
     <style>
-        /* Hide carousel on mobile, show on desktop */
-        @media (max-width: 768px) {
-            #header-carousel {
-                display: none !important;
-            }
+        #header-carousel {
+            display: block !important;
         }
-
-        @media (min-width: 769px) {
-            #header-carousel {
-                display: block !important;
+        @media (max-width: 768px) {
+            #header-carousel .carousel-item img {
+                height: clamp(280px, 50vw, 420px) !important;
+            }
+            #header-carousel .carousel-caption p {
+                font-size: 1.25rem !important;
+                margin-bottom: 0.75rem !important;
+            }
+            #header-carousel .carousel-caption .btn {
+                padding: 6px 18px !important;
+                font-size: 0.85rem !important;
             }
         }
     </style>

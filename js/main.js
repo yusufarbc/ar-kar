@@ -64,5 +64,65 @@
         loop: true,
     });
     
+    // Sayfa Açılış Reklam Popup (bmt-reklam.webp)
+    function initAdPopup() {
+        if ($('#adPopup').length === 0) {
+            var popupHtml = `
+                <div id="adPopup" class="ad-popup-overlay" role="dialog" aria-modal="true" aria-label="AR-KAR Reklam">
+                    <div class="ad-popup-wrapper">
+                        <button type="button" class="ad-popup-close" id="adPopupClose" aria-label="Kapat">&times;</button>
+                        <div class="ad-popup-body">
+                            <img src="img/bmt-reklam.webp" alt="AR-KAR Reklam Duyurusu" class="ad-popup-img">
+                        </div>
+                    </div>
+                </div>
+            `;
+            $('body').append(popupHtml);
+        }
+
+        var $popup = $('#adPopup');
+
+        function openPopup() {
+            $('body').addClass('ad-popup-open');
+            $popup.css('display', 'flex');
+            setTimeout(function () {
+                $popup.addClass('show');
+            }, 50);
+        }
+
+        function closePopup() {
+            $popup.removeClass('show');
+            setTimeout(function () {
+                $popup.css('display', 'none');
+                $('body').removeClass('ad-popup-open');
+            }, 350);
+        }
+
+        // Sayfa açıldıktan sonra yumuşak gecikme ile göster
+        setTimeout(openPopup, 400);
+
+        // Kapatma Olayları
+        $(document).on('click', '#adPopupClose', function (e) {
+            e.preventDefault();
+            closePopup();
+        });
+
+        $(document).on('click', '#adPopup', function (e) {
+            if ($(e.target).hasClass('ad-popup-overlay') || $(e.target).hasClass('ad-popup-wrapper')) {
+                closePopup();
+            }
+        });
+
+        $(document).on('keyup', function (e) {
+            if (e.key === 'Escape' || e.keyCode === 27) {
+                closePopup();
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        initAdPopup();
+    });
+
 })(jQuery);
 

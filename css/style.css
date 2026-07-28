@@ -536,7 +536,7 @@
 
     /* Carousel çok küçük ekranlar */
     .carousel-caption {
-        padding: 1rem;
+        padding: 1rem !important;
     }
 
     .carousel-caption h1 {
@@ -548,9 +548,12 @@
     }
 
     .carousel-caption p {
-        font-size: 0.85rem !important;
-        display: none;
-        /* Çok küçük ekranlarda paragrafı gizle */
+        display: block !important;
+        font-size: 1.1rem !important;
+        line-height: 1.35 !important;
+        margin-bottom: 0.75rem !important;
+        color: #ffffff !important;
+        font-weight: 600 !important;
     }
 
     /* Service items daha kompakt */

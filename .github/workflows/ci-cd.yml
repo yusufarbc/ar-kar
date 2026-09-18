@@ -3,10 +3,12 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
+      - main
       - production
       - staging
   pull_request:
     branches:
+      - main
       - production
 
 concurrency:
@@ -65,7 +67,7 @@ jobs:
   deploy-production:
     name: Deploy to Cloudflare Pages (Production)
     needs: test
-    if: github.ref == 'refs/heads/production' && github.event_name == 'push'
+    if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/production') && github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository

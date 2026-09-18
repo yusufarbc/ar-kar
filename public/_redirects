@@ -27,6 +27,6 @@
 /haberler            /blog.html             301
 /duyurular           /blog.html             301
 
-# Yönetim paneli kısayolu (aynı host üzerinde)
-/panel               /keystatic/            302
-/admin               /keystatic/            302
+# Yönetim paneli kısayolu.
+# NOT: /admin artık gerçek bir sayfa (src/pages/admin.astro), yönlendirilmemeli.
+/panel               /admin                 302

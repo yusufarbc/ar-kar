@@ -9,7 +9,7 @@ const dateField = z
   .transform((val) => (typeof val === 'string' ? val : val.toISOString().split('T')[0]));
 
 const blog = defineCollection({
-  loader: glob({ pattern: '**/*.mdoc', base: 'src/content/blog' }),
+  loader: glob({ pattern: '**/*.{md,mdoc}', base: 'src/content/blog' }),
   schema: z.object({
     title: z.string(),
     date: dateField,
@@ -19,7 +19,7 @@ const blog = defineCollection({
 });
 
 const projects = defineCollection({
-  loader: glob({ pattern: '**/*.mdoc', base: 'src/content/projects' }),
+  loader: glob({ pattern: '**/*.{md,mdoc}', base: 'src/content/projects' }),
   schema: z.object({
     title: z.string(),
     category: z.enum(['insaat', 'pvc', 'dekorasyon', 'mimar']).default('insaat'),

@@ -8,7 +8,7 @@ import { defineMiddleware } from 'astro:middleware';
 // erişilebilir kalırdı. Bu middleware, WAF'ın tamamlayıcısı olarak ikinci
 // bir savunma katmanı sağlar: panel rotaları başka hiçbir host'ta çalışmaz.
 const PANEL_HOST = 'panel.ar-kar.com';
-const PANEL_PATH_PREFIXES = ['/keystatic', '/api/keystatic'];
+const PANEL_PATH_PREFIXES = ['/keystatic', '/api/keystatic', '/admin', '/api/cms'];
 
 function isPanelPath(pathname: string): boolean {
   return PANEL_PATH_PREFIXES.some(

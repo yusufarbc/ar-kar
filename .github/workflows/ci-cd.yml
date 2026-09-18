@@ -107,4 +107,9 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: deploy --name ar-kar
+          # Custom domain'ler her deploy'da yeniden bildirilir. wrangler.jsonc'ye
+          # `routes` olarak yazılamaz: aynı dosya staging deploy'unda da
+          # kullanıldığı için staging worker'ı canlı domain'i devralırdı.
+          # panel.ar-kar.com bilinçli olarak burada YOK — WAF geo-block kuralı
+          # kurulmadan panel'in dünyaya açılmaması için ayrı bağlanır.
+          command: deploy --name ar-kar --domain ar-kar.com --domain www.ar-kar.com

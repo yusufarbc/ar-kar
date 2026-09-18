@@ -73,15 +73,15 @@ jobs:
       - name: Build
         run: npm run build
 
+      # cloudflare/wrangler-action kendi wrangler sürümünü kurar ve bu,
+      # repodaki @cloudflare/workers-types ile peer çakışması yaratıyor.
+      # Bu yüzden doğrudan projenin kendi wrangler'ı kullanılıyor.
       - name: Deploy to Cloudflare Pages
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: >-
-            pages deploy dist
-            --project-name=ar-kar
-            --branch=${{ github.ref_name }}
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          npx wrangler pages deploy dist --project-name=ar-kar --branch="${{ github.ref_name }}" --commit-dirty=true
 
   # --------------------------------------------------------------------
   # Yönetim paneli -> Cloudflare Pages: ar-kar-admin
@@ -110,16 +110,24 @@ jobs:
             echo "panel/ değişmedi, deploy atlanıyor."
           fi
 
+      - name: Setup Node.js
+        if: steps.changed.outputs.run == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: Install Dependencies
+        if: steps.changed.outputs.run == 'true'
+        run: npm ci
+
+      # functions/ dizini ÇALIŞMA DİZİNİNE göre aranır; bu yüzden panel/
+      # içinden çalıştırılır ve statik klasör olarak public/ verilir.
       - name: Deploy to Cloudflare Pages
         if: steps.changed.outputs.run == 'true'
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          # functions/ dizini çalışma dizinine göre aranır; bu yüzden
-          # workingDirectory panel/ olmalı ve statik klasör public/ verilmeli.
-          workingDirectory: panel
-          command: >-
-            pages deploy public
-            --project-name=ar-kar-admin
-            --branch=production
+        working-directory: panel
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          npx wrangler pages deploy public --project-name=ar-kar-admin --branch=production --commit-dirty=true

@@ -1,92 +1,23 @@
-<!DOCTYPE html>
-<html lang="tr">
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
 
-<head>
-    <meta charset="UTF-8">
-    <title>AR-KAR İnşaat Samsun | 36 Yıllık Güvenilir İnşaat, Tarım ve PVC Firması | Çarşamba</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+const title = "AR-KAR İnşaat Samsun | 36 Yıllık Güvenilir İnşaat, Tarım ve PVC Firması | Çarşamba";
+const description = "AR-KAR İnşaat olarak Samsun Çarşamba'da 36 yıldır güvenilir hizmet veriyoruz. Konut inşaat projeleri, anahtar teslim inşaat, PVC kapı-pencere, tarım ürünleri ve zirai ilaç satışı ile kaliteli hizmet sunuyoruz.";
+const canonical = "https://ar-kar.com/";
+const ogImage = "https://ar-kar.com/img/logo.webp";
 
-    <meta
-        content="AR-KAR İnşaat olarak Samsun Çarşamba'da 36 yıldır güvenilir hizmet veriyoruz. Konut inşaat projeleri, anahtar teslim inşaat, PVC kapı-pencere, tarım ürünleri ve zirai ilaç satışı ile kaliteli hizmet sunuyoruz."
-        name="description">
-    <meta name="robots" content="index, follow">
-    <meta name="author" content="AR-KAR İnşaat">
-    <meta name="geo.region" content="TR-55">
-    <meta name="geo.placename" content="Çarşamba, Samsun">
-    <meta name="geo.position" content="41.1986;36.7153">
-    <meta name="ICBM" content="41.1986, 36.7153">
-    <link rel="canonical" href="https://ar-kar.com/">
+---
 
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="AR-KAR İnşaat Samsun | 36 Yıllık Güvenilir İnşaat, Tarım ve PVC Firması">
-    <meta property="og:description"
-        content="Samsun Çarşamba'da 36 yıldır güvenilir hizmet veren AR-KAR İnşaat. Konut projeleri, anahtar teslim inşaat, PVC sistemleri ve tarım ürünleri.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://ar-kar.com/">
-    <meta property="og:image" content="https://ar-kar.com/img/logo.webp">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:locale" content="tr_TR">
-    <meta property="og:site_name" content="AR-KAR İnşaat">
-
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="AR-KAR İnşaat Samsun | 36 Yıllık Güvenilir İnşaat, Tarım ve PVC Firması">
-    <meta name="twitter:description"
-        content="Samsun Çarşamba'da 36 yıldır güvenilir hizmet veren AR-KAR İnşaat. Konut projeleri, anahtar teslim inşaat, PVC sistemleri ve tarım ürünleri.">
-    <meta name="twitter:image" content="https://ar-kar.com/img/logo.webp">
-
-    <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
-
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap"
-        rel="stylesheet">
-
-    <!-- Icon Font Stylesheet -->
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    <link rel="preconnect" href="https://cdn.jsdelivr.net">
-    <link rel="preconnect" href="https://code.jquery.com">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-
-    <!-- Libraries Stylesheet -->
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
-    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
-
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.red.css" rel="stylesheet">
-
-    <!-- Template Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
-
-    <!-- Humans.txt -->
-    <link type="text/plain" rel="author" href="humans.txt">
-
-    <!-- Google Analytics (opsiyonel) -->
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <!--
-    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'GA_MEASUREMENT_ID');
-    </script>
-    -->
-
-    <!-- Security Headers (meta tags) -->
-    <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="X-Frame-Options" content="DENY">
-    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
-    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-
-    <!-- JSON-LD Structured Data -->
-    <script type="application/ld+json">
-    {
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  ogImage={ogImage}
+  
+  activePage="index"
+>
+  <Fragment slot="head">
+    <script is:inline type="application/ld+json" set:html={`{
         "@context": "https://schema.org",
         "@type": "Organization",
         "name": "AR-KAR İnşaat Gıda Tarım Ürünleri ve Taş. Tic. Ltd. Şti.",
@@ -193,12 +124,8 @@
                 }
             ]
         }
-    }
-    </script>
-
-    <!-- LocalBusiness Schema for Local SEO -->
-    <script type="application/ld+json">
-    {
+    }`} />
+    <script is:inline type="application/ld+json" set:html={`{
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
         "name": "AR-KAR İnşaat",
@@ -242,63 +169,10 @@
             "ratingValue": "4.8",
             "reviewCount": "127"
         }
-    }
-    </script>
-</head>
+    }`} />
+  </Fragment>
 
-<body>
-
-    <!-- Navbar Start -->
-    <div class="container-fluid sticky-top bg-dark navbar-dark shadow-sm px-2 px-sm-3 px-md-5 pe-lg-0">
-        <nav class="navbar navbar-expand-lg py-1 py-lg-0">
-            <a href="index.html" class="navbar-brand me-2">
-                <img src="./img/logo.webp" alt="AR-KAR İnşaat Logo" style="max-height:85px; padding: 8px;">
-            </a>
-            <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarCollapse">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <div class="navbar-nav ms-auto py-0">
-                    <a href="index.html" class="nav-item nav-link active fw-semibold">Anasayfa</a>
-                    <a href="#about" class="nav-item nav-link fw-semibold">Hakkımızda</a>
-                    <a href="#projects" class="nav-item nav-link fw-semibold">Projelerimiz</a>
-                    <a href="#dealerships" class="nav-item nav-link fw-semibold">Bayilikler</a>
-                    <div class="nav-item dropdown">
-                        <a href="#service" class="nav-link dropdown-toggle fw-semibold"
-                            data-bs-toggle="dropdown">Hizmetler</a>
-                        <div class="dropdown-menu m-0">
-                            <a href="projeler.html" class="dropdown-item">İnşaat Projeleri</a>
-                            <a href="muteahhitlik.html" class="dropdown-item">Anahtar Teslim İnşaat</a>
-                            <a href="insaat.html" class="dropdown-item">Hırdavat & İnşaat Malzemeleri</a>
-                            <a href="pvc.html" class="dropdown-item">PVC Kapı ve Pencere Sistemleri</a>
-                            <a href="tarim.html" class="dropdown-item">Tarım Ürünleri Alım Satımı</a>
-                            <a href="ziraat.html" class="dropdown-item">Zirai Ürünler ve Danışmanlık</a>
-                            <a href="otomotiv.html" class="dropdown-item">Otomotiv Alım Satım</a>
-                            <a href="mimar.html" class="dropdown-item">Mimari Proje Hizmetleri</a>
-                            <a href="dekorasyon.html" class="dropdown-item">Dekorasyon Hizmetleri</a>
-                        </div>
-                    </div>
-                    <a href="#contact" class="nav-item nav-link fw-semibold">İletişim</a>
-                    <button
-                        class="nav-item nav-link bg-primary text-white px-4 px-lg-5 ms-2 ms-lg-3 d-none d-lg-block fw-semibold"
-                        style="font-size:1rem; border:none; border-radius: 5px; transition: all 0.3s;"
-                        data-bs-toggle="modal" data-bs-target="#contactModal">Bize ulaşın <i
-                            class="bi bi-arrow-right"></i></button>
-                    <div class="d-block d-lg-none w-100 mt-3 px-2">
-                        <button class="btn btn-primary w-100 fw-semibold py-3"
-                            style="font-size:1rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(204, 39, 43, 0.3);"
-                            data-bs-toggle="modal" data-bs-target="#contactModal">
-                            <i class="bi bi-telephone-fill me-2"></i>Bize ulaşın
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </div>
-    <!-- Navbar End -->
-
-    <!-- Carousel Start -->
+  <!-- Carousel Start -->
     <div class="container-fluid p-0 position-relative">
         <div id="header-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
             <!-- Carousel Indicators -->
@@ -313,7 +187,7 @@
 
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="w-100 d-block" src="img/carousel-1.webp"
+                    <img class="w-100 d-block" src="/img/carousel-1.webp"
                         alt="AR-KAR İnşaat - Samsun Çarşamba'da 36 Yıllık Güvenilir İnşaat"
                         style="height:clamp(320px,60vw,700px); object-fit:cover; object-position:center;"
                         loading="eager">
@@ -327,7 +201,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="w-100 d-block" src="img/carousel-2.webp"
+                    <img class="w-100 d-block" src="/img/carousel-2.webp"
                         alt="AR-KAR İnşaat - Aş.Kavacık'da Başlayan Kalite"
                         style="height:clamp(320px,60vw,700px); object-fit:cover; object-position:center;"
                         loading="lazy">
@@ -341,7 +215,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="w-100 d-block" src="img/carousel-3.webp" alt="AR-KAR İnşaat - Projelerin Güvencesi"
+                    <img class="w-100 d-block" src="/img/carousel-3.webp" alt="AR-KAR İnşaat - Projelerin Güvencesi"
                         style="height:clamp(320px,60vw,700px); object-fit:cover; object-position:center;"
                         loading="lazy">
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
@@ -402,7 +276,7 @@
             </div>
 
             <div class="col-lg-5 pb-5 d-flex align-items-center justify-content-center" style="min-height: 400px;">
-                <img class="img-fluid w-100 h-auto rounded" src="img/about.webp"
+                <img class="img-fluid w-100 h-auto rounded" src="/img/about.webp"
                     alt="AR-KAR İnşaat Hakkımızda - 36 Yıllık Tecrübe"
                     style="object-fit: contain; border: none; max-height: 380px;" loading="lazy">
             </div>
@@ -421,7 +295,7 @@
         <div class="row g-4">
             <div class="col-12 col-sm-6 col-lg-3">
                 <div class="project-item position-relative overflow-hidden rounded">
-                    <img class="img-fluid w-100" src="img/kirazlikcay.webp"
+                    <img class="img-fluid w-100" src="/img/kirazlikcay.webp"
                         alt="Kirazlıkçay Konut Projesi - AR-KAR İnşaat" style="height: 300px; object-fit: cover;"
                         loading="lazy">
                     <div class="project-overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-white text-center p-4"
@@ -436,7 +310,7 @@
             </div>
             <div class="col-12 col-sm-6 col-lg-3">
                 <div class="project-item position-relative overflow-hidden rounded">
-                    <img class="img-fluid w-100" src="img/beypınar .webp" alt="Beypınar Konut Projesi - AR-KAR İnşaat"
+                    <img class="img-fluid w-100" src="/img/beypınar .webp" alt="Beypınar Konut Projesi - AR-KAR İnşaat"
                         style="height: 300px; object-fit: cover;" loading="lazy">
                     <div class="project-overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-white text-center p-4"
                         style="background: rgba(204, 39, 43, 0.8); opacity: 0; transition: all 0.3s;">
@@ -450,7 +324,7 @@
             </div>
             <div class="col-12 col-sm-6 col-lg-3">
                 <div class="project-item position-relative overflow-hidden rounded">
-                    <img class="img-fluid w-100" src="img/alaplus.webp" alt="Ala Plus Konut Projesi - AR-KAR İnşaat"
+                    <img class="img-fluid w-100" src="/img/alaplus.webp" alt="Ala Plus Konut Projesi - AR-KAR İnşaat"
                         style="height: 300px; object-fit: cover;" loading="lazy">
                     <div class="project-overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-white text-center p-4"
                         style="background: rgba(204, 39, 43, 0.8); opacity: 0; transition: all 0.3s;">
@@ -464,7 +338,7 @@
             </div>
             <div class="col-12 col-sm-6 col-lg-3">
                 <div class="project-item position-relative overflow-hidden rounded">
-                    <img class="img-fluid w-100" src="img/korfez.webp" alt="Körfez Konut Projesi - AR-KAR İnşaat"
+                    <img class="img-fluid w-100" src="/img/korfez.webp" alt="Körfez Konut Projesi - AR-KAR İnşaat"
                         style="height: 300px; object-fit: cover;" loading="lazy">
                     <div class="project-overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-white text-center p-4"
                         style="background: rgba(204, 39, 43, 0.8); opacity: 0; transition: all 0.3s;">
@@ -478,7 +352,7 @@
             </div>
             <div class="col-12 col-sm-6 col-lg-3">
                 <div class="project-item position-relative overflow-hidden rounded">
-                    <img class="img-fluid w-100" src="img/bulutoglu.webp" alt="Bulutoğlu Konut Projesi - AR-KAR İnşaat"
+                    <img class="img-fluid w-100" src="/img/bulutoglu.webp" alt="Bulutoğlu Konut Projesi - AR-KAR İnşaat"
                         style="height: 300px; object-fit: cover;" loading="lazy">
                     <div class="project-overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-white text-center p-4"
                         style="background: rgba(204, 39, 43, 0.8); opacity: 0; transition: all 0.3s;">
@@ -492,7 +366,7 @@
             </div>
             <div class="col-12 col-sm-6 col-lg-3">
                 <div class="project-item position-relative overflow-hidden rounded">
-                    <img class="img-fluid w-100" src="img/ala.webp" alt="Adapark Ala Konut Projesi - AR-KAR İnşaat"
+                    <img class="img-fluid w-100" src="/img/ala.webp" alt="Adapark Ala Konut Projesi - AR-KAR İnşaat"
                         style="height: 300px; object-fit: cover;" loading="lazy">
                     <div class="project-overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-white text-center p-4"
                         style="background: rgba(204, 39, 43, 0.8); opacity: 0; transition: all 0.3s;">
@@ -505,7 +379,7 @@
             </div>
             <div class="col-12 col-sm-6 col-lg-3">
                 <div class="project-item position-relative overflow-hidden rounded">
-                    <img class="img-fluid w-100" src="img/adapark2-0.webp"
+                    <img class="img-fluid w-100" src="/img/adapark2-0.webp"
                         alt="Adapark 2+0 Konut Projesi - AR-KAR İnşaat" style="height: 300px; object-fit: cover;"
                         loading="lazy">
                     <div class="project-overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-white text-center p-4"
@@ -519,7 +393,7 @@
             </div>
             <div class="col-12 col-sm-6 col-lg-3">
                 <div class="project-item position-relative overflow-hidden rounded">
-                    <img class="img-fluid w-100" src="img/teksstilkent.webp" alt="Tekstilkent Projesi - AR-KAR İnşaat"
+                    <img class="img-fluid w-100" src="/img/teksstilkent.webp" alt="Tekstilkent Projesi - AR-KAR İnşaat"
                         style="height: 300px; object-fit: cover;" loading="lazy">
                     <div class="project-overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-white text-center p-4"
                         style="background: rgba(204, 39, 43, 0.8); opacity: 0; transition: all 0.3s;">
@@ -552,29 +426,21 @@
                 <div class="carousel-inner text-center">
                     <div class="carousel-item active">
                         <div class="d-flex justify-content-center align-items-center" style="height:200px;">
-                            <img src="img/1.webp" alt="Polisan Boya - AR-KAR İş Ortağı" class="img-fluid"
+                            <img src="/img/1.webp" alt="Polisan Boya - AR-KAR İş Ortağı" class="img-fluid"
                                 style="max-height:160px; max-width:260px; width:auto; height:auto; object-fit:contain;"
                                 loading="lazy">
                         </div>
                     </div>
                     <div class="carousel-item">
                         <div class="d-flex justify-content-center align-items-center" style="height:200px;">
-                            <img src="img/2.webp" alt="Deckon - AR-KAR İş Ortağı" class="img-fluid"
+                            <img src="/img/2.webp" alt="Deckon - AR-KAR İş Ortağı" class="img-fluid"
                                 style="max-height:160px; max-width:260px; width:auto; height:auto; object-fit:contain;"
                                 loading="lazy">
                         </div>
                     </div>
                     <div class="carousel-item">
                         <div class="d-flex justify-content-center align-items-center" style="height:200px;">
-                            <img src="img/3.webp" alt="Atakum Kimya - AR-KAR İş Ortağı" class="img-fluid"
-                                style="max-height:160px; max-width:260px; width:auto; height:auto; object-fit:contain;"
-                                loading="lazy">
-                        </div>
-                    </div>
-
-                    <div class="carousel-item">
-                        <div class="d-flex justify-content-center align-items-center" style="height:200px;">
-                            <img src="img/4.webp" alt="Kale Seramik - AR-KAR İş Ortağı" class="img-fluid"
+                            <img src="/img/3.webp" alt="Atakum Kimya - AR-KAR İş Ortağı" class="img-fluid"
                                 style="max-height:160px; max-width:260px; width:auto; height:auto; object-fit:contain;"
                                 loading="lazy">
                         </div>
@@ -582,7 +448,7 @@
 
                     <div class="carousel-item">
                         <div class="d-flex justify-content-center align-items-center" style="height:200px;">
-                            <img src="img/5.webp" alt="Termal Seramik - AR-KAR İş Ortağı" class="img-fluid"
+                            <img src="/img/4.webp" alt="Kale Seramik - AR-KAR İş Ortağı" class="img-fluid"
                                 style="max-height:160px; max-width:260px; width:auto; height:auto; object-fit:contain;"
                                 loading="lazy">
                         </div>
@@ -590,7 +456,7 @@
 
                     <div class="carousel-item">
                         <div class="d-flex justify-content-center align-items-center" style="height:200px;">
-                            <img src="img/6.webp" alt="Rino - AR-KAR İş Ortağı" class="img-fluid"
+                            <img src="/img/5.webp" alt="Termal Seramik - AR-KAR İş Ortağı" class="img-fluid"
                                 style="max-height:160px; max-width:260px; width:auto; height:auto; object-fit:contain;"
                                 loading="lazy">
                         </div>
@@ -598,7 +464,7 @@
 
                     <div class="carousel-item">
                         <div class="d-flex justify-content-center align-items-center" style="height:200px;">
-                            <img src="img/7.webp" alt="Kavçim Çimento - AR-KAR İş Ortağı" class="img-fluid"
+                            <img src="/img/6.webp" alt="Rino - AR-KAR İş Ortağı" class="img-fluid"
                                 style="max-height:160px; max-width:260px; width:auto; height:auto; object-fit:contain;"
                                 loading="lazy">
                         </div>
@@ -606,7 +472,7 @@
 
                     <div class="carousel-item">
                         <div class="d-flex justify-content-center align-items-center" style="height:200px;">
-                            <img src="img/8.webp" alt="ABS - AR-KAR İş Ortağı" class="img-fluid"
+                            <img src="/img/7.webp" alt="Kavçim Çimento - AR-KAR İş Ortağı" class="img-fluid"
                                 style="max-height:160px; max-width:260px; width:auto; height:auto; object-fit:contain;"
                                 loading="lazy">
                         </div>
@@ -614,7 +480,7 @@
 
                     <div class="carousel-item">
                         <div class="d-flex justify-content-center align-items-center" style="height:200px;">
-                            <img src="img/9.webp" alt="DOĞUPEN - AR-KAR İş Ortağı" class="img-fluid"
+                            <img src="/img/8.webp" alt="ABS - AR-KAR İş Ortağı" class="img-fluid"
                                 style="max-height:160px; max-width:260px; width:auto; height:auto; object-fit:contain;"
                                 loading="lazy">
                         </div>
@@ -622,7 +488,7 @@
 
                     <div class="carousel-item">
                         <div class="d-flex justify-content-center align-items-center" style="height:200px;">
-                            <img src="img/10.webp" alt="KARPEN - AR-KAR İş Ortağı" class="img-fluid"
+                            <img src="/img/9.webp" alt="DOĞUPEN - AR-KAR İş Ortağı" class="img-fluid"
                                 style="max-height:160px; max-width:260px; width:auto; height:auto; object-fit:contain;"
                                 loading="lazy">
                         </div>
@@ -630,7 +496,7 @@
 
                     <div class="carousel-item">
                         <div class="d-flex justify-content-center align-items-center" style="height:200px;">
-                            <img src="img/11.webp" alt="Gemlik Gübre - AR-KAR İş Ortağı" class="img-fluid"
+                            <img src="/img/10.webp" alt="KARPEN - AR-KAR İş Ortağı" class="img-fluid"
                                 style="max-height:160px; max-width:260px; width:auto; height:auto; object-fit:contain;"
                                 loading="lazy">
                         </div>
@@ -638,7 +504,7 @@
 
                     <div class="carousel-item">
                         <div class="d-flex justify-content-center align-items-center" style="height:200px;">
-                            <img src="img/12.webp" alt="İGSAŞ - AR-KAR İş Ortağı" class="img-fluid"
+                            <img src="/img/11.webp" alt="Gemlik Gübre - AR-KAR İş Ortağı" class="img-fluid"
                                 style="max-height:160px; max-width:260px; width:auto; height:auto; object-fit:contain;"
                                 loading="lazy">
                         </div>
@@ -646,7 +512,7 @@
 
                     <div class="carousel-item">
                         <div class="d-flex justify-content-center align-items-center" style="height:200px;">
-                            <img src="img/13.webp" alt="Peli Parke - AR-KAR İş Ortağı" class="img-fluid"
+                            <img src="/img/12.webp" alt="İGSAŞ - AR-KAR İş Ortağı" class="img-fluid"
                                 style="max-height:160px; max-width:260px; width:auto; height:auto; object-fit:contain;"
                                 loading="lazy">
                         </div>
@@ -654,7 +520,7 @@
 
                     <div class="carousel-item">
                         <div class="d-flex justify-content-center align-items-center" style="height:200px;">
-                            <img src="img/14.webp" alt="M&R - AR-KAR İş Ortağı" class="img-fluid"
+                            <img src="/img/13.webp" alt="Peli Parke - AR-KAR İş Ortağı" class="img-fluid"
                                 style="max-height:160px; max-width:260px; width:auto; height:auto; object-fit:contain;"
                                 loading="lazy">
                         </div>
@@ -662,7 +528,7 @@
 
                     <div class="carousel-item">
                         <div class="d-flex justify-content-center align-items-center" style="height:200px;">
-                            <img src="img/15.webp" alt="Turavit - AR-KAR İş Ortağı" class="img-fluid"
+                            <img src="/img/14.webp" alt="M&R - AR-KAR İş Ortağı" class="img-fluid"
                                 style="max-height:160px; max-width:260px; width:auto; height:auto; object-fit:contain;"
                                 loading="lazy">
                         </div>
@@ -670,7 +536,7 @@
 
                     <div class="carousel-item">
                         <div class="d-flex justify-content-center align-items-center" style="height:200px;">
-                            <img src="img/16.webp" alt="KYK - AR-KAR İş Ortağı" class="img-fluid"
+                            <img src="/img/15.webp" alt="Turavit - AR-KAR İş Ortağı" class="img-fluid"
                                 style="max-height:160px; max-width:260px; width:auto; height:auto; object-fit:contain;"
                                 loading="lazy">
                         </div>
@@ -678,7 +544,7 @@
 
                     <div class="carousel-item">
                         <div class="d-flex justify-content-center align-items-center" style="height:200px;">
-                            <img src="img/17.webp" alt="Birlik Galvaniz - AR-KAR İş Ortağı" class="img-fluid"
+                            <img src="/img/16.webp" alt="KYK - AR-KAR İş Ortağı" class="img-fluid"
                                 style="max-height:160px; max-width:260px; width:auto; height:auto; object-fit:contain;"
                                 loading="lazy">
                         </div>
@@ -686,7 +552,7 @@
 
                     <div class="carousel-item">
                         <div class="d-flex justify-content-center align-items-center" style="height:200px;">
-                            <img src="img/18.webp" alt="Filiz - AR-KAR İş Ortağı" class="img-fluid"
+                            <img src="/img/17.webp" alt="Birlik Galvaniz - AR-KAR İş Ortağı" class="img-fluid"
                                 style="max-height:160px; max-width:260px; width:auto; height:auto; object-fit:contain;"
                                 loading="lazy">
                         </div>
@@ -694,7 +560,15 @@
 
                     <div class="carousel-item">
                         <div class="d-flex justify-content-center align-items-center" style="height:200px;">
-                            <img src="img/19.webp" alt="Akçansa Çimento - AR-KAR İş Ortağı" class="img-fluid"
+                            <img src="/img/18.webp" alt="Filiz - AR-KAR İş Ortağı" class="img-fluid"
+                                style="max-height:160px; max-width:260px; width:auto; height:auto; object-fit:contain;"
+                                loading="lazy">
+                        </div>
+                    </div>
+
+                    <div class="carousel-item">
+                        <div class="d-flex justify-content-center align-items-center" style="height:200px;">
+                            <img src="/img/19.webp" alt="Akçansa Çimento - AR-KAR İş Ortağı" class="img-fluid"
                                 style="max-height:160px; max-width:260px; width:auto; height:auto; object-fit:contain;"
                                 loading="lazy">
                         </div>
@@ -732,7 +606,7 @@
 
             <div class="col-lg-4 col-md-6">
                 <div class="service-item bg-white d-flex flex-column align-items-center text-center h-100">
-                    <img class="img-fluid" src="img/konut.webp" alt="Konut İnşaat Projeleri - AR-KAR İnşaat"
+                    <img class="img-fluid" src="/img/konut.webp" alt="Konut İnşaat Projeleri - AR-KAR İnşaat"
                         loading="lazy">
                     <div class="service-icon bg-white">
                         <i class="fa fa-3x fa-building text-primary"></i>
@@ -748,7 +622,7 @@
 
             <div class="col-lg-4 col-md-6">
                 <div class="service-item bg-white rounded d-flex flex-column align-items-center text-center h-100">
-                    <img class="img-fluid" src="img/anahtarteslim.webp" alt="Anahtar Teslim İnşaat - AR-KAR İnşaat"
+                    <img class="img-fluid" src="/img/anahtarteslim.webp" alt="Anahtar Teslim İnşaat - AR-KAR İnşaat"
                         loading="lazy">
                     <div class="service-icon bg-white">
                         <i class="fa fa-3x fa-home text-primary"></i>
@@ -764,7 +638,7 @@
 
             <div class="col-lg-4 col-md-6">
                 <div class="service-item bg-white rounded d-flex flex-column align-items-center text-center h-100">
-                    <img class="img-fluid" src="img/nalbur.webp" alt="Hırdavat ve İnşaat Malzemeleri - AR-KAR İnşaat"
+                    <img class="img-fluid" src="/img/nalbur.webp" alt="Hırdavat ve İnşaat Malzemeleri - AR-KAR İnşaat"
                         loading="lazy">
                     <div class="service-icon bg-white">
                         <i class="fa fa-3x fa-tools text-primary"></i>
@@ -780,7 +654,7 @@
 
             <div class="col-lg-4 col-md-6">
                 <div class="service-item bg-white rounded d-flex flex-column align-items-center text-center h-100">
-                    <img class="img-fluid" src="img/mimariproje.webp" alt="Mimari Proje Hizmetleri - AR-KAR İnşaat"
+                    <img class="img-fluid" src="/img/mimariproje.webp" alt="Mimari Proje Hizmetleri - AR-KAR İnşaat"
                         loading="lazy">
                     <div class="service-icon bg-white">
                         <i class="fa fa-3x fa-drafting-compass text-primary"></i>
@@ -796,7 +670,7 @@
 
             <div class="col-lg-4 col-md-6">
                 <div class="service-item bg-white rounded d-flex flex-column align-items-center text-center h-100">
-                    <img class="img-fluid" src="img/dekorasyon.webp" alt="Dekorasyon Hizmetleri - AR-KAR İnşaat"
+                    <img class="img-fluid" src="/img/dekorasyon.webp" alt="Dekorasyon Hizmetleri - AR-KAR İnşaat"
                         loading="lazy">
                     <div class="service-icon bg-white">
                         <i class="fa fa-3x fa-paint-brush text-primary"></i>
@@ -813,7 +687,7 @@
 
             <div class="col-lg-4 col-md-6">
                 <div class="service-item bg-white rounded d-flex flex-column align-items-center text-center h-100">
-                    <img class="img-fluid" src="img/pvc.webp" alt="PVC Kapı ve Pencere Sistemleri - AR-KAR İnşaat"
+                    <img class="img-fluid" src="/img/pvc.webp" alt="PVC Kapı ve Pencere Sistemleri - AR-KAR İnşaat"
                         loading="lazy">
                     <div class="service-icon bg-white">
                         <i class="fa fa-3x fa-palette text-primary"></i>
@@ -828,7 +702,7 @@
 
             <div class="col-lg-4 col-md-6">
                 <div class="service-item bg-white rounded d-flex flex-column align-items-center text-center h-100">
-                    <img class="img-fluid" src="img/tarim.webp" alt="Tarım Ürünleri Alım Satımı - AR-KAR İnşaat"
+                    <img class="img-fluid" src="/img/tarim.webp" alt="Tarım Ürünleri Alım Satımı - AR-KAR İnşaat"
                         loading="lazy">
                     <div class="service-icon bg-white">
                         <i class="fa fa-3x fa-seedling text-primary"></i>
@@ -844,7 +718,7 @@
 
             <div class="col-lg-4 col-md-6">
                 <div class="service-item bg-white rounded d-flex flex-column align-items-center text-center">
-                    <img class="img-fluid" src="img/ziraat.webp" alt="Zirai İlaç, Gübre ve Tohum - AR-KAR İnşaat"
+                    <img class="img-fluid" src="/img/ziraat.webp" alt="Zirai İlaç, Gübre ve Tohum - AR-KAR İnşaat"
                         loading="lazy">
                     <div class="service-icon bg-white">
                         <i class="fa fa-3x fa-leaf text-primary"></i>
@@ -860,7 +734,7 @@
 
             <div class="col-lg-4 col-md-6">
                 <div class="service-item bg-white rounded d-flex flex-column align-items-center text-center h-100">
-                    <img class="img-fluid" src="img/otomotiv.webp" alt="Otomotiv Alım Satım - AR-KAR İnşaat"
+                    <img class="img-fluid" src="/img/otomotiv.webp" alt="Otomotiv Alım Satım - AR-KAR İnşaat"
                         loading="lazy">
                     <div class="service-icon bg-white">
                         <i class="fa fa-3x fa-car text-primary"></i>
@@ -956,246 +830,4 @@
         </div>
     </div>
     <!-- Contact End -->
-
-    <!-- Footer Start -->
-    <div class="footer container-fluid position-relative bg-dark text-white-50 py-6 px-5">
-        <div class="row g-5">
-            <div class="col-lg-6 pe-lg-5">
-                <a href="index.html" class="navbar-brand">
-                    <img src="./img/logo.webp" alt="AR-KAR İnşaat Logo" loading="lazy">
-                </a>
-                <p><i class="fa fa-map-marker-alt me-2"></i>Çarşamba, Samsun</p>
-                <p><i class="fa fa-phone me-2"></i>0542 182 68 55</p>
-                <p><i class="fa fa-envelope me-2"></i>arkargida@gmail.com</p>
-                <div class="d-flex justify-content-start mt-4">
-                    <a class="btn btn-lg btn-primary btn-lg-square rounded-0 me-2" href="mailto:arkargida@gmail.com"><i
-                            class="fa fa-envelope"></i></a>
-                    <a class="btn btn-lg btn-primary btn-lg-square rounded-0 me-2"
-                        href="https://wa.me/905421826855?text="><i class="fab fa-whatsapp"></i></a>
-                    <a class="btn btn-lg btn-primary btn-lg-square rounded-0 me-2"
-                        href="https://www.facebook.com/arkarltd/" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-lg btn-primary btn-lg-square rounded-0" href="https://www.instagram.com/arkarltd"
-                        target="_blank"><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
-            <div class="col-lg-6 ps-lg-5">
-                <div class="row g-5">
-                    <div class="col-sm-6">
-                        <h4 class="text-white text-uppercase mb-4">Hızlı Linkler</h4>
-                        <div class="d-flex flex-column justify-content-start">
-                            <a class="text-white-50 mb-2" href="index.html"><i
-                                    class="fa fa-angle-right me-2"></i>Anasayfa</a>
-                            <a class="text-white-50 mb-2" href="index.html#about"><i
-                                    class="fa fa-angle-right me-2"></i>Hakkımızda</a>
-                            <a class="text-white-50 mb-2" href="index.html#projects"><i
-                                    class="fa fa-angle-right me-2"></i>Projelerimiz</a>
-                            <a class="text-white-50 mb-2" href="index.html#service"><i
-                                    class="fa fa-angle-right me-2"></i>Hizmetlerimiz</a>
-                            <a class="text-white-50" href="index.html#contact"><i
-                                    class="fa fa-angle-right me-2"></i>İletişim</a>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <h4 class="text-white text-uppercase mb-4">Hizmetlerimiz</h4>
-                        <div class="d-flex flex-column justify-content-start">
-                            <a class="text-white-50 mb-2" href="projeler.html"><i
-                                    class="fa fa-angle-right me-2"></i>İnşaat Projeleri</a>
-                            <a class="text-white-50 mb-2" href="muteahhitlik.html"><i
-                                    class="fa fa-angle-right me-2"></i>Anahtar Teslim İnşaat</a>
-                            <a class="text-white-50 mb-2" href="pvc.html"><i class="fa fa-angle-right me-2"></i>PVC Kapı
-                                Pencere</a>
-                            <a class="text-white-50 mb-2" href="tarim.html"><i class="fa fa-angle-right me-2"></i>Tarım
-                                Ürünleri</a>
-                            <a class="text-white-50 mb-2" href="ziraat.html"><i class="fa fa-angle-right me-2"></i>Zirai
-                                İlaç</a>
-                            <a class="text-white-50 mb-2" href="insaat.html"><i
-                                    class="fa fa-angle-right me-2"></i>İnşaat Malzemeleri</a>
-                            <a class="text-white-50 mb-2" href="otomotiv.html"><i
-                                    class="fa fa-angle-right me-2"></i>Otomotiv Alım Satım</a>
-                            <a class="text-white-50 mb-2" href="mimar.html"><i class="fa fa-angle-right me-2"></i>Mimari
-                                Proje</a>
-                            <a class="text-white-50" href="dekorasyon.html"><i
-                                    class="fa fa-angle-right me-2"></i>Dekorasyon</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Contact Modal Start -->
-    <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header bg-primary text-white">
-                    <h5 class="modal-title" id="contactModalLabel">
-                        <i class="fa fa-phone me-2"></i>AR-KAR İnşaat - Hızlı İletişim
-                    </h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row g-4">
-                        <!-- İletişim Bilgileri -->
-                        <div class="col-md-6">
-                            <h6 class="text-primary mb-3"><i class="fa fa-map-marker-alt me-2"></i>Adreslerimiz</h6>
-                            <div class="mb-3">
-                                <strong>Şube:</strong><br>
-                                Orta Mah. Dr. Orhan Atılgan Cad. No:24/A<br>
-                                Çarşamba/SAMSUN<br>
-                                <small class="text-muted">Tel: 0362 846 03 93</small>
-                            </div>
-                            <div class="mb-3">
-                                <strong>Merkez:</strong><br>
-                                Aşağı Kavacık Mah. No:46/A<br>
-                                Çarşamba/SAMSUN<br>
-                                <small class="text-muted">Tel: 0362 834 18 48</small>
-                            </div>
-                        </div>
-
-                        <!-- Hızlı İletişim -->
-                        <div class="col-md-6">
-                            <h6 class="text-primary mb-3"><i class="fa fa-phone me-2"></i>Hızlı İletişim</h6>
-                            <div class="d-grid gap-2">
-                                <a href="tel:+903628341848" class="btn btn-success">
-                                    <i class="fa fa-phone me-2"></i>+90 362 834 18 48 - Ara
-                                </a>
-                                <a href="https://wa.me/905421826855" class="btn btn-success" target="_blank">
-                                    <i class="fab fa-whatsapp me-2"></i>WhatsApp'tan Yazın
-                                </a>
-                                <a href="mailto:arkargida@gmail.com" class="btn btn-primary">
-                                    <i class="fa fa-envelope me-2"></i>E-posta Gönder
-                                </a>
-                                <a href="https://www.facebook.com/arkarltd/" class="btn btn-outline-primary"
-                                    target="_blank">
-                                    <i class="fab fa-facebook-f me-2"></i>Facebook'ta Takip Et
-                                </a>
-                                <a href="https://www.instagram.com/arkarltd" class="btn btn-outline-primary"
-                                    target="_blank">
-                                    <i class="fab fa-instagram me-2"></i>Instagram'da Takip Et
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Çalışma Saatleri -->
-                    <div class="row mt-4">
-                        <div class="col-12">
-                            <div class="bg-light p-3 rounded">
-                                <h6 class="text-primary mb-2"><i class="fa fa-clock me-2"></i>Çalışma Saatleri</h6>
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <small><strong>Pazartesi - Cumartesi:</strong> 08:00 - 18:00</small>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <small><strong>Pazar:</strong> Kapalı</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Contact Modal End -->
-
-    <div class="container-fluid bg-dark text-white border-top border-primary px-0">
-        <div class="d-flex flex-column flex-md-row justify-content-between">
-            <div class="py-4 px-5 text-center text-md-start">
-                <p>&copy; 2025 AR-KAR İnşaat. Tüm hakları saklıdır.</p>
-            </div>
-        </div>
-    </div>
-    <!-- Footer End -->
-
-    <!-- WhatsApp Floating Button -->
-    <div class="whatsapp-float">
-        <a href="https://wa.me/905421826855?text=Merhaba, AR-KAR İnşaat hakkında bilgi almak istiyorum." target="_blank"
-            rel="noopener">
-            <i class="fab fa-whatsapp"></i>
-        </a>
-    </div>
-
-    <style>
-        .whatsapp-float {
-            position: fixed;
-            width: 60px;
-            height: 60px;
-            bottom: 80px;
-            right: 20px;
-            background-color: #25d366;
-            color: #FFF;
-            border-radius: 50px;
-            text-align: center;
-            font-size: 30px;
-            box-shadow: 2px 2px 3px #999;
-            z-index: 1001;
-            animation: pulse 2s infinite;
-        }
-
-        .whatsapp-float a {
-            color: #FFF;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            height: 100%;
-        }
-
-        .whatsapp-float:hover {
-            background-color: #128c7e;
-            transform: scale(1.1);
-            transition: all 0.3s;
-        }
-
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
-            }
-
-            70% {
-                box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
-            }
-
-            100% {
-                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .whatsapp-float {
-                width: 50px;
-                height: 50px;
-                bottom: 20px;
-                right: 10px;
-                font-size: 24px;
-            }
-
-            .footer .navbar-brand img {
-                max-height: 60px !important;
-                width: auto;
-            }
-        }
-    </style>
-
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" defer></script>
-    <script src="lib/easing/easing.min.js" defer></script>
-    <script src="lib/waypoints/waypoints.min.js" defer></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js" defer></script>
-    <script src="lib/tempusdominus/js/moment.min.js" defer></script>
-    <script src="lib/tempusdominus/js/moment-timezone.min.js" defer></script>
-    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js" defer></script>
-    <script src="lib/isotope/isotope.pkgd.min.js" defer></script>
-    <script src="lib/lightbox/js/lightbox.min.js" defer></script>
-
-    <!-- Template Javascript -->
-    <script src="js/main.js" defer></script>
-</body>
-
-</html>
+</BaseLayout>

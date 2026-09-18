@@ -1,0 +1,116 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('blog');
+const sortedPosts = posts.sort((a, b) => {
+  const dateA = new Date(a.data.date).getTime();
+  const dateB = new Date(b.data.date).getTime();
+  return dateB - dateA;
+});
+
+const title = "Blog & Haberler | AR-KAR İnşaat Samsun";
+const description = "AR-KAR İnşaat kurumsal blog ve haberler. Samsun inşaat sektörü, yeni konut projeleri, tarım ve yapı malzemeleri hakkında güncel yazılar.";
+const canonical = "https://ar-kar.com/blog/";
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  activePage="blog"
+>
+  <!-- Breadcrumb Start -->
+  <div class="container-fluid bg-dark py-3 px-5">
+    <div class="row">
+      <div class="col-12">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a href="/index.html" class="text-primary">Anasayfa</a></li>
+            <li class="breadcrumb-item active text-white" aria-current="page">Blog & Haberler</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <!-- Breadcrumb End -->
+
+  <!-- Blog List Start -->
+  <div class="container-fluid py-6 px-5 bg-light">
+    <div class="text-center mx-auto mb-5" style="max-width: 700px;">
+      <h1 class="display-5 text-uppercase mb-3">Blog & <span class="text-primary">Haberler</span></h1>
+      <p class="text-muted">AR-KAR İnşaat projeleri, sektörel gelişmeler ve güncel duyurularımız</p>
+    </div>
+
+    <div class="container">
+      {sortedPosts.length === 0 ? (
+        <div class="text-center py-5">
+          <p class="lead text-muted">Henüz yayınlanmış bir blog yazısı bulunmamaktadır.</p>
+        </div>
+      ) : (
+        <div class="row g-4">
+          {sortedPosts.map((post) => {
+            const slug = post.id.replace(/\/index$/, '');
+            const postUrl = `/blog/${slug}`;
+            const coverImage = post.data.coverImage || '/img/about.webp';
+            const dateStr = post.data.date;
+
+            return (
+              <div class="col-12 col-md-6 col-lg-4">
+                <article class="card h-100 border-0 shadow-sm rounded overflow-hidden blog-card">
+                  <div class="blog-card-img position-relative">
+                    <a href={postUrl}>
+                      <img
+                        src={coverImage}
+                        alt={post.data.title}
+                        class="card-img-top w-100"
+                        style="height: 220px; object-fit: cover;"
+                        loading="lazy"
+                      />
+                    </a>
+                    <span class="badge bg-primary position-absolute top-0 start-0 m-3 px-3 py-2">
+                      <i class="fa fa-calendar-alt me-1"></i> {dateStr}
+                    </span>
+                  </div>
+                  <div class="card-body p-4 d-flex flex-column">
+                    <h2 class="card-title h5 mb-3">
+                      <a href={postUrl} class="text-dark text-decoration-none hover-primary">
+                        {post.data.title}
+                      </a>
+                    </h2>
+                    {post.data.description && (
+                      <p class="card-text text-muted mb-4 flex-grow-1" style="font-size: 0.95rem; line-height: 1.6;">
+                        {post.data.description}
+                      </p>
+                    )}
+                    <div class="mt-auto pt-3 border-top">
+                      <a href={postUrl} class="btn btn-sm btn-primary px-3">
+                        Devamını Oku <i class="fa fa-arrow-right ms-1"></i>
+                      </a>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  </div>
+  <!-- Blog List End -->
+</BaseLayout>
+
+<style>
+  .blog-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .blog-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12) !important;
+  }
+  .hover-primary:hover {
+    color: var(--bs-primary) !important;
+    transition: color 0.2s ease;
+  }
+</style>
+

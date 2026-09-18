@@ -72,7 +72,7 @@
                     <div class="ad-popup-wrapper">
                         <button type="button" class="ad-popup-close" id="adPopupClose" aria-label="Kapat">&times;</button>
                         <div class="ad-popup-body">
-                            <img src="img/bmt-reklam.webp" alt="AR-KAR Reklam Duyurusu" class="ad-popup-img">
+                            <img src="/img/bmt-reklam.webp" alt="AR-KAR Reklam Duyurusu" class="ad-popup-img">
                         </div>
                     </div>
                 </div>

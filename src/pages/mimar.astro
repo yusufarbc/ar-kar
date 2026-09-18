@@ -1,0 +1,545 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = "AR-KAR Mimari Proje Hizmetleri | Ruhsat, Çizim, Tasarım | Samsun Çarşamba";
+const description = "AR-KAR İnşaat Mimari Proje Hizmetleri ile Samsun Çarşamba'da profesyonel mimari projeler, yapı ruhsat işlemleri, teknik çizimler, 3D modelleme ve tasarım hizmetleri sunuyoruz. 36 yıllık tecrübe ile uzman mimar kadromuz hizmetinizde.";
+const canonical = "https://ar-kar.com/mimar.html";
+const ogImage = "https://ar-kar.com/img/mimariproje.webp";
+const keywords = "ar-kar mimar, mimari proje, yapı ruhsatı, teknik çizim, proje tasarımı, samsun mimar, çarşamba mimar, yapı denetim, inşaat projeleri, 3D modelleme, autocad çizim, ticari proje, konut projesi";
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  ogImage={ogImage}
+  keywords={keywords}
+  activePage="mimar"
+>
+  <Fragment slot="head">
+    <script is:inline type="application/ld+json" set:html={`{
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "AR-KAR Mimari Proje Hizmetleri",
+        "description": "Samsun Çarşamba'da profesyonel mimari proje, yapı ruhsatı, teknik çizim ve tasarım hizmetleri sunuyoruz.",
+        "provider": {
+            "@type": "Organization",
+            "name": "AR-KAR İnşaat Gıda Tarım Ürünleri ve Taş. Tic. Ltd. Şti.",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Orta Mah. Dr. Orhan Atılgan Cad. No:24/A",
+                "addressLocality": "Çarşamba",
+                "addressRegion": "Samsun",
+                "addressCountry": "TR"
+            },
+            "telephone": "+90 362 846 03 93",
+            "email": "arkargida@gmail.com"
+        },
+        "areaServed": "Samsun, Türkiye",
+        "serviceType": "Mimari Proje Hizmetleri",
+        "offers": [
+            {
+                "@type": "Offer",
+                "name": "Mimari Proje Tasarımı",
+                "description": "Konut ve ticari yapılar için profesyonel mimari proje tasarımı"
+            },
+            {
+                "@type": "Offer", 
+                "name": "Yapı Ruhsatı İşlemleri",
+                "description": "Belediye ve resmi kurumlarda yapı ruhsatı takip işlemleri"
+            },
+            {
+                "@type": "Offer",
+                "name": "Teknik Çizim Hizmetleri",
+                "description": "AutoCAD ile profesyonel teknik çizim ve plan hazırlama"
+            }
+        ]
+    }`} />
+    <style is:inline set:html={`/* Critical CSS for above-the-fold content */
+        .navbar-brand img {
+            transition: transform 0.3s ease;
+        }
+        
+        .navbar-brand img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Lazy Loading Enhancement */
+        img[loading="lazy"] {
+            transition: opacity 0.3s ease;
+        }
+
+        /* Architectural service cards */
+        .arch-service-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .arch-service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--bs-primary), var(--bs-info));
+        }
+
+        .arch-service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--bs-primary), var(--bs-info));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+        }
+
+        /* Project showcase */
+        .project-showcase {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .showcase-item {
+            text-align: center;
+        }
+
+        .showcase-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--bs-primary);
+            line-height: 1;
+        }
+
+        .showcase-text {
+            font-weight: 600;
+            color: #333;
+            margin-top: 0.5rem;
+        }
+
+        /* Process steps */
+        .process-step {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .process-step:hover {
+            transform: translateX(5px);
+        }
+
+        .step-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--bs-primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+            font-weight: bold;
+        }
+
+        /* Expertise areas */
+        .expertise-area {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--bs-primary);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .expertise-title {
+            color: var(--bs-primary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Accessibility improvements */
+        .btn:focus,
+        .nav-link:focus,
+        .arch-service-card:focus {
+            outline: 2px solid var(--bs-primary);
+            outline-offset: 2px;
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .arch-service-card {
+                padding: 1.5rem;
+            }
+            
+            .project-showcase {
+                padding: 2rem;
+            }
+            
+            .showcase-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+            
+            .showcase-number {
+                font-size: 2rem;
+            }
+            
+            .process-step {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .step-icon {
+                margin: 0 auto 1rem;
+            }
+            
+            .display-5 {
+                font-size: 2rem;
+            }
+            
+            .display-4 {
+                font-size: 2.2rem;
+            }
+            
+            .display-6 {
+                font-size: 1.8rem;
+            }
+            
+            .py-6 {
+                padding-top: 3rem !important;
+                padding-bottom: 3rem !important;
+            }
+            
+            /* Hero section mobile */
+            .container-fluid[style*="background"] {
+                padding: 3rem 1rem !important;
+            }
+            
+            .container-fluid[style*="background"] .display-4 {
+                font-size: 1.8rem !important;
+                line-height: 1.2;
+            }
+            
+            .container-fluid[style*="background"] .fs-5 {
+                font-size: 1rem !important;
+            }
+            
+            /* Service overview mobile */
+            .position-relative.h-100.ms-5 {
+                margin-left: 0 !important;
+            }
+            
+            .position-relative.h-100.me-5 {
+                margin-right: 0 !important;
+            }
+            
+            .position-absolute.mt-5.ms-n5 {
+                position: relative !important;
+                margin-top: 0 !important;
+                margin-left: 0 !important;
+            }
+            
+            .position-absolute.mt-5.me-n5 {
+                position: relative !important;
+                margin-top: 0 !important;
+                margin-right: 0 !important;
+            }
+            
+            /* Text improvements */
+            .text-uppercase {
+                text-transform: none !important;
+            }
+            
+            /* Button improvements */
+            .btn-lg {
+                padding: 0.75rem 1.5rem;
+                font-size: 1rem;
+            }
+            
+            /* Grid improvements */
+            .row.g-4 .col-md-6 {
+                margin-bottom: 1rem;
+            }
+            
+            .row.g-5 {
+                gap: 2rem !important;
+            }
+            
+            /* Footer mobile */
+            .footer .navbar-brand img {
+                max-height: 60px !important;
+                width: auto;
+            }
+            
+            /* Spacing improvements */
+            .px-5 {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+            
+            .px-sm-3 {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+            
+            .px-md-5 {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+        }
+        
+        /* Very small screens */
+        @media (max-width: 576px) {
+            .display-4 {
+                font-size: 1.5rem !important;
+            }
+            
+            .display-5 {
+                font-size: 1.3rem !important;
+            }
+            
+            .display-6 {
+                font-size: 1.2rem !important;
+            }
+            
+            .container-fluid[style*="background"] .display-4 {
+                font-size: 1.4rem !important;
+            }
+            
+            .py-6 {
+                padding-top: 2rem !important;
+                padding-bottom: 2rem !important;
+            }
+            
+            .py-3 {
+                padding-top: 1rem !important;
+                padding-bottom: 1rem !important;
+            }
+            
+            .btn-lg {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .showcase-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .row.g-3 .col-md-4 {
+                margin-bottom: 0.5rem;
+            }
+        }`} />
+  </Fragment>
+
+  <!-- Breadcrumb Start -->
+    <div class="container-fluid bg-dark py-3 px-sm-3 px-md-5">
+        <div class="row">
+            <div class="col-md-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="index.html" class="text-primary">Anasayfa</a></li>
+                        <li class="breadcrumb-item"><a href="index.html#service" class="text-primary">Hizmetler</a></li>
+                        <li class="breadcrumb-item active text-white" aria-current="page">Mimari Proje Hizmetleri</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+    <!-- Hero Section Start -->
+    <div class="container-fluid py-6 px-5" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('img/teksstilkent.webp'); background-size: cover; background-position: center;">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h1 class="display-4 text-white text-uppercase mb-4">Profesyonel <span class="text-primary">Mimari Proje</span> Hizmetleri</h1>
+                <p class="text-white mb-4 fs-5">36 yıllık tecrübemizle hayalinizdeki projeleri gerçeğe dönüştürüyoruz. Modern tasarım anlayışı ile işlevsel ve estetik projeler üretiyoruz.</p>
+                <div class="row g-3 mt-4">
+                    <div class="col-md-4">
+                        <div class="bg-primary bg-opacity-75 p-3 rounded">
+                            <h5 class="text-white mb-0"><i class="fa fa-home me-2"></i>Konut Projeleri</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="bg-primary bg-opacity-75 p-3 rounded">
+                            <h5 class="text-white mb-0"><i class="fa fa-building me-2"></i>Ticari Projeler</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="bg-primary bg-opacity-75 p-3 rounded">
+                            <h5 class="text-white mb-0"><i class="fa fa-file-contract me-2"></i>Ruhsat İşlemleri</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Hero Section End -->
+
+    <!-- Service Overview Start -->
+    <div class="container-fluid py-6 px-5">
+        <div class="row g-5">
+            <div class="col-lg-7">
+                <h1 class="display-5 text-uppercase mb-4">AR-KAR <span class="text-primary">Mimari Proje</span> Hizmetleri</h1>
+                <h4 class="text-uppercase mb-4 text-primary">Hayallerinizi Profesyonel Projelere Dönüştürüyoruz</h4>
+                <p class="mb-4">AR-KAR İnşaat olarak, 36 yıllık tecrübemizle mimari proje alanında da uzman hizmet sunuyoruz. Konut, ticari ve endüstriyel yapılar için profesyonel mimari projeler hazırlar, yapı ruhsatı işlemlerinizi takip ederiz.</p>
+                <p class="mb-4">Uzman mimar kadromuz ile modern tasarım anlayışını geleneksel Türk mimarisi ile harmanlayarak, işlevsel ve estetik projeler üretiyoruz. Müşterilerimizin ihtiyaçlarını ve bütçelerini göz önünde bulundurarak en uygun çözümleri sunuyoruz.</p>
+                
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="d-flex">
+                            <i class="fa fa-check-circle fa-2x text-primary flex-shrink-0 me-3"></i>
+                            <div>
+                                <h5>Profesyonel Tasarım</h5>
+                                <p class="mb-0">Modern tasarım anlayışı ile işlevsel ve estetik projeler.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex">
+                            <i class="fa fa-check-circle fa-2x text-primary flex-shrink-0 me-3"></i>
+                            <div>
+                                <h5>Ruhsat İşlemleri</h5>
+                                <p class="mb-0">Belediye ve resmi kurumlarda tüm ruhsat işlemleriniz.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex">
+                            <i class="fa fa-check-circle fa-2x text-primary flex-shrink-0 me-3"></i>
+                            <div>
+                                <h5>AutoCAD Çizimleri</h5>
+                                <p class="mb-0">Detaylı ve teknik AutoCAD çizimleri ile hassas projeler.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex">
+                            <i class="fa fa-check-circle fa-2x text-primary flex-shrink-0 me-3"></i>
+                            <div>
+                                <h5>3D Görselleştirme</h5>
+                                <p class="mb-0">Projenizi gerçek gibi görebileceğiniz 3D modelleme.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5 pb-4 d-flex align-items-center justify-content-center" style="min-height: 400px;">
+                <img class="img-fluid w-100 h-auto rounded" src="/img/mimariproje.webp" style="object-fit: contain; border: none; max-height: 380px;" alt="Mimari Proje Hizmetleri" loading="lazy">
+            </div>
+        </div>
+    </div>
+    <!-- Service Overview End -->
+
+    
+
+    <!-- Why Choose Us Start -->
+    <div class="container-fluid bg-light py-6 px-5">
+        <div class="row g-5">
+            <div class="col-lg-4 pb-4 d-flex align-items-center justify-content-center" style="min-height: 400px;">
+                <img class="img-fluid w-100 h-auto rounded" src="/img/mimari.webp" style="object-fit: contain; border: none; max-height: 380px;" alt="AR-KAR Mimari Proje Avantajları" loading="lazy">
+            </div>
+            <div class="col-lg-8">
+                <h2 class="display-6 text-uppercase mb-4">Neden <span class="text-primary">AR-KAR Mimari Proje?</span></h2>
+                <p class="mb-4">36 yıllık inşaat tecrübemizi mimari proje hizmetlerinde de kullanarak, müşterilerimize en kaliteli ve profesyonel hizmeti sunuyoruz. Deneyimli mimar kadromuz ile hayalinizdeki projeyi gerçeğe dönüştürüyoruz.</p>
+                
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="d-flex">
+                            <i class="fa fa-star fa-2x text-primary flex-shrink-0 me-3"></i>
+                            <div>
+                                <h5>Deneyimli Mimar Kadrosu</h5>
+                                <p class="mb-0">Alanında uzman mimar ve teknik personel ile hizmet veriyoruz.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex">
+                            <i class="fa fa-clock fa-2x text-primary flex-shrink-0 me-3"></i>
+                            <div>
+                                <h5>Hızlı Proje Teslimi</h5>
+                                <p class="mb-0">Belirlenen süreler içerisinde projelerinizi teslim ederiz.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex">
+                            <i class="fa fa-handshake fa-2x text-primary flex-shrink-0 me-3"></i>
+                            <div>
+                                <h5>Güvenilir İşbirliği</h5>
+                                <p class="mb-0">36 yıllık güven ve kalite anlayışımızla yanınızdayız.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex">
+                            <i class="fa fa-hand-holding-usd fa-2x text-primary flex-shrink-0 me-3"></i>
+                            <div>
+                                <h5>Uygun Fiyat</h5>
+                                <p class="mb-0">Kaliteli hizmeti en uygun fiyatlarla sunuyoruz.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Why Choose Us End -->
+
+    <!-- CTA Section Start -->
+    <div class="container-fluid bg-primary py-6 px-5">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-8">
+                <h2 class="display-6 text-white mb-4">Hayalinizdeki Projeyi Gerçeğe Dönüştürün</h2>
+                <p class="text-white mb-0">AR-KAR İnşaat Mimari Proje bölümü ile iletişime geçin. Uzman mimar kadromuz ile profesyonel projeler hazırlıyor, ruhsat işlemlerinizi takip ediyoruz. Kaliteli tasarım ve güvenilir hizmet için hemen arayın.</p>
+            </div>
+            <div class="col-lg-4 text-lg-end">
+                <button class="btn btn-light btn-lg py-3 px-5" data-bs-toggle="modal" data-bs-target="#contactModal">
+                    <i class="fa fa-phone me-2"></i>Hemen Arayın
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- CTA Section End -->
+</BaseLayout>

@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Astro cache & temporary files
+.astro/
+
+# Wrangler & Cloudflare
+.wrangler/
+
+# Environment files
+.env
+.env.production
+.env.local
+.env.*.local
+
+# OS generated files
+.DS_Store
+Thumbs.db

@@ -1,0 +1,72 @@
+---
+interface Props {
+  activePage?: string;
+}
+
+const { activePage = 'index' } = Astro.props;
+
+const isServicesActive = [
+  'projeler',
+  'muteahhitlik',
+  'insaat',
+  'pvc',
+  'tarim',
+  'ziraat',
+  'otomotiv',
+  'mimar',
+  'dekorasyon'
+].includes(activePage);
+---
+
+<!-- Navbar Start -->
+<div class="container-fluid sticky-top bg-dark navbar-dark shadow-sm px-2 px-sm-3 px-md-5 pe-lg-0">
+    <nav class="navbar navbar-expand-lg py-1 py-lg-0">
+        <a href="/index.html" class="navbar-brand me-2">
+            <img src="/img/logo.webp" alt="AR-KAR İnşaat Logo" style="max-height:85px; padding: 8px;">
+        </a>
+        <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto py-0">
+                <a href="/index.html" class={`nav-item nav-link fw-semibold ${activePage === 'index' ? 'active' : ''}`}>Anasayfa</a>
+                <a href={activePage === 'index' ? '#about' : '/index.html#about'} class="nav-item nav-link fw-semibold">Hakkımızda</a>
+                <a href={activePage === 'index' ? '#projects' : '/index.html#projects'} class="nav-item nav-link fw-semibold">Projelerimiz</a>
+                <a href={activePage === 'index' ? '#dealerships' : '/index.html#dealerships'} class="nav-item nav-link fw-semibold">Bayilikler</a>
+                <div class="nav-item dropdown">
+                    <a href={activePage === 'index' ? '#service' : '/index.html#service'} class={`nav-link dropdown-toggle fw-semibold ${isServicesActive ? 'active' : ''}`}
+                        data-bs-toggle="dropdown">Hizmetler</a>
+                    <div class="dropdown-menu m-0">
+                        <a href="/projeler.html" class={`dropdown-item ${activePage === 'projeler' ? 'active' : ''}`}>İnşaat Projeleri</a>
+                        <a href="/muteahhitlik.html" class={`dropdown-item ${activePage === 'muteahhitlik' ? 'active' : ''}`}>Anahtar Teslim İnşaat</a>
+                        <a href="/insaat.html" class={`dropdown-item ${activePage === 'insaat' ? 'active' : ''}`}>Hırdavat & İnşaat Malzemeleri</a>
+                        <a href="/pvc.html" class={`dropdown-item ${activePage === 'pvc' ? 'active' : ''}`}>PVC Kapı ve Pencere Sistemleri</a>
+                        <a href="/tarim.html" class={`dropdown-item ${activePage === 'tarim' ? 'active' : ''}`}>Tarım Ürünleri Alım Satımı</a>
+                        <a href="/ziraat.html" class={`dropdown-item ${activePage === 'ziraat' ? 'active' : ''}`}>Zirai Ürünler ve Danışmanlık</a>
+                        <a href="/otomotiv.html" class={`dropdown-item ${activePage === 'otomotiv' ? 'active' : ''}`}>Otomotiv Alım Satım</a>
+                        <a href="/mimar.html" class={`dropdown-item ${activePage === 'mimar' ? 'active' : ''}`}>Mimari Proje Hizmetleri</a>
+                        <a href="/dekorasyon.html" class={`dropdown-item ${activePage === 'dekorasyon' ? 'active' : ''}`}>Dekorasyon Hizmetleri</a>
+                    </div>
+                </div>
+                <a href="/blog/" class={`nav-item nav-link fw-semibold ${activePage === 'blog' ? 'active' : ''}`}>Blog</a>
+                <a href="/sss.html" class={`nav-item nav-link fw-semibold ${activePage === 'sss' ? 'active' : ''}`}>SSS</a>
+                <a href={activePage === 'index' ? '#contact' : '/index.html#contact'} class="nav-item nav-link fw-semibold">İletişim</a>
+                <button
+                    class="nav-item nav-link bg-primary text-white px-4 px-lg-5 ms-2 ms-lg-3 d-none d-lg-block fw-semibold"
+                    style="font-size:1rem; border:none; border-radius: 5px; transition: all 0.3s;"
+                    data-bs-toggle="modal" data-bs-target="#contactModal">Bize ulaşın <i
+                        class="bi bi-arrow-right"></i></button>
+                <div class="d-block d-lg-none w-100 mt-3 px-2">
+                    <button class="btn btn-primary w-100 fw-semibold py-3"
+                        style="font-size:1rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(204, 39, 43, 0.3);"
+                        data-bs-toggle="modal" data-bs-target="#contactModal">
+                        <i class="bi bi-telephone-fill me-2"></i>Bize ulaşın
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+<!-- Navbar End -->
+

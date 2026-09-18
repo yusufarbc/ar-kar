@@ -1,0 +1,129 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => {
+    const slug = post.id.replace(/\/index$/, '');
+    return {
+      params: { slug },
+      props: { post },
+    };
+  });
+}
+
+const { post } = Astro.props;
+const { slug } = Astro.params;
+const { Content } = await render(post);
+
+const title = `${post.data.title} | AR-KAR İnşaat`;
+const description = post.data.description || `${post.data.title} - AR-KAR İnşaat kurumsal blog yazısı.`;
+const canonical = `https://ar-kar.com/blog/${slug}`;
+const coverImage = post.data.coverImage || '/img/about.webp';
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  ogImage={coverImage}
+  ogType="article"
+  activePage="blog"
+>
+  <!-- Breadcrumb Start -->
+  <div class="container-fluid bg-dark py-3 px-5">
+    <div class="row">
+      <div class="col-12">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a href="/index.html" class="text-primary">Anasayfa</a></li>
+            <li class="breadcrumb-item"><a href="/blog/" class="text-primary">Blog</a></li>
+            <li class="breadcrumb-item active text-white" aria-current="page">{post.data.title}</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <!-- Breadcrumb End -->
+
+  <!-- Blog Detail Start -->
+  <article class="container py-6">
+    <div class="row justify-content-center">
+      <div class="col-lg-9">
+        <header class="mb-4">
+          <div class="d-flex align-items-center text-muted mb-3">
+            <span class="me-3"><i class="fa fa-calendar-alt text-primary me-2"></i>{post.data.date}</span>
+            <span><i class="fa fa-user text-primary me-2"></i>AR-KAR İnşaat</span>
+          </div>
+          <h1 class="display-6 fw-bold text-dark mb-4">{post.data.title}</h1>
+          {post.data.description && (
+            <p class="lead text-secondary border-start border-4 border-primary ps-3 py-1 mb-4">
+              {post.data.description}
+            </p>
+          )}
+        </header>
+
+        {post.data.coverImage && (
+          <div class="mb-5 rounded overflow-hidden shadow-sm">
+            <img
+              src={coverImage}
+              alt={post.data.title}
+              class="w-100 img-fluid"
+              style="max-height: 480px; object-fit: cover;"
+            />
+          </div>
+        )}
+
+        <div class="blog-content prose" style="font-size: 1.1rem; line-height: 1.8;">
+          <Content />
+        </div>
+
+        <hr class="my-5" />
+
+        <div class="d-flex justify-content-between align-items-center">
+          <a href="/blog/" class="btn btn-outline-primary">
+            <i class="fa fa-arrow-left me-2"></i>Tüm Blog Yazıları
+          </a>
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#contactModal"
+          >
+            <i class="fa fa-envelope me-2"></i>Bize Danışın
+          </button>
+        </div>
+      </div>
+    </div>
+  </article>
+  <!-- Blog Detail End -->
+</BaseLayout>
+
+<style is:inline>
+  .blog-content h2, .blog-content h3, .blog-content h4 {
+    color: #040404;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+  }
+  .blog-content p {
+    margin-bottom: 1.25rem;
+    color: #444;
+  }
+  .blog-content ul, .blog-content ol {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+  .blog-content li {
+    margin-bottom: 0.5rem;
+    color: #444;
+  }
+  .blog-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 1.5rem 0;
+  }
+</style>
+

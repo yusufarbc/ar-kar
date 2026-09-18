@@ -19,6 +19,7 @@
     "@astrojs/check": "^0.9.10",
     "@astrojs/cloudflare": "^14.3.2",
     "@astrojs/markdoc": "^2.0.9",
+    "@astrojs/react": "^6.0.6",
     "@keystatic/astro": "^6.0.0",
     "@keystatic/core": "^0.5.42",
     "astro": "^7.3.3",

@@ -156,13 +156,15 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     return json({ error: 'Tarih YYYY-AA-GG biçiminde olmalı.' }, 400);
   }
 
+  const MAX_GALLERY_IMAGES = 8;
+
   try {
-    // 1) Görsel (tarayıcıda webp'ye çevrilmiş olarak gelir)
+    // 1) Kapak görseli (tarayıcıda webp'ye çevrilmiş olarak gelir)
     let coverImage = String(body.coverImage ?? '').trim();
     if (body.imageBase64) {
       const payload = String(body.imageBase64).split(',').pop() ?? '';
       if (Math.floor((payload.length * 3) / 4) > 5 * 1024 * 1024) {
-        return json({ error: 'Görsel 5 MB sınırını aşıyor.' }, 400);
+        return json({ error: 'Kapak görseli 5 MB sınırını aşıyor.' }, 400);
       }
       const fileName = `${date}-${slug}.webp`;
       await putFile(
@@ -172,6 +174,39 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
         `media: ${fileName} (${editor})`
       );
       coverImage = `${collection.mediaPublic}/${fileName}`;
+    }
+
+    // 1b) Galeri görselleri: düzenlemede korunan mevcut yollar (existingGallery)
+    // + yeni yüklenenler (galleryImages, tarayıcıda webp'ye çevrilmiş).
+    // existingGallery client'tan gelir çünkü GitHub'daki dosyanın "sha"sını
+    // burada tutmuyoruz; client düzenleme ekranında hangi görsellerin
+    // kaldığını (kullanıcı "x" ile kaldırmadığı sürece) bilir.
+    const existingGallery = Array.isArray(body.existingGallery)
+      ? body.existingGallery.filter((p: unknown) => typeof p === 'string' && p)
+      : [];
+    const galleryInput = Array.isArray(body.galleryImages) ? body.galleryImages : [];
+    if (existingGallery.length + galleryInput.length > MAX_GALLERY_IMAGES) {
+      return json({ error: `En fazla ${MAX_GALLERY_IMAGES} galeri görseli olabilir.` }, 400);
+    }
+    const gallery: string[] = [...existingGallery];
+    for (let i = 0; i < galleryInput.length; i++) {
+      const item = galleryInput[i] ?? {};
+      const dataUrl = String(item.base64 ?? '');
+      const payload = dataUrl.split(',').pop() ?? '';
+      if (!payload) continue;
+      if (Math.floor((payload.length * 3) / 4) > 5 * 1024 * 1024) {
+        return json({ error: `${i + 1}. galeri görseli 5 MB sınırını aşıyor.` }, 400);
+      }
+      // Zaman damgası + sıra numarası: düzenlemede korunan (existingGallery)
+      // dosyalarla ada çakışıp üzerine yazma riskini engeller.
+      const fileName = `${date}-${slug}-${Date.now()}-${i + 1}.webp`;
+      await putFile(
+        env.GITHUB_TOKEN,
+        `${collection.mediaDir}/${fileName}`,
+        payload,
+        `media: ${fileName} (${editor})`
+      );
+      gallery.push(`${collection.mediaPublic}/${fileName}`);
     }
 
     // 2) Frontmatter — alanlar ana sitedeki Zod şemasıyla uyumlu olmalı
@@ -192,9 +227,12 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       if (specs) fm.specs = specs;
     }
 
-    const frontmatter = Object.entries(fm)
-      .map(([k, v]) => `${k}: ${JSON.stringify(v)}`)
-      .join('\n');
+    const scalarLines = Object.entries(fm).map(([k, v]) => `${k}: ${JSON.stringify(v)}`);
+    const galleryLines =
+      gallery.length > 0
+        ? [`gallery:`, ...gallery.map((g) => `  - ${JSON.stringify(g)}`)]
+        : [];
+    const frontmatter = [...scalarLines, ...galleryLines].join('\n');
     const fileContent = `---\n${frontmatter}\n---\n\n${content}\n`;
 
     await putFile(
@@ -204,7 +242,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       `cms: "${title}" yayinlandi (${editor})`
     );
 
-    return json({ success: true, slug, coverImage });
+    return json({ success: true, slug, coverImage, gallery });
   } catch (err: any) {
     return json({ error: err?.message ?? 'Beklenmeyen hata' }, 500);
   }

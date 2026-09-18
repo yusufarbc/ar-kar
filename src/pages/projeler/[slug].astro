@@ -118,6 +118,21 @@ const coverImage = project.data.coverImage || '/img/about.webp';
           <Content />
         </div>
 
+        {project.data.gallery && project.data.gallery.length > 0 && (
+          <div class="mb-5">
+            <h2 class="h5 text-uppercase mb-3">Proje Görselleri</h2>
+            <div class="row g-3">
+              {project.data.gallery.map((img) => (
+                <div class="col-6 col-md-4">
+                  <a href={img} data-lightbox="project-gallery" class="d-block rounded overflow-hidden shadow-sm">
+                    <img src={img} alt={project.data.title} class="w-100" style="height: 160px; object-fit: cover;" loading="lazy" />
+                  </a>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
         <hr class="my-5" />
 
         <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">

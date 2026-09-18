@@ -55,23 +55,46 @@ function editorEmail(request: Request): string | null {
   }
 }
 
-/** --- frontmatter (yalnızca düz string alanlar) --- */
-function parseFrontmatter(raw: string): { data: Record<string, string>; body: string } {
+function unquote(raw: string): string {
+  let v = raw.trim();
+  if (v.startsWith('"') && v.endsWith('"')) {
+    try { return JSON.parse(v); } catch { return v.slice(1, -1); }
+  }
+  if (v.startsWith("'") && v.endsWith("'")) return v.slice(1, -1);
+  return v;
+}
+
+/** frontmatter: düz string alanlar + `key:\n  - "a"` biçimindeki listeler (gallery). */
+function parseFrontmatter(raw: string): {
+  data: Record<string, string>;
+  gallery: string[];
+  body: string;
+} {
   const m = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
-  if (!m) return { data: {}, body: raw };
+  if (!m) return { data: {}, gallery: [], body: raw };
+
   const data: Record<string, string> = {};
-  for (const line of m[1].split(/\r?\n/)) {
+  const gallery: string[] = [];
+  const lines = m[1].split(/\r?\n/);
+  let inGallery = false;
+
+  for (const line of lines) {
+    const listItem = line.match(/^\s+-\s+(.*)$/);
+    if (listItem && inGallery) {
+      gallery.push(unquote(listItem[1]));
+      continue;
+    }
+    inGallery = false;
+
     const kv = line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);
     if (!kv) continue;
-    let v = kv[2].trim();
-    if (v.startsWith('"') && v.endsWith('"')) {
-      try { v = JSON.parse(v); } catch { v = v.slice(1, -1); }
-    } else if (v.startsWith("'") && v.endsWith("'")) {
-      v = v.slice(1, -1);
+    if (kv[1] === 'gallery' && kv[2].trim() === '') {
+      inGallery = true;
+      continue;
     }
-    data[kv[1]] = v;
+    data[kv[1]] = unquote(kv[2]);
   }
-  return { data, body: (m[2] ?? '').trim() };
+  return { data, gallery, body: (m[2] ?? '').trim() };
 }
 
 async function readFile(token: string, path: string): Promise<string | null> {
@@ -110,8 +133,8 @@ export const onRequestGet: PagesFunction<Env> = async ({ request, env }) => {
     if (slug) {
       const raw = await readFile(env.GITHUB_TOKEN, `${dir}/${slug}/index.md`);
       if (raw === null) return json({ error: 'Kayıt bulunamadı.' }, 404);
-      const { data, body } = parseFrontmatter(raw);
-      return json({ slug, data, body });
+      const { data, gallery, body } = parseFrontmatter(raw);
+      return json({ slug, data, gallery, body });
     }
 
     const items = await listDir(env.GITHUB_TOKEN, dir);

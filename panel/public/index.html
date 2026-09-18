@@ -58,10 +58,51 @@
     .msg.err{display:block;background:#fdeceb;color:var(--danger);border:1px solid #f4c8c4}
     .empty{color:var(--muted);font-size:.9rem;padding:10px 0}
     img.preview{max-width:200px;border-radius:8px;margin-top:8px;display:block}
+
+    /* --- Markdown editör --- */
+    .md-toolbar{
+      display:flex;flex-wrap:wrap;gap:4px;background:#f4f5f7;border:1px solid var(--line);
+      border-bottom:0;border-radius:8px 8px 0 0;padding:6px;
+    }
+    .md-toolbar button{
+      padding:6px 10px;font-size:.82rem;font-weight:600;background:#fff;
+      border:1px solid var(--line);border-radius:6px;color:var(--ink);line-height:1;
+    }
+    .md-toolbar button:hover{background:#eee}
+    .md-toolbar .sep{width:1px;background:var(--line);margin:2px 2px}
+    .md-toolbar .push{margin-left:auto}
+    .md-toolbar button.active{background:var(--brand);color:#fff;border-color:var(--brand)}
+    .md-wrap textarea{border-radius:0 0 8px 8px;border-top:0;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88rem}
+    .md-preview{
+      display:none;border:1px solid var(--line);border-top:0;border-radius:0 0 8px 8px;
+      padding:14px;background:#fff;min-height:120px;font-size:.92rem;line-height:1.6;
+    }
+    .md-preview.active{display:block}
+    .md-preview h2,.md-preview h3{margin:.6em 0 .3em}
+    .md-preview p{margin:0 0 .8em}
+    .md-preview ul,.md-preview ol{margin:0 0 .8em;padding-left:1.4em}
+    .md-preview img{max-width:100%;border-radius:6px}
+    .md-editor-area[hidden]{display:none}
+
+    /* --- Galeri --- */
+    .gallery-thumbs{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+    .gallery-thumb{position:relative;width:88px;height:88px;border-radius:8px;overflow:hidden;border:1px solid var(--line)}
+    .gallery-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+    .gallery-thumb button{
+      position:absolute;top:2px;right:2px;width:22px;height:22px;padding:0;
+      border-radius:50%;background:rgba(20,20,20,.72);color:#fff;font-size:.85rem;line-height:1;border:0;
+    }
+    .gallery-thumb.is-new::after{
+      content:"yeni";position:absolute;left:0;bottom:0;right:0;background:rgba(21,115,74,.85);
+      color:#fff;font-size:.65rem;text-align:center;padding:1px 0;
+    }
+
     @media (max-width:480px){
       .wrap{padding:12px}
       button{width:100%}
       .row button{width:auto;flex:1 1 auto}
+      .md-toolbar button{width:auto}
+      .gallery-thumb{width:72px;height:72px}
     }
   </style>
 </head>
@@ -101,13 +142,14 @@
 <script>
 const COLLECTIONS = {
   blog: {
-    label: 'Haberler & Duyurular',
+    label: 'Haberler',
     fields: [
       {name:'title',       label:'Başlık',          type:'text',     required:true},
       {name:'date',        label:'Tarih',           type:'date',     required:true},
       {name:'description', label:'Özet Açıklama',   type:'textarea'},
       {name:'coverImage',  label:'Kapak Görseli',   type:'image'},
-      {name:'content',     label:'İçerik (Markdown)', type:'markdown', required:true},
+      {name:'gallery',     label:'Ek Görseller (Galeri)', type:'gallery'},
+      {name:'content',     label:'İçerik', type:'markdown', required:true},
     ],
   },
   projects: {
@@ -124,7 +166,8 @@ const COLLECTIONS = {
       {name:'date',        label:'Tarih',            type:'date', required:true},
       {name:'description', label:'Kısa Açıklama',    type:'textarea'},
       {name:'coverImage',  label:'Proje Görseli',    type:'image'},
-      {name:'content',     label:'Detaylı Bilgi (Markdown)', type:'markdown', required:true},
+      {name:'gallery',     label:'Ek Görseller (Galeri)', type:'gallery'},
+      {name:'content',     label:'Detaylı Bilgi', type:'markdown', required:true},
     ],
   },
 };
@@ -132,7 +175,8 @@ const COLLECTIONS = {
 const keys = Object.keys(COLLECTIONS);
 let current = keys[0];
 let editingSlug = null;
-let pendingImage = null;   // {base64, name}
+let pendingImage = null;      // {base64, name} — kapak görseli
+let galleryState = { existing: [], newFiles: [] }; // existing: string[] yollar, newFiles: {base64,name}[]
 
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
@@ -168,33 +212,201 @@ async function toWebp(file, maxWidth = 1600, quality = 0.82){
   return { dataUrl, width: w, height: h, size: blob.size };
 }
 
+/* ------------------------------------------------------------------------
+   Küçük Markdown -> HTML dönüştürücü (yalnızca panel önizlemesi için).
+   Sitedeki gerçek render Astro/Markdoc üzerinden yapılır; bu yalnızca
+   editörde hızlı bir fikir vermek amaçlıdır, tam uyum garanti etmez.
+   ------------------------------------------------------------------------ */
+function mdToHtml(src){
+  const escHtml = (s) => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const lines = escHtml(src).split(/\r?\n/);
+  let html = '';
+  let inList = null; // 'ul' | 'ol' | null
+  const closeList = () => { if (inList) { html += `</${inList}>`; inList = null; } };
+
+  const inline = (t) => t
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+
+  for (const raw of lines){
+    const line = raw;
+    if (/^\s*$/.test(line)) { closeList(); continue; }
+    let m;
+    if ((m = line.match(/^###\s+(.*)$/))) { closeList(); html += `<h4>${inline(m[1])}</h4>`; continue; }
+    if ((m = line.match(/^##\s+(.*)$/)))  { closeList(); html += `<h3>${inline(m[1])}</h3>`; continue; }
+    if ((m = line.match(/^#\s+(.*)$/)))   { closeList(); html += `<h2>${inline(m[1])}</h2>`; continue; }
+    if ((m = line.match(/^[-*]\s+(.*)$/))) {
+      if (inList !== 'ul') { closeList(); html += '<ul>'; inList = 'ul'; }
+      html += `<li>${inline(m[1])}</li>`; continue;
+    }
+    if ((m = line.match(/^\d+\.\s+(.*)$/))) {
+      if (inList !== 'ol') { closeList(); html += '<ol>'; inList = 'ol'; }
+      html += `<li>${inline(m[1])}</li>`; continue;
+    }
+    closeList();
+    html += `<p>${inline(line)}</p>`;
+  }
+  closeList();
+  return html || '<p style="color:#9aa1ac">Önizlenecek içerik yok…</p>';
+}
+
+/** Markdown editörüne toolbar + önizleme bağlar. */
+function setupMarkdownField(name){
+  const ta = $(`f_${name}`);
+  const toolbar = $(`f_${name}_toolbar`);
+  const preview = $(`f_${name}_preview`);
+  if (!ta || !toolbar) return;
+
+  function wrapSelection(before, after = before){
+    const start = ta.selectionStart, end = ta.selectionEnd;
+    const sel = ta.value.slice(start, end) || 'metin';
+    ta.value = ta.value.slice(0, start) + before + sel + after + ta.value.slice(end);
+    ta.focus();
+    ta.selectionStart = start + before.length;
+    ta.selectionEnd = start + before.length + sel.length;
+  }
+
+  function insertLinePrefix(prefix){
+    const start = ta.selectionStart;
+    const lineStart = ta.value.lastIndexOf('\n', start - 1) + 1;
+    ta.value = ta.value.slice(0, lineStart) + prefix + ta.value.slice(lineStart);
+    ta.focus();
+    ta.selectionStart = ta.selectionEnd = start + prefix.length;
+  }
+
+  toolbar.querySelectorAll('[data-cmd]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const cmd = btn.dataset.cmd;
+      if (cmd === 'bold') wrapSelection('**');
+      else if (cmd === 'italic') wrapSelection('*');
+      else if (cmd === 'h2') insertLinePrefix('## ');
+      else if (cmd === 'h3') insertLinePrefix('### ');
+      else if (cmd === 'ul') insertLinePrefix('- ');
+      else if (cmd === 'ol') insertLinePrefix('1. ');
+      else if (cmd === 'link') {
+        const url = prompt('Bağlantı adresi (https://…):');
+        if (url) wrapSelection('[', `](${url})`);
+      } else if (cmd === 'preview') {
+        const on = preview.classList.toggle('active');
+        ta.parentElement.querySelector('.md-editor-area').hidden = on;
+        btn.classList.toggle('active', on);
+        btn.textContent = on ? '✏️ Düzenle' : '👁 Önizleme';
+        if (on) preview.innerHTML = mdToHtml(ta.value);
+      }
+    });
+  });
+}
+
+function renderGalleryThumbs(name){
+  const box = $(`f_${name}_thumbs`);
+  if (!box) return;
+  const existingHtml = galleryState.existing.map((path, i) => `
+    <div class="gallery-thumb">
+      <img src="https://ar-kar.com${esc(path)}" alt="" onerror="this.closest('.gallery-thumb').style.display='none'" />
+      <button type="button" data-remove-existing="${i}" title="Kaldır">✕</button>
+    </div>`).join('');
+  const newHtml = galleryState.newFiles.map((f, i) => `
+    <div class="gallery-thumb is-new">
+      <img src="${f.base64}" alt="" />
+      <button type="button" data-remove-new="${i}" title="Kaldır">✕</button>
+    </div>`).join('');
+  box.innerHTML = existingHtml + newHtml;
+
+  box.querySelectorAll('[data-remove-existing]').forEach(b => {
+    b.onclick = () => {
+      galleryState.existing.splice(Number(b.dataset.removeExisting), 1);
+      renderGalleryThumbs(name);
+    };
+  });
+  box.querySelectorAll('[data-remove-new]').forEach(b => {
+    b.onclick = () => {
+      galleryState.newFiles.splice(Number(b.dataset.removeNew), 1);
+      renderGalleryThumbs(name);
+    };
+  });
+}
+
+function setupGalleryField(name){
+  const fileEl = $(`f_${name}_file`);
+  if (!fileEl) return;
+  fileEl.onchange = async () => {
+    const files = Array.from(fileEl.files || []);
+    fileEl.value = '';
+    const remainingSlots = 8 - galleryState.existing.length - galleryState.newFiles.length;
+    if (files.length > remainingSlots) {
+      showMsg(`En fazla ${remainingSlots} görsel daha ekleyebilirsiniz (toplam sınır: 8).`, 'err');
+    }
+    const info = $(`f_${name}_info`);
+    for (const file of files.slice(0, Math.max(0, remainingSlots))) {
+      info.textContent = `${file.name} WebP'ye çevriliyor…`;
+      try {
+        const out = await toWebp(file);
+        galleryState.newFiles.push({ base64: out.dataUrl, name: file.name });
+      } catch (err) {
+        showMsg(`${file.name}: ${err.message}`, 'err');
+      }
+    }
+    info.textContent = 'Görseller otomatik WebP\'ye çevrilir. En fazla 8 görsel.';
+    renderGalleryThumbs(name);
+  };
+}
+
 function renderTabs(){
   $('tabs').innerHTML = keys.map(k =>
     `<button class="tab" role="tab" data-key="${k}" aria-selected="${k===current}">${COLLECTIONS[k].label}</button>`
   ).join('');
   $('tabs').querySelectorAll('.tab').forEach(b => {
-    b.onclick = () => { current = b.dataset.key; editingSlug = null; pendingImage = null; renderAll(); };
+    b.onclick = () => { current = b.dataset.key; editingSlug = null; pendingImage = null; renderFields(); loadEntries(); };
   });
 }
 
 function renderFields(values){
   values = values || {};
   pendingImage = null;
+  galleryState = { existing: Array.isArray(values.gallery) ? [...values.gallery] : [], newFiles: [] };
+
   $('fields').innerHTML = COLLECTIONS[current].fields.map(f => {
     const v = values[f.name] != null ? String(values[f.name]) : (f.type === 'date' ? today() : '');
     const req = f.required ? 'required' : '';
     let input;
-    if (f.type === 'textarea')      input = `<textarea id="f_${f.name}" rows="3" ${req}>${esc(v)}</textarea>`;
-    else if (f.type === 'markdown') input = `<textarea id="f_${f.name}" rows="12" ${req}>${esc(v)}</textarea>`;
-    else if (f.type === 'select')   input = `<select id="f_${f.name}" ${req}>` +
-      f.options.map(o => `<option value="${esc(o.value)}" ${o.value===v?'selected':''}>${esc(o.label)}</option>`).join('') + `</select>`;
-    else if (f.type === 'image')    input =
-      `<input type="file" id="f_${f.name}_file" accept="image/*" />
+    if (f.type === 'textarea') {
+      input = `<textarea id="f_${f.name}" rows="3" ${req}>${esc(v)}</textarea>`;
+    } else if (f.type === 'markdown') {
+      input = `
+        <div class="md-toolbar" id="f_${f.name}_toolbar">
+          <button type="button" data-cmd="h2" title="Alt Başlık">H2</button>
+          <button type="button" data-cmd="h3" title="Alt Başlık">H3</button>
+          <span class="sep"></span>
+          <button type="button" data-cmd="bold" title="Kalın"><strong>K</strong></button>
+          <button type="button" data-cmd="italic" title="İtalik"><em>İ</em></button>
+          <span class="sep"></span>
+          <button type="button" data-cmd="ul" title="Madde Listesi">• Liste</button>
+          <button type="button" data-cmd="ol" title="Numaralı Liste">1. Liste</button>
+          <button type="button" data-cmd="link" title="Bağlantı">🔗 Link</button>
+          <button type="button" data-cmd="preview" class="push" title="Önizleme">👁 Önizleme</button>
+        </div>
+        <div class="md-editor-area">
+          <textarea id="f_${f.name}" rows="12" ${req}>${esc(v)}</textarea>
+        </div>
+        <div class="md-preview" id="f_${f.name}_preview"></div>`;
+    } else if (f.type === 'select') {
+      input = `<select id="f_${f.name}" ${req}>` +
+        f.options.map(o => `<option value="${esc(o.value)}" ${o.value===v?'selected':''}>${esc(o.label)}</option>`).join('') + `</select>`;
+    } else if (f.type === 'image') {
+      input = `<input type="file" id="f_${f.name}_file" accept="image/*" />
        <input type="hidden" id="f_${f.name}" value="${esc(v)}" />
        <div id="f_${f.name}_info" class="hint">Yüklediğiniz görsel otomatik WebP'ye çevrilir. Boş bırakırsanız mevcut görsel korunur.</div>
        ${v ? `<img class="preview" src="https://ar-kar.com${esc(v)}" alt="" onerror="this.style.display='none'" />` : ''}`;
-    else if (f.type === 'date')     input = `<input type="date" id="f_${f.name}" value="${esc(v)}" ${req} />`;
-    else                            input = `<input type="text" id="f_${f.name}" value="${esc(v)}" placeholder="${esc(f.placeholder||'')}" ${req} />`;
+    } else if (f.type === 'gallery') {
+      input = `<input type="file" id="f_${f.name}_file" accept="image/*" multiple />
+       <div id="f_${f.name}_info" class="hint">Görseller otomatik WebP'ye çevrilir. En fazla 8 görsel.</div>
+       <div class="gallery-thumbs" id="f_${f.name}_thumbs"></div>`;
+    } else if (f.type === 'date') {
+      input = `<input type="date" id="f_${f.name}" value="${esc(v)}" ${req} />`;
+    } else {
+      input = `<input type="text" id="f_${f.name}" value="${esc(v)}" placeholder="${esc(f.placeholder||'')}" ${req} />`;
+    }
     return `<div class="field"><label for="f_${f.name}">${f.label}${f.required?' *':''}</label>${input}</div>`;
   }).join('');
 
@@ -216,6 +428,11 @@ function renderFields(values){
         info.textContent = 'Hata: ' + err.message;
       }
     };
+  }
+
+  for (const f of COLLECTIONS[current].fields) {
+    if (f.type === 'markdown') setupMarkdownField(f.name);
+    if (f.type === 'gallery') { setupGalleryField(f.name); renderGalleryThumbs(f.name); }
   }
 }
 
@@ -252,7 +469,7 @@ async function editEntry(slug){
     const data = await res.json();
     if (!res.ok) throw new Error(data.error || 'Kayıt alınamadı');
     editingSlug = slug;
-    renderFields({ ...data.data, content: data.body });
+    renderFields({ ...data.data, gallery: data.gallery || [], content: data.body });
     window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
   }catch(err){ showMsg(err.message, 'err'); }
 }
@@ -278,12 +495,17 @@ $('form').addEventListener('submit', async (e) => {
     const payload = { collection: current };
     if (editingSlug) payload.slug = editingSlug;
     for (const f of COLLECTIONS[current].fields){
+      if (f.type === 'gallery') continue;
       const el = $(`f_${f.name}`);
       if (el) payload[f.name] = el.value;
     }
     if (pendingImage){
       payload.imageBase64 = pendingImage.base64;
       payload.imageName   = pendingImage.name;
+    }
+    if (COLLECTIONS[current].fields.some(f => f.type === 'gallery')) {
+      payload.existingGallery = galleryState.existing;
+      payload.galleryImages = galleryState.newFiles;
     }
     const res = await fetch('/api/publish', {
       method:'POST',

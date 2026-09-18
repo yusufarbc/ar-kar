@@ -190,26 +190,6 @@ iframe {
 }
 
 /* --------------------------------------------------------------------------
-   Çok geniş ekranlar (2K / ultra-wide)
-   --------------------------------------------------------------------------
-   Şablon her bölümde container-fluid kullanıyor; 2560px gibi genişliklerde
-   içerik uçtan uca yayılıyor ve satırlar okunamayacak kadar uzuyordu.
-   Bölümler ortalanıp makul bir üst genişlikte tutulur.
-   -------------------------------------------------------------------------- */
-@media (min-width: 1700px) {
-  .container-fluid.px-5 {
-    max-width: 1720px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  /* Metin bloklarında satır uzunluğunu okunabilir tut */
-  .container-fluid.px-5 .text-center.mx-auto {
-    max-width: 900px;
-  }
-}
-
-/* --------------------------------------------------------------------------
    Erişilebilirlik: hareket azaltma tercihi
    -------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {

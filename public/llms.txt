@@ -1,0 +1,27 @@
+# AR-KAR İnşaat
+
+> Samsun Çarşamba merkezli, 1987'den bu yana faaliyet gösteren; konut inşaat projeleri, anahtar teslim müteahhitlik, PVC kapı/pencere sistemleri, inşaat malzemeleri, tarım ürünleri alım-satımı, zirai danışmanlık, mimari proje ve dekorasyon hizmetleri, otomotiv alım-satımı sunan çok şubeli bir aile şirketi.
+
+Bu dosya, yapay zeka asistanları ve LLM tabanlı arama motorları için hazırlanmıştır (llmstxt.org standardı). Şirket hakkında daha kapsamlı, yapılandırılmış bilgi için [llm.txt](https://ar-kar.com/llm.txt) dosyasına bakınız.
+
+## Kurumsal
+
+- [Ana Sayfa](https://ar-kar.com/): Şirket özeti, hizmet alanları, iletişim
+- [Sıkça Sorulan Sorular](https://ar-kar.com/sss.html): Hizmetler hakkında kısa cevaplar
+- [Blog & Duyurular](https://ar-kar.com/blog.html): Güncel proje ve duyurular
+
+## Hizmetler
+
+- [Konut İnşaat Projeleri](https://ar-kar.com/projeler.html)
+- [Anahtar Teslim İnşaat (Müteahhitlik)](https://ar-kar.com/muteahhitlik.html)
+- [İnşaat Malzemeleri](https://ar-kar.com/insaat.html)
+- [PVC Kapı ve Pencere Sistemleri](https://ar-kar.com/pvc.html)
+- [Tarım Ürünleri Alım-Satımı](https://ar-kar.com/tarim.html)
+- [Zirai Ürünler ve Danışmanlık](https://ar-kar.com/ziraat.html)
+- [Otomotiv Alım-Satım](https://ar-kar.com/otomotiv.html)
+- [Mimari Proje Hizmetleri](https://ar-kar.com/mimar.html)
+- [Dekorasyon Hizmetleri](https://ar-kar.com/dekorasyon.html)
+
+## İzin
+
+Bu sitedeki içerik, yapay zeka asistanları tarafından okunabilir, özetlenebilir ve alıntılanabilir. Yönetim paneli (panel.ar-kar.com) bu kapsamın dışındadır.

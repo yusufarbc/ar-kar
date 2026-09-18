@@ -64,28 +64,48 @@
   box-shadow: var(--shadow-soft-hover);
 }
 
-/* Büyük kutu: öne çıkan proje fotoğrafı */
+/* Büyük kutu: gerçek Çarşamba / Merkez / Şube fotoğraflarının döndüğü
+   carousel (Bootstrap'ın #header-carousel'i, artık bento hücresinin
+   içine sığdırılmış hâli — kullanıcı orijinal dönen carousel deneyimini
+   geri istedi). */
 .bento-tile--hero {
   grid-column: span 2;
   grid-row: span 2;
   min-height: 340px;
-  align-items: flex-end;
-  background-size: cover;
-  background-position: center;
+  padding: 0;
   color: #fff;
 }
-.bento-tile--hero::before {
+.bento-tile--hero .carousel,
+.bento-tile--hero .carousel-inner,
+.bento-tile--hero .carousel-item {
+  width: 100%;
+  height: 100%;
+}
+.bento-tile--hero .carousel-item img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.bento-tile--hero .carousel-item::after {
   content: "";
   position: absolute;
   inset: 0;
   background: linear-gradient(180deg, rgba(20, 21, 26, 0.1) 0%, rgba(20, 21, 26, 0.85) 100%);
 }
 .bento-tile--hero .bento-tile__content {
-  position: relative;
-  z-index: 1;
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  right: 0;
+  bottom: 0;
   padding: 28px 30px;
   max-width: 620px;
 }
+.bento-tile--hero .carousel-indicators { z-index: 3; margin-bottom: 0.5rem; }
+.bento-tile--hero .carousel-control-prev,
+.bento-tile--hero .carousel-control-next { z-index: 3; width: 8%; }
 .bento-tile__eyebrow {
   display: inline-block;
   font-family: var(--font-heading);
@@ -140,6 +160,11 @@
   justify-content: center;
   padding: 20px 22px;
   background: var(--surface);
+}
+/* Carousel (2 satır) ile aynı yükseklikte olsun diye sayaçlar da 2 satır
+   kaplar: buyuk(2x2=4) + 2 uzun sayaç(1x2=2 her biri=4) = tam 4x2 ızgara. */
+.bento-tile--tall {
+  grid-row: span 2;
 }
 .bento-tile--stat.bento-tile--accent {
   background: var(--primary);
@@ -209,16 +234,15 @@
 
 @media (max-width: 991.98px) {
   .hero-bento { grid-template-columns: repeat(2, 1fr); }
-  .bento-tile--hero { grid-column: span 2; grid-row: span 1; min-height: 300px; }
+  .bento-tile--hero { grid-column: span 2; grid-row: span 1; min-height: 320px; }
+  .bento-tile--tall { grid-row: span 1; }
   .bento-tile--cta { grid-column: span 2; }
 }
 @media (max-width: 575.98px) {
   .hero-bento { grid-template-columns: 1fr; gap: 10px; }
   .bento-tile--hero,
-  .bento-tile--photo,
   .bento-tile--cta { grid-column: span 1; }
   .bento-tile--hero { min-height: 260px; }
-  .bento-tile--photo { min-height: 180px; }
 }
 
 /* --------------------------------------------------------------------------

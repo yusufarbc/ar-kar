@@ -159,27 +159,56 @@ const ogImage = "https://ar-kar.com/img/logo.webp";
   <!-- Hero Bento Grid Start -->
     <div class="container-fluid px-3 px-md-5 py-4 py-md-5">
         <div class="hero-bento">
-            <a href="#merkez" class="bento-tile bento-tile--hero" style="background-image:url('/img/carousel-2.webp')" aria-label="Merkezimiz">
-                <div class="bento-tile__content">
-                    <span class="bento-tile__eyebrow">Aş. Kavacık · Merkez Ofisimiz</span>
-                    <p class="bento-tile__title">AR-KAR — Samsun Çarşamba'da 36 Yıllık Güvenilir İnşaat ve Tarım</p>
-                    <span class="btn btn-primary">Merkezimizi Gör</span>
+            <div class="bento-tile bento-tile--hero p-0">
+                <div id="header-carousel" class="carousel slide carousel-fade h-100" data-bs-ride="carousel" data-bs-interval="5000">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#header-carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#header-carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#header-carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    </div>
+                    <div class="carousel-inner h-100">
+                        <div class="carousel-item active h-100">
+                            <img src="/img/carousel-1.webp" alt="AR-KAR İnşaat - Samsun Çarşamba Bölgesi" loading="eager">
+                            <div class="bento-tile__content">
+                                <span class="bento-tile__eyebrow">Samsun · Çarşamba</span>
+                                <p class="bento-tile__title">AR-KAR — Samsun Çarşamba'da 36 Yıllık Güvenilir İnşaat ve Tarım</p>
+                                <a href="#contact" class="btn btn-primary">Bize Ulaşın</a>
+                            </div>
+                        </div>
+                        <div class="carousel-item h-100">
+                            <img src="/img/carousel-2.webp" alt="AR-KAR İnşaat - Aş.Kavacık Merkez Ofisimiz" loading="lazy">
+                            <div class="bento-tile__content">
+                                <span class="bento-tile__eyebrow">Aş. Kavacık · Merkez Ofisimiz</span>
+                                <p class="bento-tile__title">Aş.Kavacık'da Başlayan Kalite, Her Projede Yanınızda</p>
+                                <a href="#merkez" class="btn btn-primary">Merkezimiz</a>
+                            </div>
+                        </div>
+                        <div class="carousel-item h-100">
+                            <img src="/img/carousel-3.webp" alt="AR-KAR İnşaat - Çarşamba Şubemiz" loading="lazy">
+                            <div class="bento-tile__content">
+                                <span class="bento-tile__eyebrow">Çarşamba Şubemiz</span>
+                                <p class="bento-tile__title">Projelerin Güvencesi, Ustaların Tercihi</p>
+                                <a href="#sube" class="btn btn-primary">Şubemiz</a>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#header-carousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
                 </div>
-            </a>
+            </div>
 
-            <a href="#sube" class="bento-tile bento-tile--photo" style="background-image:url('/img/carousel-3.webp')" aria-label="Şubemiz">
-                <div class="bento-tile__content">
-                    <span class="bento-tile__eyebrow">Çarşamba Şubemiz</span>
-                    <p class="bento-tile__title bento-tile__title--sm">Projelerin Güvencesi, Ustaların Tercihi</p>
-                </div>
-            </a>
-
-            <div class="bento-tile bento-tile--stat">
+            <div class="bento-tile bento-tile--stat bento-tile--tall">
                 <span class="bento-stat__number">36</span>
                 <span class="bento-stat__label">Yıllık Tecrübe</span>
             </div>
 
-            <div class="bento-tile bento-tile--stat bento-tile--accent">
+            <div class="bento-tile bento-tile--stat bento-tile--accent bento-tile--tall">
                 <span class="bento-stat__number">9+</span>
                 <span class="bento-stat__label">Tamamlanan Proje</span>
             </div>

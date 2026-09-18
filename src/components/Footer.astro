@@ -68,82 +68,144 @@
 
 <!-- Contact Modal Start -->
 <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header bg-primary text-white">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content contact-modal">
+            <div class="modal-header contact-modal__header">
                 <h5 class="modal-title" id="contactModalLabel">
-                    <i class="fa fa-phone me-2"></i>AR-KAR İnşaat - Hızlı İletişim
+                    <i class="fa fa-phone"></i>AR-KAR İnşaat — Hızlı İletişim
                 </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                     aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="row g-4">
-                    <!-- İletişim Bilgileri -->
-                    <div class="col-md-6">
-                        <h6 class="text-primary mb-3"><i class="fa fa-map-marker-alt me-2"></i>Adreslerimiz</h6>
-                        <div class="mb-3">
-                            <strong>Şube:</strong><br>
-                            Orta Mah. Dr. Orhan Atılgan Cad. No:24/A<br>
-                            Çarşamba/SAMSUN<br>
-                            <small class="text-muted">Tel: 0362 846 03 93</small>
-                        </div>
-                        <div class="mb-3">
-                            <strong>Merkez:</strong><br>
-                            Aşağı Kavacık Mah. No:46/A<br>
-                            Çarşamba/SAMSUN<br>
-                            <small class="text-muted">Tel: 0362 834 18 48</small>
-                        </div>
+                <div class="contact-modal__grid">
+                    <div class="contact-address-card">
+                        <span class="contact-address-card__label">Şube</span>
+                        <p>Orta Mah. Dr. Orhan Atılgan Cad. No:24/A<br>Çarşamba/SAMSUN</p>
+                        <a href="tel:+903628460393"><i class="fa fa-phone"></i>0362 846 03 93</a>
                     </div>
-
-                    <!-- Hızlı İletişim -->
-                    <div class="col-md-6">
-                        <h6 class="text-primary mb-3"><i class="fa fa-phone me-2"></i>Hızlı İletişim</h6>
-                        <div class="d-grid gap-2">
-                            <a href="tel:+903628341848" class="btn btn-success">
-                                <i class="fa fa-phone me-2"></i>+90 362 834 18 48 - Ara
-                            </a>
-                            <a href="https://wa.me/905421826855" class="btn btn-success" target="_blank">
-                                <i class="fab fa-whatsapp me-2"></i>WhatsApp'tan Yazın
-                            </a>
-                            <a href="mailto:arkargida@gmail.com" class="btn btn-primary">
-                                <i class="fa fa-envelope me-2"></i>E-posta Gönder
-                            </a>
-                            <a href="https://www.facebook.com/arkarltd/" class="btn btn-outline-primary"
-                                target="_blank">
-                                <i class="fab fa-facebook-f me-2"></i>Facebook'ta Takip Et
-                            </a>
-                            <a href="https://www.instagram.com/arkarltd" class="btn btn-outline-primary"
-                                target="_blank">
-                                <i class="fab fa-instagram me-2"></i>Instagram'da Takip Et
-                            </a>
-                        </div>
+                    <div class="contact-address-card">
+                        <span class="contact-address-card__label">Merkez</span>
+                        <p>Aşağı Kavacık Mah. No:46/A<br>Çarşamba/SAMSUN</p>
+                        <a href="tel:+903628341848"><i class="fa fa-phone"></i>0362 834 18 48</a>
                     </div>
                 </div>
 
-                <!-- Çalışma Saatleri -->
-                <div class="row mt-4">
-                    <div class="col-12">
-                        <div class="bg-light p-3 rounded">
-                            <h6 class="text-primary mb-2"><i class="fa fa-clock me-2"></i>Çalışma Saatleri</h6>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <small><strong>Pazartesi - Cumartesi:</strong> 08:00 - 18:00</small>
-                                </div>
-                                <div class="col-sm-6">
-                                    <small><strong>Pazar:</strong> Kapalı</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="contact-modal__quicklinks">
+                    <a href="tel:+903628341848" class="contact-quick-link contact-quick-link--accent">
+                        <i class="fa fa-phone"></i><span>+90 362 834 18 48 — Ara</span>
+                    </a>
+                    <a href="https://wa.me/905421826855" class="contact-quick-link contact-quick-link--accent" target="_blank">
+                        <i class="fab fa-whatsapp"></i><span>WhatsApp'tan Yazın</span>
+                    </a>
+                    <a href="mailto:arkargida@gmail.com" class="contact-quick-link">
+                        <i class="fa fa-envelope"></i><span>E-posta Gönder</span>
+                    </a>
+                    <a href="https://www.facebook.com/arkarltd/" class="contact-quick-link" target="_blank">
+                        <i class="fab fa-facebook-f"></i><span>Facebook'ta Takip Et</span>
+                    </a>
+                    <a href="https://www.instagram.com/arkarltd" class="contact-quick-link" target="_blank">
+                        <i class="fab fa-instagram"></i><span>Instagram'da Takip Et</span>
+                    </a>
                 </div>
-            </div>
-            <div class="modal-footer">
+
+                <div class="contact-modal__hours">
+                    <i class="fa fa-clock"></i>
+                    <span><strong>Pazartesi – Cumartesi:</strong> 08:00 – 18:00</span>
+                    <span class="contact-modal__hours-sep">·</span>
+                    <span><strong>Pazar:</strong> Kapalı</span>
+                </div>
             </div>
         </div>
     </div>
 </div>
 <!-- Contact Modal End -->
+
+<style>
+    .contact-modal { border: none; border-radius: var(--radius-lg, 20px); overflow: hidden; }
+    .contact-modal__header {
+        background: linear-gradient(135deg, var(--ink-900, #14151a) 0%, #23252c 100%);
+        color: #fff;
+        border: none;
+        padding: 1.25rem 1.5rem;
+    }
+    .contact-modal__header .modal-title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-family: var(--font-heading, inherit);
+        font-weight: 700;
+        /* design-system.css'teki genel 'h5 { color: var(--ink-900) }' kuralı
+           element seçicisi olduğu için miras alınan #fff'i eziyordu — metin
+           koyu zemin üzerinde neredeyse görünmez oluyordu. Doğrudan hedefle. */
+        color: #fff;
+    }
+    .contact-modal__header .modal-title i { color: var(--primary, #cc272b); }
+
+    .contact-modal__grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        margin-bottom: 20px;
+    }
+    .contact-address-card {
+        border: 1px solid var(--ink-100, #e7e8eb);
+        border-radius: var(--radius-md, 14px);
+        padding: 16px 18px;
+    }
+    .contact-address-card__label {
+        display: inline-block;
+        font-family: var(--font-heading, inherit);
+        font-weight: 700;
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: var(--primary, #cc272b);
+        margin-bottom: 8px;
+    }
+    .contact-address-card p { margin-bottom: 10px; font-size: 0.9rem; color: var(--ink-500, #5b5e68); }
+    .contact-address-card a {
+        display: inline-flex; align-items: center; gap: 6px;
+        font-weight: 600; font-size: 0.88rem; color: var(--ink-900, #14151a); text-decoration: none;
+    }
+    .contact-address-card a i { color: var(--primary, #cc272b); }
+
+    .contact-modal__quicklinks {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+    .contact-quick-link {
+        display: flex; align-items: center; gap: 10px;
+        padding: 12px 16px;
+        border: 1px solid var(--ink-100, #e7e8eb);
+        border-radius: var(--radius-md, 14px);
+        font-weight: 600; font-size: 0.88rem;
+        color: var(--ink-900, #14151a);
+        text-decoration: none;
+        transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+    .contact-quick-link i { color: var(--primary, #cc272b); font-size: 1.05rem; width: 1.2em; text-align: center; }
+    .contact-quick-link:hover { border-color: var(--primary, #cc272b); transform: translateY(-2px); color: var(--ink-900, #14151a); }
+    .contact-quick-link--accent { background: var(--surface-alt, #f6f6f8); }
+
+    .contact-modal__hours {
+        display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+        padding: 12px 16px;
+        background: var(--surface-alt, #f6f6f8);
+        border-radius: var(--radius-md, 14px);
+        font-size: 0.85rem;
+        color: var(--ink-500, #5b5e68);
+    }
+    .contact-modal__hours i { color: var(--primary, #cc272b); }
+    .contact-modal__hours-sep { color: var(--ink-300, #9a9da6); }
+
+    @media (max-width: 575.98px) {
+        .contact-modal__grid,
+        .contact-modal__quicklinks { grid-template-columns: 1fr; }
+    }
+</style>
 
 <div class="container-fluid bg-dark text-white border-top border-primary px-0">
     <div class="d-flex flex-column flex-md-row justify-content-between">

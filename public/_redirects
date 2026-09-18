@@ -1,31 +1,23 @@
-# Cloudflare Workers Static Assets yönlendirmeleri
+# Cloudflare Pages yönlendirmeleri (ana site)
 #
-# NOT: _redirects dosyasındaki "source" alanı yalnızca YOL (path) eşleştirir,
-# host/alan adı eşleştiremez. Bu yüzden panel.ar-kar.com -> /keystatic/
-# yönlendirmesi burada TANIMLANAMAZ; o kural Cloudflare "Single Redirect"
-# (Bulk/Dynamic Redirect) olarak edge seviyesinde tanımlanır.
-# Bkz. scripts/setup-cloudflare.sh -> create_panel_redirect_rule()
+# NOT: Eski .html adresleri (ör. /insaat.html) için kural yazmaya gerek yok —
+# Cloudflare Pages bunları otomatik olarak uzantısız hâline (308) yönlendirir.
 #
-# NOT: Kök "/" isteği için burada kural YOK. wrangler.jsonc'de
-# assets.run_worker_first: ["/"] ayarlı olduğundan kök istek önce worker'a
-# gider; src/middleware.ts panel host'unda paneli gösterir, ana site için
-# adapter statik index.html'e düşer. Buraya bir "/" kuralı eklenirse worker
-# devreden çıkar ve panel kökü çalışmaz.
+# Yönetim paneli ayrı bir Pages projesindedir (panel.ar-kar.com) ve
+# Cloudflare Access ile korunur; bu sitede panel rotası yoktur.
 
-# Eski / kısa yollardan kanonik .html sayfalarına
-/anasayfa            /index.html            301
-/home                /index.html            301
-/projelerimiz        /projeler.html         301
-/insaat-malzemeleri  /insaat.html           301
-/pvc-pencere         /pvc.html              301
-/zirai               /ziraat.html           301
-/tarim-urunleri      /tarim.html            301
-/sikca-sorulan-sorular /sss.html            301
+# Kısa / alternatif yollar
+/anasayfa              /              301
+/home                  /              301
+/projelerimiz          /projeler      301
+/insaat-malzemeleri    /insaat        301
+/pvc-pencere           /pvc           301
+/zirai                 /ziraat        301
+/tarim-urunleri        /tarim         301
+/sikca-sorulan-sorular /sss           301
+/haberler              /blog          301
+/duyurular             /blog          301
 
-# Blog kısayolu
-/haberler            /blog.html             301
-/duyurular           /blog.html             301
-
-# Yönetim paneli kısayolu.
-# NOT: /admin artık gerçek bir sayfa (src/pages/admin.astro), yönlendirilmemeli.
-/panel               /admin                 302
+# Panel kısayolu (ayrı Pages projesi)
+/panel                 https://panel.ar-kar.com/   302
+/admin                 https://panel.ar-kar.com/   302

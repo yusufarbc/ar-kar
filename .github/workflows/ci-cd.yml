@@ -39,19 +39,23 @@ jobs:
       - name: Run Test Gate (astro check && astro build)
         run: npm run test
 
+      - name: Type-check Panel Functions
+        run: npx tsc -p tsconfig.panel.json
+
       - name: Verify Build Output
         run: |
-          test -f dist/server/entry.mjs || { echo "::error::dist/server/entry.mjs üretilmedi"; exit 1; }
-          test -f dist/client/index.html || { echo "::error::dist/client/index.html üretilmedi"; exit 1; }
+          test -f dist/index.html || { echo "::error::dist/index.html üretilmedi"; exit 1; }
+          test -f dist/sitemap.xml || { echo "::error::dist/sitemap.xml üretilmedi"; exit 1; }
           echo "Build çıktısı doğrulandı."
 
   # --------------------------------------------------------------------
-  # Staging: ar-kar-staging worker'ına deploy (canlıya dokunmaz)
+  # Ana site (statik) -> Cloudflare Pages: ar-kar
+  # ar-kar.com + www.ar-kar.com
   # --------------------------------------------------------------------
-  deploy-staging:
-    name: Deploy to Cloudflare Workers (Staging)
+  deploy-site:
+    name: Deploy Site (Cloudflare Pages)
     needs: test
-    if: github.ref == 'refs/heads/staging' && github.event_name == 'push'
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -69,47 +73,53 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Deploy to Cloudflare Workers
+      - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          # NOT: wrangler `env` blokları adapter çıktısına aktarılmadığı için
-          # `--env staging` production'ın üzerine yazar. Ayrım worker adı ile yapılır.
-          command: deploy --name ar-kar-staging
+          command: >-
+            pages deploy dist
+            --project-name=ar-kar
+            --branch=${{ github.ref_name }}
 
   # --------------------------------------------------------------------
-  # Production: ar-kar worker'ına deploy (ar-kar.com + panel.ar-kar.com)
+  # Yönetim paneli -> Cloudflare Pages: ar-kar-admin
+  # panel.ar-kar.com (Cloudflare Access ile korunur)
+  #
+  # Yalnızca panel/ dizini değiştiğinde deploy edilir.
   # --------------------------------------------------------------------
-  deploy-production:
-    name: Deploy to Cloudflare Workers (Production)
+  deploy-panel:
+    name: Deploy Panel (Cloudflare Pages)
     needs: test
     if: github.ref == 'refs/heads/production' && github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
         with:
-          node-version: 22
-          cache: 'npm'
+          fetch-depth: 2
 
-      - name: Install Dependencies
-        run: npm ci
+      - name: Panel değişti mi?
+        id: changed
+        run: |
+          if git diff --name-only HEAD^ HEAD | grep -q '^panel/'; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "run=false" >> "$GITHUB_OUTPUT"
+            echo "panel/ değişmedi, deploy atlanıyor."
+          fi
 
-      - name: Build
-        run: npm run build
-
-      - name: Deploy to Cloudflare Workers
+      - name: Deploy to Cloudflare Pages
+        if: steps.changed.outputs.run == 'true'
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          # Custom domain'ler her deploy'da yeniden bildirilir. wrangler.jsonc'ye
-          # `routes` olarak yazılamaz: aynı dosya staging deploy'unda da
-          # kullanıldığı için staging worker'ı canlı domain'i devralırdı.
-          # panel.ar-kar.com, Cloudflare WAF custom rule'u ile korunuyor
-          # (yalnızca TR IP'leri; ip.geoip.country ne "TR" -> Block).
-          command: deploy --name ar-kar --domain ar-kar.com --domain www.ar-kar.com --domain panel.ar-kar.com
+          # functions/ dizini çalışma dizinine göre aranır; bu yüzden
+          # workingDirectory panel/ olmalı ve statik klasör public/ verilmeli.
+          workingDirectory: panel
+          command: >-
+            pages deploy public
+            --project-name=ar-kar-admin
+            --branch=production

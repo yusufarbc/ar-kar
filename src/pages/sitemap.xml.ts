@@ -15,17 +15,17 @@ const STATIC_PAGES: Array<{
   priority: string;
 }> = [
   { path: '/', changefreq: 'weekly', priority: '1.0' },
-  { path: '/projeler.html', changefreq: 'weekly', priority: '0.9' },
-  { path: '/muteahhitlik.html', changefreq: 'monthly', priority: '0.8' },
-  { path: '/insaat.html', changefreq: 'monthly', priority: '0.8' },
-  { path: '/pvc.html', changefreq: 'monthly', priority: '0.8' },
-  { path: '/tarim.html', changefreq: 'monthly', priority: '0.7' },
-  { path: '/ziraat.html', changefreq: 'monthly', priority: '0.7' },
-  { path: '/otomotiv.html', changefreq: 'monthly', priority: '0.7' },
-  { path: '/mimar.html', changefreq: 'monthly', priority: '0.7' },
-  { path: '/dekorasyon.html', changefreq: 'monthly', priority: '0.7' },
-  { path: '/sss.html', changefreq: 'monthly', priority: '0.6' },
-  { path: '/blog.html', changefreq: 'weekly', priority: '0.7' },
+  { path: '/projeler', changefreq: 'weekly', priority: '0.9' },
+  { path: '/muteahhitlik', changefreq: 'monthly', priority: '0.8' },
+  { path: '/insaat', changefreq: 'monthly', priority: '0.8' },
+  { path: '/pvc', changefreq: 'monthly', priority: '0.8' },
+  { path: '/tarim', changefreq: 'monthly', priority: '0.7' },
+  { path: '/ziraat', changefreq: 'monthly', priority: '0.7' },
+  { path: '/otomotiv', changefreq: 'monthly', priority: '0.7' },
+  { path: '/mimar', changefreq: 'monthly', priority: '0.7' },
+  { path: '/dekorasyon', changefreq: 'monthly', priority: '0.7' },
+  { path: '/sss', changefreq: 'monthly', priority: '0.6' },
+  { path: '/blog', changefreq: 'weekly', priority: '0.7' },
 ];
 
 function xmlEscape(value: string): string {
@@ -57,7 +57,7 @@ export const GET: APIRoute = async () => {
     ...blogPosts.map((post) => {
       const slug = post.id.replace(/\/index$/, '');
       return {
-        loc: `${SITE}/blog/${slug}.html`,
+        loc: `${SITE}/blog/${slug}`,
         lastmod: toLastmod(post.data.date, today),
         changefreq: 'monthly',
         priority: '0.6',
@@ -66,7 +66,7 @@ export const GET: APIRoute = async () => {
     ...projects.map((project) => {
       const slug = project.id.replace(/\/index$/, '');
       return {
-        loc: `${SITE}/projeler/${slug}.html`,
+        loc: `${SITE}/projeler/${slug}`,
         lastmod: toLastmod(project.data.date, today),
         changefreq: 'monthly',
         priority: '0.7',

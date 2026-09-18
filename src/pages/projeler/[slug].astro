@@ -23,7 +23,7 @@ const title = `${project.data.title} | AR-KAR İnşaat Samsun`;
 const description =
   project.data.description ||
   `${project.data.title} - AR-KAR İnşaat ${categoryLabel} projesi.`;
-const canonical = `https://ar-kar.com/projeler/${slug}.html`;
+const canonical = `https://ar-kar.com/projeler/${slug}`;
 const coverImage = project.data.coverImage || '/img/about.webp';
 ---
 
@@ -53,7 +53,7 @@ const coverImage = project.data.coverImage || '/img/about.webp';
         '@type': 'BreadcrumbList',
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Ana Sayfa', item: 'https://ar-kar.com/' },
-          { '@type': 'ListItem', position: 2, name: 'Projeler', item: 'https://ar-kar.com/projeler.html' },
+          { '@type': 'ListItem', position: 2, name: 'Projeler', item: 'https://ar-kar.com/projeler' },
           { '@type': 'ListItem', position: 3, name: project.data.title, item: canonical },
         ],
       },
@@ -66,8 +66,8 @@ const coverImage = project.data.coverImage || '/img/about.webp';
       <div class="col-12">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb mb-0">
-            <li class="breadcrumb-item"><a href="/index.html" class="text-primary">Anasayfa</a></li>
-            <li class="breadcrumb-item"><a href="/projeler.html" class="text-primary">Projeler</a></li>
+            <li class="breadcrumb-item"><a href="/" class="text-primary">Anasayfa</a></li>
+            <li class="breadcrumb-item"><a href="/projeler" class="text-primary">Projeler</a></li>
             <li class="breadcrumb-item active text-white" aria-current="page">{project.data.title}</li>
           </ol>
         </nav>
@@ -118,7 +118,7 @@ const coverImage = project.data.coverImage || '/img/about.webp';
         <hr class="my-5" />
 
         <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
-          <a href="/projeler.html" class="btn btn-outline-primary">
+          <a href="/projeler" class="btn btn-outline-primary">
             <i class="fa fa-arrow-left me-2"></i>Tüm Projeler
           </a>
           <button

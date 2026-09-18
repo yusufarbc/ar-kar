@@ -9,28 +9,21 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "wrangler dev",
+    "preview": "astro preview",
     "check": "astro check",
     "test": "npm run check && npm run build",
-    "deploy:staging": "npm run build && wrangler deploy --name ar-kar-staging",
-    "deploy:production": "npm run build && wrangler deploy --name ar-kar --domain ar-kar.com --domain www.ar-kar.com --domain panel.ar-kar.com"
+    "deploy:production": "npm run build && wrangler pages deploy dist --project-name=ar-kar --branch=production",
+    "deploy:staging": "npm run build && wrangler pages deploy dist --project-name=ar-kar --branch=staging",
+    "panel:deploy": "wrangler pages deploy panel --project-name=ar-kar-admin --branch=production"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.10",
-    "@astrojs/cloudflare": "^14.3.2",
-    "@astrojs/markdoc": "^2.0.9",
-    "@astrojs/react": "^6.0.6",
-    "@keystatic/astro": "^6.0.0",
-    "@keystatic/core": "^0.5.42",
     "astro": "^7.3.3",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
     "typescript": "^5.7.3"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260918.1",
     "@types/node": "^22.13.10",
-    "@types/react": "^19.0.8",
-    "@types/react-dom": "^19.0.3",
     "wrangler": "^4.134.0"
   }
 }

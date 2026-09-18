@@ -11,7 +11,7 @@ const sortedPosts = posts.sort((a, b) => {
 
 const title = "Blog & Haberler | AR-KAR İnşaat Samsun";
 const description = "AR-KAR İnşaat kurumsal blog ve haberler. Samsun inşaat sektörü, yeni konut projeleri, tarım ve yapı malzemeleri hakkında güncel yazılar.";
-const canonical = "https://ar-kar.com/blog.html";
+const canonical = "https://ar-kar.com/blog";
 ---
 
 <BaseLayout
@@ -26,7 +26,7 @@ const canonical = "https://ar-kar.com/blog.html";
       <div class="col-12">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb mb-0">
-            <li class="breadcrumb-item"><a href="/index.html" class="text-primary">Anasayfa</a></li>
+            <li class="breadcrumb-item"><a href="/" class="text-primary">Anasayfa</a></li>
             <li class="breadcrumb-item active text-white" aria-current="page">Blog & Haberler</li>
           </ol>
         </nav>
@@ -51,7 +51,7 @@ const canonical = "https://ar-kar.com/blog.html";
         <div class="row g-4">
           {sortedPosts.map((post) => {
             const slug = post.id.replace(/\/index$/, '');
-            const postUrl = `/blog/${slug}.html`;
+            const postUrl = `/blog/${slug}`;
             const coverImage = post.data.coverImage || '/img/about.webp';
             const dateStr = post.data.date;
 

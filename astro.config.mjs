@@ -1,23 +1,16 @@
 import { defineConfig } from 'astro/config';
-import keystatic from '@keystatic/astro';
-import markdoc from '@astrojs/markdoc';
-import react from '@astrojs/react';
-import cloudflare from '@astrojs/cloudflare';
 
-// https://astro.build/config
+// Ana site tamamen statiktir (SSG) — hiçbir sunucu tarafı rota yoktur.
+// Cloudflare Pages'e düz dosya olarak yüklenir.
+//
+// İçerik yönetimi ayrı bir projede: panel/ (panel.ar-kar.com).
+// Panel, GitHub'a .md commit'ler; commit CI/CD'yi tetikler; bu site yeniden
+// derlenip yayına çıkar.
 export default defineConfig({
   site: 'https://ar-kar.com',
   output: 'static',
   build: {
+    // Sayfalar insaat.html, pvc.html ... olarak üretilir (mevcut URL yapısı korunur).
     format: 'file',
   },
-  adapter: cloudflare({
-    imageService: 'passthrough',
-  }),
-  // react(): Keystatic paneli `<Keystatic client:only="react" />` ile render
-  // ediliyor. Bu direktifin çalışması için Astro'ya bir React renderer'ı
-  // tanıtılmalı; @keystatic/astro bunu kendisi eklemiyor. Eksik olduğunda
-  // panel sayfası 0 byte döner (boş beyaz ekran).
-  integrations: [react(), keystatic(), markdoc()],
 });
-

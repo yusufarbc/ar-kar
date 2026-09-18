@@ -19,7 +19,7 @@ const { Content } = await render(post);
 
 const title = `${post.data.title} | AR-KAR İnşaat`;
 const description = post.data.description || `${post.data.title} - AR-KAR İnşaat kurumsal blog yazısı.`;
-const canonical = `https://ar-kar.com/blog/${slug}.html`;
+const canonical = `https://ar-kar.com/blog/${slug}`;
 const coverImage = post.data.coverImage || '/img/about.webp';
 ---
 
@@ -37,8 +37,8 @@ const coverImage = post.data.coverImage || '/img/about.webp';
       <div class="col-12">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb mb-0">
-            <li class="breadcrumb-item"><a href="/index.html" class="text-primary">Anasayfa</a></li>
-            <li class="breadcrumb-item"><a href="/blog.html" class="text-primary">Blog</a></li>
+            <li class="breadcrumb-item"><a href="/" class="text-primary">Anasayfa</a></li>
+            <li class="breadcrumb-item"><a href="/blog" class="text-primary">Blog</a></li>
             <li class="breadcrumb-item active text-white" aria-current="page">{post.data.title}</li>
           </ol>
         </nav>
@@ -82,7 +82,7 @@ const coverImage = post.data.coverImage || '/img/about.webp';
         <hr class="my-5" />
 
         <div class="d-flex justify-content-between align-items-center">
-          <a href="/blog.html" class="btn btn-outline-primary">
+          <a href="/blog" class="btn btn-outline-primary">
             <i class="fa fa-arrow-left me-2"></i>Tüm Blog Yazıları
           </a>
           <button

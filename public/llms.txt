@@ -7,20 +7,20 @@ Bu dosya, yapay zeka asistanları ve LLM tabanlı arama motorları için hazırl
 ## Kurumsal
 
 - [Ana Sayfa](https://ar-kar.com/): Şirket özeti, hizmet alanları, iletişim
-- [Sıkça Sorulan Sorular](https://ar-kar.com/sss.html): Hizmetler hakkında kısa cevaplar
-- [Blog & Duyurular](https://ar-kar.com/blog.html): Güncel proje ve duyurular
+- [Sıkça Sorulan Sorular](https://ar-kar.com/sss): Hizmetler hakkında kısa cevaplar
+- [Blog & Duyurular](https://ar-kar.com/blog): Güncel proje ve duyurular
 
 ## Hizmetler
 
-- [Konut İnşaat Projeleri](https://ar-kar.com/projeler.html)
-- [Anahtar Teslim İnşaat (Müteahhitlik)](https://ar-kar.com/muteahhitlik.html)
-- [İnşaat Malzemeleri](https://ar-kar.com/insaat.html)
-- [PVC Kapı ve Pencere Sistemleri](https://ar-kar.com/pvc.html)
-- [Tarım Ürünleri Alım-Satımı](https://ar-kar.com/tarim.html)
-- [Zirai Ürünler ve Danışmanlık](https://ar-kar.com/ziraat.html)
-- [Otomotiv Alım-Satım](https://ar-kar.com/otomotiv.html)
-- [Mimari Proje Hizmetleri](https://ar-kar.com/mimar.html)
-- [Dekorasyon Hizmetleri](https://ar-kar.com/dekorasyon.html)
+- [Konut İnşaat Projeleri](https://ar-kar.com/projeler)
+- [Anahtar Teslim İnşaat (Müteahhitlik)](https://ar-kar.com/muteahhitlik)
+- [İnşaat Malzemeleri](https://ar-kar.com/insaat)
+- [PVC Kapı ve Pencere Sistemleri](https://ar-kar.com/pvc)
+- [Tarım Ürünleri Alım-Satımı](https://ar-kar.com/tarim)
+- [Zirai Ürünler ve Danışmanlık](https://ar-kar.com/ziraat)
+- [Otomotiv Alım-Satım](https://ar-kar.com/otomotiv)
+- [Mimari Proje Hizmetleri](https://ar-kar.com/mimar)
+- [Dekorasyon Hizmetleri](https://ar-kar.com/dekorasyon)
 
 ## İzin
 

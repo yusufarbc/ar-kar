@@ -1,6 +1,7 @@
 {
   "extends": "astro/tsconfigs/strict",
   "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist", "public/lib"]
+  // panel/ ayrı bir Cloudflare Pages projesidir (kendi tsconfig'i var);
+  // Pages Functions tipleri Astro'nun tip kontrolüne dahil edilmemeli.
+  "exclude": ["dist", "public/lib", "panel"]
 }
-

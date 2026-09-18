@@ -21,7 +21,7 @@ const isServicesActive = [
 <!-- Navbar Start -->
 <div class="container-fluid sticky-top bg-dark navbar-dark shadow-sm px-2 px-sm-3 px-md-5 pe-lg-0">
     <nav class="navbar navbar-expand-lg py-1 py-lg-0">
-        <a href="/index.html" class="navbar-brand me-2">
+        <a href="/" class="navbar-brand me-2">
             <img src="/img/logo.webp" alt="AR-KAR İnşaat Logo" style="max-height:85px; padding: 8px;">
         </a>
         <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse"
@@ -30,28 +30,28 @@ const isServicesActive = [
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0">
-                <a href="/index.html" class={`nav-item nav-link fw-semibold ${activePage === 'index' ? 'active' : ''}`}>Anasayfa</a>
-                <a href={activePage === 'index' ? '#about' : '/index.html#about'} class="nav-item nav-link fw-semibold">Hakkımızda</a>
-                <a href={activePage === 'index' ? '#projects' : '/index.html#projects'} class="nav-item nav-link fw-semibold">Projelerimiz</a>
-                <a href={activePage === 'index' ? '#dealerships' : '/index.html#dealerships'} class="nav-item nav-link fw-semibold">Bayilikler</a>
+                <a href="/" class={`nav-item nav-link fw-semibold ${activePage === 'index' ? 'active' : ''}`}>Anasayfa</a>
+                <a href={activePage === 'index' ? '#about' : '/#about'} class="nav-item nav-link fw-semibold">Hakkımızda</a>
+                <a href={activePage === 'index' ? '#projects' : '/#projects'} class="nav-item nav-link fw-semibold">Projelerimiz</a>
+                <a href={activePage === 'index' ? '#dealerships' : '/#dealerships'} class="nav-item nav-link fw-semibold">Bayilikler</a>
                 <div class="nav-item dropdown">
-                    <a href={activePage === 'index' ? '#service' : '/index.html#service'} class={`nav-link dropdown-toggle fw-semibold ${isServicesActive ? 'active' : ''}`}
+                    <a href={activePage === 'index' ? '#service' : '/#service'} class={`nav-link dropdown-toggle fw-semibold ${isServicesActive ? 'active' : ''}`}
                         data-bs-toggle="dropdown">Hizmetler</a>
                     <div class="dropdown-menu m-0">
-                        <a href="/projeler.html" class={`dropdown-item ${activePage === 'projeler' ? 'active' : ''}`}>İnşaat Projeleri</a>
-                        <a href="/muteahhitlik.html" class={`dropdown-item ${activePage === 'muteahhitlik' ? 'active' : ''}`}>Anahtar Teslim İnşaat</a>
-                        <a href="/insaat.html" class={`dropdown-item ${activePage === 'insaat' ? 'active' : ''}`}>Hırdavat & İnşaat Malzemeleri</a>
-                        <a href="/pvc.html" class={`dropdown-item ${activePage === 'pvc' ? 'active' : ''}`}>PVC Kapı ve Pencere Sistemleri</a>
-                        <a href="/tarim.html" class={`dropdown-item ${activePage === 'tarim' ? 'active' : ''}`}>Tarım Ürünleri Alım Satımı</a>
-                        <a href="/ziraat.html" class={`dropdown-item ${activePage === 'ziraat' ? 'active' : ''}`}>Zirai Ürünler ve Danışmanlık</a>
-                        <a href="/otomotiv.html" class={`dropdown-item ${activePage === 'otomotiv' ? 'active' : ''}`}>Otomotiv Alım Satım</a>
-                        <a href="/mimar.html" class={`dropdown-item ${activePage === 'mimar' ? 'active' : ''}`}>Mimari Proje Hizmetleri</a>
-                        <a href="/dekorasyon.html" class={`dropdown-item ${activePage === 'dekorasyon' ? 'active' : ''}`}>Dekorasyon Hizmetleri</a>
+                        <a href="/projeler" class={`dropdown-item ${activePage === 'projeler' ? 'active' : ''}`}>İnşaat Projeleri</a>
+                        <a href="/muteahhitlik" class={`dropdown-item ${activePage === 'muteahhitlik' ? 'active' : ''}`}>Anahtar Teslim İnşaat</a>
+                        <a href="/insaat" class={`dropdown-item ${activePage === 'insaat' ? 'active' : ''}`}>Hırdavat & İnşaat Malzemeleri</a>
+                        <a href="/pvc" class={`dropdown-item ${activePage === 'pvc' ? 'active' : ''}`}>PVC Kapı ve Pencere Sistemleri</a>
+                        <a href="/tarim" class={`dropdown-item ${activePage === 'tarim' ? 'active' : ''}`}>Tarım Ürünleri Alım Satımı</a>
+                        <a href="/ziraat" class={`dropdown-item ${activePage === 'ziraat' ? 'active' : ''}`}>Zirai Ürünler ve Danışmanlık</a>
+                        <a href="/otomotiv" class={`dropdown-item ${activePage === 'otomotiv' ? 'active' : ''}`}>Otomotiv Alım Satım</a>
+                        <a href="/mimar" class={`dropdown-item ${activePage === 'mimar' ? 'active' : ''}`}>Mimari Proje Hizmetleri</a>
+                        <a href="/dekorasyon" class={`dropdown-item ${activePage === 'dekorasyon' ? 'active' : ''}`}>Dekorasyon Hizmetleri</a>
                     </div>
                 </div>
-                <a href="/blog.html" class={`nav-item nav-link fw-semibold ${activePage === 'blog' ? 'active' : ''}`}>Blog</a>
-                <a href="/sss.html" class={`nav-item nav-link fw-semibold ${activePage === 'sss' ? 'active' : ''}`}>SSS</a>
-                <a href={activePage === 'index' ? '#contact' : '/index.html#contact'} class="nav-item nav-link fw-semibold">İletişim</a>
+                <a href="/blog" class={`nav-item nav-link fw-semibold ${activePage === 'blog' ? 'active' : ''}`}>Blog</a>
+                <a href="/sss" class={`nav-item nav-link fw-semibold ${activePage === 'sss' ? 'active' : ''}`}>SSS</a>
+                <a href={activePage === 'index' ? '#contact' : '/#contact'} class="nav-item nav-link fw-semibold">İletişim</a>
                 <button
                     class="nav-item nav-link bg-primary text-white px-4 px-lg-5 ms-2 ms-lg-3 d-none d-lg-block fw-semibold"
                     style="font-size:1rem; border:none; border-radius: 5px; transition: all 0.3s;"

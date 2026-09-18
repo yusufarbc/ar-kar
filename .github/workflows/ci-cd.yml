@@ -110,6 +110,6 @@ jobs:
           # Custom domain'ler her deploy'da yeniden bildirilir. wrangler.jsonc'ye
           # `routes` olarak yazılamaz: aynı dosya staging deploy'unda da
           # kullanıldığı için staging worker'ı canlı domain'i devralırdı.
-          # panel.ar-kar.com bilinçli olarak burada YOK — WAF geo-block kuralı
-          # kurulmadan panel'in dünyaya açılmaması için ayrı bağlanır.
-          command: deploy --name ar-kar --domain ar-kar.com --domain www.ar-kar.com
+          # panel.ar-kar.com, Cloudflare WAF custom rule'u ile korunuyor
+          # (yalnızca TR IP'leri; ip.geoip.country ne "TR" -> Block).
+          command: deploy --name ar-kar --domain ar-kar.com --domain www.ar-kar.com --domain panel.ar-kar.com

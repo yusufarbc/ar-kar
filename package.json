@@ -13,7 +13,7 @@
     "check": "astro check",
     "test": "npm run check && npm run build",
     "deploy:staging": "npm run build && wrangler deploy --name ar-kar-staging",
-    "deploy:production": "npm run build && wrangler deploy --name ar-kar --domain ar-kar.com --domain www.ar-kar.com"
+    "deploy:production": "npm run build && wrangler deploy --name ar-kar --domain ar-kar.com --domain www.ar-kar.com --domain panel.ar-kar.com"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.10",

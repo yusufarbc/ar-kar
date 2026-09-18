@@ -44,6 +44,18 @@
     }
   ],
 
+  // CMS panelinin GitHub'a commit atmak için kullandığı token.
+  // Cloudflare Secrets Store'da (hesap seviyesinde) tutulur; buradaki
+  // store_id gizli bir değer değil, yalnızca deponun kimliğidir.
+  // Değeri okumak için: (await env.GITHUB_TOKEN.get()) — bkz. src/lib/secrets.ts
+  "secrets_store_secrets": [
+    {
+      "binding": "GITHUB_TOKEN",
+      "store_id": "621bf51b2b124dcd8a080686e0b472f4",
+      "secret_name": "GITHUB_TOKEN"
+    }
+  ],
+
   "vars": {
     "PUBLIC_SITE_URL": "https://ar-kar.com",
     "PUBLIC_PANEL_HOST": "panel.ar-kar.com"

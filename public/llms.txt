@@ -8,7 +8,7 @@ Bu dosya, yapay zeka asistanları ve LLM tabanlı arama motorları için hazırl
 
 - [Ana Sayfa](https://ar-kar.com/): Şirket özeti, hizmet alanları, iletişim
 - [Sıkça Sorulan Sorular](https://ar-kar.com/sss): Hizmetler hakkında kısa cevaplar
-- [Blog & Duyurular](https://ar-kar.com/blog): Güncel proje ve duyurular
+- [Haberler & Duyurular](https://ar-kar.com/blog): Güncel proje ve duyurular
 
 ## Hizmetler
 

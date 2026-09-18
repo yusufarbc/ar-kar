@@ -9,7 +9,7 @@ const sortedPosts = posts.sort((a, b) => {
   return dateB - dateA;
 });
 
-const title = "Blog & Haberler | AR-KAR İnşaat Samsun";
+const title = "Haberler & Duyurular | AR-KAR İnşaat Samsun";
 const description = "AR-KAR İnşaat kurumsal blog ve haberler. Samsun inşaat sektörü, yeni konut projeleri, tarım ve yapı malzemeleri hakkında güncel yazılar.";
 const canonical = "https://ar-kar.com/blog";
 ---
@@ -27,7 +27,7 @@ const canonical = "https://ar-kar.com/blog";
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb mb-0">
             <li class="breadcrumb-item"><a href="/" class="text-primary">Anasayfa</a></li>
-            <li class="breadcrumb-item active text-white" aria-current="page">Blog & Haberler</li>
+            <li class="breadcrumb-item active text-white" aria-current="page">Haberler &amp; Duyurular</li>
           </ol>
         </nav>
       </div>
@@ -38,14 +38,14 @@ const canonical = "https://ar-kar.com/blog";
   <!-- Blog List Start -->
   <div class="container-fluid py-6 px-5 bg-light">
     <div class="text-center mx-auto mb-5" style="max-width: 700px;">
-      <h1 class="display-5 text-uppercase mb-3">Blog & <span class="text-primary">Haberler</span></h1>
+      <h1 class="display-5 text-uppercase mb-3">Haberler &amp; <span class="text-primary">Duyurular</span></h1>
       <p class="text-muted">AR-KAR İnşaat projeleri, sektörel gelişmeler ve güncel duyurularımız</p>
     </div>
 
     <div class="container">
       {sortedPosts.length === 0 ? (
         <div class="text-center py-5">
-          <p class="lead text-muted">Henüz yayınlanmış bir blog yazısı bulunmamaktadır.</p>
+          <p class="lead text-muted">Henüz yayınlanmış bir haber bulunmamaktadır.</p>
         </div>
       ) : (
         <div class="row g-4">

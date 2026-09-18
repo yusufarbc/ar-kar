@@ -105,6 +105,33 @@
   text-transform: none;
   margin-bottom: 16px;
 }
+.bento-tile__title--sm {
+  font-size: clamp(1rem, 0.85rem + 0.8vw, 1.3rem);
+  margin-bottom: 0;
+}
+
+/* Orta kutu: gerçek şube/lokasyon fotoğrafı (hero'nun küçük eşleniği) */
+.bento-tile--photo {
+  grid-column: span 2;
+  grid-row: span 1;
+  min-height: 150px;
+  align-items: flex-end;
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+}
+.bento-tile--photo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(20, 21, 26, 0.05) 0%, rgba(20, 21, 26, 0.8) 100%);
+}
+.bento-tile--photo .bento-tile__content {
+  position: relative;
+  z-index: 1;
+  padding: 18px 20px;
+}
+.bento-tile--photo .bento-tile__eyebrow { margin-bottom: 4px; }
 
 /* Sayaç kutuları */
 .bento-tile--stat {
@@ -188,8 +215,10 @@
 @media (max-width: 575.98px) {
   .hero-bento { grid-template-columns: 1fr; gap: 10px; }
   .bento-tile--hero,
+  .bento-tile--photo,
   .bento-tile--cta { grid-column: span 1; }
   .bento-tile--hero { min-height: 260px; }
+  .bento-tile--photo { min-height: 180px; }
 }
 
 /* --------------------------------------------------------------------------
@@ -211,8 +240,10 @@
   border: 1px solid var(--ink-100);
 }
 .services-bento .bento-tile--service:first-child {
+  /* 2 sütun x 1 satır: 1 büyük (2 hücre) + 6 küçük (6 hücre) = tam 4x2
+     ızgara, boşluk kalmaz. (Önceden 2 satırdı; içerik o yüksekliği
+     doldurmadığı için kutunun altında boş alan kalıyordu.) */
   grid-column: span 2;
-  grid-row: span 2;
   background: var(--ink-900);
   color: #fff;
 }

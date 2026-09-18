@@ -357,7 +357,7 @@ function renderTabs(){
     `<button class="tab" role="tab" data-key="${k}" aria-selected="${k===current}">${COLLECTIONS[k].label}</button>`
   ).join('');
   $('tabs').querySelectorAll('.tab').forEach(b => {
-    b.onclick = () => { current = b.dataset.key; editingSlug = null; pendingImage = null; renderFields(); loadEntries(); };
+    b.onclick = () => { current = b.dataset.key; editingSlug = null; pendingImage = null; renderTabs(); renderFields(); loadEntries(); };
   });
 }
 

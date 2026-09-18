@@ -128,15 +128,29 @@ iframe {
 /* --------------------------------------------------------------------------
    Hero / carousel — dar ekranda başlık ve buton dengesi
    -------------------------------------------------------------------------- */
-#header-carousel .carousel-caption h1,
-#header-carousel .carousel-caption h2 {
-  font-size: clamp(1.35rem, 0.90rem + 2.4vw, 3.25rem);
-  line-height: 1.2;
-}
-
-#header-carousel .carousel-caption p {
+/* Slayt başlığı markup'ta <p class="display-3/4"> olarak yazılmış.
+   Bu yüzden genel paragraf kuralı display-* taşıyan öğeleri DIŞARIDA
+   bırakmalı; aksi halde başlığı küçültür. */
+#header-carousel .carousel-caption p:not([class*="display-"]) {
   font-size: clamp(0.88rem, 0.82rem + 0.45vw, 1.15rem);
   line-height: 1.55;
+}
+
+#header-carousel .carousel-caption h1,
+#header-carousel .carousel-caption h2,
+#header-carousel .carousel-caption [class*="display-"] {
+  font-size: clamp(1.35rem, 0.55rem + 3.4vw, 4.5rem);
+  line-height: 1.15;
+  font-weight: 700;
+  text-wrap: balance;
+}
+
+/* Slayt metin bloğu markup'ta satır içi max-width: 900px ile sınırlı.
+   Çok geniş ekranlarda bu blok ortada küçük kalıyordu. */
+@media (min-width: 1400px) {
+  #header-carousel .carousel-caption > div {
+    max-width: 1150px !important;
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -172,6 +186,26 @@ iframe {
     font-size: 0.85rem;
     padding-left: 0.9rem;
     padding-right: 0.9rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Çok geniş ekranlar (2K / ultra-wide)
+   --------------------------------------------------------------------------
+   Şablon her bölümde container-fluid kullanıyor; 2560px gibi genişliklerde
+   içerik uçtan uca yayılıyor ve satırlar okunamayacak kadar uzuyordu.
+   Bölümler ortalanıp makul bir üst genişlikte tutulur.
+   -------------------------------------------------------------------------- */
+@media (min-width: 1700px) {
+  .container-fluid.px-5 {
+    max-width: 1720px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Metin bloklarında satır uzunluğunu okunabilir tut */
+  .container-fluid.px-5 .text-center.mx-auto {
+    max-width: 900px;
   }
 }
 

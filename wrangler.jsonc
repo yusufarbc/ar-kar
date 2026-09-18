@@ -7,7 +7,9 @@
   // üzerinden o üretilmiş yapılandırma kullanılır.
   //
   // ÖNEMLİ:
-  //  - `main` / `assets` alanlarını buraya ELLE EKLEMEYİN, adapter yönetir.
+  //  - `main` / `assets.directory` / `assets.binding` alanlarını buraya ELLE
+  //    EKLEMEYİN, adapter yönetir. `assets` altındaki diğer anahtarlar (ör.
+  //    html_handling) korunur.
   //  - `env` (wrangler environment) blokları adapter'ın ürettiği yapılandırmaya
   //    AKTARILMAZ. Bu yüzden `--env staging` sessizce yok sayılır ve staging
   //    deploy'u production worker'ının üzerine yazar. Staging ayrımı bu nedenle
@@ -21,6 +23,16 @@
 
   "observability": {
     "enabled": true
+  },
+
+  // Tüm iç linkler, canonical etiketler ve sitemap.xml açık `.html` uzantısı
+  // kullanıyor (orijinal statik site yapısı korunuyor). Cloudflare Workers
+  // Static Assets varsayılanı ("auto-trailing-slash") `/sayfa.html` isteğini
+  // 307 ile `/sayfa`'ya yönlendirir — bu hem gereksiz bir round-trip hem de
+  // canonical URL'lerle çelişir. "none" ile bu otomatik yönlendirme kapatılır,
+  // `.html` URL'ler birebir korunur.
+  "assets": {
+    "html_handling": "none"
   },
 
   // Astro session store'u. `id` verilmediğinde Wrangler ilk deploy'da

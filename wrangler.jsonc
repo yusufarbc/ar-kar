@@ -32,7 +32,13 @@
   // canonical URL'lerle çelişir. "none" ile bu otomatik yönlendirme kapatılır,
   // `.html` URL'ler birebir korunur.
   "assets": {
-    "html_handling": "none"
+    "html_handling": "none",
+
+    // Kök isteği önce worker'a gider. Böylece middleware, panel.ar-kar.com
+    // kökünü /admin sayfasına *içeriden* yönlendirebilir (tarayıcı adresi
+    // "panel.ar-kar.com" olarak kalır). ar-kar.com kökü ise middleware'den
+    // geçip statik index.html'e düşmeye devam eder.
+    "run_worker_first": ["/"]
   },
 
   // Astro session store'u. `id` verilmediğinde Wrangler ilk deploy'da

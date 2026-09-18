@@ -6,12 +6,11 @@
 # (Bulk/Dynamic Redirect) olarak edge seviyesinde tanımlanır.
 # Bkz. scripts/setup-cloudflare.sh -> create_panel_redirect_rule()
 #
-# wrangler.jsonc'de assets.html_handling "none" olarak ayarlı (site genelinde
-# .html uzantılı URL'lerin otomatik yönlendirmeden birebir korunması için).
-# Bu yüzden kök "/" isteği artık kendiliğinden index.html'e çözülmez; aşağıdaki
-# 200 kodlu kural bunu tarayıcı URL'sini DEĞİŞTİRMEDEN (redirect değil, rewrite)
-# sağlar.
-/                    /index.html            200
+# NOT: Kök "/" isteği için burada kural YOK. wrangler.jsonc'de
+# assets.run_worker_first: ["/"] ayarlı olduğundan kök istek önce worker'a
+# gider; src/middleware.ts panel host'unda paneli gösterir, ana site için
+# adapter statik index.html'e düşer. Buraya bir "/" kuralı eklenirse worker
+# devreden çıkar ve panel kökü çalışmaz.
 
 # Eski / kısa yollardan kanonik .html sayfalarına
 /anasayfa            /index.html            301

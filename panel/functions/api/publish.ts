@@ -4,10 +4,15 @@
  * GITHUB_TOKEN yalnızca burada, Pages ortam değişkeni olarak yaşar.
  * Tarayıcıya asla gönderilmez.
  *
- * Kimlik doğrulama Cloudflare Access tarafından yapılır (panel.ar-kar.com
- * uygulaması). Buradaki Cf-Access-Jwt-Assertion kontrolü ikinci katmandır
- * ve editörün e-postasını commit mesajına yazmak için kullanılır.
+ * KİMLİK DOĞRULAMA: Cloudflare Access yalnızca panel.ar-kar.com özel adını
+ * korur — bu projenin ham *.pages.dev adresi Access'ten geçmez. Bu yüzden
+ * Cf-Access-Jwt-Assertion header'ının İMZASI burada, _lib/verifyAccess.ts
+ * ile Cloudflare'in genel anahtarına (JWKS) karşı doğrulanır. İmza kontrolü
+ * olmadan bu uç nokta, sahte bir header ile internetten doğrudan
+ * çağrılabilir ve GITHUB_TOKEN'ın yetkisiyle repoya yazılabilirdi.
  */
+
+import { verifyAccessJwt } from '../_lib/verifyAccess';
 
 interface Env {
   GITHUB_TOKEN: string;
@@ -71,22 +76,6 @@ function slugify(input: string): string {
     .slice(0, 80);
 }
 
-/** Editörün e-postasını Access JWT'sinden okur. */
-function editorEmail(request: Request): string | null {
-  const jwt = request.headers.get('Cf-Access-Jwt-Assertion');
-  if (!jwt) return null;
-  try {
-    const b64 = jwt.split('.')[1].replace(/-/g, '+').replace(/_/g, '/');
-    const padded = b64 + '='.repeat((4 - (b64.length % 4)) % 4);
-    const payload = JSON.parse(
-      new TextDecoder().decode(Uint8Array.from(atob(padded), (c) => c.charCodeAt(0)))
-    );
-    return payload.email ?? payload.sub ?? 'bilinmeyen';
-  } catch {
-    return 'bilinmeyen';
-  }
-}
-
 /** Var olan dosyanın sha'sı (güncelleme için gerekir); yoksa null. */
 async function getSha(token: string, path: string): Promise<string | null> {
   const res = await fetch(
@@ -120,10 +109,11 @@ async function putFile(token: string, path: string, contentB64: string, message:
 export const onRequestPost: PagesFunction<Env> = async (context) => {
   const { request, env } = context;
 
-  const editor = editorEmail(request);
-  if (!editor) {
-    return json({ error: 'Yetkisiz: Cloudflare Access kimliği bulunamadı.' }, 401);
+  const identity = await verifyAccessJwt(request.headers.get('Cf-Access-Jwt-Assertion'));
+  if (!identity) {
+    return json({ error: 'Yetkisiz: Cloudflare Access kimliği doğrulanamadı.' }, 401);
   }
+  const editor = identity.email;
 
   if (!env.GITHUB_TOKEN) {
     return json(

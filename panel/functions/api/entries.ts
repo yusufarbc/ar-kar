@@ -5,6 +5,8 @@
  *   DELETE /api/entries?collection=blog&slug=xyz   -> sil
  */
 
+import { verifyAccessJwt } from '../_lib/verifyAccess';
+
 interface Env {
   GITHUB_TOKEN: string;
 }
@@ -38,21 +40,6 @@ function ghHeaders(token: string) {
 function fromBase64(b64: string): string {
   const binary = atob(b64.replace(/\s/g, ''));
   return new TextDecoder().decode(Uint8Array.from(binary, (c) => c.charCodeAt(0)));
-}
-
-function editorEmail(request: Request): string | null {
-  const jwt = request.headers.get('Cf-Access-Jwt-Assertion');
-  if (!jwt) return null;
-  try {
-    const b64 = jwt.split('.')[1].replace(/-/g, '+').replace(/_/g, '/');
-    const padded = b64 + '='.repeat((4 - (b64.length % 4)) % 4);
-    const payload = JSON.parse(
-      new TextDecoder().decode(Uint8Array.from(atob(padded), (c) => c.charCodeAt(0)))
-    );
-    return payload.email ?? payload.sub ?? 'bilinmeyen';
-  } catch {
-    return 'bilinmeyen';
-  }
 }
 
 function unquote(raw: string): string {
@@ -120,7 +107,8 @@ async function listDir(token: string, path: string) {
 }
 
 export const onRequestGet: PagesFunction<Env> = async ({ request, env }) => {
-  if (!editorEmail(request)) return json({ error: 'Yetkisiz.' }, 401);
+  const identity = await verifyAccessJwt(request.headers.get('Cf-Access-Jwt-Assertion'));
+  if (!identity) return json({ error: 'Yetkisiz.' }, 401);
   if (!env.GITHUB_TOKEN) return json({ error: 'GITHUB_TOKEN tanımlı değil.' }, 500);
 
   const url = new URL(request.url);
@@ -159,8 +147,9 @@ export const onRequestGet: PagesFunction<Env> = async ({ request, env }) => {
 };
 
 export const onRequestDelete: PagesFunction<Env> = async ({ request, env }) => {
-  const editor = editorEmail(request);
-  if (!editor) return json({ error: 'Yetkisiz.' }, 401);
+  const identity = await verifyAccessJwt(request.headers.get('Cf-Access-Jwt-Assertion'));
+  if (!identity) return json({ error: 'Yetkisiz.' }, 401);
+  const editor = identity.email;
   if (!env.GITHUB_TOKEN) return json({ error: 'GITHUB_TOKEN tanımlı değil.' }, 500);
 
   const url = new URL(request.url);

@@ -1,13 +1,24 @@
 name: "CodeQL Zafiyet Taraması"
 
+# NOT: Panelden yayınlanan her içerik bir commit oluşturur. Bu commit'ler
+# yalnızca .md dosyası ve görsel içerir, hiç kod değiştirmez — o yüzden
+# güvenlik taraması gereksiz yere çalışırdı. paths-ignore ile bu commit'ler
+# atlanır. Kod değiştiğinde tarama yine koşar, ayrıca haftalık tam tarama
+# her şeyi kapsamaya devam eder.
 on:
   push:
     branches:
       - production
       - staging
+    paths-ignore:
+      - 'src/content/**'
+      - 'public/img/**'
   pull_request:
     branches:
       - production
+    paths-ignore:
+      - 'src/content/**'
+      - 'public/img/**'
   schedule:
     # Her Pazartesi 03:30 UTC (06:30 TR) — zamanlanmış tam tarama
     - cron: '30 3 * * 1'

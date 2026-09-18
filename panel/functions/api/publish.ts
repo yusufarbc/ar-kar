@@ -188,6 +188,8 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       fm.category = category;
       const location = String(body.location ?? '').trim();
       if (location) fm.location = location;
+      const specs = String(body.specs ?? '').trim();
+      if (specs) fm.specs = specs;
     }
 
     const frontmatter = Object.entries(fm)

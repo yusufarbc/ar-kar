@@ -426,223 +426,42 @@ const keywords = "konut projeleri samsun, çarşamba konut inşaat, atakum konut
         </div>
 
         <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-4 portfolio-container align-items-stretch">
-
-            <!-- Çarşamba Kirazlıkçay Konut Projesi -->
-            <div class="col portfolio-item carsamba d-flex">
-                <div class="portfolio-box flex-fill d-flex flex-column h-100">
-                    <a href="/img/kirazlikcay.webp" data-lightbox="portfolio" class="portfolio-image">
-                        <img class="img-fluid w-100" src="/img/kirazlikcay.webp" alt="Çarşamba Kirazlıkçay Konut Projesi"
-                            loading="lazy">
-                    </a>
-                    <div class="portfolio-title flex-grow-1 d-flex flex-column">
-                        <h2 class="text-uppercase">Kirazlıkçay Konut Projesi</h2>
-                        <span><i class="fa fa-map-marker-alt text-primary me-2"></i>Çarşamba, Samsun</span>
-                        <span><i class="fa fa-home text-primary me-2"></i>18 Daire (8x2+1, 10x1+1)</span>
-                        <p class="mt-3 text-muted">Doğayla iç içe, manzaralı konumda tasarlanmış huzurlu yaşam alanları.
-                            Çarşamba TOKİ'nin arka tarafında yer almaktadır. Çevresinde MKE, Yarı Olimpik Yüzme Havuzu,
-                            Organize Sanayi Bölgesi, Tekstilkent Sanayisi bulunmaktadır. Yaşanabilir ve müstakil alanın
-                            tam ortasındadır.</p>
+            {cmsProjects.map((project) => {
+                const slug = project.id.replace(/\/index$/, '');
+                const cover = project.data.coverImage || '/img/about.webp';
+                return (
+                    <div class="col portfolio-item d-flex">
+                        <div class="portfolio-box flex-fill d-flex flex-column h-100">
+                            <a href={cover} data-lightbox="portfolio" class="portfolio-image">
+                                <img class="img-fluid w-100" src={cover} alt={project.data.title} loading="lazy" />
+                            </a>
+                            <div class="portfolio-title flex-grow-1 d-flex flex-column">
+                                <h2 class="text-uppercase">
+                                    <a href={`/projeler/${slug}`} class="text-decoration-none text-reset">{project.data.title}</a>
+                                </h2>
+                                {project.data.location && (
+                                    <span><i class="fa fa-map-marker-alt text-primary me-2"></i>{project.data.location}</span>
+                                )}
+                                {project.data.specs && (
+                                    <span><i class="fa fa-home text-primary me-2"></i>{project.data.specs}</span>
+                                )}
+                                {project.data.description && (
+                                    <p class="mt-3 text-muted">{project.data.description}</p>
+                                )}
+                                <div class="mt-auto pt-2">
+                                    <a href={`/projeler/${slug}`} class="btn btn-sm btn-primary px-3">
+                                        Detayları Gör <i class="fa fa-arrow-right ms-1"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-
-            <!-- Atakum Beypınar Konut Projesi -->
-            <div class="col portfolio-item atakum d-flex">
-                <div class="portfolio-box flex-fill d-flex flex-column h-100">
-                    <a href="/img/beypınar .webp" data-lightbox="portfolio" class="portfolio-image">
-                        <img class="img-fluid w-100" src="/img/beypınar .webp" alt="Atakum Beypınar Konut Projesi"
-                            loading="lazy">
-                    </a>
-                    <div class="portfolio-title flex-grow-1 d-flex flex-column">
-                        <h2 class="text-uppercase">Beypınar Konut Projesi</h2>
-                        <span><i class="fa fa-map-marker-alt text-primary me-2"></i>Atakum, Samsun</span>
-                        <span><i class="fa fa-home text-primary me-2"></i>18 Daire (2+1, 120 m²)</span>
-                        <p class="mt-2 text-muted">Modern mimari anlayışla tasarlanmış, konforlu yaşam alanları sunan
-                            konut projemiz. Gökdelenler bölgesi, Recep Tayyip Erdoğan bulvarına yakın konumda.
-                            Dairelerimiz 2+1 olmasına rağmen 120 m² ferah alana sahiptir. Her şey mimar ve iç mimar
-                            işbirliğiyle kaliteli ve özenle yapılmıştır.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Çarşamba Adapark 2+0 Konut Projesi -->
-            <div class="col portfolio-item carsamba d-flex">
-                <div class="portfolio-box flex-fill d-flex flex-column h-100">
-                    <a href="/img/adapark2-0.webp" data-lightbox="portfolio" class="portfolio-image">
-                        <img class="img-fluid w-100" src="/img/adapark2-0.webp" alt="Çarşamba Adapark 2+0 Konut Projesi"
-                            loading="lazy">
-                    </a>
-                    <div class="portfolio-title flex-grow-1 d-flex flex-column">
-                        <h2 class="text-uppercase">Adapark 2+0 Konut Projesi</h2>
-                        <span><i class="fa fa-map-marker-alt text-primary me-2"></i>Çarşamba, Samsun</span>
-                        <span><i class="fa fa-home text-primary me-2"></i>6 Daire (2+0, 80 m²) + Dükkan</span>
-                        <p class="mt-2 text-muted">Doğayla iç içe, manzaralı konumda tasarlanmış huzurlu yaşam alanları.
-                            Bölgenin en prestijli konumundadır. Daireler bulunduğu bölgenin kalite ve konseptinin
-                            üstünde yapılmıştır. Tüm bölgelere yürüme mesafesindedir.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Atakum Körfez Konut Projesi -->
-            <div class="col portfolio-item atakum d-flex">
-                <div class="portfolio-box flex-fill d-flex flex-column h-100">
-                    <a href="/img/korfez.webp" data-lightbox="portfolio" class="portfolio-image">
-                        <img class="img-fluid w-100" src="/img/korfez.webp" alt="Atakum Körfez Konut Projesi"
-                            loading="lazy">
-                    </a>
-                    <div class="portfolio-title flex-grow-1 d-flex flex-column">
-                        <h2 class="text-uppercase">Körfez Konut Projesi</h2>
-                        <span><i class="fa fa-map-marker-alt text-primary me-2"></i>Atakum, Samsun</span>
-                        <span><i class="fa fa-home text-primary me-2"></i>19 Daire (1+1)</span>
-                        <p class="mt-2 text-muted">Modern mimari anlayışla tasarlanmış, konforlu yaşam alanları sunan
-                            konut projemiz. Dairelerimiz yer ve yapısına göre bölgesinde bulunan çoğu binadan kaliteli
-                            ve kullanışlı şekilde inşa edilmiştir. Pelitköy tramvay durağına 1 dakika, Körfez marinaya 5
-                            dakika yürüme mesafesindedir.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Çarşamba Bulutoğlu Konut Projesi -->
-            <div class="col portfolio-item carsamba d-flex">
-                <div class="portfolio-box flex-fill d-flex flex-column h-100">
-                    <a href="/img/bulutoglu.webp" data-lightbox="portfolio" class="portfolio-image">
-                        <img class="img-fluid w-100" src="/img/bulutoglu.webp" alt="Çarşamba Bulutoğlu Konut Projesi"
-                            loading="lazy">
-                    </a>
-                    <div class="portfolio-title flex-grow-1 d-flex flex-column">
-                        <h2 class="text-uppercase">Bulutoğlu Konut Projesi</h2>
-                        <span><i class="fa fa-map-marker-alt text-primary me-2"></i>Çarşamba, Samsun</span>
-                        <span><i class="fa fa-home text-primary me-2"></i>8 Daire (3+1) + Dükkan</span>
-                        <p class="mt-2 text-muted">Stratejik konumda, modern tasarım ve kaliteli malzemelerle inşa
-                            edilen konut projemiz. Bölgenin en işlek köy ve şehri birleştiren caddesinde bulunmaktadır.
-                            Dairelerimiz kaliteli ve özenle inşa edilmiştir.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Çarşamba Adapark Ala Konut Projesi -->
-            <div class="col portfolio-item carsamba d-flex">
-                <div class="portfolio-box flex-fill d-flex flex-column h-100">
-                    <a href="/img/ala.webp" data-lightbox="portfolio" class="portfolio-image">
-                        <img class="img-fluid w-100" src="/img/ala.webp" alt="Çarşamba Adapark Ala Konut Projesi"
-                            loading="lazy">
-                    </a>
-                    <div class="portfolio-title flex-grow-1 d-flex flex-column">
-                        <h2 class="text-uppercase">Adapark Ala Konut Projesi</h2>
-                        <span><i class="fa fa-map-marker-alt text-primary me-2"></i>Çarşamba, Samsun</span>
-                        <span><i class="fa fa-home text-primary me-2"></i>12 Daire (3+1, 160 m²) + 2 Dükkan</span>
-                        <p class="mt-2 text-muted">Doğayla iç içe, manzaralı konumda tasarlanmış huzurlu yaşam alanları.
-                            Bölgenin en prestijli konumunda, karşısında yeni kaymakamlık binası bulunmaktadır. Daireler
-                            bulunduğu bölgenin kalite ve konseptinin üstünde yapılmıştır. Akıllı ev sistemi
-                            bulunmaktadır. Tüm bölgelere yürüme mesafesindedir.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Çarşamba Adapark Ala Plus Konut Projesi -->
-            <div class="col portfolio-item carsamba d-flex">
-                <div class="portfolio-box flex-fill d-flex flex-column h-100">
-                    <a href="/img/alaplus.webp" data-lightbox="portfolio" class="portfolio-image">
-                        <img class="img-fluid w-100" src="/img/alaplus.webp"
-                            alt="Çarşamba Adapark Ala Plus Konut Projesi" loading="lazy">
-                    </a>
-                    <div class="portfolio-title flex-grow-1 d-flex flex-column">
-                        <h2 class="text-uppercase">Adapark Ala Plus Konut Projesi</h2>
-                        <span><i class="fa fa-map-marker-alt text-primary me-2"></i>Çarşamba, Samsun</span>
-                        <span><i class="fa fa-home text-primary me-2"></i>12 Daire (3+1, 135 m²) + 2 Dükkan</span>
-                        <p class="mt-2 text-muted">Doğayla iç içe, manzaralı konumda tasarlanmış huzurlu yaşam alanları.
-                            Bölgenin en prestijli konumunda, karşı çaprazında yeni kaymakamlık binası ve kaymakam konutu
-                            bulunmaktadır. Daireler bulunduğu bölgenin kalite ve konseptinin üstünde yapılmıştır. Tüm
-                            bölgelere yürüme mesafesindedir.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Çarşamba Tekstilkent Projesi -->
-            <div class="col portfolio-item carsamba d-flex">
-                <div class="portfolio-box flex-fill d-flex flex-column h-100">
-                    <a href="/img/teksstilkent.webp" data-lightbox="portfolio" class="portfolio-image">
-                        <img class="img-fluid w-100" src="/img/teksstilkent.webp" alt="Çarşamba Tekstilkent Projesi"
-                            loading="lazy">
-                    </a>
-                    <div class="portfolio-title flex-grow-1 d-flex flex-column">
-                        <h2 class="text-uppercase">Tekstilkent Projesi</h2>
-                        <span><i class="fa fa-map-marker-alt text-primary me-2"></i>Çarşamba, Samsun</span>
-
-                        <p class="mt-2 text-muted">Projemiz 975 m2 si idare bina 2900 m2 si üretim alanı olmak üzere
-                            toplamda 3875 m2'dir. Bölgede bulunan fabrikalar arasında en büyük tekstil üretim
-                            tesislerinden bir tanesidir.</p>
-                    </div>
-                </div>
-            </div>
-
+                );
+            })}
         </div>
 
     </div>
     <!-- Portfolio End -->
-
-    <!-- CMS Projects Start -->
-    {cmsProjects.length > 0 && (
-        <div class="container-fluid py-6 px-5 bg-light">
-            <div class="text-center mx-auto mb-5" style="max-width: 700px;">
-                <h2 class="display-6 text-uppercase mb-3">Güncel <span class="text-primary">Projelerimiz</span></h2>
-                <p class="text-muted">Devam eden ve yeni tamamlanan çalışmalarımızdan seçmeler</p>
-            </div>
-            <div class="container">
-                <div class="row g-4">
-                    {cmsProjects.map((project) => {
-                        const slug = project.id.replace(/\/index$/, '');
-                        const projectUrl = `/projeler/${slug}`;
-                        const coverImage = project.data.coverImage || '/img/about.webp';
-
-                        return (
-                            <div class="col-12 col-md-6 col-lg-4">
-                                <article class="card h-100 border-0 shadow-sm rounded overflow-hidden project-card">
-                                    <div class="position-relative">
-                                        <a href={projectUrl}>
-                                            <img
-                                                src={coverImage}
-                                                alt={project.data.title}
-                                                class="card-img-top w-100"
-                                                style="height: 220px; object-fit: cover;"
-                                                loading="lazy"
-                                            />
-                                        </a>
-                                        <span class="badge bg-primary position-absolute top-0 start-0 m-3 px-3 py-2">
-                                            {PROJECT_CATEGORIES[project.data.category]}
-                                        </span>
-                                    </div>
-                                    <div class="card-body p-4 d-flex flex-column">
-                                        <h3 class="card-title h5 mb-2">
-                                            <a href={projectUrl} class="text-dark text-decoration-none hover-primary">
-                                                {project.data.title}
-                                            </a>
-                                        </h3>
-                                        {project.data.location && (
-                                            <span class="text-muted small mb-3">
-                                                <i class="fa fa-map-marker-alt text-primary me-2"></i>{project.data.location}
-                                            </span>
-                                        )}
-                                        {project.data.description && (
-                                            <p class="card-text text-muted mb-4 flex-grow-1" style="font-size: 0.95rem; line-height: 1.6;">
-                                                {project.data.description}
-                                            </p>
-                                        )}
-                                        <div class="mt-auto pt-3 border-top">
-                                            <a href={projectUrl} class="btn btn-sm btn-primary px-3">
-                                                Projeyi İncele <i class="fa fa-arrow-right ms-1"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </article>
-                            </div>
-                        );
-                    })}
-                </div>
-            </div>
-        </div>
-    )}
-    <!-- CMS Projects End -->
 </BaseLayout>
 
 <style>

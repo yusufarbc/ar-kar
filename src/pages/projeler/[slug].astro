@@ -86,6 +86,9 @@ const coverImage = project.data.coverImage || '/img/about.webp';
             {project.data.location && (
               <span><i class="fa fa-map-marker-alt text-primary me-2"></i>{project.data.location}</span>
             )}
+            {project.data.specs && (
+              <span><i class="fa fa-home text-primary me-2"></i>{project.data.specs}</span>
+            )}
             {project.data.date && (
               <span><i class="fa fa-calendar-alt text-primary me-2"></i>{project.data.date}</span>
             )}

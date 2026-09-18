@@ -24,6 +24,7 @@ const projects = defineCollection({
     title: z.string(),
     category: z.enum(['insaat', 'pvc', 'dekorasyon', 'mimar']).default('insaat'),
     location: z.string().optional(),
+    specs: z.string().optional(),
     date: dateField.optional(),
     description: z.string().optional(),
     coverImage: z.string().optional(),

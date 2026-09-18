@@ -1,0 +1,39 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+
+  // Bu dosya Astro'nun Cloudflare adapter'ı tarafından okunur; build sırasında
+  // `main` ve `assets` alanları eklenerek `dist/server/wrangler.json` üretilir.
+  // `wrangler deploy` kök dizinden çalıştığında `.wrangler/deploy/config.json`
+  // üzerinden o üretilmiş yapılandırma kullanılır.
+  //
+  // ÖNEMLİ:
+  //  - `main` / `assets` alanlarını buraya ELLE EKLEMEYİN, adapter yönetir.
+  //  - `env` (wrangler environment) blokları adapter'ın ürettiği yapılandırmaya
+  //    AKTARILMAZ. Bu yüzden `--env staging` sessizce yok sayılır ve staging
+  //    deploy'u production worker'ının üzerine yazar. Staging ayrımı bu nedenle
+  //    worker adı ile yapılır:
+  //      npm run deploy:staging     -> wrangler deploy --name ar-kar-staging
+  //      npm run deploy:production  -> wrangler deploy --name ar-kar
+
+  "name": "ar-kar",
+  "compatibility_date": "2026-09-17",
+  "compatibility_flags": ["nodejs_compat"],
+
+  "observability": {
+    "enabled": true
+  },
+
+  // Astro session store'u. `id` verilmediğinde Wrangler ilk deploy'da
+  // namespace'i otomatik provision eder ve id'yi çıktıda gösterir.
+  // Sabitlemek için:  npx wrangler kv namespace create ar-kar-session
+  "kv_namespaces": [
+    {
+      "binding": "SESSION"
+    }
+  ],
+
+  "vars": {
+    "PUBLIC_SITE_URL": "https://ar-kar.com",
+    "PUBLIC_PANEL_HOST": "panel.ar-kar.com"
+  }
+}

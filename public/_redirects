@@ -1,0 +1,25 @@
+# Cloudflare Workers Static Assets yönlendirmeleri
+#
+# NOT: _redirects dosyasındaki "source" alanı yalnızca YOL (path) eşleştirir,
+# host/alan adı eşleştiremez. Bu yüzden panel.ar-kar.com -> /keystatic/
+# yönlendirmesi burada TANIMLANAMAZ; o kural Cloudflare "Single Redirect"
+# (Bulk/Dynamic Redirect) olarak edge seviyesinde tanımlanır.
+# Bkz. scripts/setup-cloudflare.sh -> create_panel_redirect_rule()
+
+# Eski / kısa yollardan kanonik .html sayfalarına
+/anasayfa            /index.html            301
+/home                /index.html            301
+/projelerimiz        /projeler.html         301
+/insaat-malzemeleri  /insaat.html           301
+/pvc-pencere         /pvc.html              301
+/zirai               /ziraat.html           301
+/tarim-urunleri      /tarim.html            301
+/sikca-sorulan-sorular /sss.html            301
+
+# Blog kısayolu
+/haberler            /blog/                 301
+/duyurular           /blog/                 301
+
+# Yönetim paneli kısayolu (aynı host üzerinde)
+/panel               /keystatic/            302
+/admin               /keystatic/            302

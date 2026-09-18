@@ -1,5 +1,14 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { PROJECT_CATEGORIES } from '../lib/projects';
+
+// Keystatic panelinden (panel.ar-kar.com) eklenen projeler.
+// Aşağıdaki statik portfolyo bölümü referans projeler olarak korunur;
+// CMS'ten gelen kayıtlar ayrı bir bölümde listelenir.
+const cmsProjects = (await getCollection('projects')).sort((a, b) =>
+  String(b.data.date ?? '').localeCompare(String(a.data.date ?? ''))
+);
 
 const title = "Konut İnşaat Projeleri | AR-KAR İnşaat Samsun | Samsun'da Modern Konut Projeleri";
 const description = "AR-KAR İnşaat konut projeleri: Çarşamba Kirazlıkçay, Adapark, Bulutoğlu, Atakum Beypınar ve Körfez'de modern konut projeleri. Akıllı ev sistemli, 2+1, 3+1 daireler. 36 yıllık deneyimle kaliteli inşaat.";
@@ -571,4 +580,81 @@ const keywords = "konut projeleri samsun, çarşamba konut inşaat, atakum konut
 
     </div>
     <!-- Portfolio End -->
+
+    <!-- CMS Projects Start -->
+    {cmsProjects.length > 0 && (
+        <div class="container-fluid py-6 px-5 bg-light">
+            <div class="text-center mx-auto mb-5" style="max-width: 700px;">
+                <h2 class="display-6 text-uppercase mb-3">Güncel <span class="text-primary">Projelerimiz</span></h2>
+                <p class="text-muted">Devam eden ve yeni tamamlanan çalışmalarımızdan seçmeler</p>
+            </div>
+            <div class="container">
+                <div class="row g-4">
+                    {cmsProjects.map((project) => {
+                        const slug = project.id.replace(/\/index$/, '');
+                        const projectUrl = `/projeler/${slug}`;
+                        const coverImage = project.data.coverImage || '/img/about.webp';
+
+                        return (
+                            <div class="col-12 col-md-6 col-lg-4">
+                                <article class="card h-100 border-0 shadow-sm rounded overflow-hidden project-card">
+                                    <div class="position-relative">
+                                        <a href={projectUrl}>
+                                            <img
+                                                src={coverImage}
+                                                alt={project.data.title}
+                                                class="card-img-top w-100"
+                                                style="height: 220px; object-fit: cover;"
+                                                loading="lazy"
+                                            />
+                                        </a>
+                                        <span class="badge bg-primary position-absolute top-0 start-0 m-3 px-3 py-2">
+                                            {PROJECT_CATEGORIES[project.data.category]}
+                                        </span>
+                                    </div>
+                                    <div class="card-body p-4 d-flex flex-column">
+                                        <h3 class="card-title h5 mb-2">
+                                            <a href={projectUrl} class="text-dark text-decoration-none hover-primary">
+                                                {project.data.title}
+                                            </a>
+                                        </h3>
+                                        {project.data.location && (
+                                            <span class="text-muted small mb-3">
+                                                <i class="fa fa-map-marker-alt text-primary me-2"></i>{project.data.location}
+                                            </span>
+                                        )}
+                                        {project.data.description && (
+                                            <p class="card-text text-muted mb-4 flex-grow-1" style="font-size: 0.95rem; line-height: 1.6;">
+                                                {project.data.description}
+                                            </p>
+                                        )}
+                                        <div class="mt-auto pt-3 border-top">
+                                            <a href={projectUrl} class="btn btn-sm btn-primary px-3">
+                                                Projeyi İncele <i class="fa fa-arrow-right ms-1"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                        );
+                    })}
+                </div>
+            </div>
+        </div>
+    )}
+    <!-- CMS Projects End -->
 </BaseLayout>
+
+<style>
+    .project-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .project-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12) !important;
+    }
+    .hover-primary:hover {
+        color: var(--bs-primary) !important;
+        transition: color 0.2s ease;
+    }
+</style>

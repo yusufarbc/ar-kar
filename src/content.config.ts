@@ -2,11 +2,29 @@ import { defineCollection } from 'astro:content';
 import { z } from 'astro/zod';
 import { glob } from 'astro/loaders';
 
+/** Keystatic `fields.date` ISO string yazar; Date objesi gelirse YYYY-MM-DD'ye indirger. */
+const dateField = z
+  .string()
+  .or(z.date())
+  .transform((val) => (typeof val === 'string' ? val : val.toISOString().split('T')[0]));
+
 const blog = defineCollection({
   loader: glob({ pattern: '**/*.mdoc', base: 'src/content/blog' }),
   schema: z.object({
     title: z.string(),
-    date: z.string().or(z.date()).transform((val) => (typeof val === 'string' ? val : val.toISOString().split('T')[0])),
+    date: dateField,
+    description: z.string().optional(),
+    coverImage: z.string().optional(),
+  }),
+});
+
+const projects = defineCollection({
+  loader: glob({ pattern: '**/*.mdoc', base: 'src/content/projects' }),
+  schema: z.object({
+    title: z.string(),
+    category: z.enum(['insaat', 'pvc', 'dekorasyon', 'mimar']).default('insaat'),
+    location: z.string().optional(),
+    date: dateField.optional(),
     description: z.string().optional(),
     coverImage: z.string().optional(),
   }),
@@ -14,5 +32,5 @@ const blog = defineCollection({
 
 export const collections = {
   blog,
+  projects,
 };
-

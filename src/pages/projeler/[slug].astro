@@ -1,0 +1,164 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { PROJECT_CATEGORIES } from '../../lib/projects';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project) => {
+    const slug = project.id.replace(/\/index$/, '');
+    return {
+      params: { slug },
+      props: { project },
+    };
+  });
+}
+
+const { project } = Astro.props;
+const { slug } = Astro.params;
+const { Content } = await render(project);
+
+const categoryLabel = PROJECT_CATEGORIES[project.data.category];
+const title = `${project.data.title} | AR-KAR İnşaat Samsun`;
+const description =
+  project.data.description ||
+  `${project.data.title} - AR-KAR İnşaat ${categoryLabel} projesi.`;
+const canonical = `https://ar-kar.com/projeler/${slug}`;
+const coverImage = project.data.coverImage || '/img/about.webp';
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  ogImage={coverImage.startsWith('http') ? coverImage : `https://ar-kar.com${coverImage}`}
+  ogType="article"
+  activePage="projeler"
+>
+  <Fragment slot="head">
+    <script is:inline type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'CreativeWork',
+      name: project.data.title,
+      description,
+      url: canonical,
+      image: coverImage.startsWith('http') ? coverImage : `https://ar-kar.com${coverImage}`,
+      creator: {
+        '@type': 'Organization',
+        name: 'AR-KAR İnşaat',
+        url: 'https://ar-kar.com',
+      },
+      ...(project.data.location ? { locationCreated: { '@type': 'Place', name: project.data.location } } : {}),
+      breadcrumb: {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Ana Sayfa', item: 'https://ar-kar.com/' },
+          { '@type': 'ListItem', position: 2, name: 'Projeler', item: 'https://ar-kar.com/projeler.html' },
+          { '@type': 'ListItem', position: 3, name: project.data.title, item: canonical },
+        ],
+      },
+    })} />
+  </Fragment>
+
+  <!-- Breadcrumb Start -->
+  <div class="container-fluid bg-dark py-3 px-5">
+    <div class="row">
+      <div class="col-12">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a href="/index.html" class="text-primary">Anasayfa</a></li>
+            <li class="breadcrumb-item"><a href="/projeler.html" class="text-primary">Projeler</a></li>
+            <li class="breadcrumb-item active text-white" aria-current="page">{project.data.title}</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <!-- Breadcrumb End -->
+
+  <!-- Project Detail Start -->
+  <article class="container py-6">
+    <div class="row justify-content-center">
+      <div class="col-lg-9">
+        <header class="mb-4">
+          <div class="d-flex flex-wrap align-items-center text-muted mb-3 gap-3">
+            <span class="badge bg-primary px-3 py-2">{categoryLabel}</span>
+            {project.data.location && (
+              <span><i class="fa fa-map-marker-alt text-primary me-2"></i>{project.data.location}</span>
+            )}
+            {project.data.date && (
+              <span><i class="fa fa-calendar-alt text-primary me-2"></i>{project.data.date}</span>
+            )}
+          </div>
+          <h1 class="display-6 fw-bold text-dark mb-4">{project.data.title}</h1>
+          {project.data.description && (
+            <p class="lead text-secondary border-start border-4 border-primary ps-3 py-1 mb-4">
+              {project.data.description}
+            </p>
+          )}
+        </header>
+
+        {project.data.coverImage && (
+          <div class="mb-5 rounded overflow-hidden shadow-sm">
+            <a href={coverImage} data-lightbox="project">
+              <img
+                src={coverImage}
+                alt={project.data.title}
+                class="w-100 img-fluid"
+                style="max-height: 480px; object-fit: cover;"
+              />
+            </a>
+          </div>
+        )}
+
+        <div class="project-content" style="font-size: 1.1rem; line-height: 1.8;">
+          <Content />
+        </div>
+
+        <hr class="my-5" />
+
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+          <a href="/projeler.html" class="btn btn-outline-primary">
+            <i class="fa fa-arrow-left me-2"></i>Tüm Projeler
+          </a>
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#contactModal"
+          >
+            <i class="fa fa-envelope me-2"></i>Bu Proje Hakkında Bilgi Alın
+          </button>
+        </div>
+      </div>
+    </div>
+  </article>
+  <!-- Project Detail End -->
+</BaseLayout>
+
+<style is:inline>
+  .project-content h2, .project-content h3, .project-content h4 {
+    color: #040404;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+  }
+  .project-content p {
+    margin-bottom: 1.25rem;
+    color: #444;
+  }
+  .project-content ul, .project-content ol {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+  .project-content li {
+    margin-bottom: 0.5rem;
+    color: #444;
+  }
+  .project-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 1.5rem 0;
+  }
+</style>

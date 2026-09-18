@@ -11,7 +11,7 @@ const sortedPosts = posts.sort((a, b) => {
 
 const title = "Blog & Haberler | AR-KAR İnşaat Samsun";
 const description = "AR-KAR İnşaat kurumsal blog ve haberler. Samsun inşaat sektörü, yeni konut projeleri, tarım ve yapı malzemeleri hakkında güncel yazılar.";
-const canonical = "https://ar-kar.com/blog/";
+const canonical = "https://ar-kar.com/blog.html";
 ---
 
 <BaseLayout
@@ -51,7 +51,7 @@ const canonical = "https://ar-kar.com/blog/";
         <div class="row g-4">
           {sortedPosts.map((post) => {
             const slug = post.id.replace(/\/index$/, '');
-            const postUrl = `/blog/${slug}`;
+            const postUrl = `/blog/${slug}.html`;
             const coverImage = post.data.coverImage || '/img/about.webp';
             const dateStr = post.data.date;
 

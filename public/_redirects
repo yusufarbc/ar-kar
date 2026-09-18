@@ -5,6 +5,13 @@
 # yönlendirmesi burada TANIMLANAMAZ; o kural Cloudflare "Single Redirect"
 # (Bulk/Dynamic Redirect) olarak edge seviyesinde tanımlanır.
 # Bkz. scripts/setup-cloudflare.sh -> create_panel_redirect_rule()
+#
+# wrangler.jsonc'de assets.html_handling "none" olarak ayarlı (site genelinde
+# .html uzantılı URL'lerin otomatik yönlendirmeden birebir korunması için).
+# Bu yüzden kök "/" isteği artık kendiliğinden index.html'e çözülmez; aşağıdaki
+# 200 kodlu kural bunu tarayıcı URL'sini DEĞİŞTİRMEDEN (redirect değil, rewrite)
+# sağlar.
+/                    /index.html            200
 
 # Eski / kısa yollardan kanonik .html sayfalarına
 /anasayfa            /index.html            301
@@ -17,8 +24,8 @@
 /sikca-sorulan-sorular /sss.html            301
 
 # Blog kısayolu
-/haberler            /blog/                 301
-/duyurular           /blog/                 301
+/haberler            /blog.html             301
+/duyurular           /blog.html             301
 
 # Yönetim paneli kısayolu (aynı host üzerinde)
 /panel               /keystatic/            302

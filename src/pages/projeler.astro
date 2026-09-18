@@ -592,7 +592,7 @@ const keywords = "konut projeleri samsun, çarşamba konut inşaat, atakum konut
                 <div class="row g-4">
                     {cmsProjects.map((project) => {
                         const slug = project.id.replace(/\/index$/, '');
-                        const projectUrl = `/projeler/${slug}`;
+                        const projectUrl = `/projeler/${slug}.html`;
                         const coverImage = project.data.coverImage || '/img/about.webp';
 
                         return (

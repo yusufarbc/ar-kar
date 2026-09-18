@@ -21,9 +21,7 @@ const STATIC_PAGES: Array<{
   { path: '/pvc', changefreq: 'monthly', priority: '0.8' },
   { path: '/tarim', changefreq: 'monthly', priority: '0.7' },
   { path: '/ziraat', changefreq: 'monthly', priority: '0.7' },
-  { path: '/otomotiv', changefreq: 'monthly', priority: '0.7' },
   { path: '/mimar', changefreq: 'monthly', priority: '0.7' },
-  { path: '/dekorasyon', changefreq: 'monthly', priority: '0.7' },
   { path: '/sss', changefreq: 'monthly', priority: '0.6' },
   { path: '/blog', changefreq: 'weekly', priority: '0.7' },
 ];

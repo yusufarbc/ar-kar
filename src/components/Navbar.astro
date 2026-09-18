@@ -12,9 +12,7 @@ const isServicesActive = [
   'pvc',
   'tarim',
   'ziraat',
-  'otomotiv',
-  'mimar',
-  'dekorasyon'
+  'mimar'
 ].includes(activePage);
 ---
 
@@ -44,9 +42,7 @@ const isServicesActive = [
                         <a href="/pvc" class={`dropdown-item ${activePage === 'pvc' ? 'active' : ''}`}>PVC Kapı ve Pencere Sistemleri</a>
                         <a href="/tarim" class={`dropdown-item ${activePage === 'tarim' ? 'active' : ''}`}>Tarım Ürünleri Alım Satımı</a>
                         <a href="/ziraat" class={`dropdown-item ${activePage === 'ziraat' ? 'active' : ''}`}>Zirai Ürünler ve Danışmanlık</a>
-                        <a href="/otomotiv" class={`dropdown-item ${activePage === 'otomotiv' ? 'active' : ''}`}>Otomotiv Alım Satım</a>
                         <a href="/mimar" class={`dropdown-item ${activePage === 'mimar' ? 'active' : ''}`}>Mimari Proje Hizmetleri</a>
-                        <a href="/dekorasyon" class={`dropdown-item ${activePage === 'dekorasyon' ? 'active' : ''}`}>Dekorasyon Hizmetleri</a>
                     </div>
                 </div>
                 <a href="/blog" class={`nav-item nav-link fw-semibold ${activePage === 'blog' ? 'active' : ''}`}>Blog</a>

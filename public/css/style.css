@@ -387,39 +387,7 @@
         padding-right: 0 !important;
     }
 
-    /* Başlık boyutları */
-    .display-1 {
-        font-size: 2.5rem !important;
-    }
-
-    .display-2 {
-        font-size: 2.2rem !important;
-    }
-
-    .display-3 {
-        font-size: 2rem !important;
-    }
-
-    .display-4 {
-        font-size: 1.8rem !important;
-    }
-
-    .display-5 {
-        font-size: 1.6rem !important;
-    }
-
-    .display-6 {
-        font-size: 1.4rem !important;
-    }
-
     /* Carousel mobil uyumları */
-    .carousel-caption h1 {
-        font-size: 2rem !important;
-    }
-
-    .carousel-caption h4 {
-        font-size: 1.1rem !important;
-    }
 
     .carousel-caption p {
         font-size: 0.9rem !important;
@@ -508,31 +476,6 @@
 /* Çok küçük ekranlar için özel kurallar */
 @media (max-width: 576px) {
 
-    /* Ekstra küçük başlıklar */
-    .display-1 {
-        font-size: 2rem !important;
-    }
-
-    .display-2 {
-        font-size: 1.8rem !important;
-    }
-
-    .display-3 {
-        font-size: 1.6rem !important;
-    }
-
-    .display-4 {
-        font-size: 1.4rem !important;
-    }
-
-    .display-5 {
-        font-size: 1.3rem !important;
-    }
-
-    .display-6 {
-        font-size: 1.2rem !important;
-    }
-
     /* Container padding daha da küçült */
     .container-fluid {
         padding-left: 10px !important;
@@ -547,14 +490,6 @@
     /* Carousel çok küçük ekranlar */
     .carousel-caption {
         padding: 0.5rem 0.75rem !important;
-    }
-
-    .carousel-caption h1 {
-        font-size: 1.3rem !important;
-    }
-
-    .carousel-caption h4 {
-        font-size: 0.9rem !important;
     }
 
     .carousel-caption p {
@@ -613,28 +548,13 @@
         font-size: 13px;
     }
 
-    /* Tablet başlıklar */
-    .display-1 {
-        font-size: 3rem !important;
-    }
-
-    .display-2 {
-        font-size: 2.5rem !important;
-    }
-
     /* Tablet service items */
     .service-item {
         padding: 2rem 1.5rem;
     }
 
     /* Tablet carousel */
-    .carousel-caption h1 {
-        font-size: 2.5rem !important;
-    }
 
-    .carousel-caption h4 {
-        font-size: 1.3rem !important;
-    }
 }
 
 /* Navbar mobil buton stilleri */
@@ -896,13 +816,6 @@ h1, h2, h3, h4, h5, h6,
         padding-right: 2rem !important;
     }
 
-    .display-4 {
-        font-size: 2.2rem !important;
-    }
-
-    .display-5 {
-        font-size: 1.8rem !important;
-    }
 }
 
 /* Mobil Cihazlar (320px - 767.98px) Mobil Tasarım Optimizasyonu */

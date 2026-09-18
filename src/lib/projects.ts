@@ -8,7 +8,6 @@
 export const PROJECT_CATEGORIES = {
   insaat: 'İnşaat',
   pvc: 'PVC & Alüminyum',
-  dekorasyon: 'Dekorasyon',
   mimar: 'Mimarlık',
 } as const;
 

@@ -31,7 +31,7 @@ const COLLECTIONS: Record<string, { dir: string; mediaDir: string; mediaPublic: 
   },
 };
 
-const PROJECT_CATEGORIES = ['insaat', 'pvc', 'dekorasyon', 'mimar'];
+const PROJECT_CATEGORIES = ['insaat', 'pvc', 'mimar'];
 
 const json = (data: unknown, status = 200) =>
   new Response(JSON.stringify(data), {

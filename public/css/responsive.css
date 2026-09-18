@@ -1,0 +1,190 @@
+/* ==========================================================================
+   AR-KAR — Akışkan (fluid) responsive katmanı
+   --------------------------------------------------------------------------
+   style.css'ten SONRA yüklenir. Amaç: yazı ve boşlukları sabit kırılma
+   noktalarına bırakmak yerine ekran genişliğiyle birlikte sürekli
+   ölçeklendirmek (clamp). Masaüstü değerleri mevcut tasarımla aynı bırakıldı;
+   değişen yalnızca küçük ve orta ekranlardaki davranış.
+   ========================================================================== */
+
+:root {
+  /* Akışkan tipografi ölçeği — min, tercih edilen, maks */
+  --fs-display-3: clamp(2.25rem, 1.30rem + 4.2vw, 4rem);
+  --fs-display-4: clamp(2.00rem, 1.25rem + 3.6vw, 3.5rem);
+  --fs-display-5: clamp(1.75rem, 1.15rem + 3.0vw, 3rem);
+  --fs-display-6: clamp(1.45rem, 1.05rem + 2.0vw, 2.5rem);
+
+  --fs-h1: clamp(1.75rem, 1.20rem + 2.6vw, 2.75rem);
+  --fs-h2: clamp(1.50rem, 1.10rem + 1.9vw, 2.25rem);
+  --fs-h3: clamp(1.25rem, 1.00rem + 1.3vw, 1.75rem);
+  --fs-h4: clamp(1.10rem, 0.95rem + 0.8vw, 1.4rem);
+  --fs-h5: clamp(1.00rem, 0.92rem + 0.4vw, 1.15rem);
+
+  --fs-body: clamp(0.94rem, 0.90rem + 0.18vw, 1rem);
+  --fs-lead: clamp(1.02rem, 0.94rem + 0.45vw, 1.2rem);
+  --fs-small: clamp(0.82rem, 0.79rem + 0.15vw, 0.9rem);
+
+  /* Akışkan bölüm boşlukları (masaüstünde 90px = 5.625rem) */
+  --space-section: clamp(2.75rem, 1.30rem + 5.2vw, 5.625rem);
+  /* Akışkan yatay kenar boşluğu (masaüstünde 3rem = px-5) */
+  --space-gutter: clamp(1rem, 0.35rem + 2.4vw, 3rem);
+}
+
+/* --------------------------------------------------------------------------
+   Tipografi
+   -------------------------------------------------------------------------- */
+body {
+  font-size: var(--fs-body);
+}
+
+.display-3 { font-size: var(--fs-display-3); }
+.display-4 { font-size: var(--fs-display-4); }
+.display-5 { font-size: var(--fs-display-5); }
+.display-6 { font-size: var(--fs-display-6); }
+
+.display-3, .display-4, .display-5, .display-6 {
+  line-height: 1.18;
+  /* Uzun Türkçe başlıkların dar ekranda taşmasını engelle */
+  overflow-wrap: break-word;
+}
+
+h1, .h1 { font-size: var(--fs-h1); }
+h2, .h2 { font-size: var(--fs-h2); }
+h3, .h3 { font-size: var(--fs-h3); }
+h4, .h4 { font-size: var(--fs-h4); }
+h5, .h5 { font-size: var(--fs-h5); }
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.25;
+  overflow-wrap: break-word;
+}
+
+.lead { font-size: var(--fs-lead); }
+small, .small { font-size: var(--fs-small); }
+
+/* Metin bloklarında okunabilir satır uzunluğu */
+.text-center.mx-auto p,
+section p,
+.service-item p,
+.portfolio-title p {
+  line-height: 1.65;
+}
+
+/* --------------------------------------------------------------------------
+   Bölüm boşlukları — sabit 90px yerine ekranla ölçeklenir
+   -------------------------------------------------------------------------- */
+.py-6 {
+  padding-top: var(--space-section);
+  padding-bottom: var(--space-section);
+}
+.pt-6 { padding-top: var(--space-section); }
+.pb-6 { padding-bottom: var(--space-section); }
+
+/* Yatay kenar boşluğu yalnızca tam genişlik bölümlerde daraltılır;
+   .px-5 utility'si başka yerlerde (butonlar vb.) bozulmasın diye
+   kapsam bilinçli olarak dar tutuldu. */
+.container-fluid.px-5 {
+  padding-left: var(--space-gutter) !important;
+  padding-right: var(--space-gutter) !important;
+}
+
+/* --------------------------------------------------------------------------
+   Görseller ve medya
+   -------------------------------------------------------------------------- */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Kart görselleri: dar ekranda orantılı yükseklik */
+.portfolio-image img,
+.service-item > img {
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  width: 100%;
+}
+
+/* Gömülü haritalar / iframe'ler taşmasın */
+iframe {
+  max-width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   Kartlar
+   -------------------------------------------------------------------------- */
+.portfolio-title h2 {
+  font-size: clamp(1.05rem, 0.92rem + 0.7vw, 1.35rem);
+  line-height: 1.3;
+}
+
+.portfolio-title span {
+  font-size: var(--fs-small);
+}
+
+.service-item h3 {
+  font-size: clamp(1.1rem, 0.98rem + 0.6vw, 1.4rem);
+}
+
+/* --------------------------------------------------------------------------
+   Hero / carousel — dar ekranda başlık ve buton dengesi
+   -------------------------------------------------------------------------- */
+#header-carousel .carousel-caption h1,
+#header-carousel .carousel-caption h2 {
+  font-size: clamp(1.35rem, 0.90rem + 2.4vw, 3.25rem);
+  line-height: 1.2;
+}
+
+#header-carousel .carousel-caption p {
+  font-size: clamp(0.88rem, 0.82rem + 0.45vw, 1.15rem);
+  line-height: 1.55;
+}
+
+/* --------------------------------------------------------------------------
+   Dokunmatik hedef boyutları (mobil kullanılabilirlik)
+   -------------------------------------------------------------------------- */
+@media (max-width: 767.98px) {
+  .btn {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .navbar-nav .nav-link {
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+  }
+
+  /* Tablolar ve geniş içerik yatayda taşmasın */
+  .table-responsive,
+  .overflow-x-auto {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Çok dar ekranlar (küçük telefonlar) */
+@media (max-width: 380px) {
+  :root {
+    --space-gutter: 0.85rem;
+  }
+
+  .btn {
+    font-size: 0.85rem;
+    padding-left: 0.9rem;
+    padding-right: 0.9rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Erişilebilirlik: hareket azaltma tercihi
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

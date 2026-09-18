@@ -18,6 +18,10 @@
 /haberler              /blog          301
 /duyurular             /blog          301
 
+# Kaldırılan hizmetler (arama motorlarında indekslenmiş olabilir)
+/otomotiv              /              301
+/dekorasyon            /              301
+
 # Panel kısayolu (ayrı Pages projesi)
 /panel                 https://panel.ar-kar.com/   302
 /admin                 https://panel.ar-kar.com/   302

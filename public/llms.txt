@@ -1,6 +1,6 @@
 # AR-KAR İnşaat
 
-> Samsun Çarşamba merkezli, 1987'den bu yana faaliyet gösteren; konut inşaat projeleri, anahtar teslim müteahhitlik, PVC kapı/pencere sistemleri, inşaat malzemeleri, tarım ürünleri alım-satımı, zirai danışmanlık, mimari proje ve dekorasyon hizmetleri, otomotiv alım-satımı sunan çok şubeli bir aile şirketi.
+> Samsun Çarşamba merkezli, 1987'den bu yana faaliyet gösteren; konut inşaat projeleri, anahtar teslim müteahhitlik, PVC kapı/pencere sistemleri, inşaat malzemeleri, tarım ürünleri alım-satımı, zirai danışmanlık, mimari proje hizmetleri sunan çok şubeli bir aile şirketi.
 
 Bu dosya, yapay zeka asistanları ve LLM tabanlı arama motorları için hazırlanmıştır (llmstxt.org standardı). Şirket hakkında daha kapsamlı, yapılandırılmış bilgi için [llm.txt](https://ar-kar.com/llm.txt) dosyasına bakınız.
 
@@ -18,9 +18,7 @@ Bu dosya, yapay zeka asistanları ve LLM tabanlı arama motorları için hazırl
 - [PVC Kapı ve Pencere Sistemleri](https://ar-kar.com/pvc)
 - [Tarım Ürünleri Alım-Satımı](https://ar-kar.com/tarim)
 - [Zirai Ürünler ve Danışmanlık](https://ar-kar.com/ziraat)
-- [Otomotiv Alım-Satım](https://ar-kar.com/otomotiv)
 - [Mimari Proje Hizmetleri](https://ar-kar.com/mimar)
-- [Dekorasyon Hizmetleri](https://ar-kar.com/dekorasyon)
 
 ## İzin
 

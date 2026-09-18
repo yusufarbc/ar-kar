@@ -76,12 +76,20 @@ jobs:
       # cloudflare/wrangler-action kendi wrangler sürümünü kurar ve bu,
       # repodaki @cloudflare/workers-types ile peer çakışması yaratıyor.
       # Bu yüzden doğrudan projenin kendi wrangler'ı kullanılıyor.
+      #
+      # --skip-caching: Cloudflare'in POST /pages/assets/check-missing
+      # uç noktası 2026-09-18'de kalıcı 500 hatası vermeye başladı
+      # (Cloudflare tarafında "Minor Service Outage", 4 farklı Ray ID ile
+      # doğrulandı). Bu bayrak dosya-hash önbelleğini atlayıp her seferinde
+      # tüm dosyaları yeniden yükler; check-missing çağrısını devre dışı
+      # bırakarak sorunu aşar. Proje küçük olduğu için (143 dosya, ~5sn)
+      # performans kaybı önemsiz.
       - name: Deploy to Cloudflare Pages
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
-          npx wrangler pages deploy dist --project-name=ar-kar --branch="${{ github.ref_name }}" --commit-dirty=true
+          npx wrangler pages deploy dist --project-name=ar-kar --branch="${{ github.ref_name }}" --commit-dirty=true --skip-caching
 
   # --------------------------------------------------------------------
   # Yönetim paneli -> Cloudflare Pages: ar-kar-admin

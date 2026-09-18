@@ -12,8 +12,8 @@
     "preview": "astro preview",
     "check": "astro check",
     "test": "npm run check && npm run build",
-    "deploy:production": "npm run build && wrangler pages deploy dist --project-name=ar-kar --branch=production",
-    "deploy:staging": "npm run build && wrangler pages deploy dist --project-name=ar-kar --branch=staging",
+    "deploy:production": "npm run build && wrangler pages deploy dist --project-name=ar-kar --branch=production --skip-caching",
+    "deploy:staging": "npm run build && wrangler pages deploy dist --project-name=ar-kar --branch=staging --skip-caching",
     "panel:deploy": "wrangler pages deploy panel --project-name=ar-kar-admin --branch=production"
   },
   "dependencies": {

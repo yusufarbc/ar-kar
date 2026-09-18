@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
 
 const title = "Sık Sorulan Sorular - AR-KAR İnşaat | Samsun Çarşamba";
 const description = "AR-KAR İnşaat hakkında sık sorulan sorular ve cevapları. İnşaat, PVC, tarım ve diğer hizmetlerimiz hakkında merak ettikleriniz.";
@@ -97,6 +98,8 @@ const ogImage = "https://ar-kar.com/img/logo.webp";
             }
         }`} />
   </Fragment>
+
+  <PageHeader active="Sık Sorulan Sorular" />
 
   <!-- SSS Content -->
     <div class="container-fluid py-6 px-5">

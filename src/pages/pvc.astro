@@ -1,4 +1,5 @@
 ---
+import PageHeader from '../components/PageHeader.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const title = "PVC Kapı ve Pencere Sistemleri | AR-KAR İnşaat Samsun | Kaliteli PVC Doğrama";
@@ -449,20 +450,7 @@ const keywords = "pvc kapı pencere samsun, pvc doğrama çarşamba, pvc pencere
         }`} />
   </Fragment>
 
-  <!-- Breadcrumb Start -->
-    <div class="container-fluid bg-dark py-3 px-3 px-md-5">
-        <div class="row">
-            <div class="col-12">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb mb-0">
-                        <li class="breadcrumb-item"><a href="/" class="text-primary">Anasayfa</a></li>
-                        <li class="breadcrumb-item active text-white" aria-current="page">PVC Kapı ve Pencere Sistemleri</li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
-    </div>
-    <!-- Breadcrumb End -->
+  <PageHeader active="PVC Kapı ve Pencere Sistemleri" />
 
 
     <!-- PVC Services Section Start -->

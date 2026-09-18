@@ -1,0 +1,81 @@
+/* ==========================================================================
+   AR-KAR — Tasarım Sistemi v2
+   --------------------------------------------------------------------------
+   style.css'ten SONRA, responsive.css'ten ÖNCE yüklenir. Şablonun eski
+   Bootstrap/Roboto görünümünü, marka rengini (kırmızı) tek vurgu rengi
+   olarak koruyup nötr paleti ve tipografiyi modernize ederek günceller.
+   Carousel/bento gibi yapısal değişiklikler ayrı bileşen dosyalarında;
+   burada yalnızca renk + tipografi jetonları var.
+   ========================================================================== */
+
+:root {
+  /* Marka rengi korunuyor — tek vurgu rengi */
+  --primary: #cc272b;
+  --bs-primary: #cc272b;
+
+  /* Eski --secondary (#3c3c44) yerine daha zengin bir graphite skalası */
+  --ink-900: #14151a;   /* en koyu metin / başlık */
+  --ink-700: #33353d;
+  --ink-500: #5b5e68;   /* ikincil metin */
+  --ink-300: #9a9da6;
+  --ink-100: #e7e8eb;
+  --surface: #ffffff;
+  --surface-alt: #f6f6f8;   /* eski --light yerine, saf beyazdan daha yumuşak */
+
+  --secondary: var(--ink-700);
+  --bs-secondary: var(--ink-700);
+  --dark: var(--ink-900);
+  --bs-dark: var(--ink-900);
+  --light: var(--surface-alt);
+  --bs-light: var(--surface-alt);
+
+  /* Tipografi */
+  --font-heading: "Plus Jakarta Sans", "Segoe UI", sans-serif;
+  --font-body: "Inter", "Segoe UI", sans-serif;
+
+  /* Köşe yuvarlama / gölge — bento kartlarında tekrar kullanılır */
+  --radius-lg: 20px;
+  --radius-md: 14px;
+  --shadow-soft: 0 8px 30px rgba(20, 21, 26, 0.07);
+  --shadow-soft-hover: 0 16px 40px rgba(20, 21, 26, 0.12);
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--ink-700);
+  background: var(--surface-alt);
+}
+
+h1, h2, h3, h4, h5, h6,
+.display-1, .display-2, .display-3, .display-4, .display-5, .display-6 {
+  font-family: var(--font-heading);
+  color: var(--ink-900);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.display-1, .display-2, .display-3, .display-4 {
+  font-weight: 800;
+}
+
+.text-muted {
+  color: var(--ink-500) !important;
+}
+
+/* Bootstrap'ın .bg-dark'ı artık düz siyah yerine graphite kullanır —
+   navbar, footer ve breadcrumb barları burada zenginleşir. */
+.bg-dark {
+  background-color: var(--ink-900) !important;
+}
+
+.text-white-50 {
+  color: rgba(255, 255, 255, 0.62) !important;
+}
+
+/* Kart/kutu bileşenlerinde tekrar kullanılacak ortak yumuşak gölge */
+.card,
+.service-item,
+.portfolio-box {
+  box-shadow: var(--shadow-soft);
+  border-radius: var(--radius-md);
+}

@@ -1,0 +1,33 @@
+---
+// Alt sayfalarda tekrarlanan breadcrumb barının modernize edilmiş, tek
+// noktadan yönetilen hâli. Kasıtlı olarak <h1> ÜRETMEZ — her sayfanın
+// kendi içerik bölümünde zaten bir h1'i var; burada ikinci bir h1
+// oluşturmak SEO açısından yanlış olurdu.
+interface Crumb {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  /** Breadcrumb'ta "Anasayfa" ile aktif sayfa arasındaki ara adım(lar). */
+  parents?: Crumb[];
+  /** Aktif (tıklanamaz) son breadcrumb öğesi. */
+  active: string;
+}
+
+const { parents = [], active } = Astro.props;
+---
+
+<div class="page-header">
+  <div class="container-fluid px-3 px-md-5">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item"><a href="/">Anasayfa</a></li>
+        {parents.map((p) => (
+          <li class="breadcrumb-item"><a href={p.href}>{p.label}</a></li>
+        ))}
+        <li class="breadcrumb-item active" aria-current="page">{active}</li>
+      </ol>
+    </nav>
+  </div>
+</div>

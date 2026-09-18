@@ -1,0 +1,259 @@
+/* ==========================================================================
+   AR-KAR — Bento Grid bileşenleri
+   --------------------------------------------------------------------------
+   Ana sayfanın hero'su (eski 3-slaytlı carousel) ve hizmetler bölümü için.
+   Sadece bu iki bölümde kullanılıyor; diğer sayfalara yüklenmesi zararsız
+   (eşleşen sınıf yoksa hiçbir etkisi olmaz).
+   ========================================================================== */
+
+/* --- Sayfa başlığı barı (PageHeader.astro) --- */
+.page-header {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--ink-900) 0%, #23252c 100%);
+  padding: 13px 0;
+}
+.page-header::after {
+  content: "";
+  position: absolute;
+  top: -60%;
+  right: -8%;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(204, 39, 43, 0.35), transparent 70%);
+  pointer-events: none;
+}
+.page-header .breadcrumb { margin: 0; position: relative; z-index: 1; }
+.page-header .breadcrumb-item,
+.page-header .breadcrumb-item a {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+.page-header .breadcrumb-item a:hover { color: #fff; }
+.page-header .breadcrumb-item.active { color: #fff; font-weight: 600; }
+.page-header .breadcrumb-item + .breadcrumb-item::before {
+  color: rgba(255, 255, 255, 0.32);
+}
+
+/* --------------------------------------------------------------------------
+   Hero Bento Grid
+   -------------------------------------------------------------------------- */
+.hero-bento {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: minmax(150px, auto);
+  grid-auto-flow: dense;
+  gap: 14px;
+}
+
+.bento-tile {
+  position: relative;
+  display: flex;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  text-decoration: none;
+  color: inherit;
+}
+.bento-tile:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-soft-hover);
+}
+
+/* Büyük kutu: öne çıkan proje fotoğrafı */
+.bento-tile--hero {
+  grid-column: span 2;
+  grid-row: span 2;
+  min-height: 340px;
+  align-items: flex-end;
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+}
+.bento-tile--hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(20, 21, 26, 0.1) 0%, rgba(20, 21, 26, 0.85) 100%);
+}
+.bento-tile--hero .bento-tile__content {
+  position: relative;
+  z-index: 1;
+  padding: 28px 30px;
+  max-width: 620px;
+}
+.bento-tile__eyebrow {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ffb3b3;
+  margin-bottom: 10px;
+}
+.bento-tile__title {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: clamp(1.3rem, 1rem + 1.6vw, 2.1rem);
+  line-height: 1.2;
+  color: #fff;
+  text-transform: none;
+  margin-bottom: 16px;
+}
+
+/* Sayaç kutuları */
+.bento-tile--stat {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 20px 22px;
+  background: var(--surface);
+}
+.bento-tile--stat.bento-tile--accent {
+  background: var(--primary);
+  color: #fff;
+}
+.bento-stat__number {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: clamp(1.8rem, 1.4rem + 1.6vw, 2.6rem);
+  line-height: 1;
+}
+.bento-stat__label {
+  margin-top: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink-500);
+}
+.bento-tile--accent .bento-stat__label { color: rgba(255, 255, 255, 0.85); }
+
+/* Hızlı erişim kutuları (PVC / Mimari 3D) */
+.bento-tile--action {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 10px;
+  padding: 20px 22px;
+  background: var(--surface);
+  border: 1px solid var(--ink-100);
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  font: inherit;
+}
+.bento-tile--action i {
+  font-size: 1.4rem;
+  color: var(--primary);
+}
+.bento-tile--action span {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--ink-900);
+  line-height: 1.3;
+}
+.bento-tile--action:hover { border-color: var(--primary); }
+
+/* Geniş CTA şeridi (Hızlı Teklif Al) */
+.bento-tile--cta {
+  grid-column: span 4;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  background: var(--ink-900);
+  border: none;
+  min-height: 90px;
+}
+.bento-tile--cta i {
+  font-size: 1.6rem;
+  color: var(--primary);
+}
+.bento-tile--cta span {
+  color: #fff;
+  font-size: 1.15rem;
+}
+.bento-tile--cta:hover { background: #23252c; }
+
+@media (max-width: 991.98px) {
+  .hero-bento { grid-template-columns: repeat(2, 1fr); }
+  .bento-tile--hero { grid-column: span 2; grid-row: span 1; min-height: 300px; }
+  .bento-tile--cta { grid-column: span 2; }
+}
+@media (max-width: 575.98px) {
+  .hero-bento { grid-template-columns: 1fr; gap: 10px; }
+  .bento-tile--hero,
+  .bento-tile--cta { grid-column: span 1; }
+  .bento-tile--hero { min-height: 260px; }
+}
+
+/* --------------------------------------------------------------------------
+   Hizmetler Bento Grid
+   -------------------------------------------------------------------------- */
+.services-bento {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: minmax(180px, auto);
+  gap: 16px;
+}
+.services-bento .bento-tile--service {
+  grid-column: span 1;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 24px;
+  background: var(--surface);
+  border: 1px solid var(--ink-100);
+}
+.services-bento .bento-tile--service:first-child {
+  grid-column: span 2;
+  grid-row: span 2;
+  background: var(--ink-900);
+  color: #fff;
+}
+.services-bento .bento-tile--service:first-child .service-icon-badge {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--primary);
+}
+.services-bento .bento-tile--service:first-child h3 { color: #fff; }
+.services-bento .bento-tile--service:first-child p { color: rgba(255, 255, 255, 0.72); }
+
+.service-icon-badge {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(204, 39, 43, 0.1);
+  color: var(--primary);
+  font-size: 1.3rem;
+  margin-bottom: 16px;
+}
+.services-bento h3 {
+  font-size: 1.05rem;
+  margin-bottom: 8px;
+}
+.services-bento .bento-tile--service:first-child h3 { font-size: 1.35rem; }
+.services-bento p {
+  font-size: 0.88rem;
+  color: var(--ink-500);
+  margin-bottom: 14px;
+}
+.services-bento .btn {
+  margin-top: auto;
+}
+
+@media (max-width: 991.98px) {
+  .services-bento { grid-template-columns: repeat(2, 1fr); }
+  .services-bento .bento-tile--service:first-child { grid-column: span 2; grid-row: span 1; }
+}
+@media (max-width: 575.98px) {
+  .services-bento { grid-template-columns: 1fr; }
+  .services-bento .bento-tile--service:first-child { grid-column: span 1; }
+}

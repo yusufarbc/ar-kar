@@ -1,4 +1,5 @@
 ---
+import PageHeader from '../components/PageHeader.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const title = "AR-KAR Mimari Proje Hizmetleri | Ruhsat, Çizim, Tasarım | Samsun Çarşamba";
@@ -373,21 +374,7 @@ const keywords = "ar-kar mimar, mimari proje, yapı ruhsatı, teknik çizim, pro
         }`} />
   </Fragment>
 
-  <!-- Breadcrumb Start -->
-    <div class="container-fluid bg-dark py-3 px-sm-3 px-md-5">
-        <div class="row">
-            <div class="col-md-12">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb mb-0">
-                        <li class="breadcrumb-item"><a href="/" class="text-primary">Anasayfa</a></li>
-                        <li class="breadcrumb-item"><a href="/#service" class="text-primary">Hizmetler</a></li>
-                        <li class="breadcrumb-item active text-white" aria-current="page">Mimari Proje Hizmetleri</li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
-    </div>
-    <!-- Breadcrumb End -->
+  <PageHeader active="Mimari Proje Hizmetleri" parents={[{ label: "Hizmetler", href: "/#service" }]} />
 
     <!-- Hero Section Start -->
     <div class="container-fluid py-6 px-5" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('img/teksstilkent.webp'); background-size: cover; background-position: center;">

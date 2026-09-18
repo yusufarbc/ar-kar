@@ -1,4 +1,5 @@
 ---
+import PageHeader from '../../components/PageHeader.astro';
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
@@ -31,21 +32,7 @@ const coverImage = post.data.coverImage || '/img/about.webp';
   ogType="article"
   activePage="blog"
 >
-  <!-- Breadcrumb Start -->
-  <div class="container-fluid bg-dark py-3 px-5">
-    <div class="row">
-      <div class="col-12">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb mb-0">
-            <li class="breadcrumb-item"><a href="/" class="text-primary">Anasayfa</a></li>
-            <li class="breadcrumb-item"><a href="/blog" class="text-primary">Haberler</a></li>
-            <li class="breadcrumb-item active text-white" aria-current="page">{post.data.title}</li>
-          </ol>
-        </nav>
-      </div>
-    </div>
-  </div>
-  <!-- Breadcrumb End -->
+  <PageHeader active={post.data.title} parents={[{ label: "Haberler", href: "/blog" }]} />
 
   <!-- Blog Detail Start -->
   <article class="container py-6">

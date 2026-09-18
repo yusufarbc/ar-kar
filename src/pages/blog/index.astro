@@ -1,4 +1,5 @@
 ---
+import PageHeader from '../../components/PageHeader.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
@@ -20,20 +21,7 @@ const canonical = "https://ar-kar.com/blog";
   canonical={canonical}
   activePage="blog"
 >
-  <!-- Breadcrumb Start -->
-  <div class="container-fluid bg-dark py-3 px-5">
-    <div class="row">
-      <div class="col-12">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb mb-0">
-            <li class="breadcrumb-item"><a href="/" class="text-primary">Anasayfa</a></li>
-            <li class="breadcrumb-item active text-white" aria-current="page">Haberler &amp; Duyurular</li>
-          </ol>
-        </nav>
-      </div>
-    </div>
-  </div>
-  <!-- Breadcrumb End -->
+  <PageHeader active="Haberler & Duyurular" />
 
   <!-- Blog List Start -->
   <div class="container-fluid py-6 px-5 bg-light">

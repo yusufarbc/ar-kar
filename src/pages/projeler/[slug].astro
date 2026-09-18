@@ -1,4 +1,5 @@
 ---
+import PageHeader from '../../components/PageHeader.astro';
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { PROJECT_CATEGORIES } from '../../lib/projects';
@@ -60,21 +61,7 @@ const coverImage = project.data.coverImage || '/img/about.webp';
     })} />
   </Fragment>
 
-  <!-- Breadcrumb Start -->
-  <div class="container-fluid bg-dark py-3 px-5">
-    <div class="row">
-      <div class="col-12">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb mb-0">
-            <li class="breadcrumb-item"><a href="/" class="text-primary">Anasayfa</a></li>
-            <li class="breadcrumb-item"><a href="/projeler" class="text-primary">Projeler</a></li>
-            <li class="breadcrumb-item active text-white" aria-current="page">{project.data.title}</li>
-          </ol>
-        </nav>
-      </div>
-    </div>
-  </div>
-  <!-- Breadcrumb End -->
+  <PageHeader active={project.data.title} parents={[{ label: "Projeler", href: "/projeler" }]} />
 
   <!-- Project Detail Start -->
   <article class="container py-6">

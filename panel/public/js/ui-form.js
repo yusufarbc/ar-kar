@@ -96,7 +96,7 @@ export function fieldHtml(f, values){
     input = `
       <label class="drop" id="f_${f.name}_drop">
         <span class="drop__title">Görsel seçin veya buraya sürükleyin</span>
-        <span>JPG / PNG / WebP — otomatik olarak WebP'ye çevrilir ve 1600px'e küçültülür</span>
+        <span>JPG / PNG / WebP — otomatik olarak 4:5 orana ortadan kırpılır, WebP'ye çevrilir ve 1600px'e küçültülür</span>
         <input type="file" id="f_${f.name}_file" accept="image/*" />
       </label>
       <input type="hidden" id="f_${f.name}" value="${esc(v)}" />
@@ -109,7 +109,7 @@ export function fieldHtml(f, values){
     input = `
       <label class="drop" id="f_${f.name}_drop">
         <span class="drop__title">Görselleri seçin veya buraya sürükleyin</span>
-        <span>En fazla ${MAX_GALLERY} görsel — hepsi otomatik WebP'ye çevrilir</span>
+        <span>En fazla ${MAX_GALLERY} görsel — hepsi otomatik 4:5 orana kırpılıp WebP'ye çevrilir</span>
       </label>
       <div class="thumbs" id="f_${f.name}_thumbs"></div>
       <div class="hint" id="f_${f.name}_info"></div>`;

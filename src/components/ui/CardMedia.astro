@@ -7,13 +7,20 @@ interface Props {
   alt: string;
   aspectRatio?: string;
   loading?: 'lazy' | 'eager';
+  /**
+   * 'cover' (varsayılan): kutu kenarda boşluk kalmadan tamamen doldurulur,
+   * taşan kısım kırpılır — kartlarda "yanda boşluk" bırakmamak öncelikli.
+   * 'contain': istisnai durumlar için (görselin TAMAMININ görünmesi asıl
+   * amaçsa, ör. bir detay sayfasındaki tek büyük görsel).
+   */
+  fit?: 'contain' | 'cover';
 }
 
-const { src, alt, aspectRatio = '4 / 3', loading = 'lazy' } = Astro.props;
+const { src, alt, aspectRatio = '4 / 3', loading = 'lazy', fit = 'cover' } = Astro.props;
 const hasBadge = Astro.slots.has('badge');
 ---
 
-<div class="card-media" style={`--card-media-ratio:${aspectRatio}`}>
+<div class="card-media" style={`--card-media-ratio:${aspectRatio};--card-media-fit:${fit}`}>
   {hasBadge && (
     <div class="card-media__badge">
       <slot name="badge" />

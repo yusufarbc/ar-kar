@@ -40,6 +40,11 @@ export const COLLECTIONS = {
 
 export const SITE = 'https://ar-kar.com';
 export const MAX_GALLERY = 8;
+/** Kapak ve galeri görselleri için standart kadraj (genişlik/yükseklik).
+ * Sitede kart görselleri artık bu orana göre 'cover' ile gösteriliyor
+ * (bkz. CardMedia.astro) — her gönderi farklı boyutta gelmesin diye
+ * yükleme anında bu orana göre ortadan kırpılır. */
+export const IMAGE_ASPECT_RATIO = 4 / 5;
 
 /* ======================================================================
    Durum — tek paylaşımlı nesne. Diğer modüller `import { state } from

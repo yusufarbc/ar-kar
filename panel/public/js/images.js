@@ -1,19 +1,38 @@
-import { $, esc, state, MAX_GALLERY, SITE, markDirty } from './state.js';
+import { $, esc, state, MAX_GALLERY, SITE, IMAGE_ASPECT_RATIO, markDirty } from './state.js';
 import { toast } from './ui-toast.js';
 
 /* ======================================================================
-   Görsel işleme — tarayıcıda WebP'ye çevir ve küçült
+   Görsel işleme — tarayıcıda ortadan sabit orana kırp, WebP'ye çevir ve
+   küçült. Kırpma sayesinde panelden yüklenen her kapak/galeri görseli
+   aynı orana (IMAGE_ASPECT_RATIO) sahip olur; sitede kart görselleri
+   birbirinden farklı boy/en oranlarıyla gelip tutarsız durmaz.
    ====================================================================== */
-export async function toWebp(file, maxWidth = 1600, quality = 0.82){
+export async function toWebp(file, { maxWidth = 1600, quality = 0.82, aspectRatio = null } = {}){
   if (!file.type.startsWith('image/')) throw new Error('Bu bir görsel dosyası değil.');
   const bitmap = await createImageBitmap(file);
-  const scale = Math.min(1, maxWidth / bitmap.width);
-  const w = Math.round(bitmap.width * scale);
-  const h = Math.round(bitmap.height * scale);
+
+  // Kaynak görselden, istenen orana uyan en büyük dikdörtgeni ortadan seç.
+  let sx = 0, sy = 0, sw = bitmap.width, sh = bitmap.height;
+  if (aspectRatio) {
+    const sourceRatio = bitmap.width / bitmap.height;
+    if (sourceRatio > aspectRatio) {
+      // Kaynak hedeften daha geniş (yatık) — sağ/soldan kırp.
+      sw = Math.round(bitmap.height * aspectRatio);
+      sx = Math.round((bitmap.width - sw) / 2);
+    } else if (sourceRatio < aspectRatio) {
+      // Kaynak hedeften daha uzun (dikey) — üst/alttan kırp.
+      sh = Math.round(bitmap.width / aspectRatio);
+      sy = Math.round((bitmap.height - sh) / 2);
+    }
+  }
+
+  const scale = Math.min(1, maxWidth / sw);
+  const w = Math.round(sw * scale);
+  const h = Math.round(sh * scale);
 
   const canvas = document.createElement('canvas');
   canvas.width = w; canvas.height = h;
-  canvas.getContext('2d').drawImage(bitmap, 0, 0, w, h);
+  canvas.getContext('2d').drawImage(bitmap, sx, sy, sw, sh, 0, 0, w, h);
 
   const blob = await new Promise((res) => canvas.toBlob(res, 'image/webp', quality));
   if (!blob) throw new Error('Görsel WebP formatına çevrilemedi.');
@@ -43,7 +62,7 @@ export function setupCover(name){
     info.textContent = 'WebP formatına çevriliyor…';
     box.hidden = false;
     try{
-      const out = await toWebp(file);
+      const out = await toWebp(file, { aspectRatio: IMAGE_ASPECT_RATIO });
       state.pendingImage = { base64: out.dataUrl, name: file.name };
       img.src = out.dataUrl;
       info.innerHTML = `<strong>Yeni görsel hazır.</strong><br>${out.width}×${out.height}px · ${kb(out.size)} · WebP`;
@@ -73,7 +92,7 @@ export function setupGallery(name){
     for (const file of files.slice(0, Math.max(0, free))){
       info.textContent = `${file.name} çevriliyor…`;
       try{
-        const out = await toWebp(file);
+        const out = await toWebp(file, { aspectRatio: IMAGE_ASPECT_RATIO });
         state.gallery.newFiles.push({ base64: out.dataUrl, name: file.name });
         markDirty();
       }catch(err){

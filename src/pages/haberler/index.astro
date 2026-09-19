@@ -75,7 +75,7 @@ const blogSchema = {
               <div class="col-12 col-md-6 col-lg-4">
                 <Card padded={false} class="h-100 d-flex flex-column">
                   <a href={postUrl}>
-                    <CardMedia src={coverImage} alt={post.data.title}>
+                    <CardMedia src={coverImage} alt={post.data.title} aspectRatio="4 / 5">
                       <Badge slot="badge" label={post.data.date} icon="fa-calendar-alt" />
                     </CardMedia>
                   </a>

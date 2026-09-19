@@ -270,10 +270,9 @@ a.card-surface:hover,
 .card-media img {
   width: 100%;
   height: 100%;
-  /* Bilerek 'cover' değil 'contain' — ürün/proje görselleri kırpılıp
-     kenarları kesilmesin diye tamamı kutunun içine sığdırılır (kutunun
-     dolmayan kısmı --surface-alt zeminiyle dolar). */
-  object-fit: contain;
+  /* Varsayılan 'cover' — kart kenarlarında boşluk kalmasın diye görsel
+     kutuyu tam doldurur (bkz. CardMedia.astro `fit` prop). */
+  object-fit: var(--card-media-fit, cover);
   transition: transform 0.35s ease;
   display: block;
 }

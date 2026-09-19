@@ -56,5 +56,5 @@ export const COMPANY = {
       whatsapp: '905421526755',
     },
   ],
-  openingHours: { days: 'Pazartesi – Cumartesi', opens: '08:00', closes: '18:00' },
+  openingHours: { days: 'Pazartesi – Cumartesi', opens: '08:00', closes: '20:00' },
 } as const;

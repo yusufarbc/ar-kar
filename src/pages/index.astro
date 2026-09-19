@@ -188,7 +188,7 @@ const ogImage = "https://ar-kar.com/img/og-default.webp";
                 "Saturday"
             ],
             "opens": "08:00",
-            "closes": "18:00"
+            "closes": "20:00"
         },
         "sameAs": [
             "https://www.facebook.com/arkarltd/",
@@ -288,7 +288,7 @@ const ogImage = "https://ar-kar.com/img/og-default.webp";
                     <div class="col-12 col-sm-6 col-lg-3">
                         <div class="project-item position-relative overflow-hidden rounded">
                             <img class="img-fluid w-100" src={cover} alt={`${project.data.title} - AR-KAR İnşaat`}
-                                style="height: 300px; object-fit: contain; background: var(--surface-alt);" loading="lazy">
+                                style="aspect-ratio: 4 / 5; object-fit: cover;" loading="lazy">
                             <div class="project-overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-white text-center p-4"
                                 style="background: rgba(231, 30, 36, 0.8); opacity: 0; transition: all 0.3s;">
                                 <h4 class="text-white mb-3">{project.data.title}</h4>
@@ -383,17 +383,17 @@ const ogImage = "https://ar-kar.com/img/og-default.webp";
                 <span class="btn btn-sm text-primary">Detaylı Bilgi <i class="fa fa-arrow-right"></i></span>
             </a>
 
-            <a href="/insaat" class="bento-tile bento-tile--service">
-                <div class="service-icon-badge"><i class="fa fa-tools"></i></div>
-                <h3>Hırdavat &amp; İnşaat Malzemeleri</h3>
-                <p>Kaliteli inşaat malzemeleri ve hırdavat ürünleri ile projelerinizi destekliyoruz.</p>
-                <span class="btn btn-sm text-primary">Detaylı Bilgi <i class="fa fa-arrow-right"></i></span>
-            </a>
-
             <a href="/mimar" class="bento-tile bento-tile--service">
                 <div class="service-icon-badge"><i class="fa fa-drafting-compass"></i></div>
                 <h3>Mimari Proje Hizmetleri</h3>
                 <p>Profesyonel mimari projeler, ruhsat işlemleri ve teknik çizim hizmetleri sunuyoruz.</p>
+                <span class="btn btn-sm text-primary">Detaylı Bilgi <i class="fa fa-arrow-right"></i></span>
+            </a>
+
+            <a href="/insaat" class="bento-tile bento-tile--service">
+                <div class="service-icon-badge"><i class="fa fa-tools"></i></div>
+                <h3>Hırdavat &amp; İnşaat Malzemeleri</h3>
+                <p>Kaliteli inşaat malzemeleri ve hırdavat ürünleri ile projelerinizi destekliyoruz.</p>
                 <span class="btn btn-sm text-primary">Detaylı Bilgi <i class="fa fa-arrow-right"></i></span>
             </a>
 

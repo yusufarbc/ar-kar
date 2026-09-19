@@ -79,12 +79,12 @@ const articleSchema = {
         </header>
 
         {post.data.coverImage && (
-          <div class="mb-5 rounded overflow-hidden shadow-sm" style="background: var(--surface-alt);">
+          <div class="mb-5 rounded shadow-sm text-center" style="background: var(--surface-alt); padding: 14px;">
             <img
               src={coverImage}
               alt={post.data.title}
-              class="w-100 img-fluid"
-              style="max-height: 480px; object-fit: contain;"
+              class="img-fluid rounded"
+              style="max-height: 520px; width: auto; max-width: 100%;"
             />
           </div>
         )}

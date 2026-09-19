@@ -79,12 +79,12 @@ const articleSchema = {
         </header>
 
         {post.data.coverImage && (
-          <div class="mb-5 rounded overflow-hidden shadow-sm">
+          <div class="mb-5 rounded overflow-hidden shadow-sm" style="background: var(--surface-alt);">
             <img
               src={coverImage}
               alt={post.data.title}
               class="w-100 img-fluid"
-              style="max-height: 480px; object-fit: cover;"
+              style="max-height: 480px; object-fit: contain;"
             />
           </div>
         )}
@@ -99,8 +99,8 @@ const articleSchema = {
             <div class="row g-3">
               {post.data.gallery.map((img) => (
                 <div class="col-6 col-md-4">
-                  <a href={img} data-lightbox="blog-gallery" class="d-block rounded overflow-hidden shadow-sm">
-                    <img src={img} alt={post.data.title} class="w-100" style="height: 160px; object-fit: cover;" loading="lazy" />
+                  <a href={img} data-lightbox="blog-gallery" class="d-block rounded overflow-hidden shadow-sm" style="background: var(--surface-alt);">
+                    <img src={img} alt={post.data.title} class="w-100" style="height: 160px; object-fit: contain;" loading="lazy" />
                   </a>
                 </div>
               ))}

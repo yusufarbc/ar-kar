@@ -81,13 +81,13 @@ const coverImage = project.data.coverImage || '/img/about.webp';
         </header>
 
         {project.data.coverImage && (
-          <div class="mb-5 rounded overflow-hidden shadow-sm">
+          <div class="mb-5 rounded overflow-hidden shadow-sm" style="background: var(--surface-alt);">
             <a href={coverImage} data-lightbox="project">
               <img
                 src={coverImage}
                 alt={project.data.title}
                 class="w-100 img-fluid"
-                style="max-height: 480px; object-fit: cover;"
+                style="max-height: 480px; object-fit: contain;"
               />
             </a>
           </div>
@@ -103,8 +103,8 @@ const coverImage = project.data.coverImage || '/img/about.webp';
             <div class="row g-3">
               {project.data.gallery.map((img) => (
                 <div class="col-6 col-md-4">
-                  <a href={img} data-lightbox="project-gallery" class="d-block rounded overflow-hidden shadow-sm">
-                    <img src={img} alt={project.data.title} class="w-100" style="height: 160px; object-fit: cover;" loading="lazy" />
+                  <a href={img} data-lightbox="project-gallery" class="d-block rounded overflow-hidden shadow-sm" style="background: var(--surface-alt);">
+                    <img src={img} alt={project.data.title} class="w-100" style="height: 160px; object-fit: contain;" loading="lazy" />
                   </a>
                 </div>
               ))}

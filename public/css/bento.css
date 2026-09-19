@@ -72,14 +72,31 @@
 /* Büyük kutu: gerçek Çarşamba / Merkez / Şube fotoğraflarının döndüğü
    carousel (Bootstrap'ın #header-carousel'i, artık bento hücresinin
    içine sığdırılmış hâli — kullanıcı orijinal dönen carousel deneyimini
-   geri istedi). Tam genişlik: yıl/proje sayacı kutuları kaldırıldı
-   (bkz. hakkimizda.astro "Sayılarla" bölümü), bu yüzden carousel artık
-   tek başına, kalabalıksız bir hero olarak tüm satırı kaplıyor. */
+   geri istedi). */
 .bento-tile--hero {
-  grid-column: span 4;
   min-height: 420px;
   padding: 0;
   color: #fff;
+}
+
+/* Tam genişlik (edge-to-edge) hero — yıl/proje sayacı kutuları ve "Hızlı
+   Teklif Alın" şeridi kaldırıldı (bkz. hakkimizda.astro "Sayılarla"
+   bölümü ve navbar/carousel'in kendi "Bize Ulaşın" butonları), geriye
+   kalan tek eleman olan carousel artık kenarlarda boşluk bırakmadan tüm
+   sayfa genişliğini kaplıyor. Yükseklik viewport genişliğine göre
+   akışkan (clamp) — ekran büyüklüğüne kendiliğinden uyum sağlar. */
+.hero-full {
+  width: 100%;
+}
+.hero-full .bento-tile--hero {
+  border-radius: 0;
+  box-shadow: none;
+  height: clamp(320px, 42vw, 620px);
+  min-height: 0;
+}
+.hero-full .bento-tile:hover {
+  transform: none;
+  box-shadow: none;
 }
 .bento-tile--hero .carousel,
 .bento-tile--hero .carousel-inner,

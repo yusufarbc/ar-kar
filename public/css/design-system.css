@@ -270,12 +270,15 @@ a.card-surface:hover,
 .card-media img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  /* Bilerek 'cover' değil 'contain' — ürün/proje görselleri kırpılıp
+     kenarları kesilmesin diye tamamı kutunun içine sığdırılır (kutunun
+     dolmayan kısmı --surface-alt zeminiyle dolar). */
+  object-fit: contain;
   transition: transform 0.35s ease;
   display: block;
 }
 a.card-surface:hover .card-media img,
-.card-surface.is-hoverable:hover .card-media img { transform: scale(1.05); }
+.card-surface.is-hoverable:hover .card-media img { transform: scale(1.04); }
 .card-media__badge {
   position: absolute;
   top: 14px;

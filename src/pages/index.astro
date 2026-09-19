@@ -204,9 +204,8 @@ const ogImage = "https://ar-kar.com/img/og-default.webp";
          dayanan bir aggregateRating tekrar eklenebilir. -->
   </Fragment>
 
-  <!-- Hero Bento Grid Start -->
-    <div class="container-fluid px-3 px-md-5 py-4 py-md-5">
-        <div class="hero-bento">
+  <!-- Hero Carousel Start -->
+    <div class="hero-full">
             <div class="bento-tile bento-tile--hero p-0">
                 <div id="header-carousel" class="carousel slide carousel-fade h-100" data-bs-ride="carousel" data-bs-interval="5000">
                     <div class="carousel-indicators">
@@ -250,14 +249,8 @@ const ogImage = "https://ar-kar.com/img/og-default.webp";
                     </button>
                 </div>
             </div>
-
-            <button type="button" class="bento-tile bento-tile--cta" data-bs-toggle="modal" data-bs-target="#contactModal">
-                <i class="fa fa-bolt" aria-hidden="true"></i>
-                <span>Hızlı Teklif Alın</span>
-            </button>
-        </div>
     </div>
-    <!-- Hero Bento Grid End -->
+    <!-- Hero Carousel End -->
 
     <!-- About Start -->
     <div class="container-fluid py-6 px-5" id="about">
@@ -295,7 +288,7 @@ const ogImage = "https://ar-kar.com/img/og-default.webp";
                     <div class="col-12 col-sm-6 col-lg-3">
                         <div class="project-item position-relative overflow-hidden rounded">
                             <img class="img-fluid w-100" src={cover} alt={`${project.data.title} - AR-KAR İnşaat`}
-                                style="height: 300px; object-fit: cover;" loading="lazy">
+                                style="height: 300px; object-fit: contain; background: var(--surface-alt);" loading="lazy">
                             <div class="project-overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-white text-center p-4"
                                 style="background: rgba(231, 30, 36, 0.8); opacity: 0; transition: all 0.3s;">
                                 <h4 class="text-white mb-3">{project.data.title}</h4>

@@ -6,6 +6,14 @@
 # Yönetim paneli ayrı bir Pages projesindedir (panel.ar-kar.com) ve
 # Cloudflare Access ile korunur; bu sitede panel rotası yoktur.
 
+# Hakkımızda ve İletişim artık kendi sayfaları (eskiden ana sayfa çıpasıydı).
+# NOT: /#about gibi çıpalı adresler için kural yazılamaz — tarayıcı '#' sonrasını
+# sunucuya hiç göndermez. Aşağıdakiler yalnızca gerçek yol takma adlarıdır.
+/about                 /hakkimizda    301
+/contact               /iletisim      301
+/bize-ulasin           /iletisim      301
+/kurumsal              /hakkimizda    301
+
 # Kısa / alternatif yollar
 /anasayfa              /              301
 /home                  /              301

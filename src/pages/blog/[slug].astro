@@ -22,6 +22,29 @@ const title = `${post.data.title} | AR-KAR İnşaat`;
 const description = post.data.description || `${post.data.title} - AR-KAR İnşaat kurumsal blog yazısı.`;
 const canonical = `https://ar-kar.com/blog/${slug}`;
 const coverImage = post.data.coverImage || '/img/about.webp';
+
+// Haber yazılarında hiç yapısal veri yoktu; arama sonuçlarında tarih, yazar
+// ve görsel bilgisi taşıyan makale kartları bu şema olmadan oluşmuyor.
+const origin = (Astro.site ?? new URL('https://ar-kar.com')).origin;
+const absolute = (p: string) => (p.startsWith('http') ? p : new URL(p, origin).href);
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.data.title,
+  description,
+  image: absolute(coverImage),
+  datePublished: post.data.date,
+  dateModified: post.data.date,
+  inLanguage: 'tr-TR',
+  mainEntityOfPage: { '@type': 'WebPage', '@id': absolute(`/blog/${slug}`) },
+  author: { '@type': 'Organization', name: 'AR-KAR İnşaat', url: origin },
+  publisher: {
+    '@type': 'Organization',
+    name: 'AR-KAR İnşaat',
+    logo: { '@type': 'ImageObject', url: absolute('/img/logo.webp') },
+  },
+};
 ---
 
 <BaseLayout
@@ -32,6 +55,10 @@ const coverImage = post.data.coverImage || '/img/about.webp';
   ogType="article"
   activePage="blog"
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(articleSchema)} />
+  </Fragment>
+
   <PageHeader active={post.data.title} parents={[{ label: "Haberler", href: "/blog" }]} />
 
   <!-- Blog Detail Start -->
@@ -104,14 +131,14 @@ const coverImage = post.data.coverImage || '/img/about.webp';
 
 <style is:inline>
   .blog-content h2, .blog-content h3, .blog-content h4 {
-    color: #040404;
+    color: var(--ink-900);
     margin-top: 2rem;
     margin-bottom: 1rem;
     font-weight: 700;
   }
   .blog-content p {
     margin-bottom: 1.25rem;
-    color: #444;
+    color: var(--ink-700);
   }
   .blog-content ul, .blog-content ol {
     margin-bottom: 1.5rem;
@@ -119,7 +146,7 @@ const coverImage = post.data.coverImage || '/img/about.webp';
   }
   .blog-content li {
     margin-bottom: 0.5rem;
-    color: #444;
+    color: var(--ink-700);
   }
   .blog-content img {
     max-width: 100%;

@@ -1,12 +1,54 @@
 ---
+import { EXPERIENCE_YEARS } from '../lib/company';
 import PageHeader from '../components/PageHeader.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const title = "PVC Kapı ve Pencere Sistemleri | AR-KAR İnşaat Samsun | Kaliteli PVC Doğrama";
-const description = "AR-KAR İnşaat PVC kapı ve pencere sistemleri: Samsun Çarşamba'da en kaliteli PVC doğrama, enerji verimli pencere sistemleri, cam balkon çözümleri. 36 yıllık deneyimle profesyonel montaj.";
+const description = `AR-KAR İnşaat PVC kapı ve pencere sistemleri: Samsun Çarşamba'da en kaliteli PVC doğrama, enerji verimli pencere sistemleri, cam balkon çözümleri. ${EXPERIENCE_YEARS} yıllık deneyimle profesyonel montaj.`;
 const canonical = "https://ar-kar.com/pvc";
 const ogImage = "https://ar-kar.com/img/pvc.webp";
 const keywords = "pvc kapı pencere samsun, pvc doğrama çarşamba, pvc pencere sistemleri, pvc kapı montajı, enerji verimli pencere, cam balkon sistemleri, pvc doğrama fiyatları, kaliteli pvc kapı";
+
+// Bu sayfada hiç yapısal veri yoktu — diğer tüm hizmet sayfalarında varken
+// PVC sayfası arama motorlarına yalnızca düz metin olarak görünüyordu.
+// Şema, sayfada gerçekten anlatılan üç hizmet ve dört adımlı süreçle
+// birebir örtüşür; sayfada olmayan hiçbir iddia eklenmemiştir.
+const origin = (Astro.site ?? new URL('https://ar-kar.com')).origin;
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'PVC Kapı ve Pencere Sistemleri',
+  serviceType: 'PVC doğrama, montaj ve cam balkon',
+  description,
+  url: new URL('/pvc', origin).href,
+  image: new URL('/img/pvc.webp', origin).href,
+  inLanguage: 'tr-TR',
+  provider: {
+    '@type': 'LocalBusiness',
+    name: 'AR-KAR İnşaat',
+    url: origin,
+    telephone: '+90 362 834 18 48',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Orta Mah. Dr. Orhan Atılgan Cad. No:24/A',
+      addressLocality: 'Çarşamba',
+      addressRegion: 'Samsun',
+      postalCode: '55500',
+      addressCountry: 'TR',
+    },
+  },
+  areaServed: { '@type': 'AdministrativeArea', name: 'Samsun' },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'PVC Sistemleri',
+    itemListElement: [
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'PVC Pencere Sistemleri' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'PVC Kapı Sistemleri' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Cam Balkon Sistemleri' } },
+    ],
+  },
+};
 ---
 
 <BaseLayout
@@ -18,6 +60,7 @@ const keywords = "pvc kapı pencere samsun, pvc doğrama çarşamba, pvc pencere
   activePage="pvc"
 >
   <Fragment slot="head">
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(serviceSchema)} />
     <style is:inline set:html={`/* Critical CSS for above-the-fold content */
         .navbar-brand img {
             transition: transform 0.3s ease;
@@ -34,7 +77,7 @@ const keywords = "pvc kapı pencere samsun, pvc doğrama çarşamba, pvc pencere
 
         /* PVC product showcase */
         .pvc-showcase {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            background: linear-gradient(135deg, var(--surface-alt) 0%, var(--surface-raised) 100%);
             border-radius: 15px;
             padding: 2rem;
             margin-bottom: 2rem;
@@ -47,7 +90,7 @@ const keywords = "pvc kapı pencere samsun, pvc doğrama çarşamba, pvc pencere
         }
 
         .pvc-feature-card {
-            background: white;
+            background: var(--surface);
             border-radius: 10px;
             padding: 2rem;
             text-align: center;
@@ -221,7 +264,7 @@ const keywords = "pvc kapı pencere samsun, pvc doğrama çarşamba, pvc pencere
         }
 
         .pvc-card .card-title {
-            color: var(--dark);
+            color: var(--ink-900);
             font-weight: 700;
             line-height: 1.2;
             margin-bottom: 15px;
@@ -248,7 +291,7 @@ const keywords = "pvc kapı pencere samsun, pvc doğrama çarşamba, pvc pencere
 
         .pvc-card .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(204, 39, 43, 0.3);
+            box-shadow: 0 8px 25px rgba(231, 30, 36, 0.3);
         }
 
         .pvc-card .btn::before {
@@ -274,7 +317,7 @@ const keywords = "pvc kapı pencere samsun, pvc doğrama çarşamba, pvc pencere
 
         .features-section .rounded-circle:hover {
             transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 10px 20px rgba(204, 39, 43, 0.3);
+            box-shadow: 0 10px 20px rgba(231, 30, 36, 0.3);
         }
 
         /* Process Section Styles */
@@ -284,7 +327,7 @@ const keywords = "pvc kapı pencere samsun, pvc doğrama çarşamba, pvc pencere
 
         .process-section .rounded-circle:hover {
             transform: scale(1.1);
-            box-shadow: 0 10px 25px rgba(204, 39, 43, 0.2);
+            box-shadow: 0 10px 25px rgba(231, 30, 36, 0.2);
         }
 
         /* Card Height Adjustments */
@@ -369,7 +412,7 @@ const keywords = "pvc kapı pencere samsun, pvc doğrama çarşamba, pvc pencere
 
         /* Section background gradients */
         .pvc-services-section {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            background: linear-gradient(135deg, var(--surface-alt) 0%, var(--surface-raised) 100%);
             position: relative;
         }
 
@@ -380,13 +423,13 @@ const keywords = "pvc kapı pencere samsun, pvc doğrama çarşamba, pvc pencere
             left: 0;
             right: 0;
             height: 100px;
-            background: linear-gradient(to bottom, rgba(204, 39, 43, 0.05), transparent);
+            background: linear-gradient(to bottom, rgba(231, 30, 36, 0.05), transparent);
         }
 
         /* Call to action enhanced styles */
         .cta-enhanced {
-            background: linear-gradient(135deg, #f8f9fa, #fff);
-            border: 2px solid #e9ecef;
+            background: linear-gradient(135deg, var(--surface-alt), var(--surface));
+            border: 2px solid var(--ink-100);
             position: relative;
             overflow: hidden;
         }
@@ -398,7 +441,7 @@ const keywords = "pvc kapı pencere samsun, pvc doğrama çarşamba, pvc pencere
             right: -50%;
             width: 200%;
             height: 200%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(204,39,43,0.05)"/></svg>') repeat;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(231,30,36,0.05)"/></svg>') repeat;
             animation: float 30s infinite linear;
         }
 
@@ -460,7 +503,7 @@ const keywords = "pvc kapı pencere samsun, pvc doğrama çarşamba, pvc pencere
                 <span class="text-primary">PVC Kapı ve Pencere</span> Sistemleri
             </h1>
             <p class="mb-4">
-                AR-KAR İnşaat olarak 36 yıllık deneyimimizle Samsun Çarşamba'da en kaliteli PVC kapı ve pencere sistemlerini sunuyoruz. 
+                AR-KAR İnşaat olarak {EXPERIENCE_YEARS} yıllık deneyimimizle Samsun Çarşamba'da en kaliteli PVC kapı ve pencere sistemlerini sunuyoruz. 
                 Enerji verimli, güvenli ve estetik PVC doğrama çözümleriyle yaşam alanlarınızı konforlu hale getiriyoruz.
             </p>
         </div>
@@ -599,7 +642,7 @@ const keywords = "pvc kapı pencere samsun, pvc doğrama çarşamba, pvc pencere
             <div class="col-12">
                 <div class="bg-light p-4 p-md-5 rounded-3 text-center cta-enhanced">
                     <h3 class="mb-3">PVC Kapı Pencere Sistemleri İçin Hemen İletişime Geçin!</h3>
-                    <p class="mb-4 text-muted">36 yıllık deneyimimizle en kaliteli PVC doğrama sistemlerini sizlere sunuyoruz. Ücretsiz keşif ve fiyat teklifi için hemen arayın.</p>
+                    <p class="mb-4 text-muted">{EXPERIENCE_YEARS} yıllık deneyimimizle en kaliteli PVC doğrama sistemlerini sizlere sunuyoruz. Ücretsiz keşif ve fiyat teklifi için hemen arayın.</p>
                     <div class="row g-3 justify-content-center">
                         <div class="col-auto">
                             <a href="tel:+905421526755" class="btn btn-primary btn-lg px-4 btn-enhanced">

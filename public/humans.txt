@@ -1,25 +1,24 @@
 # humanstxt.org
 
 /* TEAM */
-    Firma: AR-KAR İnşaat Gıda Tarım Ürünleri ve Taş. Tic. Ltd. Şti.
+    Ticari Ünvan: AR-KAR GIDA TARIM ÜRÜNLERİ VE TAŞIMACILIK TİCARET LİMİTED ŞİRKETİ
     Lokasyon: Samsun, Çarşamba, Türkiye
     İletişim: arkargida@gmail.com
     Web: https://ar-kar.com
 
 /* THANKS */
-    36 yıldır bizlere güvenen tüm müşterilerimize teşekkür ederiz.
+    1987'den bu yana bizlere güvenen tüm müşterilerimize teşekkür ederiz.
 
 /* SITE */
-    Son Güncelleme: 2026-01-18
     Diller: Türkçe
-    Standartlar: HTML5, CSS3, JavaScript
     Yapısal Veri: Schema.org JSON-LD
-    IDE: Modern Web Development
-    Bileşenler: Bootstrap 5, Font Awesome, Owl Carousel
-    Hosting: GitHub Pages
-    
+    Çatı: Astro (statik site üretimi)
+    Bileşenler: Bootstrap 5, Font Awesome, Lightbox
+    Barındırma: Cloudflare Pages
+    Kaynak Kod: https://github.com/yusufarbc/ar-kar
+
 /* HAKKIMIZDA */
-    Kuruluş: 1987
-    Tecrübe: 36+ yıl
+    Kuruluş: 1987 (Arabacı Ticaret olarak, Nurettin Arabacı tarafından)
+    Limited Şirket: 1996
     Sektörler: İnşaat, Tarım, PVC, Mimari
     Misyon: Kaliteli inşaat ve güvenilir hizmet

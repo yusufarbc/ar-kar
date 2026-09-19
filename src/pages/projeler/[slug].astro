@@ -50,14 +50,6 @@ const coverImage = project.data.coverImage || '/img/about.webp';
         url: 'https://ar-kar.com',
       },
       ...(project.data.location ? { locationCreated: { '@type': 'Place', name: project.data.location } } : {}),
-      breadcrumb: {
-        '@type': 'BreadcrumbList',
-        itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Ana Sayfa', item: 'https://ar-kar.com/' },
-          { '@type': 'ListItem', position: 2, name: 'Projeler', item: 'https://ar-kar.com/projeler' },
-          { '@type': 'ListItem', position: 3, name: project.data.title, item: canonical },
-        ],
-      },
     })} />
   </Fragment>
 
@@ -143,14 +135,14 @@ const coverImage = project.data.coverImage || '/img/about.webp';
 
 <style is:inline>
   .project-content h2, .project-content h3, .project-content h4 {
-    color: #040404;
+    color: var(--ink-900);
     margin-top: 2rem;
     margin-bottom: 1rem;
     font-weight: 700;
   }
   .project-content p {
     margin-bottom: 1.25rem;
-    color: #444;
+    color: var(--ink-700);
   }
   .project-content ul, .project-content ol {
     margin-bottom: 1.5rem;
@@ -158,7 +150,7 @@ const coverImage = project.data.coverImage || '/img/about.webp';
   }
   .project-content li {
     margin-bottom: 0.5rem;
-    color: #444;
+    color: var(--ink-700);
   }
   .project-content img {
     max-width: 100%;

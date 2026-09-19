@@ -30,7 +30,7 @@
                     <div class="d-flex flex-column justify-content-start">
                         <a class="text-white-50 mb-2" href="/"><i
                                 class="fa fa-angle-right me-2"></i>Anasayfa</a>
-                        <a class="text-white-50 mb-2" href="/#about"><i
+                        <a class="text-white-50 mb-2" href="/hakkimizda"><i
                                 class="fa fa-angle-right me-2"></i>Hakkımızda</a>
                         <a class="text-white-50 mb-2" href="/#projects"><i
                                 class="fa fa-angle-right me-2"></i>Projelerimiz</a>
@@ -38,7 +38,7 @@
                                 class="fa fa-angle-right me-2"></i>Haberler &amp; Duyurular</a>
                         <a class="text-white-50 mb-2" href="/sss"><i
                                 class="fa fa-angle-right me-2"></i>Sık Sorulan Sorular</a>
-                        <a class="text-white-50" href="/#contact"><i
+                        <a class="text-white-50" href="/iletisim"><i
                                 class="fa fa-angle-right me-2"></i>İletişim</a>
                     </div>
                 </div>
@@ -124,7 +124,7 @@
 <style>
     .contact-modal { border: none; border-radius: var(--radius-lg, 20px); overflow: hidden; }
     .contact-modal__header {
-        background: linear-gradient(135deg, var(--ink-900, #14151a) 0%, #23252c 100%);
+        background: linear-gradient(135deg, var(--surface-raised, #1c1c21) 0%, #26262d 100%);
         color: #fff;
         border: none;
         padding: 1.25rem 1.5rem;
@@ -140,7 +140,7 @@
            koyu zemin üzerinde neredeyse görünmez oluyordu. Doğrudan hedefle. */
         color: #fff;
     }
-    .contact-modal__header .modal-title i { color: var(--primary, #cc272b); }
+    .contact-modal__header .modal-title i { color: var(--primary, #E71E24); }
 
     .contact-modal__grid {
         display: grid;
@@ -149,7 +149,7 @@
         margin-bottom: 20px;
     }
     .contact-address-card {
-        border: 1px solid var(--ink-100, #e7e8eb);
+        border: 1px solid var(--ink-100, #27272c);
         border-radius: var(--radius-md, 14px);
         padding: 16px 18px;
     }
@@ -160,15 +160,15 @@
         font-size: 0.78rem;
         text-transform: uppercase;
         letter-spacing: 0.04em;
-        color: var(--primary, #cc272b);
+        color: var(--primary, #E71E24);
         margin-bottom: 8px;
     }
-    .contact-address-card p { margin-bottom: 10px; font-size: 0.9rem; color: var(--ink-500, #5b5e68); }
+    .contact-address-card p { margin-bottom: 10px; font-size: 0.9rem; color: var(--ink-500, #a1a2a8); }
     .contact-address-card a {
         display: inline-flex; align-items: center; gap: 6px;
-        font-weight: 600; font-size: 0.88rem; color: var(--ink-900, #14151a); text-decoration: none;
+        font-weight: 600; font-size: 0.88rem; color: var(--ink-900, #ffffff); text-decoration: none;
     }
-    .contact-address-card a i { color: var(--primary, #cc272b); }
+    .contact-address-card a i { color: var(--primary, #E71E24); }
 
     .contact-modal__quicklinks {
         display: grid;
@@ -179,27 +179,27 @@
     .contact-quick-link {
         display: flex; align-items: center; gap: 10px;
         padding: 12px 16px;
-        border: 1px solid var(--ink-100, #e7e8eb);
+        border: 1px solid var(--ink-100, #27272c);
         border-radius: var(--radius-md, 14px);
         font-weight: 600; font-size: 0.88rem;
-        color: var(--ink-900, #14151a);
+        color: var(--ink-900, #ffffff);
         text-decoration: none;
         transition: border-color 0.2s ease, transform 0.2s ease;
     }
-    .contact-quick-link i { color: var(--primary, #cc272b); font-size: 1.05rem; width: 1.2em; text-align: center; }
-    .contact-quick-link:hover { border-color: var(--primary, #cc272b); transform: translateY(-2px); color: var(--ink-900, #14151a); }
-    .contact-quick-link--accent { background: var(--surface-alt, #f6f6f8); }
+    .contact-quick-link i { color: var(--primary, #E71E24); font-size: 1.05rem; width: 1.2em; text-align: center; }
+    .contact-quick-link:hover { border-color: var(--primary, #E71E24); transform: translateY(-2px); color: var(--ink-900, #ffffff); }
+    .contact-quick-link--accent { background: var(--surface-alt, #151519); }
 
     .contact-modal__hours {
         display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
         padding: 12px 16px;
-        background: var(--surface-alt, #f6f6f8);
+        background: var(--surface-alt, #151519);
         border-radius: var(--radius-md, 14px);
         font-size: 0.85rem;
-        color: var(--ink-500, #5b5e68);
+        color: var(--ink-500, #a1a2a8);
     }
-    .contact-modal__hours i { color: var(--primary, #cc272b); }
-    .contact-modal__hours-sep { color: var(--ink-300, #9a9da6); }
+    .contact-modal__hours i { color: var(--primary, #E71E24); }
+    .contact-modal__hours-sep { color: var(--ink-300, #6d6e75); }
 
     @media (max-width: 575.98px) {
         .contact-modal__grid,

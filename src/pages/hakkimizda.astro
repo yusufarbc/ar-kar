@@ -1,0 +1,240 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { getCollection } from 'astro:content';
+import { COMPANY, FOUNDING_YEAR, INCORPORATION_YEAR, EXPERIENCE_YEARS } from '../lib/company';
+
+/**
+ * Ayrı "Hakkımızda" sayfası.
+ *
+ * Daha önce firma hikâyesi yalnızca ana sayfadaki #about çıpasında, üç
+ * cümlelik bir paragraf hâlindeydi. Google'ın E-E-A-T değerlendirmesinde
+ * "bu işi kim yapıyor, ne zamandır yapıyor" sorusuna cevap veren ayrı bir
+ * kurumsal sayfa, özellikle para/güven gerektiren sektörlerde (inşaat bu
+ * kategoriye girer) doğrudan ağırlık taşır.
+ *
+ * Sayfadaki tüm bilgiler sitede halihazırda doğrulanabilir olanlardan
+ * türetilmiştir: kuruluş yılı, kurucu, şirketleşme yılı, hizmet alanları,
+ * proje sayısı, şubeler ve iş ortağı markalar.
+ */
+const title = `Hakkımızda | AR-KAR İnşaat — ${FOUNDING_YEAR}'den Bu Yana Samsun Çarşamba`;
+const description = `AR-KAR İnşaat ${FOUNDING_YEAR} yılında Arabacı Ticaret olarak kuruldu, ${INCORPORATION_YEAR}'da limited şirkete dönüştü. Samsun Çarşamba'da inşaat, PVC, hırdavat, tarım ve mimari proje alanlarında ${EXPERIENCE_YEARS} yıllık tecrübe.`;
+const canonical = "https://ar-kar.com/hakkimizda";
+const keywords = "ar-kar hakkında, ar-kar inşaat kimdir, çarşamba inşaat firması, arabacı ticaret, samsun aile şirketi inşaat";
+
+const projectCount = (await getCollection('projects')).length;
+const origin = (Astro.site ?? new URL('https://ar-kar.com')).origin;
+
+const MILESTONES = [
+  {
+    year: String(FOUNDING_YEAR),
+    title: 'Arabacı Ticaret kuruldu',
+    text: 'Nurettin Arabacı, Çarşamba’da Arabacı Ticaret adıyla faaliyete başladı.',
+  },
+  {
+    year: String(INCORPORATION_YEAR),
+    title: 'AR-KAR limited şirket oldu',
+    text: 'Firma AR-KAR ismiyle limited şirkete dönüştü ve kurumsallaşma süreci başladı.',
+  },
+  {
+    year: 'Bugün',
+    title: `${EXPERIENCE_YEARS} yıl, 10’dan fazla sektör`,
+    text: `İki adreste; inşaat, müteahhitlik, PVC, hırdavat, tarım, zirai ürünler ve mimari proje alanlarında hizmet veriyoruz. Tamamlanan proje sayısı: ${projectCount}.`,
+  },
+];
+
+const FIELDS = [
+  { icon: 'fa-building', name: 'Konut İnşaat Projeleri', href: '/projeler' },
+  { icon: 'fa-handshake', name: 'Anahtar Teslim İnşaat', href: '/muteahhitlik' },
+  { icon: 'fa-tools', name: 'Hırdavat & İnşaat Malzemeleri', href: '/insaat' },
+  { icon: 'fa-cube', name: 'PVC Kapı ve Pencere Sistemleri', href: '/pvc' },
+  { icon: 'fa-seedling', name: 'Tarım Ürünleri Alım Satımı', href: '/tarim' },
+  { icon: 'fa-leaf', name: 'Zirai Ürünler ve Danışmanlık', href: '/ziraat' },
+  { icon: 'fa-palette', name: 'Mimari Proje Hizmetleri', href: '/mimar' },
+];
+
+const aboutSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: 'AR-KAR İnşaat Hakkımızda',
+  url: new URL('/hakkimizda', origin).href,
+  inLanguage: 'tr-TR',
+  mainEntity: {
+    '@type': 'Organization',
+    name: COMPANY.legalName,
+    alternateName: COMPANY.shortName,
+    url: origin,
+    logo: new URL('/img/logo.webp', origin).href,
+    foundingDate: String(FOUNDING_YEAR),
+    founder: { '@type': 'Person', name: 'Nurettin Arabacı' },
+    email: COMPANY.email,
+    telephone: COMPANY.branches.flatMap((b) => [b.phone, b.mobile]),
+    address: COMPANY.branches.map((b) => ({
+      '@type': 'PostalAddress',
+      name: b.name,
+      streetAddress: b.street,
+      addressLocality: b.district,
+      addressRegion: b.city,
+      postalCode: b.postalCode,
+      addressCountry: 'TR',
+    })),
+    areaServed: { '@type': 'AdministrativeArea', name: 'Samsun' },
+    sameAs: [COMPANY.instagram, COMPANY.facebook],
+  },
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  keywords={keywords}
+  ogImage="https://ar-kar.com/img/about.webp"
+  activePage="hakkimizda"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(aboutSchema)} />
+    <style is:inline set:html={`
+      .about-lead { font-size: 1.1rem; line-height: 1.75; }
+      .timeline { list-style: none; margin: 0; padding: 0; position: relative; }
+      .timeline::before {
+        content: ""; position: absolute; left: 13px; top: 6px; bottom: 6px;
+        width: 2px; background: var(--ink-100, #27272c);
+      }
+      .timeline__item { position: relative; padding: 0 0 1.75rem 3rem; }
+      .timeline__item:last-child { padding-bottom: 0; }
+      .timeline__dot {
+        position: absolute; left: 4px; top: 2px;
+        width: 20px; height: 20px; border-radius: 50%;
+        background: var(--primary, #E71E24);
+        border: 4px solid var(--surface, #0c0c0e);
+        box-shadow: 0 0 0 2px var(--ink-100, #27272c);
+      }
+      .timeline__year {
+        font-size: .76rem; font-weight: 700; letter-spacing: .08em;
+        text-transform: uppercase; color: var(--primary, #E71E24);
+      }
+      .timeline__title { font-size: 1.05rem; font-weight: 700; margin: .15rem 0 .35rem; }
+      .timeline__text { color: var(--ink-500, #a1a2a8); margin: 0; }
+
+      .field-grid { list-style: none; margin: 0; padding: 0; display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+      .field-grid a {
+        display: flex; align-items: center; gap: .75rem;
+        padding: 1rem 1.1rem; text-decoration: none; color: inherit;
+        background: var(--surface, #0c0c0e);
+        border: 1px solid var(--ink-100, #27272c); border-radius: 12px;
+        transition: border-color .2s ease, transform .2s ease;
+      }
+      .field-grid a:hover { border-color: var(--primary, #E71E24); transform: translateY(-2px); }
+      .field-grid i { color: var(--primary, #E71E24); font-size: 1.15rem; width: 1.4rem; text-align: center; }
+
+      .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+      .fact {
+        background: var(--surface-alt, #151519);
+        border: 1px solid var(--ink-100, #27272c);
+        border-radius: 14px; padding: 1.25rem; text-align: center;
+      }
+      .fact__num { display: block; font-size: 2rem; font-weight: 800; line-height: 1; color: var(--primary, #E71E24); }
+      .fact__label { display: block; font-size: .82rem; color: var(--ink-500, #a1a2a8); margin-top: .4rem; }
+    `} />
+  </Fragment>
+
+  <PageHeader active="Hakkımızda" />
+
+  <div class="container-fluid py-6 px-3 px-md-5">
+
+    <!-- Giriş -->
+    <div class="row g-5 align-items-center mb-6">
+      <div class="col-lg-7">
+        <h1 class="display-5 text-uppercase mb-4">
+          <span class="text-primary">{FOUNDING_YEAR}</span>'den Bu Yana Çarşamba'da
+        </h1>
+        <p class="about-lead">
+          {COMPANY.displayName} olarak 10'dan fazla sektörde, {EXPERIENCE_YEARS} yılı aşkın
+          süredir bilgi, birikim ve tecrübemizle Samsun'un Çarşamba ilçesinde hizmet vermekteyiz.
+        </p>
+        <p class="text-muted">
+          İlk olarak Nurettin Arabacı tarafından Arabacı Ticaret adıyla kurulan firmamız,
+          {INCORPORATION_YEAR} yılında AR-KAR ismiyle limited şirket olmuş ve kurumsallaşmaya
+          başlamıştır. Bugün inşaat ve müteahhitlikten PVC doğramaya, hırdavat ve yapı
+          malzemelerinden tarım ve zirai ürünlere uzanan geniş bir hizmet alanında,
+          aynı titizlikle çalışmaya devam ediyoruz.
+        </p>
+      </div>
+      <div class="col-lg-5">
+        <img
+          class="img-fluid w-100 rounded"
+          src="/img/about.webp"
+          alt="AR-KAR İnşaat — Samsun Çarşamba"
+          style="object-fit: cover; max-height: 380px;"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    </div>
+
+    <!-- Sayılarla -->
+    <div class="facts mb-6">
+      <div class="fact">
+        <span class="fact__num">{EXPERIENCE_YEARS}</span>
+        <span class="fact__label">Yıllık tecrübe</span>
+      </div>
+      <div class="fact">
+        <span class="fact__num">{projectCount}</span>
+        <span class="fact__label">Tamamlanan proje</span>
+      </div>
+      <div class="fact">
+        <span class="fact__num">{FIELDS.length}</span>
+        <span class="fact__label">Hizmet alanı</span>
+      </div>
+      <div class="fact">
+        <span class="fact__num">{COMPANY.branches.length}</span>
+        <span class="fact__label">Adres</span>
+      </div>
+    </div>
+
+    <!-- Kilometre taşları -->
+    <div class="row g-5 mb-6">
+      <div class="col-lg-6">
+        <h2 class="h3 text-uppercase mb-4">Kilometre <span class="text-primary">Taşları</span></h2>
+        <ul class="timeline">
+          {MILESTONES.map((m) => (
+            <li class="timeline__item">
+              <span class="timeline__dot" aria-hidden="true"></span>
+              <span class="timeline__year">{m.year}</span>
+              <h3 class="timeline__title">{m.title}</h3>
+              <p class="timeline__text">{m.text}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="col-lg-6">
+        <h2 class="h3 text-uppercase mb-4">Faaliyet <span class="text-primary">Alanlarımız</span></h2>
+        <ul class="field-grid">
+          {FIELDS.map((f) => (
+            <li>
+              <a href={f.href}>
+                <i class={`fa ${f.icon}`} aria-hidden="true"></i>
+                <span>{f.name}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <!-- İletişim yönlendirmesi -->
+    <div class="text-center">
+      <h2 class="h4 mb-3">Bizi yakından tanımak ister misiniz?</h2>
+      <p class="text-muted mb-4">
+        Çarşamba'daki iki adresimizde sizi ağırlamaktan memnuniyet duyarız.
+      </p>
+      <a href="/iletisim" class="btn btn-primary btn-lg px-5 py-3">
+        <i class="fa fa-map-marker-alt me-2"></i>İletişim ve Adreslerimiz
+      </a>
+    </div>
+
+  </div>
+</BaseLayout>

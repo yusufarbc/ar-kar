@@ -1,12 +1,142 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
+import { COMPANY, FOUNDING_YEAR, EXPERIENCE_YEARS } from '../lib/company';
 
-const title = "Sık Sorulan Sorular - AR-KAR İnşaat | Samsun Çarşamba";
-const description = "AR-KAR İnşaat hakkında sık sorulan sorular ve cevapları. İnşaat, PVC, tarım ve diğer hizmetlerimiz hakkında merak ettikleriniz.";
+const title = "Sık Sorulan Sorular | AR-KAR İnşaat Samsun Çarşamba";
+const description = "AR-KAR İnşaat'a en çok sorulan sorular: inşaat süreleri, PVC garanti ve ölçü alma, anahtar teslim kapsamı, zirai danışmanlık, çalışma saatleri ve iletişim.";
 const canonical = "https://ar-kar.com/sss";
-const ogImage = "https://ar-kar.com/img/logo.webp";
+const ogImage = "https://ar-kar.com/img/og-default.webp";
+const keywords = "ar-kar sss, inşaat sık sorulan sorular, pvc pencere garanti, anahtar teslim inşaat nedir, çarşamba inşaat firması, zirai danışmanlık samsun";
 
+/**
+ * SSS içeriği tek bir yerden gelir.
+ *
+ * Hem ekranda görünen akordiyon hem de FAQPage yapısal verisi bu diziden
+ * üretilir. Google, FAQPage işaretlemesinin sayfada GÖRÜNEN içerikle birebir
+ * aynı olmasını şart koşar; iki ayrı yerde tutulsaydı biri güncellenip
+ * diğeri unutulduğunda işaretleme politikaya aykırı hâle gelirdi.
+ *
+ * Cevaplar yalnızca sitede halihazırda yer alan bilgilere dayanır
+ * (hizmetler, şube adresleri, çalışma saatleri, PVC süreç adımları).
+ * Fiyat, sertifika veya kampanya gibi doğrulanmamış hiçbir iddia yoktur.
+ */
+const FAQ_GROUPS: Array<{ group: string; items: Array<{ q: string; a: string }> }> = [
+  {
+    group: 'İnşaat ve Müteahhitlik',
+    items: [
+      {
+        q: 'İnşaat projeleriniz ne kadar sürede tamamlanıyor?',
+        a: 'Proje büyüklüğüne göre değişmekle birlikte, ortalama bir konut projesi 8-12 ay içerisinde tamamlanmaktadır. Detaylı zaman planını proje başlangıcında paylaşıyoruz.',
+      },
+      {
+        q: 'Anahtar teslim inşaat neleri kapsıyor?',
+        a: "Anahtar teslim hizmetimizde projenin tüm aşamalarını biz yönetiyoruz: mimari proje ve ruhsat işlemleri, kaba inşaat, ince işler, tesisat, doğrama ve son teslim. Siz yalnızca anahtarı teslim alıyorsunuz.",
+      },
+      {
+        q: 'Hangi bölgelerde çalışıyorsunuz?',
+        a: 'Merkezimiz Samsun Çarşamba’da. Tamamladığımız projeler ağırlıklı olarak Çarşamba ve Atakum bölgesinde yer alıyor; Samsun geneli için taleplerinizi değerlendiriyoruz.',
+      },
+      {
+        q: 'Tamamladığınız projeleri nereden görebilirim?',
+        a: 'Tüm konut ve ticari projelerimizi fotoğraf, konum ve daire bilgileriyle birlikte “Projelerimiz” sayfasında inceleyebilirsiniz.',
+      },
+      {
+        q: 'Kendi arsam var, kat karşılığı çalışıyor musunuz?',
+        a: 'Arsa sahipleriyle yapılabilecek iş modellerini proje bazında değerlendiriyoruz. Arsanızın konumu ve imar durumuyla birlikte bizimle iletişime geçmeniz yeterli.',
+      },
+    ],
+  },
+  {
+    group: 'PVC Kapı ve Pencere',
+    items: [
+      {
+        q: 'PVC kapı pencere garantiniz var mı?',
+        a: 'Evet, tüm PVC kapı pencere sistemlerimizde 10 yıl garanti veriyoruz. Ayrıca montaj sonrası bakım hizmetleri de sunmaktayız.',
+      },
+      {
+        q: 'Ölçü alma ücretli mi?',
+        a: 'PVC sistemlerinde sürecimiz dört adımdan oluşur: ölçü alma, tasarım ve ürün seçimi, üretim, montaj ve teslim. Ölçü alma için bizimle iletişime geçmeniz yeterlidir.',
+      },
+      {
+        q: 'Cam balkon da yapıyor musunuz?',
+        a: 'Evet. PVC pencere ve kapı sistemlerinin yanı sıra cam balkon sistemleri de sunuyoruz.',
+      },
+      {
+        q: 'Montaj ne kadar sürer?',
+        a: 'Süre; daire sayısına, doğrama adedine ve ürün seçimine göre değişir. Ölçü alındıktan sonra size net bir üretim ve montaj takvimi veriyoruz.',
+      },
+    ],
+  },
+  {
+    group: 'İnşaat Malzemeleri ve Hırdavat',
+    items: [
+      {
+        q: 'Hangi markaların bayiliğini yapıyorsunuz?',
+        a: 'Polisan Boya, Kale Seramik, Akçansa ve Kavçim Çimento, Gemlik Gübre, İGSAŞ, DOĞUPEN ve KARPEN gibi 19 markayla çalışıyoruz. Tamamını ana sayfadaki “İş Ortaklarımız” bölümünde görebilirsiniz.',
+      },
+      {
+        q: 'Şantiyeye teslimat yapıyor musunuz?',
+        a: 'Kaba ve ince inşaat malzemeleri, hırdavat, elektrik ve tesisat ürünlerinde toplu alımlar için teslimat seçeneklerini mağazalarımızdan öğrenebilirsiniz.',
+      },
+      {
+        q: 'Perakende satış yapıyor musunuz?',
+        a: 'Evet. Hem müteahhit ve usta alımlarına hem de bireysel müşterilere satış yapıyoruz.',
+      },
+    ],
+  },
+  {
+    group: 'Tarım ve Zirai Ürünler',
+    items: [
+      {
+        q: 'Zirai danışmanlık hizmetiniz nasıl işliyor?',
+        a: 'Zirai ilaç, gübre ve tohum satışının yanında ürün seçimi ve uygulama konusunda danışmanlık veriyoruz. Arazinizin durumu ve ürün deseninizle mağazamıza uğrayabilir veya telefonla ulaşabilirsiniz.',
+      },
+      {
+        q: 'Tarım ürünü alımı da yapıyor musunuz?',
+        a: 'Evet. Zirai girdi satışının yanı sıra tarım ürünleri alım satımı da faaliyet alanlarımız arasında.',
+      },
+    ],
+  },
+  {
+    group: 'Çalışma Şekli ve İletişim',
+    items: [
+      {
+        q: 'Ödeme seçenekleriniz nelerdir?',
+        a: 'Nakit, kredi kartı ve banka kredisi seçenekleri mevcuttur. Büyük projeler için taksitli ödeme planları da sunuyoruz.',
+      },
+      {
+        q: 'Çalışma saatleriniz nedir?',
+        a: `${COMPANY.openingHours.days} günleri ${COMPANY.openingHours.opens} - ${COMPANY.openingHours.closes} saatleri arasında hizmet veriyoruz.`,
+      },
+      {
+        q: 'Kaç şubeniz var, nerede?',
+        a: `İki adresimiz var: ${COMPANY.branches[1].name} — ${COMPANY.branches[1].street}, ${COMPANY.branches[1].district}/${COMPANY.branches[1].city}; ${COMPANY.branches[0].name} — ${COMPANY.branches[0].street}, ${COMPANY.branches[0].district}/${COMPANY.branches[0].city}.`,
+      },
+      {
+        q: 'Firma ne zamandan beri faaliyette?',
+        a: `Firmamız ${FOUNDING_YEAR} yılında Nurettin Arabacı tarafından Arabacı Ticaret adıyla kuruldu, 1996'da AR-KAR ismiyle limited şirkete dönüştü. Bugün ${EXPERIENCE_YEARS} yıllık birikimle hizmet veriyoruz.`,
+      },
+      {
+        q: 'Teklif almak için ne yapmalıyım?',
+        a: `Telefonla (${COMPANY.branches[0].phone} veya ${COMPANY.branches[1].phone}), WhatsApp üzerinden ya da ${COMPANY.email} adresine e-posta göndererek teklif isteyebilirsiniz. Projenizin kapsamını iletmeniz süreci hızlandırır.`,
+      },
+    ],
+  },
+];
+
+const ALL_ITEMS = FAQ_GROUPS.flatMap((g) => g.items);
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  inLanguage: 'tr-TR',
+  mainEntity: ALL_ITEMS.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+};
 ---
 
 <BaseLayout
@@ -14,150 +144,135 @@ const ogImage = "https://ar-kar.com/img/logo.webp";
   description={description}
   canonical={canonical}
   ogImage={ogImage}
-  
+  keywords={keywords}
   activePage="sss"
 >
   <Fragment slot="head">
-    <style is:inline set:html={`/* FAQ specific styles */
-        .accordion-item {
-            border: none;
-            border-radius: 10px !important;
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(faqSchema)} />
+    <style is:inline set:html={`/* SSS sayfasına özel stiller.
+        NOT: Buradaki .whatsapp-float kuralları kaldırıldı — o buton ve
+        stilleri zaten Footer bileşeninde site genelinde tanımlı, burada
+        tekrarlanması ölü kod demekti. */
+        .faq-group { margin-bottom: 2.5rem; }
+        .faq-group__title {
+            font-size: 1.05rem;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            color: var(--ink-500, #a1a2a8);
             margin-bottom: 1rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding-bottom: .5rem;
+            border-bottom: 2px solid var(--ink-100, #27272c);
         }
-        
+        .accordion-item {
+            border: 1px solid var(--ink-100, #27272c);
+            border-radius: 12px !important;
+            margin-bottom: .75rem;
+            overflow: hidden;
+            box-shadow: none;
+        }
         .accordion-button {
             font-weight: 600;
-            font-size: 1.1rem;
-            border-radius: 10px !important;
-            background-color: #f8f9fa;
+            font-size: 1.02rem;
+            /* Koyu tema: kapalı soru kutusu kart yüzeyi rengini alır.
+               Sabit beyaz verilirse başlık metni de beyaz olduğu için
+               soru tamamen görünmez olur. */
+            background-color: var(--surface, #0c0c0e);
+            color: var(--ink-900, #fff);
+            padding: 1rem 1.15rem;
         }
-        
+        .accordion-button:hover {
+            background-color: var(--surface-alt, #151519);
+        }
         .accordion-button:not(.collapsed) {
-            background-color: var(--bs-primary);
-            color: white;
+            background-color: var(--primary, #E71E24);
+            color: var(--arkar-white, #fff);
+            box-shadow: none;
         }
-        
+        .accordion-button:not(.collapsed)::after { filter: brightness(0) invert(1); }
+        .accordion-button:focus { box-shadow: none; border-color: var(--primary, #E71E24); }
         .accordion-body {
-            font-size: 1rem;
-            line-height: 1.6;
-            color: #666;
+            font-size: .98rem;
+            line-height: 1.7;
+            color: var(--ink-500, #a1a2a8);
+            background: var(--surface-alt, #151519);
         }
-        
-        /* Mobile optimizations */
-        @media (max-width: 768px) {
-            .display-5 {
-                font-size: 2rem;
-            }
-            
-            .py-6 {
-                padding-top: 3rem !important;
-                padding-bottom: 3rem !important;
-            }
-            
-            .accordion-button {
-                font-size: 1rem;
-            }
-        }
-        
-        /* WhatsApp floating button */
-        .whatsapp-float {
-            position: fixed;
-            width: 60px;
-            height: 60px;
-            bottom: 20px;
-            right: 20px;
-            background-color: #25d366;
-            color: white;
-            border-radius: 50px;
+        .faq-cta {
+            background: var(--surface-alt, #151519);
+            border: 1px solid var(--ink-100, #27272c);
+            border-radius: 16px;
+            padding: 2rem 1.5rem;
             text-align: center;
-            font-size: 30px;
-            box-shadow: 2px 2px 3px #999;
-            z-index: 1000;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
         }
-        
-        .whatsapp-float:hover {
-            background-color: #20c55e;
-            color: white;
-            transform: scale(1.1);
-            text-decoration: none;
-        }
-        
         @media (max-width: 768px) {
-            .whatsapp-float {
-                width: 55px;
-                height: 55px;
-                bottom: 15px;
-                right: 15px;
-                font-size: 25px;
-            }
+            .display-5 { font-size: 2rem; }
+            .accordion-button { font-size: .96rem; padding: .85rem 1rem; }
         }`} />
   </Fragment>
 
   <PageHeader active="Sık Sorulan Sorular" />
 
-  <!-- SSS Content -->
-    <div class="container-fluid py-6 px-5">
-        <div class="text-center mx-auto mb-5" style="max-width: 800px;">
-            <h1 class="display-5 text-uppercase mb-4">Sık Sorulan <span class="text-primary">Sorular</span></h1>
-            <p class="mb-0">AR-KAR İnşaat hizmetleri hakkında merak ettikleriniz</p>
-        </div>
-        
-        <div class="row justify-content-center">
-            <div class="col-lg-10">
-                <div class="accordion" id="faqAccordion">
-                    
-                    <!-- İnşaat Projeleri -->
-                    <div class="accordion-item mb-3">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
-                                İnşaat projeleriniz ne kadare sürede tamamlanıyor?
-                            </button>
-                        </h2>
-                        <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body">
-                                Proje büyüklüğüne göre değişmekle birlikte, ortalama bir konut projesi 8-12 ay içerisinde tamamlanmaktadır. Detaylı zaman planını proje başlangıcında paylaşıyoruz.
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- PVC Hizmetleri -->
-                    <div class="accordion-item mb-3">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
-                                PVC kapı pencere garantiniz var mı?
-                            </button>
-                        </h2>
-                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body">
-                                Evet, tüm PVC kapı pencere sistemlerimizde 10 yıl garanti veriyoruz. Ayrıca montaj sonrası bakım hizmetleri de sunmaktayız.
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Ödeme -->
-                    <div class="accordion-item mb-3">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
-                                Ödeme seçenekleriniz nelerdir?
-                            </button>
-                        </h2>
-                        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body">
-                                Nakit, kredi kartı ve banka kredisi seçenekleri mevcuttur. Büyük projeler için taksitli ödeme planları da sunuyoruz.
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Daha fazla soru eklenebilir -->
-                    
-                </div>
-            </div>
-        </div>
+  <div class="container-fluid py-6 px-3 px-md-5">
+    <div class="text-center mx-auto mb-5" style="max-width: 800px;">
+      <h1 class="display-5 text-uppercase mb-3">Sık Sorulan <span class="text-primary">Sorular</span></h1>
+      <p class="mb-0 text-muted">
+        AR-KAR İnşaat hizmetleri hakkında en çok merak edilen {ALL_ITEMS.length} soru ve cevabı.
+        Aradığınızı bulamazsanız bize doğrudan ulaşabilirsiniz.
+      </p>
     </div>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-9">
+        {FAQ_GROUPS.map((group, gi) => (
+          <section class="faq-group">
+            <h2 class="faq-group__title">{group.group}</h2>
+            <div class="accordion" id={`faqAccordion${gi}`}>
+              {group.items.map((item, ii) => {
+                const id = `faq-${gi}-${ii}`;
+                const open = gi === 0 && ii === 0;
+                return (
+                  <div class="accordion-item">
+                    <h3 class="accordion-header">
+                      <button
+                        class={`accordion-button${open ? '' : ' collapsed'}`}
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target={`#${id}`}
+                        aria-expanded={open ? 'true' : 'false'}
+                        aria-controls={id}
+                      >
+                        {item.q}
+                      </button>
+                    </h3>
+                    <div
+                      id={id}
+                      class={`accordion-collapse collapse${open ? ' show' : ''}`}
+                      data-bs-parent={`#faqAccordion${gi}`}
+                    >
+                      <div class="accordion-body">{item.a}</div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+        ))}
+
+        <div class="faq-cta">
+          <h2 class="h4 mb-2">Sorunuzun cevabı burada yok mu?</h2>
+          <p class="text-muted mb-4">Bize ulaşın, en kısa sürede dönüş yapalım.</p>
+          <div class="d-flex flex-wrap gap-2 justify-content-center">
+            <a href={COMPANY.branches[0].phoneHref} class="btn btn-primary px-4 py-2">
+              <i class="fa fa-phone me-2"></i>{COMPANY.branches[0].phone}
+            </a>
+            <a href={`https://wa.me/${COMPANY.whatsapp}`} class="btn btn-outline-secondary px-4 py-2" target="_blank" rel="noopener">
+              <i class="fab fa-whatsapp me-2"></i>WhatsApp
+            </a>
+            <a href="/iletisim" class="btn btn-outline-secondary px-4 py-2">
+              <i class="fa fa-map-marker-alt me-2"></i>İletişim sayfası
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </BaseLayout>

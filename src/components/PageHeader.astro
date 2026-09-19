@@ -3,6 +3,11 @@
 // noktadan yönetilen hâli. Kasıtlı olarak <h1> ÜRETMEZ — her sayfanın
 // kendi içerik bölümünde zaten bir h1'i var; burada ikinci bir h1
 // oluşturmak SEO açısından yanlış olurdu.
+//
+// BreadcrumbList yapısal verisi de buradan üretilir. Daha önce bu şema
+// yalnızca 4 sayfada, üstelik elle yazılmış hâlde vardı; mimar, ziraat,
+// pvc, sss ve blog sayfalarında hiç yoktu. Artık breadcrumb'ı gösteren
+// her sayfa şemasını da otomatik alır ve ikisi asla birbirinden sapmaz.
 interface Crumb {
   label: string;
   href: string;
@@ -16,7 +21,28 @@ interface Props {
 }
 
 const { parents = [], active } = Astro.props;
+
+const origin = (Astro.site ?? new URL('https://ar-kar.com')).origin;
+const toAbsolute = (href: string) => new URL(href, origin).href;
+
+// Google'ın önerisi: son öğe "item" taşımaz, yalnızca adıyla verilir.
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Anasayfa', item: toAbsolute('/') },
+    ...parents.map((p, i) => ({
+      '@type': 'ListItem',
+      position: i + 2,
+      name: p.label,
+      item: toAbsolute(p.href),
+    })),
+    { '@type': 'ListItem', position: parents.length + 2, name: active },
+  ],
+};
 ---
+
+<script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbSchema)} />
 
 <div class="page-header">
   <div class="container-fluid px-3 px-md-5">

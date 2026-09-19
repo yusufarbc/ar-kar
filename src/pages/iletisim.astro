@@ -1,0 +1,210 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { COMPANY } from '../lib/company';
+
+/**
+ * Ayrı iletişim sayfası.
+ *
+ * Daha önce iletişim yalnızca ana sayfadaki #contact çıpasıydı. Yerel
+ * aramada ("samsun çarşamba inşaat firması iletişim", "ar-kar telefon")
+ * kendi adresi ve kendi ContactPage/LocalBusiness şeması olan bir sayfa
+ * çıpadan çok daha güçlü bir sinyaldir; Google Business profili ile
+ * eşleşen NAP (isim-adres-telefon) bilgisini de tek bir yerde toplar.
+ */
+const title = "İletişim | AR-KAR İnşaat Samsun Çarşamba — Adres ve Telefon";
+const description = "AR-KAR İnşaat iletişim bilgileri: Çarşamba merkez ve şube adresleri, telefon numaraları, WhatsApp, e-posta ve çalışma saatleri. Samsun Çarşamba'da hizmetinizdeyiz.";
+const canonical = "https://ar-kar.com/iletisim";
+const keywords = "ar-kar iletişim, ar-kar inşaat telefon, çarşamba inşaat firması adres, samsun inşaat iletişim, ar-kar çarşamba";
+
+const MAPS: Record<string, string> = {
+  sube: 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d772.468571026306!2d36.73518574680688!3d41.20190120018642!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x408805eef4150237%3A0xacad6d76d6d10c25!2zQVItS0FSIMSwTsWeQUFULCBHSURBLCBUQVJJTSDDnFLDnE5MRVLEsCBWRSBUQcWeLiBUxLBDLiBMVEQuIMWeVMSw!5e0!3m2!1str!2str!4v1752059976203!5m2!1str!2str',
+  merkez: 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11998.885509682566!2d36.7301586!3d41.2496267!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4087d815c0000001%3A0x93edfdd88f6e6692!2zQXIta2FyIMSwbsWfYWF0!5e0!3m2!1str!2str!4v1752059871580!5m2!1str!2str',
+};
+
+const origin = (Astro.site ?? new URL('https://ar-kar.com')).origin;
+
+const contactSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  name: 'AR-KAR İnşaat İletişim',
+  url: new URL('/iletisim', origin).href,
+  inLanguage: 'tr-TR',
+  mainEntity: {
+    '@type': 'LocalBusiness',
+    name: COMPANY.legalName,
+    alternateName: COMPANY.shortName,
+    url: origin,
+    email: COMPANY.email,
+    image: new URL('/img/logo.webp', origin).href,
+    telephone: COMPANY.branches.flatMap((b) => [b.phone, b.mobile]),
+    address: COMPANY.branches.map((b) => ({
+      '@type': 'PostalAddress',
+      name: b.name,
+      streetAddress: b.street,
+      addressLocality: b.district,
+      addressRegion: b.city,
+      postalCode: b.postalCode,
+      addressCountry: 'TR',
+    })),
+    openingHoursSpecification: {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+      opens: COMPANY.openingHours.opens,
+      closes: COMPANY.openingHours.closes,
+    },
+    sameAs: [COMPANY.instagram, COMPANY.facebook],
+  },
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  keywords={keywords}
+  activePage="iletisim"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(contactSchema)} />
+    <style is:inline set:html={`
+      .contact-card {
+        background: var(--surface, #0c0c0e);
+        border: 1px solid var(--ink-100, #27272c);
+        border-radius: 16px;
+        overflow: hidden;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+      .contact-card__body { padding: 1.5rem; flex: 1; }
+      .contact-card__badge {
+        display: inline-block;
+        font-size: .72rem;
+        font-weight: 700;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+        color: var(--primary, #E71E24);
+        background: rgba(231, 30, 36, .08);
+        padding: .25rem .65rem;
+        border-radius: 999px;
+        margin-bottom: .75rem;
+      }
+      .contact-card dl { margin: 0; }
+      .contact-card dt {
+        font-size: .76rem;
+        text-transform: uppercase;
+        letter-spacing: .05em;
+        color: var(--ink-300, #6d6e75);
+        font-weight: 600;
+        margin-top: 1rem;
+      }
+      .contact-card dd { margin: .2rem 0 0; font-size: 1rem; }
+      .contact-card dd a { text-decoration: none; }
+      .contact-card dd a:hover { text-decoration: underline; }
+      .contact-card iframe { display: block; width: 100%; height: 240px; border: 0; }
+      .quick-row { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.25rem; }
+      .quick-row .btn { flex: 1 1 auto; }
+      .hours-box {
+        background: var(--surface-alt, #151519);
+        border: 1px solid var(--ink-100, #27272c);
+        border-radius: 16px;
+        padding: 1.5rem;
+      }
+    `} />
+  </Fragment>
+
+  <PageHeader active="İletişim" />
+
+  <div class="container-fluid py-6 px-3 px-md-5">
+    <div class="text-center mx-auto mb-5" style="max-width: 760px;">
+      <h1 class="display-5 text-uppercase mb-3"><span class="text-primary">İletişim</span> Bilgilerimiz</h1>
+      <p class="text-muted mb-0">
+        Samsun Çarşamba'da iki adresimizde hizmet veriyoruz. Telefon, WhatsApp veya
+        e-posta ile bize ulaşabilir, doğrudan mağazalarımıza uğrayabilirsiniz.
+      </p>
+    </div>
+
+    <div class="row g-4">
+      {COMPANY.branches.map((branch) => (
+        <div class="col-12 col-lg-6">
+          <article class="contact-card" id={branch.id}>
+            <div class="contact-card__body">
+              <span class="contact-card__badge">{branch.name}</span>
+              <h2 class="h5 mb-0">AR-KAR İnşaat — {branch.name}</h2>
+
+              <dl>
+                <dt>Adres</dt>
+                <dd>{branch.street}<br />{branch.district} / {branch.city}</dd>
+
+                <dt>Telefon</dt>
+                <dd><a href={branch.phoneHref}>{branch.phone}</a></dd>
+
+                <dt>Cep</dt>
+                <dd><a href={branch.mobileHref}>{branch.mobile}</a></dd>
+
+                <dt>E-posta</dt>
+                <dd><a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a></dd>
+              </dl>
+
+              <div class="quick-row">
+                <a href={branch.phoneHref} class="btn btn-primary">
+                  <i class="fa fa-phone me-2"></i>Ara
+                </a>
+                <a
+                  href={`https://wa.me/${branch.whatsapp}?text=${encodeURIComponent(`Merhaba, AR-KAR ${branch.name} hakkında bilgi almak istiyorum.`)}`}
+                  class="btn btn-outline-secondary"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <i class="fab fa-whatsapp me-2"></i>WhatsApp
+                </a>
+              </div>
+            </div>
+
+            <iframe
+              src={MAPS[branch.id]}
+              title={`AR-KAR İnşaat ${branch.name} konum haritası`}
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              allowfullscreen
+            ></iframe>
+          </article>
+        </div>
+      ))}
+    </div>
+
+    <div class="row g-4 mt-1">
+      <div class="col-12 col-lg-6">
+        <div class="hours-box h-100">
+          <h2 class="h5 mb-3"><i class="fa fa-clock text-primary me-2"></i>Çalışma Saatleri</h2>
+          <p class="mb-1"><strong>{COMPANY.openingHours.days}</strong></p>
+          <p class="mb-3">{COMPANY.openingHours.opens} – {COMPANY.openingHours.closes}</p>
+          <p class="text-muted mb-0" style="font-size:.9rem">
+            Pazar günleri kapalıyız. Acil talepleriniz için WhatsApp üzerinden mesaj bırakabilirsiniz.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-6">
+        <div class="hours-box h-100">
+          <h2 class="h5 mb-3"><i class="fa fa-share-alt text-primary me-2"></i>Sosyal Medya</h2>
+          <p class="text-muted" style="font-size:.9rem">
+            Yeni projelerimizi ve duyurularımızı sosyal medya hesaplarımızdan takip edebilirsiniz.
+          </p>
+          <div class="quick-row">
+            <a href={COMPANY.instagram} class="btn btn-outline-secondary" target="_blank" rel="noopener">
+              <i class="fab fa-instagram me-2"></i>Instagram
+            </a>
+            <a href={COMPANY.facebook} class="btn btn-outline-secondary" target="_blank" rel="noopener">
+              <i class="fab fa-facebook-f me-2"></i>Facebook
+            </a>
+            <a href={`mailto:${COMPANY.email}`} class="btn btn-outline-secondary">
+              <i class="fa fa-envelope me-2"></i>E-posta
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

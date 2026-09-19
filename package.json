@@ -9,12 +9,13 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "build:staging": "node scripts/build-staging.mjs",
     "preview": "astro preview",
     "check": "astro check",
     "test": "npm run check && npm run build",
     "deploy:production": "npm run build && wrangler pages deploy dist --project-name=ar-kar --branch=production --skip-caching",
-    "deploy:staging": "npm run build && wrangler pages deploy dist --project-name=ar-kar --branch=staging --skip-caching",
-    "panel:deploy": "wrangler pages deploy panel --project-name=ar-kar-admin --branch=production"
+    "deploy:staging": "npm run build:staging && wrangler pages deploy dist --project-name=ar-kar --branch=staging --skip-caching",
+    "panel:deploy": "cd panel && wrangler pages deploy public --project-name=ar-kar-admin --branch=production"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.10",

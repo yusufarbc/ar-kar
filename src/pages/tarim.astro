@@ -1,4 +1,5 @@
 ---
+import { EXPERIENCE_YEARS } from '../lib/company';
 import PageHeader from '../components/PageHeader.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
@@ -27,7 +28,7 @@ const keywords = "tarım ürünleri alım satım samsun, mısır alımı çarşa
         "mainEntity": {
             "@type": "LocalBusiness",
             "@id": "https://ar-kar.com/#organization",
-            "name": "AR-KAR İnşaat Gıda Tarım Ürünleri ve Taş. Tic. Ltd. Şti.",
+            "name": "AR-KAR GIDA TARIM ÜRÜNLERİ VE TAŞIMACILIK TİCARET LİMİTED ŞİRKETİ",
             "alternateName": "AR-KAR İnşaat",
             "url": "https://ar-kar.com",
             "telephone": ["+90 362 846 03 93", "+90 362 834 18 48"],
@@ -53,23 +54,6 @@ const keywords = "tarım ürünleri alım satım samsun, mısır alımı çarşa
                 },
                 "geoRadius": "100000"
             }
-        },
-        "breadcrumb": {
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-                {
-                    "@type": "ListItem",
-                    "position": 1,
-                    "name": "Ana Sayfa",
-                    "item": "https://ar-kar.com/"
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 2,
-                    "name": "Tarım Ürünleri Alım Satımı",
-                    "item": "https://ar-kar.com/tarim"
-                }
-            ]
         },
         "hasOfferCatalog": {
             "@type": "OfferCatalog",
@@ -124,7 +108,7 @@ const keywords = "tarım ürünleri alım satım samsun, mısır alımı çarşa
 
         /* Agriculture product cards */
         .agriculture-card {
-            background: white;
+            background: var(--surface);
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
@@ -315,7 +299,7 @@ const keywords = "tarım ürünleri alım satım samsun, mısır alımı çarşa
         }
 
         .agri-card .card-title {
-            color: var(--dark);
+            color: var(--ink-900);
             font-weight: 700;
             line-height: 1.2;
             margin-bottom: 15px;
@@ -482,7 +466,7 @@ const keywords = "tarım ürünleri alım satım samsun, mısır alımı çarşa
                 <span class="text-success">Tarım Ürünleri</span> Alım Satımı
             </h1>
             <p class="mb-4">
-                AR-KAR İnşaat olarak 36 yıllık deneyimimizle Samsun Çarşamba'da tarım ürünleri alım satımı yapıyoruz. 
+                AR-KAR İnşaat olarak {EXPERIENCE_YEARS} yıllık deneyimimizle Samsun Çarşamba'da tarım ürünleri alım satımı yapıyoruz. 
                 Çiftçilerimize adil fiyat, güvenli ödeme, kaliteli hizmet sunarak tarımsal ticarette güvenilir ortağınızız.
             </p>
         </div>
@@ -608,7 +592,7 @@ const keywords = "tarım ürünleri alım satım samsun, mısır alımı çarşa
                                     <i class="fas fa-handshake fa-2x"></i>
                                 </div>
                                 <h4>Güvenilir Ortaklık</h4>
-                                <p class="text-muted">36 yıllık deneyimimizle çiftçilerimize güvenilir ortaklık sunuyoruz.</p>
+                                <p class="text-muted">{EXPERIENCE_YEARS} yıllık deneyimimizle çiftçilerimize güvenilir ortaklık sunuyoruz.</p>
                             </div>
                         </div>
                     </div>

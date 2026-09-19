@@ -13,6 +13,30 @@ const sortedPosts = posts.sort((a, b) => {
 const title = "Haberler & Duyurular | AR-KAR İnşaat Samsun";
 const description = "AR-KAR İnşaat kurumsal blog ve haberler. Samsun inşaat sektörü, yeni konut projeleri, tarım ve yapı malzemeleri hakkında güncel yazılar.";
 const canonical = "https://ar-kar.com/blog";
+
+// Haber listesinde yapısal veri yoktu. Blog + blogPost listesi, arama
+// motorlarına bu sayfanın bir yayın akışı olduğunu ve hangi yazıları
+// içerdiğini doğrudan bildirir.
+const origin = (Astro.site ?? new URL('https://ar-kar.com')).origin;
+
+const blogSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  name: 'AR-KAR İnşaat — Haberler & Duyurular',
+  description,
+  url: new URL('/blog', origin).href,
+  inLanguage: 'tr-TR',
+  publisher: { '@type': 'Organization', name: 'AR-KAR İnşaat', url: origin },
+  blogPost: sortedPosts.map((post) => {
+    const slug = post.id.replace(/\/index$/, '');
+    return {
+      '@type': 'BlogPosting',
+      headline: post.data.title,
+      datePublished: post.data.date,
+      url: new URL(`/blog/${slug}`, origin).href,
+    };
+  }),
+};
 ---
 
 <BaseLayout
@@ -21,6 +45,10 @@ const canonical = "https://ar-kar.com/blog";
   canonical={canonical}
   activePage="blog"
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(blogSchema)} />
+  </Fragment>
+
   <PageHeader active="Haberler & Duyurular" />
 
   <!-- Blog List Start -->

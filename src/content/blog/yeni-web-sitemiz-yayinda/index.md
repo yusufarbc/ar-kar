@@ -1,7 +1,7 @@
 ---
 title: AR-KAR İnşaat Yeni Web Sitesi Yayında
 date: '2026-01-18'
-description: AR-KAR İnşaat olarak Samsun ve Çarşamba'da 36 yıllık tecrübemizle modern ve kullanıcı dostu yeni web sitemizle hizmetinizdeyiz.
+description: AR-KAR İnşaat olarak Samsun ve Çarşamba'da 1987'den bu yana edindiğimiz tecrübeyle modern ve kullanıcı dostu yeni web sitemizle hizmetinizdeyiz.
 coverImage: /img/about.webp
 ---
 

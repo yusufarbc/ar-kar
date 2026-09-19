@@ -4,9 +4,12 @@ import { getCollection } from 'astro:content';
 // Her `astro build` calistiginda yeniden uretilir; elle guncellenen bir
 // dosya degildir. Google Search Console'a https://ar-kar.com/sitemap.xml
 // olarak eklenmelidir.
+//
+// Adres artik sabit degil, astro.config.mjs'teki `site` degerinden gelir —
+// staging derlemesi kendi adresini yazar, canli sitenin adreslerini degil.
 export const prerender = true;
 
-const SITE = 'https://ar-kar.com';
+const FALLBACK_SITE = 'https://ar-kar.com';
 
 // Site genelindeki .html konvansiyonuna uyan sabit sayfalar.
 const STATIC_PAGES: Array<{
@@ -16,6 +19,8 @@ const STATIC_PAGES: Array<{
 }> = [
   { path: '/', changefreq: 'weekly', priority: '1.0' },
   { path: '/projeler', changefreq: 'weekly', priority: '0.9' },
+  { path: '/hakkimizda', changefreq: 'monthly', priority: '0.8' },
+  { path: '/iletisim', changefreq: 'monthly', priority: '0.8' },
   { path: '/muteahhitlik', changefreq: 'monthly', priority: '0.8' },
   { path: '/insaat', changefreq: 'monthly', priority: '0.8' },
   { path: '/pvc', changefreq: 'monthly', priority: '0.8' },
@@ -35,7 +40,8 @@ function toLastmod(value: unknown, fallback: string): string {
   return fallback;
 }
 
-export const GET: APIRoute = async () => {
+export const GET: APIRoute = async ({ site }) => {
+  const SITE = (site ?? new URL(FALLBACK_SITE)).origin;
   const today = new Date().toISOString().split('T')[0];
 
   const [blogPosts, projects] = await Promise.all([
@@ -43,12 +49,15 @@ export const GET: APIRoute = async () => {
     getCollection('projects'),
   ]);
 
-  type Entry = { loc: string; lastmod: string; changefreq: string; priority: string };
+  type Entry = { loc: string; lastmod?: string; changefreq: string; priority: string };
 
   const entries: Entry[] = [
+    // Sabit sayfalarda lastmod BILEREK yazilmaz. Her derlemede "bugun"
+    // yazmak, her deploy'da tum sayfalar degismis gibi gorunmesine yol acar
+    // ve Google bir sure sonra bu alani tamamen yok saymaya baslar. Gercek
+    // bir tarih yalnizca icerik kayitlarinda var.
     ...STATIC_PAGES.map((p) => ({
       loc: `${SITE}${p.path}`,
-      lastmod: today,
       changefreq: p.changefreq,
       priority: p.priority,
     })),
@@ -77,8 +86,7 @@ export const GET: APIRoute = async () => {
 ${entries
   .map(
     (e) => `  <url>
-    <loc>${xmlEscape(e.loc)}</loc>
-    <lastmod>${e.lastmod}</lastmod>
+    <loc>${xmlEscape(e.loc)}</loc>${e.lastmod ? `\n    <lastmod>${e.lastmod}</lastmod>` : ''}
     <changefreq>${e.changefreq}</changefreq>
     <priority>${e.priority}</priority>
   </url>`

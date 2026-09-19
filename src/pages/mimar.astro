@@ -1,9 +1,10 @@
 ---
+import { EXPERIENCE_YEARS } from '../lib/company';
 import PageHeader from '../components/PageHeader.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const title = "AR-KAR Mimari Proje Hizmetleri | Ruhsat, Çizim, Tasarım | Samsun Çarşamba";
-const description = "AR-KAR İnşaat Mimari Proje Hizmetleri ile Samsun Çarşamba'da profesyonel mimari projeler, yapı ruhsat işlemleri, teknik çizimler, 3D modelleme ve tasarım hizmetleri sunuyoruz. 36 yıllık tecrübe ile uzman mimar kadromuz hizmetinizde.";
+const description = `AR-KAR İnşaat Mimari Proje Hizmetleri ile Samsun Çarşamba'da profesyonel mimari projeler, yapı ruhsat işlemleri, teknik çizimler, 3D modelleme ve tasarım hizmetleri sunuyoruz. ${EXPERIENCE_YEARS} yıllık tecrübe ile uzman mimar kadromuz hizmetinizde.`;
 const canonical = "https://ar-kar.com/mimar";
 const ogImage = "https://ar-kar.com/img/mimariproje.webp";
 const keywords = "ar-kar mimar, mimari proje, yapı ruhsatı, teknik çizim, proje tasarımı, samsun mimar, çarşamba mimar, yapı denetim, inşaat projeleri, 3D modelleme, autocad çizim, ticari proje, konut projesi";
@@ -25,7 +26,7 @@ const keywords = "ar-kar mimar, mimari proje, yapı ruhsatı, teknik çizim, pro
         "description": "Samsun Çarşamba'da profesyonel mimari proje, yapı ruhsatı, teknik çizim ve tasarım hizmetleri sunuyoruz.",
         "provider": {
             "@type": "Organization",
-            "name": "AR-KAR İnşaat Gıda Tarım Ürünleri ve Taş. Tic. Ltd. Şti.",
+            "name": "AR-KAR GIDA TARIM ÜRÜNLERİ VE TAŞIMACILIK TİCARET LİMİTED ŞİRKETİ",
             "address": {
                 "@type": "PostalAddress",
                 "streetAddress": "Orta Mah. Dr. Orhan Atılgan Cad. No:24/A",
@@ -72,7 +73,7 @@ const keywords = "ar-kar mimar, mimari proje, yapı ruhsatı, teknik çizim, pro
 
         /* Architectural service cards */
         .arch-service-card {
-            background: white;
+            background: var(--surface);
             border-radius: 15px;
             padding: 2rem;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
@@ -113,7 +114,7 @@ const keywords = "ar-kar mimar, mimari proje, yapı ruhsatı, teknik çizim, pro
 
         /* Project showcase */
         .project-showcase {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            background: linear-gradient(135deg, var(--surface-alt) 0%, var(--surface-raised) 100%);
             border-radius: 20px;
             padding: 3rem;
             margin-bottom: 3rem;
@@ -139,7 +140,7 @@ const keywords = "ar-kar mimar, mimari proje, yapı ruhsatı, teknik çizim, pro
 
         .showcase-text {
             font-weight: 600;
-            color: #333;
+            color: var(--ink-700);
             margin-top: 0.5rem;
         }
 
@@ -149,7 +150,7 @@ const keywords = "ar-kar mimar, mimari proje, yapı ruhsatı, teknik çizim, pro
             align-items: flex-start;
             margin-bottom: 2rem;
             padding: 1.5rem;
-            background: white;
+            background: var(--surface);
             border-radius: 10px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             transition: transform 0.3s ease;
@@ -175,7 +176,7 @@ const keywords = "ar-kar mimar, mimari proje, yapı ruhsatı, teknik çizim, pro
 
         /* Expertise areas */
         .expertise-area {
-            background: white;
+            background: var(--surface);
             border-radius: 10px;
             padding: 1.5rem;
             margin-bottom: 1rem;
@@ -377,11 +378,11 @@ const keywords = "ar-kar mimar, mimari proje, yapı ruhsatı, teknik çizim, pro
   <PageHeader active="Mimari Proje Hizmetleri" parents={[{ label: "Hizmetler", href: "/#service" }]} />
 
     <!-- Hero Section Start -->
-    <div class="container-fluid py-6 px-5" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('img/teksstilkent.webp'); background-size: cover; background-position: center;">
+    <div class="container-fluid py-6 px-5" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('img/tekstilkent.webp'); background-size: cover; background-position: center;">
         <div class="row justify-content-center">
             <div class="col-lg-8 text-center">
                 <h1 class="display-4 text-white text-uppercase mb-4">Profesyonel <span class="text-primary">Mimari Proje</span> Hizmetleri</h1>
-                <p class="text-white mb-4 fs-5">36 yıllık tecrübemizle hayalinizdeki projeleri gerçeğe dönüştürüyoruz. Modern tasarım anlayışı ile işlevsel ve estetik projeler üretiyoruz.</p>
+                <p class="text-white mb-4 fs-5">{EXPERIENCE_YEARS} yıllık tecrübemizle hayalinizdeki projeleri gerçeğe dönüştürüyoruz. Modern tasarım anlayışı ile işlevsel ve estetik projeler üretiyoruz.</p>
                 <div class="row g-3 mt-4">
                     <div class="col-md-4">
                         <div class="bg-primary bg-opacity-75 p-3 rounded">
@@ -410,7 +411,7 @@ const keywords = "ar-kar mimar, mimari proje, yapı ruhsatı, teknik çizim, pro
             <div class="col-lg-7">
                 <h1 class="display-5 text-uppercase mb-4">AR-KAR <span class="text-primary">Mimari Proje</span> Hizmetleri</h1>
                 <h4 class="text-uppercase mb-4 text-primary">Hayallerinizi Profesyonel Projelere Dönüştürüyoruz</h4>
-                <p class="mb-4">AR-KAR İnşaat olarak, 36 yıllık tecrübemizle mimari proje alanında da uzman hizmet sunuyoruz. Konut, ticari ve endüstriyel yapılar için profesyonel mimari projeler hazırlar, yapı ruhsatı işlemlerinizi takip ederiz.</p>
+                <p class="mb-4">AR-KAR İnşaat olarak, {EXPERIENCE_YEARS} yıllık tecrübemizle mimari proje alanında da uzman hizmet sunuyoruz. Konut, ticari ve endüstriyel yapılar için profesyonel mimari projeler hazırlar, yapı ruhsatı işlemlerinizi takip ederiz.</p>
                 <p class="mb-4">Uzman mimar kadromuz ile modern tasarım anlayışını geleneksel Türk mimarisi ile harmanlayarak, işlevsel ve estetik projeler üretiyoruz. Müşterilerimizin ihtiyaçlarını ve bütçelerini göz önünde bulundurarak en uygun çözümleri sunuyoruz.</p>
                 
                 <div class="row g-4">
@@ -469,7 +470,7 @@ const keywords = "ar-kar mimar, mimari proje, yapı ruhsatı, teknik çizim, pro
             </div>
             <div class="col-lg-8">
                 <h2 class="display-6 text-uppercase mb-4">Neden <span class="text-primary">AR-KAR Mimari Proje?</span></h2>
-                <p class="mb-4">36 yıllık inşaat tecrübemizi mimari proje hizmetlerinde de kullanarak, müşterilerimize en kaliteli ve profesyonel hizmeti sunuyoruz. Deneyimli mimar kadromuz ile hayalinizdeki projeyi gerçeğe dönüştürüyoruz.</p>
+                <p class="mb-4">{EXPERIENCE_YEARS} yıllık inşaat tecrübemizi mimari proje hizmetlerinde de kullanarak, müşterilerimize en kaliteli ve profesyonel hizmeti sunuyoruz. Deneyimli mimar kadromuz ile hayalinizdeki projeyi gerçeğe dönüştürüyoruz.</p>
                 
                 <div class="row g-4">
                     <div class="col-md-6">
@@ -495,7 +496,7 @@ const keywords = "ar-kar mimar, mimari proje, yapı ruhsatı, teknik çizim, pro
                             <i class="fa fa-handshake fa-2x text-primary flex-shrink-0 me-3"></i>
                             <div>
                                 <h5>Güvenilir İşbirliği</h5>
-                                <p class="mb-0">36 yıllık güven ve kalite anlayışımızla yanınızdayız.</p>
+                                <p class="mb-0">{EXPERIENCE_YEARS} yıllık güven ve kalite anlayışımızla yanınızdayız.</p>
                             </div>
                         </div>
                     </div>

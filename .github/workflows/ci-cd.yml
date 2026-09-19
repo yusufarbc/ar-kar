@@ -70,7 +70,12 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
+      # staging dalı canlı sitenin önizleme kopyasıdır: noindex meta'sı,
+      # "Disallow: /" robots.txt'si ve kendi canonical adresiyle derlenir
+      # (bkz. astro.config.mjs). production dalı normal derlenir.
       - name: Build
+        env:
+          PUBLIC_DEPLOY_ENV: ${{ github.ref_name == 'staging' && 'staging' || 'production' }}
         run: npm run build
 
       # cloudflare/wrangler-action kendi wrangler sürümünü kurar ve bu,

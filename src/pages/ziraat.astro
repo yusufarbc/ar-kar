@@ -1,4 +1,5 @@
 ---
+import { EXPERIENCE_YEARS } from '../lib/company';
 import PageHeader from '../components/PageHeader.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
@@ -96,7 +97,7 @@ const keywords = "zirai ilaç mağazası samsun, gübre satışı çarşamba, to
 
         /* Agricultural product showcase */
         .agri-product-card {
-            background: white;
+            background: var(--surface);
             border-radius: 12px;
             padding: 2rem;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
@@ -132,7 +133,7 @@ const keywords = "zirai ilaç mağazası samsun, gübre satışı çarşamba, to
 
         /* Service process steps */
         .service-step {
-            background: white;
+            background: var(--surface);
             border-radius: 10px;
             padding: 1.5rem;
             margin-bottom: 1rem;
@@ -161,7 +162,7 @@ const keywords = "zirai ilaç mağazası samsun, gübre satışı çarşamba, to
 
         /* Consultation form styling */
         .consultation-form {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            background: linear-gradient(135deg, var(--surface-alt) 0%, var(--surface-raised) 100%);
             border-radius: 15px;
             padding: 2rem;
         }
@@ -264,7 +265,7 @@ const keywords = "zirai ilaç mağazası samsun, gübre satışı çarşamba, to
             <div class="col-lg-8">
                 <h2 class="display-6 text-uppercase mb-4">AR-KAR <span class="text-primary">Zirai Ürünler</span> Mağazası Avantajları</h2>
                 <h4 class="text-uppercase mb-4 text-primary">Kaliteli Tarımsal Girdiler ve Profesyonel Danışmanlık</h4>
-                <p class="mb-4">AR-KAR Zirai Ürünler Mağazası olarak, 36 yıllık güven ve kalite anlayışımızla çiftçilerimize en kaliteli tarımsal girdileri sunuyoruz. Uzman ekibimizle tarım danışmanlığı hizmeti vererek, verimli ve sürdürülebilir tarım uygulamalarını destekliyoruz.</p>
+                <p class="mb-4">AR-KAR Zirai Ürünler Mağazası olarak, {EXPERIENCE_YEARS} yıllık güven ve kalite anlayışımızla çiftçilerimize en kaliteli tarımsal girdileri sunuyoruz. Uzman ekibimizle tarım danışmanlığı hizmeti vererek, verimli ve sürdürülebilir tarım uygulamalarını destekliyoruz.</p>
                 <p class="mb-4">Deneyimli tarım uzmanlarımız ile bitki beslenme programları, hastalık-zararlı mücadelesi ve toprak analizi hizmetleri sunarak, çiftçilerimizin başarısını garanti altına alıyoruz. Kaliteli ürün garantisi ve uzman desteği ile yanınızdayız.</p>
                 
                 <div class="row g-4">
@@ -299,7 +300,7 @@ const keywords = "zirai ilaç mağazası samsun, gübre satışı çarşamba, to
                         <div class="d-flex">
                             <i class="fa fa-check-circle fa-2x text-primary flex-shrink-0 me-3"></i>
                             <div>
-                                <h5>36 Yıllık Güven</h5>
+                                <h5>{EXPERIENCE_YEARS} Yıllık Güven</h5>
                                 <p class="mb-0">Sektördeki köklü tecrübemizle güvenilir hizmet.</p>
                             </div>
                         </div>

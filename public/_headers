@@ -1,0 +1,27 @@
+# Cloudflare Pages — HTTP başlıkları
+#
+# Güvenlik başlıkları buraya taşındı. Daha önce BaseLayout içinde
+# <meta http-equiv="X-Frame-Options" ...> şeklinde veriliyorlardı; tarayıcılar
+# bu başlıkları meta etiketi olarak YOK SAYAR, yalnızca gerçek HTTP başlığı
+# olarak kabul eder. Yani site pratikte korumasızdı.
+#
+# public/.htaccess de aynı işi yapmaya çalışıyordu ama Cloudflare Pages Apache
+# değildir ve .htaccess dosyasını hiç okumaz; o dosya kaldırıldı.
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Cross-Origin-Opener-Policy: same-origin
+
+# Sürümlenmiş, bir daha değişmeyen üçüncü parti kütüphaneler.
+/lib/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Görseller: panel her yüklemeye tarih önekli yeni bir ad verdiği için
+# aynı adresin içeriği değişmez. Yine de elle değiştirme ihtimaline karşı
+# bir yıl yerine 30 gün veriliyor.
+/img/*
+  Cache-Control: public, max-age=2592000

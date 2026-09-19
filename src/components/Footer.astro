@@ -223,16 +223,17 @@ import { COMPANY } from '../lib/company';
 </div>
 
 <style>
-    /* Marka rengiyle statik — eskiden jenerik yeşil (#25d366) + sürekli
-       "pulse" animasyonuydu; bento CTA ve iletişim modalı zaten
-       WhatsApp'ı öne çıkarıyor, ekstra dikkat çekmeye gerek yok. */
+    /* Kullanıcı isteğiyle orijinal WhatsApp yeşiline geri döndürüldü —
+       marka kırmızısı burada tanınırlığı azaltıyordu. Sürekli "pulse"
+       animasyonu yine de kaldırılmış durumda (bento CTA ve iletişim
+       modalı zaten WhatsApp'ı öne çıkarıyor). */
     .whatsapp-float {
         position: fixed;
         width: 60px;
         height: 60px;
         bottom: 80px;
         right: 20px;
-        background-color: var(--primary, #E71E24);
+        background-color: #25d366;
         color: #FFF;
         border-radius: 50px;
         text-align: center;
@@ -252,7 +253,7 @@ import { COMPANY } from '../lib/company';
     }
 
     .whatsapp-float:hover {
-        background-color: var(--ink-900, #14151a);
+        background-color: #128c7e;
         transform: scale(1.08);
         transition: all 0.3s;
     }

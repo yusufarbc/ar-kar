@@ -111,12 +111,25 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          # github.event.before'a kadar diff alabilmek için tam geçmiş
+          # gerekir; bir push birden fazla commit taşıyorsa 2 yeterli değil.
+          fetch-depth: 0
 
       - name: Panel değişti mi?
         id: changed
         run: |
-          if git diff --name-only HEAD^ HEAD | grep -q '^panel/'; then
+          # NOT: HEAD^..HEAD yalnızca SON commit'i kontrol eder. Bir push
+          # birden fazla commit taşıdığında (ör. bu depo topluca birkaç
+          # commit'le güncellendiğinde) panel/ değişikliği önceki bir
+          # commit'te kalabilir ve HEAD^..HEAD onu göremez — deploy
+          # sessizce atlanır. github.event.before, push'tan ÖNCEKİ SHA'dır
+          # ve tüm push aralığını kapsar; ilk push (before all-zero SHA)
+          # durumunda HEAD^'e düşer.
+          BASE="${{ github.event.before }}"
+          if [ -z "$BASE" ] || [ "$BASE" = "0000000000000000000000000000000000000000" ]; then
+            BASE="HEAD^"
+          fi
+          if git diff --name-only "$BASE" HEAD | grep -q '^panel/'; then
             echo "run=true" >> "$GITHUB_OUTPUT"
           else
             echo "run=false" >> "$GITHUB_OUTPUT"

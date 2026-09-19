@@ -23,7 +23,6 @@
 /zirai                 /ziraat        301
 /tarim-urunleri        /tarim         301
 /sikca-sorulan-sorular /sss           301
-/duyurular             /haberler      301
 
 # Eski adres: içerik artık "blog" değil "haberler" olarak adlandırılıyor
 # (bkz. src/pages/haberler/). Panelden yayınlanmış eski bağlantılar ve

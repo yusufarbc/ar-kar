@@ -7,10 +7,6 @@ import Card from '../components/ui/Card.astro';
 
 const allProjects = await getCollection('projects');
 
-// Proje sayısı elle "9+" yazılıydı; artık koleksiyondan sayılır, yeni bir
-// proje panelden eklendiğinde ana sayfadaki sayaç kendiliğinden güncellenir.
-const projectCount = allProjects.length;
-
 // Ana sayfadaki 8 proje kartı eskiden koleksiyondan bağımsız, elle
 // yazılmıştı (projeler.astro'nunkinden AYRI bir veri kaynağı) — tıpkı
 // "tecrübe yılı" ve "proje sayısı"nın daha önce elle yazılıp yanlış
@@ -255,18 +251,8 @@ const ogImage = "https://ar-kar.com/img/og-default.webp";
                 </div>
             </div>
 
-            <div class="bento-tile bento-tile--stat bento-tile--tall">
-                <span class="bento-stat__number">{EXPERIENCE_YEARS}</span>
-                <span class="bento-stat__label">Yıllık Tecrübe</span>
-            </div>
-
-            <div class="bento-tile bento-tile--stat bento-tile--accent bento-tile--tall">
-                <span class="bento-stat__number">{projectCount}</span>
-                <span class="bento-stat__label">Tamamlanan Proje</span>
-            </div>
-
             <button type="button" class="bento-tile bento-tile--cta" data-bs-toggle="modal" data-bs-target="#contactModal">
-                <i class="fa fa-bolt"></i>
+                <i class="fa fa-bolt" aria-hidden="true"></i>
                 <span>Hızlı Teklif Alın</span>
             </button>
         </div>

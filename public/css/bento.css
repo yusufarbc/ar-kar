@@ -72,11 +72,12 @@
 /* Büyük kutu: gerçek Çarşamba / Merkez / Şube fotoğraflarının döndüğü
    carousel (Bootstrap'ın #header-carousel'i, artık bento hücresinin
    içine sığdırılmış hâli — kullanıcı orijinal dönen carousel deneyimini
-   geri istedi). */
+   geri istedi). Tam genişlik: yıl/proje sayacı kutuları kaldırıldı
+   (bkz. hakkimizda.astro "Sayılarla" bölümü), bu yüzden carousel artık
+   tek başına, kalabalıksız bir hero olarak tüm satırı kaplıyor. */
 .bento-tile--hero {
-  grid-column: span 2;
-  grid-row: span 2;
-  min-height: 340px;
+  grid-column: span 4;
+  min-height: 420px;
   padding: 0;
   color: #fff;
 }
@@ -192,37 +193,6 @@
 }
 .bento-tile--photo .bento-tile__eyebrow { margin-bottom: 4px; }
 
-/* Sayaç kutuları */
-.bento-tile--stat {
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 20px 22px;
-  background: var(--surface);
-}
-/* Carousel (2 satır) ile aynı yükseklikte olsun diye sayaçlar da 2 satır
-   kaplar: buyuk(2x2=4) + 2 uzun sayaç(1x2=2 her biri=4) = tam 4x2 ızgara. */
-.bento-tile--tall {
-  grid-row: span 2;
-}
-.bento-tile--stat.bento-tile--accent {
-  background: var(--primary);
-  color: #fff;
-}
-.bento-stat__number {
-  font-family: var(--font-heading);
-  font-weight: 800;
-  font-size: clamp(1.8rem, 1.4rem + 1.6vw, 2.6rem);
-  line-height: 1;
-}
-.bento-stat__label {
-  margin-top: 6px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--ink-500);
-}
-.bento-tile--accent .bento-stat__label { color: rgba(255, 255, 255, 0.85); }
-
 /* Hızlı erişim kutuları (PVC / Mimari 3D) */
 .bento-tile--action {
   flex-direction: column;
@@ -274,8 +244,7 @@
 
 @media (max-width: 991.98px) {
   .hero-bento { grid-template-columns: repeat(2, 1fr); }
-  .bento-tile--hero { grid-column: span 2; grid-row: span 1; min-height: 320px; }
-  .bento-tile--tall { grid-row: span 1; }
+  .bento-tile--hero { grid-column: span 2; min-height: 320px; }
   .bento-tile--cta { grid-column: span 2; }
 }
 @media (max-width: 575.98px) {

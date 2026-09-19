@@ -32,29 +32,14 @@
   --radius:12px;
 }
 
-@media (prefers-color-scheme: dark){
-  :root{
-    --bg:#0f1115;
-    --panel:#171a20;
-    --panel-2:#1d2128;
-    --ink:#eceef2;
-    --ink-2:#b9bec7;
-    --muted:#8b929d;
-    --line:#2a2f38;
-    --line-2:#232831;
-    --brand:#E71E24;
-    --ok:#6ee7b7;
-    --ok-bg:#12241c;
-    --ok-line:#1f4536;
-    --danger:#fca5a5;
-    --danger-bg:#2a1618;
-    --danger-line:#4d2427;
-    --warn:#fcd34d;
-    --warn-bg:#2a2313;
-    --warn-line:#4b3d16;
-    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35);
-  }
-}
+/* NOT: Panel bilerek her zaman AÇIK temayla açılır — daha önce
+   prefers-color-scheme:dark ile otomatik koyu temaya geçiyordu, ama
+   sonuç neredeyse tamamen siyah/koyu lacivert bir arayüzdü ("iç
+   karartıyor" geri bildirimi). Ana site de aynı ilkeyi izliyor: siyah
+   yalnızca navbar/footer gibi dar şeritlerde, geri kalan her yerde açık
+   zemin. Panel de bu markaya uyumlu tek bir (açık) temayla çalışır. */
+
+[hidden]{display:none!important}
 
 *{box-sizing:border-box}
 html,body{height:100%}

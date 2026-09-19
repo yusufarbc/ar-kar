@@ -16,7 +16,7 @@ const sortedPosts = posts.sort((a, b) => {
 
 const title = "Haberler | AR-KAR İnşaat Samsun";
 const description = "AR-KAR İnşaat'tan güncel haberler: yeni bayilikler, projeler ve duyurular. Samsun inşaat sektörü, tarım ve yapı malzemeleri hakkında güncel paylaşımlar.";
-const canonical = "https://ar-kar.com/blog";
+const canonical = "https://ar-kar.com/haberler";
 
 // Haber listesinde yapısal veri yoktu. Blog + blogPost listesi, arama
 // motorlarına bu sayfanın bir yayın akışı olduğunu ve hangi yazıları
@@ -28,7 +28,7 @@ const blogSchema = {
   '@type': 'Blog',
   name: 'AR-KAR İnşaat — Haberler',
   description,
-  url: new URL('/blog', origin).href,
+  url: new URL('/haberler', origin).href,
   inLanguage: 'tr-TR',
   publisher: { '@type': 'Organization', name: 'AR-KAR İnşaat', url: origin },
   blogPost: sortedPosts.map((post) => {
@@ -37,7 +37,7 @@ const blogSchema = {
       '@type': 'BlogPosting',
       headline: post.data.title,
       datePublished: post.data.date,
-      url: new URL(`/blog/${slug}`, origin).href,
+      url: new URL(`/haberler/${slug}`, origin).href,
     };
   }),
 };
@@ -47,7 +47,7 @@ const blogSchema = {
   title={title}
   description={description}
   canonical={canonical}
-  activePage="blog"
+  activePage="haberler"
 >
   <Fragment slot="head">
     <script type="application/ld+json" is:inline set:html={JSON.stringify(blogSchema)} />
@@ -68,7 +68,7 @@ const blogSchema = {
         <div class="row g-4">
           {sortedPosts.map((post) => {
             const slug = post.id.replace(/\/index$/, '');
-            const postUrl = `/blog/${slug}`;
+            const postUrl = `/haberler/${slug}`;
             const coverImage = post.data.coverImage || '/img/about.webp';
 
             return (

@@ -19,8 +19,8 @@ const { slug } = Astro.params;
 const { Content } = await render(post);
 
 const title = `${post.data.title} | AR-KAR İnşaat`;
-const description = post.data.description || `${post.data.title} - AR-KAR İnşaat kurumsal blog yazısı.`;
-const canonical = `https://ar-kar.com/blog/${slug}`;
+const description = post.data.description || `${post.data.title} - AR-KAR İnşaat'tan haber.`;
+const canonical = `https://ar-kar.com/haberler/${slug}`;
 const coverImage = post.data.coverImage || '/img/about.webp';
 
 // Haber yazılarında hiç yapısal veri yoktu; arama sonuçlarında tarih, yazar
@@ -37,7 +37,7 @@ const articleSchema = {
   datePublished: post.data.date,
   dateModified: post.data.date,
   inLanguage: 'tr-TR',
-  mainEntityOfPage: { '@type': 'WebPage', '@id': absolute(`/blog/${slug}`) },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': absolute(`/haberler/${slug}`) },
   author: { '@type': 'Organization', name: 'AR-KAR İnşaat', url: origin },
   publisher: {
     '@type': 'Organization',
@@ -53,13 +53,13 @@ const articleSchema = {
   canonical={canonical}
   ogImage={coverImage}
   ogType="article"
-  activePage="blog"
+  activePage="haberler"
 >
   <Fragment slot="head">
     <script type="application/ld+json" is:inline set:html={JSON.stringify(articleSchema)} />
   </Fragment>
 
-  <PageHeader active={post.data.title} parents={[{ label: "Haberler", href: "/blog" }]} />
+  <PageHeader active={post.data.title} parents={[{ label: "Haberler", href: "/haberler" }]} />
 
   <!-- Blog Detail Start -->
   <article class="container py-6">
@@ -111,7 +111,7 @@ const articleSchema = {
         <hr class="my-5" />
 
         <div class="d-flex justify-content-between align-items-center">
-          <a href="/blog" class="btn btn-outline-primary">
+          <a href="/haberler" class="btn btn-outline-primary">
             <i class="fa fa-arrow-left me-2" aria-hidden="true"></i>Tüm Haberler
           </a>
           <button

@@ -7,7 +7,7 @@
 export const COLLECTIONS = {
   blog: {
     label: 'Haberler',
-    urlBase: '/blog/',
+    urlBase: '/haberler/',
     fields: [
       {name:'title',       label:'Başlık',                type:'text',     required:true},
       {name:'date',        label:'Tarih',                 type:'date',     required:true},

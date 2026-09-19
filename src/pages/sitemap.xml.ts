@@ -28,7 +28,7 @@ const STATIC_PAGES: Array<{
   { path: '/ziraat', changefreq: 'monthly', priority: '0.7' },
   { path: '/mimar', changefreq: 'monthly', priority: '0.7' },
   { path: '/sss', changefreq: 'monthly', priority: '0.6' },
-  { path: '/blog', changefreq: 'weekly', priority: '0.7' },
+  { path: '/haberler', changefreq: 'weekly', priority: '0.7' },
 ];
 
 function xmlEscape(value: string): string {
@@ -64,7 +64,7 @@ export const GET: APIRoute = async ({ site }) => {
     ...blogPosts.map((post) => {
       const slug = post.id.replace(/\/index$/, '');
       return {
-        loc: `${SITE}/blog/${slug}`,
+        loc: `${SITE}/haberler/${slug}`,
         lastmod: toLastmod(post.data.date, today),
         changefreq: 'monthly',
         priority: '0.6',

@@ -23,8 +23,13 @@
 /zirai                 /ziraat        301
 /tarim-urunleri        /tarim         301
 /sikca-sorulan-sorular /sss           301
-/haberler              /blog          301
-/duyurular             /blog          301
+/duyurular             /haberler      301
+
+# Eski adres: içerik artık "blog" değil "haberler" olarak adlandırılıyor
+# (bkz. src/pages/haberler/). Panelden yayınlanmış eski bağlantılar ve
+# arama motorunda indekslenmiş adresler kırılmasın diye 301 ile taşınıyor.
+/blog                  /haberler      301
+/blog/*                /haberler/:splat 301
 
 # Kaldırılan hizmetler (arama motorlarında indekslenmiş olabilir)
 /otomotiv              /              301

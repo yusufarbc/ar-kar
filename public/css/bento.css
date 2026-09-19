@@ -10,7 +10,7 @@
 .page-header {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, var(--ink-900) 0%, #23252c 100%);
+  background: linear-gradient(135deg, var(--surface-raised) 0%, #26262d 100%);
   padding: 13px 0;
 }
 .page-header::after {
@@ -21,7 +21,7 @@
   width: 280px;
   height: 280px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(204, 39, 43, 0.35), transparent 70%);
+  background: radial-gradient(circle, rgba(231, 30, 36, 0.35), transparent 70%);
   pointer-events: none;
 }
 .page-header .breadcrumb { margin: 0; position: relative; z-index: 1; }
@@ -218,7 +218,7 @@
   align-items: center;
   justify-content: center;
   gap: 14px;
-  background: var(--ink-900);
+  background: var(--surface-raised);
   border: none;
   min-height: 90px;
 }
@@ -268,7 +268,7 @@
      ızgara, boşluk kalmaz. (Önceden 2 satırdı; içerik o yüksekliği
      doldurmadığı için kutunun altında boş alan kalıyordu.) */
   grid-column: span 2;
-  background: var(--ink-900);
+  background: var(--surface-raised);
   color: #fff;
 }
 .services-bento .bento-tile--service:first-child .service-icon-badge {
@@ -285,7 +285,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(204, 39, 43, 0.1);
+  background: rgba(231, 30, 36, 0.1);
   color: var(--primary);
   font-size: 1.3rem;
   margin-bottom: 16px;
@@ -311,4 +311,82 @@
 @media (max-width: 575.98px) {
   .services-bento { grid-template-columns: 1fr; }
   .services-bento .bento-tile--service:first-child { grid-column: span 1; }
+}
+
+/* ==========================================================================
+   İş ortağı logo ızgarası
+   --------------------------------------------------------------------------
+   Eskiden 19 logo, 5 saniyede bir dönen tek görsellik bir carousel'deydi:
+   tamamını görmek ~95 saniye sürüyordu ve hiçbir ziyaretçi o kadar beklemez.
+   Bayilik ağı bir güven sinyali olduğu için hepsi tek bakışta görünmeli.
+   ========================================================================== */
+.partner-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 14px;
+    align-items: stretch;
+}
+
+.partner-grid__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px 14px;
+    min-height: 110px;
+    /* Marka logoları beyaz zemin bekler — koyu sayfada beyaz "jeton". */
+    background: var(--arkar-white, #fff);
+    border: 1px solid var(--ink-100, #27272c);
+    border-radius: var(--radius-md, 14px);
+    transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+
+.partner-grid__item img {
+    max-width: 100%;
+    max-height: 62px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    /* Logolar beyaz zemin için tasarlanmış; çoğu koyu metinli ve şeffaf
+       arka planlı. Siyah üzerine konduklarında okunmuyorlardı, bu yüzden
+       kutunun kendisi beyaz. Dinginlik hover'da açılan hafif bir
+       doygunluk düşüşüyle sağlanıyor, filtreyle değil. */
+    filter: saturate(.85);
+    opacity: .9;
+    transition: filter .2s ease, opacity .2s ease;
+}
+
+.partner-grid__item:hover {
+    border-color: var(--primary, #E71E24);
+    box-shadow: var(--shadow-soft, 0 8px 30px rgba(20, 21, 26, .07));
+    transform: translateY(-2px);
+}
+
+.partner-grid__item:hover img {
+    filter: none;
+    opacity: 1;
+}
+
+/* Dokunmatikte hover yok; logolar baştan tam görünür. */
+
+/* Dokunmatikte hover yok — logolar baştan tam renkli görünsün */
+@media (hover: none) {
+    .partner-grid__item img {
+        filter: none;
+        opacity: 1;
+    }
+}
+
+@media (max-width: 575px) {
+    .partner-grid {
+        grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+        gap: 10px;
+    }
+    .partner-grid__item {
+        min-height: 88px;
+        padding: 12px 10px;
+    }
+    .partner-grid__item img { max-height: 46px; }
 }

@@ -1,10 +1,10 @@
 /********** Template CSS **********/
 :root {
-    --primary: #cc272b;
+    --primary: #E71E24;
     --secondary: #3c3c44;
     --light: #ffffff;
     --dark: #040404;
-    --bs-primary: #cc272b;
+    --bs-primary: #E71E24;
     --bs-secondary: #3c3c44;
     --bs-light: #ffffff;
     --bs-dark: #040404;
@@ -101,7 +101,7 @@
     padding: 35px 15px;
     font-size: 14px;
     text-transform: uppercase;
-    color: var(--light);
+    color: rgba(255, 255, 255, 0.82);
     outline: none;
     transition: .5s;
 }
@@ -268,7 +268,7 @@
 
     .project-overlay {
         opacity: 1 !important;
-        background: rgba(204, 39, 43, 0.9) !important;
+        background: rgba(231, 30, 36, 0.9) !important;
         position: relative !important;
         transform: none !important;
         margin-top: -4px;
@@ -583,7 +583,7 @@
     }
 
     .dropdown-item {
-        color: var(--light);
+        color: rgba(255, 255, 255, 0.82);
         padding: 8px 20px;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
@@ -737,7 +737,7 @@ body.ad-popup-open {
     right: -16px;
     width: 44px;
     height: 44px;
-    background: #cc272b;
+    background: #E71E24;
     color: #ffffff;
     border: 2px solid #ffffff;
     border-radius: 50%;
@@ -756,7 +756,7 @@ body.ad-popup-open {
 .ad-popup-close:hover,
 .ad-popup-close:focus {
     background: #ffffff;
-    color: #cc272b;
+    color: #E71E24;
     transform: scale(1.12) rotate(90deg);
     outline: none;
 }

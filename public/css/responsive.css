@@ -202,3 +202,59 @@ iframe {
     scroll-behavior: auto !important;
   }
 }
+
+/* ==========================================================================
+   Dokunmatik cihazlarda proje kartı içeriği
+   --------------------------------------------------------------------------
+   .project-overlay varsayılan olarak opacity:0 ve yalnızca :hover ile
+   açılıyor. style.css bunu <=767px için zaten çözüyor (overlay görsel
+   altına akıyor), ancak 768px ve üzeri DOKUNMATİK cihazlarda — tabletler,
+   dokunmatik dizüstüler — hover olayı hiç oluşmadığı için proje açıklaması
+   ve "Detayları Gör" bağlantısı hiçbir şekilde erişilemiyordu.
+
+   (hover: none) bu cihazları ekran genişliğinden bağımsız yakalar;
+   min-width: 768px ise telefonlardaki mevcut yığılmış düzeni bozmamak
+   için gereklidir.
+   ========================================================================== */
+@media (hover: none) and (min-width: 768px) {
+    .project-item .project-overlay {
+        opacity: 1 !important;
+        justify-content: flex-end !important;
+        padding-bottom: 1.5rem !important;
+        /* Görsel tamamen kapanmasın: alta doğru koyulaşan geçiş */
+        background: linear-gradient(
+            to top,
+            rgba(20, 21, 26, .94) 0%,
+            rgba(231, 30, 36, .80) 55%,
+            rgba(231, 30, 36, .20) 100%
+        ) !important;
+    }
+
+    /* Uzun açıklama 300px'lik kartı taşırmasın */
+    .project-item .project-overlay p {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        font-size: .88rem;
+        margin-bottom: .85rem;
+    }
+
+    /* Dokunmatikte "havada kalma" efektinin anlamı yok */
+    .project-item:hover {
+        transform: none;
+        box-shadow: none;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   mb-6 / mt-6
+   --------------------------------------------------------------------------
+   Bootstrap'in boşluk ölçeği 5'te biter; bu projede .py-6 / .pt-6 / .pb-6
+   zaten özel olarak tanımlanmış ama kenar boşluğu karşılıkları eksikti.
+   Tanımsız bir sınıf sessizce hiçbir şey yapmadığı için, .mb-6 kullanan
+   bölümler alt alta yapışıyordu.
+   -------------------------------------------------------------------------- */
+.mb-6 { margin-bottom: var(--space-section); }
+.mt-6 { margin-top: var(--space-section); }

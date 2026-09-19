@@ -1,28 +1,28 @@
 /* ==========================================================================
-   AR-KAR — Tasarım Sistemi v3 (koyu tema)
+   AR-KAR — Tasarım Sistemi v4
    --------------------------------------------------------------------------
    style.css'ten SONRA, responsive.css'ten ÖNCE yüklenir.
 
    MARKA PALETİ — logodan örneklenen üç renk:
      kırmızı  #E71E24   tek vurgu rengi
-     siyah    #000000   sayfanın ana zemin rengi
-     beyaz    #FFFFFF   birincil metin
+     siyah    #000000   YALNIZCA navbar + footer zemini (logo bunun için
+                         tasarlanmış; sayfanın geri kalanı siyah DEĞİL)
+     beyaz    #FFFFFF   kart/sayfa zemini
 
    --------------------------------------------------------------------------
-   MÜREKKEP SKALASI TERS ÇEVRİLDİ
+   AÇIK TEMA + SİYAH "ÇERÇEVE"
    --------------------------------------------------------------------------
-   Skala anlamını korur: --ink-900 her zaman "zemine karşı en yüksek kontrast"
-   demektir. Açık temada bu en koyu griydi; koyu temada beyaz oldu. --ink-100
-   ise en düşük kontrast, yani kenarlık/ayraç rengi.
+   Site açık temadır — sayfa zemini beyaza yakın açık gri, metin koyu.
+   Navbar ve footer bunun DIŞINDA: ikisi de .bg-dark sınıfıyla bilerek saf
+   siyaha (--arkar-black) sabitlenir, çünkü ikisinde de logo var ve logo
+   siyah zemin için tasarlanmış. Bu ikisi sayfayı yukarıdan ve aşağıdan
+   "çerçeveleyen" sabit bir bant gibi davranır; aradaki içerik açık kalır.
 
-   Bu sayede tokenları kullanan her yer (bento.css, responsive.css, iletişim,
-   hakkımızda ve SSS sayfalarının kendi stilleri) tek satır değiştirmeden
-   koyu temaya geçer.
-
-   Zeminler üç kademelidir: sayfa saf siyah, kartlar bir tık açık, vurgulu
-   bölümler bir tık daha açık. Saf siyah üzerine saf siyah kart konulsaydı
-   hiçbir derinlik kalmazdı; koyu arayüzlerde ayrım gölgeyle değil, zemin
-   kademesi ve kenarlıkla kurulur.
+   Sayfa içinde YİNE DE koyu vurgu panelleri var (sayfa başlığı barı, CTA
+   şeridi, öne çıkan hizmet kutusu, iletişim modalı başlığı) — bunlar
+   BİLEREK --ink-900 (koyu grafit, #14151a) kullanır, saf siyah değil.
+   Böylece "logo siyahı" (navbar/footer) ile "vurgu koyusu" (içerik)
+   birbirine karışmaz; ikisi görsel olarak ayrışan iki farklı koyu tondur.
    ========================================================================== */
 
 :root {
@@ -35,30 +35,26 @@
   --bs-primary: var(--arkar-red);
   --bs-primary-rgb: 231, 30, 36;
 
-  /* --- Mürekkep (yüksek kontrasttan düşüğe) --- */
-  --ink-900: #ffffff;   /* başlıklar */
-  --ink-700: #e4e4e7;   /* gövde metni */
-  --ink-500: #a1a2a8;   /* ikincil / muted */
-  --ink-300: #6d6e75;   /* pasif metin, ikon */
-  --ink-100: #27272c;   /* kenarlık ve ayraç */
+  /* --- Mürekkep (koyudan açığa; açık zemin üzerindeki metin/kenarlık) --- */
+  --ink-900: #14151a;   /* en koyu metin / başlık; koyu vurgu panellerinin zemini */
+  --ink-700: #33353d;   /* gövde metni */
+  --ink-500: #5b5e68;   /* ikincil / muted metin */
+  --ink-300: #9a9da6;   /* pasif metin, ikon */
+  --ink-100: #e7e8eb;   /* kenarlık ve ayraç */
 
   /* --- Zeminler --- */
-  --surface: #0c0c0e;       /* kart, kutu */
-  --surface-alt: #151519;   /* vurgulu bölüm (eski bg-light) */
-  --surface-page: var(--arkar-black);
-  /* Vurgulu koyu paneller (bento CTA, hizmet kutusu, sayfa başlığı barı).
-     Açık temada burada --ink-900 (koyu gri) kullanılıyordu; skala ters
-     çevrilince o token beyaza döndüğü için ayrı bir jeton gerekti. */
-  --surface-raised: #1c1c21;
+  --surface: #ffffff;        /* kart, kutu */
+  --surface-alt: #f6f6f8;    /* sayfa zemini / hafif vurgulu bölüm */
+  --surface-raised: #eef0f3; /* surface-alt'ten bir tık koyu — dekoratif gradyan bitişi */
 
-  --secondary: var(--ink-500);
-  --bs-secondary: var(--ink-500);
-  --dark: var(--arkar-black);
-  --bs-dark: var(--arkar-black);
+  --secondary: var(--ink-700);
+  --bs-secondary: var(--ink-700);
+  --dark: var(--ink-900);
+  --bs-dark: var(--ink-900);
   --light: var(--surface-alt);
   --bs-light: var(--surface-alt);
 
-  --bs-body-bg: var(--arkar-black);
+  --bs-body-bg: var(--surface-alt);
   --bs-body-color: var(--ink-700);
   --bs-border-color: var(--ink-100);
   --bs-emphasis-color: var(--ink-900);
@@ -70,26 +66,18 @@
   /* --- Biçim --- */
   --radius-lg: 20px;
   --radius-md: 14px;
-  /* Koyu zeminde gölge görünmez; derinlik için hafif bir dış hat kullanılır. */
-  --shadow-soft: 0 1px 0 rgba(255, 255, 255, .04), 0 12px 32px rgba(0, 0, 0, .55);
-  --shadow-soft-hover: 0 1px 0 rgba(255, 255, 255, .07), 0 20px 46px rgba(0, 0, 0, .7);
+  --shadow-soft: 0 8px 30px rgba(20, 21, 26, 0.07);
+  --shadow-soft-hover: 0 16px 40px rgba(20, 21, 26, 0.12);
 }
 
-html {
-  background: var(--arkar-black);
-  color-scheme: dark;
-}
+html { background: var(--surface-alt); }
 
 body {
   font-family: var(--font-body);
   color: var(--ink-700);
-  background: var(--arkar-black);
+  background: var(--surface-alt);
 }
 
-/* Sınıf biçimleri (.h1 … .h6) BİLEREK listede: bootstrap.red.css bunlara
-   `color:#040F28` veriyor ve sınıf seçicisi element seçicisinden güçlü
-   olduğu için, yalnızca `h1, h2 …` yazmak `<h2 class="h5">` gibi
-   başlıkları koyu zeminde neredeyse görünmez bırakıyordu. */
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6,
 .display-1, .display-2, .display-3, .display-4, .display-5, .display-6 {
@@ -103,192 +91,28 @@ h1, h2, h3, h4, h5, h6,
   font-weight: 800;
 }
 
-/* ==========================================================================
-   Bootstrap renk yardımcılarının koyu tema karşılıkları
-   --------------------------------------------------------------------------
-   Sitede bu sınıflar yüzlerce yerde kullanılıyor (bg-light 12, bg-white 13,
-   text-muted 32, btn-light 12 ...). Tokenları değiştirmek tek başına yetmez;
-   Bootstrap bu sınıfları sabit renklerle tanımladığı için burada
-   karşılıklarının verilmesi gerekir.
-   ========================================================================== */
+.text-muted { color: var(--ink-500) !important; }
 
-.bg-light { background-color: var(--surface-alt) !important; }
-.bg-white { background-color: var(--surface) !important; }
-.bg-body  { background-color: var(--arkar-black) !important; }
-
-/* Navbar, footer ve breadcrumb barı saf siyah kalır — logo zemini de siyah. */
+/* Sitede .bg-dark YALNIZCA navbar ve footer'da kullanılır (3 kullanım:
+   Navbar.astro kökü, Footer.astro üst ve alt şeridi) — başka hiçbir
+   bileşen bu sınıfı taşımaz. Bu yüzden burada karmaşık bir seçiciye
+   gerek yok: .bg-dark = logo siyahı, direkt ve koşulsuz.
+   Sayfa içindeki AYRI "koyu vurgu paneli" kavramı (sayfa başlığı barı,
+   bento CTA, iletişim modalı başlığı) bu sınıfı hiç kullanmaz; kendi
+   CSS'lerinde doğrudan var(--ink-900) (grafit, saf siyah değil) ile
+   tanımlanır — bkz. bento.css ve Footer.astro. */
 .bg-dark { background-color: var(--arkar-black) !important; }
 
-.text-muted { color: var(--ink-500) !important; }
-.text-body  { color: var(--ink-700) !important; }
-.text-dark  { color: var(--ink-900) !important; }
-.text-white-50 { color: rgba(255, 255, 255, 0.55) !important; }
-.text-secondary { color: var(--ink-500) !important; }
+.text-white-50 { color: rgba(255, 255, 255, 0.62) !important; }
 
-.border,
-.border-top,
-.border-bottom,
-.border-start,
-.border-end { border-color: var(--ink-100) !important; }
-
-hr { border-color: var(--ink-100); opacity: 1; }
-
-/* Açık zeminli düğme koyu temada ters çalışır: beyaz yerine yükseltilmiş
-   yüzey + açık metin. */
-.btn-light {
-  background-color: var(--surface-alt);
-  border-color: var(--ink-100);
-  color: var(--ink-900);
-}
-.btn-light:hover,
-.btn-light:focus {
-  background-color: var(--ink-100);
-  border-color: var(--ink-300);
-  color: var(--ink-900);
-}
-
-.btn-outline-secondary {
-  border-color: var(--ink-100);
-  color: var(--ink-700);
-}
-.btn-outline-secondary:hover,
-.btn-outline-secondary:focus {
-  background-color: var(--surface-alt);
-  border-color: var(--primary);
-  color: var(--ink-900);
-}
-
-.btn-primary {
-  background-color: var(--primary);
-  border-color: var(--primary);
-  color: var(--arkar-white);
-}
-.btn-primary:hover,
-.btn-primary:focus {
-  background-color: #c9161c;
-  border-color: #c9161c;
-  color: var(--arkar-white);
-}
-
-a { color: var(--ink-700); }
-a:hover { color: var(--primary); }
-
-/* ==========================================================================
-   Bileşenler
-   ========================================================================== */
-
+/* Kart/kutu bileşenlerinde tekrar kullanılacak ortak yumuşak gölge */
 .card,
 .service-item,
 .portfolio-box {
-  background-color: var(--surface);
-  border: 1px solid var(--ink-100);
   box-shadow: var(--shadow-soft);
   border-radius: var(--radius-md);
-  color: var(--ink-700);
 }
 
-/* style.css bu ikisine sabit `background: white` ve `color: #333` veriyor. */
-.portfolio-box,
-.portfolio-title {
-  background: var(--surface) !important;
-  color: var(--ink-700) !important;
-}
-.portfolio-title h2 { color: var(--ink-900) !important; }
-.portfolio-title span { color: var(--ink-500) !important; }
-
-/* NOT: .page-header'ın asıl zemini bento.css'te (bu dosyadan SONRA yüklenir)
-   koyu bir gradyanla veriliyor. Buradaki kural yalnızca bento.css
-   yüklenmediği bir durumda yedek görevi görür. */
-.page-header {
-  background: var(--surface-alt);
-  border-bottom: 1px solid var(--ink-100);
-}
-.breadcrumb-item + .breadcrumb-item::before { color: var(--ink-300); }
-.breadcrumb-item a { color: var(--ink-500); }
-.breadcrumb-item a:hover { color: var(--primary); }
-.breadcrumb-item.active { color: var(--ink-900); }
-
-.dropdown-menu {
-  background-color: var(--surface);
-  border: 1px solid var(--ink-100);
-}
-.dropdown-item { color: var(--ink-700); }
-.dropdown-item:hover,
-.dropdown-item:focus {
-  background-color: var(--surface-alt);
-  color: var(--ink-900);
-}
-.dropdown-item.active,
-.dropdown-item:active {
-  background-color: var(--primary);
-  color: var(--arkar-white);
-}
-
-.modal-content {
-  background-color: var(--surface);
-  border: 1px solid var(--ink-100);
-  color: var(--ink-700);
-}
-.modal-header,
-.modal-footer { border-color: var(--ink-100); }
-.btn-close { filter: invert(1) grayscale(1) brightness(1.6); }
-
-.accordion-item {
-  background-color: var(--surface);
-  border-color: var(--ink-100);
-  color: var(--ink-700);
-}
-.accordion-button {
-  background-color: var(--surface);
-  color: var(--ink-900);
-}
-.accordion-button:not(.collapsed) {
-  background-color: var(--primary);
-  color: var(--arkar-white);
-}
-.accordion-button::after { filter: invert(1) brightness(1.8); }
-.accordion-body {
-  background-color: var(--surface-alt);
-  color: var(--ink-500);
-}
-
-.form-control,
-.form-select {
-  background-color: var(--surface-alt);
-  border-color: var(--ink-100);
-  color: var(--ink-700);
-}
-.form-control::placeholder { color: var(--ink-300); }
-.form-control:focus,
-.form-select:focus {
-  background-color: var(--surface-alt);
-  border-color: var(--primary);
-  color: var(--ink-900);
-  box-shadow: 0 0 0 .2rem rgba(231, 30, 36, .25);
-}
-
-/* Google Haritalar gömüleri açık renkli gelir; koyu sayfada göz almasın
-   diye hafifçe yumuşatılır, üzerine gelince tam parlaklığa döner. */
-iframe[src*="google.com/maps"] {
-  filter: brightness(.86) contrast(1.04);
-  transition: filter .25s ease;
-  border-radius: var(--radius-md);
-}
-iframe[src*="google.com/maps"]:hover { filter: none; }
-
-/* Seçim vurgusu marka rengiyle */
-::selection {
-  background: var(--primary);
-  color: var(--arkar-white);
-}
-
-/* ==========================================================================
-   Navbar — koyu tema kontrastı
-   --------------------------------------------------------------------------
-   Bootstrap'in .navbar-dark varyantı bağlantılara rgba(255,255,255,.55)
-   verir. Bu değer koyu gri bir navbar için tasarlanmıştır; saf siyah zeminde
-   menü okunamayacak kadar sönük kalıyordu.
-   ========================================================================== */
 .navbar-dark .navbar-nav .nav-link {
   color: rgba(255, 255, 255, 0.82);
 }
@@ -301,11 +125,21 @@ iframe[src*="google.com/maps"]:hover { filter: none; }
   color: var(--primary);
 }
 .navbar-dark .navbar-toggler {
-  border-color: var(--ink-100);
+  border-color: #2a2a2a;
+}
+/* Sayfayı siyahtan ayıran ince bir alt çizgi — menü havada durmasın. */
+.sticky-top.bg-dark {
+  border-bottom: 1px solid #1a1a1a;
 }
 
-/* Sayfayı siyahtan ayıran ince bir alt çizgi — navbar ile içerik arasında
-   sınır kalmadığı için menü havada duruyordu. */
-.sticky-top.bg-dark {
-  border-bottom: 1px solid var(--ink-100);
+/* ==========================================================================
+   Google Haritalar gömüleri
+   ========================================================================== */
+iframe[src*="google.com/maps"] {
+  border-radius: var(--radius-md);
+}
+
+::selection {
+  background: var(--primary);
+  color: var(--arkar-white);
 }

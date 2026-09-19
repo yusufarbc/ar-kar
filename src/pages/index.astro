@@ -409,29 +409,57 @@ const ogImage = "https://ar-kar.com/img/og-default.webp";
 
 
     <!-- Dealerships Start -->
-    <section class="container-fluid py-6 px-3 px-md-5" id="dealerships" aria-labelledby="dealerships-title">
-        <div class="text-center mx-auto mb-5" style="max-width: 720px;">
+    <section class="container-fluid py-6 px-0" id="dealerships" aria-labelledby="dealerships-title">
+        <div class="text-center mx-auto mb-5 px-3 px-md-5" style="max-width: 720px;">
             <h2 class="display-6 text-uppercase mb-3" id="dealerships-title">
                 <span class="text-primary">Güvenilir</span> İş Ortaklarımız
             </h2>
-            <p class="mb-0">Bayiliğini yaptığımız ve birlikte çalıştığımız {PARTNERS.length} marka</p>
+            {/* Marka sayısı BİLEREK yazılmıyor — panelden yeni bayilik
+                eklendiğinde/çıkarıldığında burası elle güncellenmesi
+                gereken bir sayı bırakmasın. */}
+            <p class="mb-0">Bayiliğini yaptığımız ve birlikte çalıştığımız güvenilir markalar</p>
         </div>
 
-        <ul class="partner-grid">
-            {PARTNERS.map((partner) => (
-                <li class="partner-grid__item">
-                    <img
-                        src={partner.src}
-                        alt={partner.name + " — AR-KAR iş ortağı"}
-                        title={partner.name}
-                        loading="lazy"
-                        decoding="async"
-                        width="200"
-                        height="120"
-                    />
-                </li>
-            ))}
-        </ul>
+        {/* Kayan marka şeridi. Eskiden Bootstrap carousel'i tek logo
+            gösterip 5 saniyede bir değiştiriyordu (tamamını görmek
+            ~95 saniye sürüyordu); statik ızgara ise tamamını anında
+            gösteriyordu ama "kayan" hissi istenmiyordu. Bu ikisi arası:
+            tüm logolar aynı anda görünür VE şerit kendiliğinden akar.
+            Liste CSS animasyonuyla kesintisiz döngü için ikiye
+            katlanmıştır; ikinci kopya ekran okuyuculardan gizlidir. */}
+        <div class="partner-marquee">
+            <div class="partner-marquee__rail">
+                <ul class="partner-marquee__track">
+                    {PARTNERS.map((partner) => (
+                        <li class="partner-marquee__item">
+                            <img
+                                src={partner.src}
+                                alt={partner.name + " — AR-KAR iş ortağı"}
+                                title={partner.name}
+                                loading="lazy"
+                                decoding="async"
+                                width="200"
+                                height="120"
+                            />
+                        </li>
+                    ))}
+                </ul>
+                <ul class="partner-marquee__track" aria-hidden="true">
+                    {PARTNERS.map((partner) => (
+                        <li class="partner-marquee__item">
+                            <img
+                                src={partner.src}
+                                alt=""
+                                loading="lazy"
+                                decoding="async"
+                                width="200"
+                                height="120"
+                            />
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </div>
     </section>
 
 

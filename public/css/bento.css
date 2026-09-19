@@ -10,7 +10,10 @@
 .page-header {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, var(--surface-raised) 0%, #26262d 100%);
+  /* Bilerek koyu: --ink-900 (grafit), saf siyah DEĞİL. Sayfanın geri kalanı
+     açık temadır; bu bar navbar/footer'ın siyahıyla karışmasın diye
+     kasıtlı olarak farklı bir koyu ton kullanır. */
+  background: linear-gradient(135deg, var(--ink-900) 0%, #23252c 100%);
   padding: 13px 0;
 }
 .page-header::after {
@@ -218,7 +221,8 @@
   align-items: center;
   justify-content: center;
   gap: 14px;
-  background: var(--surface-raised);
+  /* Bilerek koyu (ink-900) — navbar/footer siyahından ayrı bir vurgu tonu. */
+  background: var(--ink-900);
   border: none;
   min-height: 90px;
 }
@@ -268,7 +272,7 @@
      ızgara, boşluk kalmaz. (Önceden 2 satırdı; içerik o yüksekliği
      doldurmadığı için kutunun altında boş alan kalıyordu.) */
   grid-column: span 2;
-  background: var(--surface-raised);
+  background: var(--ink-900);
   color: #fff;
 }
 .services-bento .bento-tile--service:first-child .service-icon-badge {
@@ -314,79 +318,93 @@
 }
 
 /* ==========================================================================
-   İş ortağı logo ızgarası
+   İş ortağı logo şeridi (kayan / marquee)
    --------------------------------------------------------------------------
    Eskiden 19 logo, 5 saniyede bir dönen tek görsellik bir carousel'deydi:
-   tamamını görmek ~95 saniye sürüyordu ve hiçbir ziyaretçi o kadar beklemez.
-   Bayilik ağı bir güven sinyali olduğu için hepsi tek bakışta görünmeli.
+   tamamını görmek ~95 saniye sürüyordu. Statik bir ızgara tamamını anında
+   gösterirdi ama "kayan" hissini kaybederdi. Bu ikisi arası: TÜM logolar
+   aynı anda görünür ve şerit kendiliğinden, kesintisiz akar.
+
+   Mekanik: .partner-marquee sabit bir "vitrin" (overflow: hidden + kenar
+   solması). İçindeki .partner-marquee__rail, aynı listenin İKİ kopyasını
+   yan yana taşır (markup'ta iki <ul>) ve soldan sağa -%50 kayar; ikinci
+   kopya tam o anda ekranın dışına çıktığı noktada birinci kopyanın
+   başlangıcıyla piksel piksel örtüştüğü için göz hiçbir dikiş/sıçrama
+   görmez — döngü sonsuza kadar sorunsuz tekrar eder.
+
+   Marka sayısı zamanla değişebilir (panelden eklenip çıkarılabilir); süre
+   sabit bir "konforlu hız" hedefler, tam fizik doğruluğu gerekmez — birkaç
+   logo eksilip artması akışın hissini fark edilir şekilde bozmaz.
    ========================================================================== */
-.partner-grid {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 14px;
-    align-items: stretch;
+.partner-marquee {
+    position: relative;
+    overflow: hidden;
+    /* Şeridin sayfa kenarına yapışık değil, kenarlarda yumuşak solduğu
+       izlenimi — mask ile. Desteklemeyen tarayıcıda düz kırpma olur,
+       zararsız. */
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 48px, #000 calc(100% - 48px), transparent);
+            mask-image: linear-gradient(90deg, transparent, #000 48px, #000 calc(100% - 48px), transparent);
 }
 
-.partner-grid__item {
+.partner-marquee__rail {
+    display: flex;
+    width: max-content;
+    animation: partner-marquee-scroll 46s linear infinite;
+}
+.partner-marquee:hover .partner-marquee__rail,
+.partner-marquee:focus-within .partner-marquee__rail {
+    animation-play-state: paused;
+}
+
+.partner-marquee__track {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0 20px;
+    gap: 14px;
+}
+
+.partner-marquee__item {
+    flex: none;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 18px 14px;
-    min-height: 110px;
-    /* Marka logoları beyaz zemin bekler — koyu sayfada beyaz "jeton". */
-    background: var(--arkar-white, #fff);
-    border: 1px solid var(--ink-100, #27272c);
+    width: 160px;
+    padding: 16px 14px;
+    background: var(--surface, #fff);
+    border: 1px solid var(--ink-100, #e7e8eb);
     border-radius: var(--radius-md, 14px);
-    transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+    box-shadow: var(--shadow-soft, 0 8px 30px rgba(20, 21, 26, .07));
 }
 
-.partner-grid__item img {
+.partner-marquee__item img {
     max-width: 100%;
-    max-height: 62px;
+    max-height: 56px;
     width: auto;
     height: auto;
     object-fit: contain;
-    /* Logolar beyaz zemin için tasarlanmış; çoğu koyu metinli ve şeffaf
-       arka planlı. Siyah üzerine konduklarında okunmuyorlardı, bu yüzden
-       kutunun kendisi beyaz. Dinginlik hover'da açılan hafif bir
-       doygunluk düşüşüyle sağlanıyor, filtreyle değil. */
-    filter: saturate(.85);
-    opacity: .9;
-    transition: filter .2s ease, opacity .2s ease;
 }
 
-.partner-grid__item:hover {
-    border-color: var(--primary, #E71E24);
-    box-shadow: var(--shadow-soft, 0 8px 30px rgba(20, 21, 26, .07));
-    transform: translateY(-2px);
+@keyframes partner-marquee-scroll {
+    from { transform: translateX(0); }
+    /* -%50: iki kopyadan tam birincisinin genişliği kadar kaymak demektir
+       — bu noktada ekranda görünen, başlangıçtakiyle birebir aynıdır. */
+    to   { transform: translateX(-50%); }
 }
 
-.partner-grid__item:hover img {
-    filter: none;
-    opacity: 1;
-}
-
-/* Dokunmatikte hover yok; logolar baştan tam görünür. */
-
-/* Dokunmatikte hover yok — logolar baştan tam renkli görünsün */
-@media (hover: none) {
-    .partner-grid__item img {
-        filter: none;
-        opacity: 1;
-    }
+/* Hareket hassasiyeti olan kullanıcılar: otomatik kayma durur, şerit
+   elle kaydırılabilir yatay bir listeye döner (içerik kaybolmaz). */
+@media (prefers-reduced-motion: reduce) {
+    .partner-marquee__rail { animation: none; }
+    .partner-marquee { overflow-x: auto; -webkit-mask-image: none; mask-image: none; }
 }
 
 @media (max-width: 575px) {
-    .partner-grid {
-        grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-        gap: 10px;
-    }
-    .partner-grid__item {
-        min-height: 88px;
+    .partner-marquee__item {
+        width: 128px;
         padding: 12px 10px;
     }
-    .partner-grid__item img { max-height: 46px; }
+    .partner-marquee__item img { max-height: 44px; }
+    .partner-marquee__track { gap: 10px; padding: 0 10px; }
+    .partner-marquee__rail { animation-duration: 34s; }
 }

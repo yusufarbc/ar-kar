@@ -1,7 +1,24 @@
 (function ($) {
     "use strict";
-    
-    // Dropdown on mouse hover
+
+    /* ----------------------------------------------------------------------
+       NOT: Bu dosya eskiden hazır şablonun orijinaliydi ve sitede hiç
+       bulunmayan öğeleri hedefleyen kod içeriyordu:
+
+         .date / .time      -> tempusdominus datetimepicker (hiç yok)
+         .testimonial-carousel -> owlCarousel (hiç yok)
+         .back-to-top       -> easing eklentisi (hiç yok)
+         #portfolio-flters  -> isotope filtreleme arayüzü (hiç yok)
+
+       Bu yüzden her sayfada moment.js, moment-timezone, tempusdominus,
+       owlCarousel, isotope, easing ve waypoints (~900 KB) hiçbir işe
+       yaramadan yükleniyordu. Hepsi kaldırıldı; geriye yalnızca gerçekten
+       çalışan iki davranış kaldı.
+       ---------------------------------------------------------------------- */
+
+    // ----------------------------------------------------------------------
+    // Masaüstünde açılır menüyü fare üzerine gelince aç
+    // ----------------------------------------------------------------------
     $(document).ready(function () {
         function toggleNavbarMethod() {
             if ($(window).width() > 992) {
@@ -18,65 +35,46 @@
         $(window).resize(toggleNavbarMethod);
     });
 
+    // ----------------------------------------------------------------------
+    // Açılış duyuru penceresi (bmt-reklam.webp)
+    //
+    // Eskiden her sayfa açılışında yeniden gösteriliyordu; aynı ziyaretçi
+    // siteyi gezerken duyuruyu her sayfada tekrar kapatmak zorunda kalıyordu.
+    // Artık oturum başına bir kez gösterilir.
+    // ----------------------------------------------------------------------
+    var AD_KEY = 'arkar:ad-dismissed';
 
-    // Date and time picker
-    $('.date').datetimepicker({
-        format: 'L'
-    });
-    $('.time').datetimepicker({
-        format: 'LT'
-    });
-    
-    
-    // Back to top button
-    $(window).scroll(function () {
-        if ($(this).scrollTop() > 100) {
-            $('.back-to-top').fadeIn('slow');
-        } else {
-            $('.back-to-top').fadeOut('slow');
+    function adAlreadySeen() {
+        try {
+            return sessionStorage.getItem(AD_KEY) === '1';
+        } catch (e) {
+            // Gizli sekme veya site verisi kapalıysa sessionStorage erişimi
+            // hata fırlatabilir; bu durumda duyuruyu göstermeye devam et.
+            return false;
         }
-    });
-    $('.back-to-top').click(function () {
-        $('html, body').animate({scrollTop: 0}, 1500, 'easeInOutExpo');
-        return false;
-    });
+    }
 
+    function rememberAdSeen() {
+        try {
+            sessionStorage.setItem(AD_KEY, '1');
+        } catch (e) {
+            /* yok sayılır */
+        }
+    }
 
-    // Portfolio isotope and filter
-    var portfolioIsotope = $('.portfolio-container').isotope({
-        itemSelector: '.portfolio-item',
-        layoutMode: 'fitRows'
-    });
-    $('#portfolio-flters li').on('click', function () {
-        $("#portfolio-flters li").removeClass('active');
-        $(this).addClass('active');
-
-        portfolioIsotope.isotope({filter: $(this).data('filter')});
-    });
-
-
-    // Testimonials carousel
-    $(".testimonial-carousel").owlCarousel({
-        autoplay: true,
-        smartSpeed: 1000,
-        items: 1,
-        dots: false,
-        loop: true,
-    });
-    
-    // Sayfa Açılış Reklam Popup (bmt-reklam.webp)
     function initAdPopup() {
+        if (adAlreadySeen()) return;
+
         if ($('#adPopup').length === 0) {
-            var popupHtml = `
-                <div id="adPopup" class="ad-popup-overlay" role="dialog" aria-modal="true" aria-label="AR-KAR Reklam">
-                    <div class="ad-popup-wrapper">
-                        <button type="button" class="ad-popup-close" id="adPopupClose" aria-label="Kapat">&times;</button>
-                        <div class="ad-popup-body">
-                            <img src="/img/bmt-reklam.webp" alt="AR-KAR Reklam Duyurusu" class="ad-popup-img">
-                        </div>
-                    </div>
-                </div>
-            `;
+            var popupHtml =
+                '<div id="adPopup" class="ad-popup-overlay" role="dialog" aria-modal="true" aria-label="AR-KAR Duyuru">' +
+                '  <div class="ad-popup-wrapper">' +
+                '    <button type="button" class="ad-popup-close" id="adPopupClose" aria-label="Kapat">&times;</button>' +
+                '    <div class="ad-popup-body">' +
+                '      <img src="/img/bmt-reklam.webp" alt="AR-KAR duyurusu" class="ad-popup-img" width="800" height="1000">' +
+                '    </div>' +
+                '  </div>' +
+                '</div>';
             $('body').append(popupHtml);
         }
 
@@ -91,6 +89,7 @@
         }
 
         function closePopup() {
+            rememberAdSeen();
             $popup.removeClass('show');
             setTimeout(function () {
                 $popup.css('display', 'none');
@@ -98,10 +97,8 @@
             }, 350);
         }
 
-        // Sayfa açıldıktan sonra yumuşak gecikme ile göster
         setTimeout(openPopup, 400);
 
-        // Kapatma Olayları
         $(document).on('click', '#adPopupClose', function (e) {
             e.preventDefault();
             closePopup();
@@ -125,4 +122,3 @@
     });
 
 })(jQuery);
-

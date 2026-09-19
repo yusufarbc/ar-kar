@@ -1,0 +1,23 @@
+---
+// Kartların üstündeki görsel + rozet bloğu — insaat.astro'nun
+// .card-img-container + .material-category-badge deseninin (20+ tekrar)
+// tek noktadan yönetilen hâli.
+interface Props {
+  src: string;
+  alt: string;
+  aspectRatio?: string;
+  loading?: 'lazy' | 'eager';
+}
+
+const { src, alt, aspectRatio = '4 / 3', loading = 'lazy' } = Astro.props;
+const hasBadge = Astro.slots.has('badge');
+---
+
+<div class="card-media" style={`--card-media-ratio:${aspectRatio}`}>
+  {hasBadge && (
+    <div class="card-media__badge">
+      <slot name="badge" />
+    </div>
+  )}
+  <img src={src} alt={alt} loading={loading} decoding="async" />
+</div>

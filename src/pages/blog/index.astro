@@ -2,6 +2,10 @@
 import PageHeader from '../../components/PageHeader.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
+import SectionHeader from '../../components/ui/SectionHeader.astro';
+import Card from '../../components/ui/Card.astro';
+import CardMedia from '../../components/ui/CardMedia.astro';
+import Badge from '../../components/ui/Badge.astro';
 
 const posts = await getCollection('blog');
 const sortedPosts = posts.sort((a, b) => {
@@ -53,10 +57,7 @@ const blogSchema = {
 
   <!-- Blog List Start -->
   <div class="container-fluid py-6 px-5 bg-light">
-    <div class="text-center mx-auto mb-5" style="max-width: 700px;">
-      <h1 class="display-5 text-uppercase mb-3">Haberler &amp; <span class="text-primary">Duyurular</span></h1>
-      <p class="text-muted">AR-KAR İnşaat projeleri, sektörel gelişmeler ve güncel duyurularımız</p>
-    </div>
+    <SectionHeader accent="Haberler &" title="Duyurular" lede="AR-KAR İnşaat projeleri, sektörel gelişmeler ve güncel duyurularımız" />
 
     <div class="container">
       {sortedPosts.length === 0 ? (
@@ -69,43 +70,33 @@ const blogSchema = {
             const slug = post.id.replace(/\/index$/, '');
             const postUrl = `/blog/${slug}`;
             const coverImage = post.data.coverImage || '/img/about.webp';
-            const dateStr = post.data.date;
 
             return (
               <div class="col-12 col-md-6 col-lg-4">
-                <article class="card h-100 border-0 shadow-sm rounded overflow-hidden blog-card">
-                  <div class="blog-card-img position-relative">
-                    <a href={postUrl}>
-                      <img
-                        src={coverImage}
-                        alt={post.data.title}
-                        class="card-img-top w-100"
-                        style="height: 220px; object-fit: cover;"
-                        loading="lazy"
-                      />
-                    </a>
-                    <span class="badge bg-primary position-absolute top-0 start-0 m-3 px-3 py-2">
-                      <i class="fa fa-calendar-alt me-1"></i> {dateStr}
-                    </span>
-                  </div>
-                  <div class="card-body p-4 d-flex flex-column">
-                    <h2 class="card-title h5 mb-3">
-                      <a href={postUrl} class="text-dark text-decoration-none hover-primary">
+                <Card padded={false} class="h-100 d-flex flex-column">
+                  <a href={postUrl}>
+                    <CardMedia src={coverImage} alt={post.data.title}>
+                      <Badge slot="badge" label={post.data.date} icon="fa-calendar-alt" />
+                    </CardMedia>
+                  </a>
+                  <div class="card-surface__body flex-grow-1 d-flex flex-column">
+                    <h2 class="h5 mb-3">
+                      <a href={postUrl} class="text-reset text-decoration-none">
                         {post.data.title}
                       </a>
                     </h2>
                     {post.data.description && (
-                      <p class="card-text text-muted mb-4 flex-grow-1" style="font-size: 0.95rem; line-height: 1.6;">
+                      <p class="text-muted mb-4 flex-grow-1" style="font-size: 0.95rem; line-height: 1.6;">
                         {post.data.description}
                       </p>
                     )}
                     <div class="mt-auto pt-3 border-top">
                       <a href={postUrl} class="btn btn-sm btn-primary px-3">
-                        Devamını Oku <i class="fa fa-arrow-right ms-1"></i>
+                        Devamını Oku <i class="fa fa-arrow-right ms-1" aria-hidden="true"></i>
                       </a>
                     </div>
                   </div>
-                </article>
+                </Card>
               </div>
             );
           })}
@@ -115,18 +106,4 @@ const blogSchema = {
   </div>
   <!-- Blog List End -->
 </BaseLayout>
-
-<style>
-  .blog-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  .blog-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12) !important;
-  }
-  .hover-primary:hover {
-    color: var(--bs-primary) !important;
-    transition: color 0.2s ease;
-  }
-</style>
 

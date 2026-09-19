@@ -2,12 +2,54 @@
 import { EXPERIENCE_YEARS } from '../lib/company';
 import PageHeader from '../components/PageHeader.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeader from '../components/ui/SectionHeader.astro';
+import Card from '../components/ui/Card.astro';
+import CardMedia from '../components/ui/CardMedia.astro';
+import Badge from '../components/ui/Badge.astro';
 
 const title = "Zirai İlaç Mağazası | AR-KAR İnşaat Samsun | Gübre Tohum Satışı";
 const description = "AR-KAR Zirai Ürünler Mağazası: Samsun Çarşamba'da tohum, gübre ve zirai ilaç satışı yapan mağazamızda tarım danışmanlığı hizmeti de vermekteyiz. Çiftçilerimize kaliteli tarımsal girdiler ve uzman destek.";
 const canonical = "https://ar-kar.com/ziraat";
 const ogImage = "https://ar-kar.com/img/ziraat.webp";
 const keywords = "zirai ilaç mağazası samsun, gübre satışı çarşamba, tohum mağazası, tarımsal girdi mağazası, tarım danışmanlığı, bitki koruma ürünleri satışı, tarım ilacı mağazası, organik gübre satışı, hibrit tohum mağazası, tarımsal kimyasal mağazası";
+
+// Mağazada satılan ürün grupları — kart markup'ı (görsel + rozet + başlık +
+// açıklama) artık Card/CardMedia/Badge bileşenlerinden geliyor (bkz.
+// insaat.astro/tarim.astro'daki aynı desen).
+const PRODUCTS = [
+  {
+    img: '/img/ilac.webp',
+    alt: 'Bitki Koruma Ürünleri - AR-KAR Mağazası',
+    badgeIcon: 'fa-shield-alt',
+    badgeLabel: 'Bitki Koruma',
+    title: 'Bitki Koruma Ürünleri',
+    description: 'Mağazamızda herbisit, fungisit, insektisit ve diğer bitki koruma ürünleri bulunmaktadır.',
+  },
+  {
+    img: '/img/gubre.webp',
+    alt: 'Gübre Çeşitleri - AR-KAR Mağazası',
+    badgeIcon: 'fa-leaf',
+    badgeLabel: 'Gübre',
+    title: 'Gübre Çeşitleri',
+    description:
+      'Organik, kimyevi ve sıvı gübre çeşitleri mevcuttur. Toprak analizi sonucuna göre uygun gübre önerisi sunuyoruz.',
+  },
+  {
+    img: '/img/tohum.webp',
+    alt: 'Tohum Satışı - AR-KAR Mağazası',
+    badgeIcon: 'fa-seedling',
+    badgeLabel: 'Tohum',
+    title: 'Tohum Satışı',
+    description: 'Hibrit ve açık tozlanma tohum çeşitleri. Sebze, meyve ve tarla bitkileri için kaliteli tohumlar.',
+  },
+];
+
+const ADVANTAGES = [
+  { title: 'Kaliteli Ürünler', text: 'Tüm tarımsal girdilerimiz sertifikalı ve kalite garantili.' },
+  { title: 'Uzman Danışmanlık', text: 'Deneyimli tarım uzmanlarından profesyonel danışmanlık.' },
+  { title: 'Uygun Fiyat', text: 'Piyasa koşullarında en uygun fiyat garantisi.' },
+  { title: `${EXPERIENCE_YEARS} Yıllık Güven`, text: 'Sektördeki köklü tecrübemizle güvenilir hizmet.' },
+];
 ---
 
 <BaseLayout
@@ -30,7 +72,7 @@ const keywords = "zirai ilaç mağazası samsun, gübre satışı çarşamba, to
             "@type": "PostalAddress",
             "streetAddress": "İnönü Mah. Gazi Cad.",
             "addressLocality": "Çarşamba",
-            "addressRegion": "Samsun", 
+            "addressRegion": "Samsun",
             "postalCode": "55500",
             "addressCountry": "TR"
         },
@@ -63,7 +105,7 @@ const keywords = "zirai ilaç mağazası samsun, gübre satışı çarşamba, to
                     }
                 },
                 {
-                    "@type": "Offer", 
+                    "@type": "Offer",
                     "itemOffered": {
                         "@type": "Service",
                         "name": "Gübre Satışı",
@@ -73,7 +115,7 @@ const keywords = "zirai ilaç mağazası samsun, gübre satışı çarşamba, to
                 {
                     "@type": "Offer",
                     "itemOffered": {
-                        "@type": "Service", 
+                        "@type": "Service",
                         "name": "Tohum Satışı",
                         "description": "Mağazamızda hibrit tohumlar, sebze tohumları satışı"
                     }
@@ -81,311 +123,76 @@ const keywords = "zirai ilaç mağazası samsun, gübre satışı çarşamba, to
             ]
         }
     }`} />
-    <style is:inline set:html={`/* Critical CSS for above-the-fold content */
-        .navbar-brand img {
-            transition: transform 0.3s ease;
-        }
-        
-        .navbar-brand img:hover {
-            transform: scale(1.05);
-        }
-
-        /* Lazy Loading Enhancement */
-        img[loading="lazy"] {
-            transition: opacity 0.3s ease;
-        }
-
-        /* Agricultural product showcase */
-        .agri-product-card {
-            background: var(--surface);
-            border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            text-align: center;
-            height: 100%;
-        }
-
-        .agri-product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-        }
-
-        .product-icon {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--bs-primary), var(--bs-success));
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1.5rem;
-            font-size: 2rem;
-        }
-
-        .product-title {
-            color: var(--bs-primary);
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        /* Service process steps */
-        .service-step {
-            background: var(--surface);
-            border-radius: 10px;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-            border-left: 4px solid var(--bs-primary);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .service-step:hover {
-            transform: translateX(5px);
-        }
-
-        .step-number {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background: var(--bs-primary);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            float: left;
-            margin-right: 1rem;
-        }
-
-        /* Consultation form styling */
-        .consultation-form {
-            background: linear-gradient(135deg, var(--surface-alt) 0%, var(--surface-raised) 100%);
-            border-radius: 15px;
-            padding: 2rem;
-        }
-
-        .form-floating .form-control {
-            border-radius: 10px;
-        }
-
-        /* Accessibility improvements */
-        .btn:focus,
-        .nav-link:focus,
-        .form-control:focus,
-        .agri-product-card:focus {
-            outline: 2px solid var(--bs-primary);
-            outline-offset: 2px;
-        }
-
-        /* Reduced motion support */
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-
-        /* Mobile optimizations */
-        @media (max-width: 768px) {
-            .agri-product-card {
-                padding: 1.5rem;
-            }
-            
-            .consultation-form {
-                padding: 1.5rem;
-            }
-            
-            .display-5 {
-                font-size: 2rem;
-            }
-            
-            .py-6 {
-                padding-top: 3rem !important;
-                padding-bottom: 3rem !important;
-            }
-            
-            .footer .navbar-brand img {
-                max-height: 60px !important;
-                width: auto;
-            }
-        }
-        
-        /* WhatsApp floating button */
-        .whatsapp-float {
-            position: fixed;
-            width: 60px;
-            height: 60px;
-            bottom: 20px;
-            right: 20px;
-            background-color: #25d366;
-            color: white;
-            border-radius: 50px;
-            text-align: center;
-            font-size: 30px;
-            box-shadow: 2px 2px 3px #999;
-            z-index: 1000;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-        
-        .whatsapp-float:hover {
-            background-color: #20c55e;
-            color: white;
-            transform: scale(1.1);
-            text-decoration: none;
-        }
-        
-        @media (max-width: 768px) {
-            .whatsapp-float {
-                width: 55px;
-                height: 55px;
-                bottom: 15px;
-                right: 15px;
-                font-size: 25px;
-            }
-        }`} />
   </Fragment>
 
   <PageHeader active="Zirai Ürünler ve Danışmanlık" />
 
-   
+  <div class="container-fluid py-6 px-3 px-md-5 materials-section">
+    <div class="materials-container">
+      <!-- Service Features Start -->
+      <div class="row g-5 align-items-center mb-5">
+        <div class="col-lg-8">
+          <div class="section-header mb-4">
+            <h2 class="section-title">AR-KAR <span class="text-primary">Zirai Ürünler</span> Mağazası Avantajları</h2>
+          </div>
+          <h4 class="text-primary mb-4">Kaliteli Tarımsal Girdiler ve Profesyonel Danışmanlık</h4>
+          <p class="mb-4">AR-KAR Zirai Ürünler Mağazası olarak, {EXPERIENCE_YEARS} yıllık güven ve kalite anlayışımızla çiftçilerimize en kaliteli tarımsal girdileri sunuyoruz. Uzman ekibimizle tarım danışmanlığı hizmeti vererek, verimli ve sürdürülebilir tarım uygulamalarını destekliyoruz.</p>
+          <p class="mb-4">Deneyimli tarım uzmanlarımız ile bitki beslenme programları, hastalık-zararlı mücadelesi ve toprak analizi hizmetleri sunarak, çiftçilerimizin başarısını garanti altına alıyoruz. Kaliteli ürün garantisi ve uzman desteği ile yanınızdayız.</p>
 
-     <!-- Service Features Start -->
-    <div class="container-fluid py-6 px-5">
-        <div class="row g-5">
-            <div class="col-lg-8">
-                <h2 class="display-6 text-uppercase mb-4">AR-KAR <span class="text-primary">Zirai Ürünler</span> Mağazası Avantajları</h2>
-                <h4 class="text-uppercase mb-4 text-primary">Kaliteli Tarımsal Girdiler ve Profesyonel Danışmanlık</h4>
-                <p class="mb-4">AR-KAR Zirai Ürünler Mağazası olarak, {EXPERIENCE_YEARS} yıllık güven ve kalite anlayışımızla çiftçilerimize en kaliteli tarımsal girdileri sunuyoruz. Uzman ekibimizle tarım danışmanlığı hizmeti vererek, verimli ve sürdürülebilir tarım uygulamalarını destekliyoruz.</p>
-                <p class="mb-4">Deneyimli tarım uzmanlarımız ile bitki beslenme programları, hastalık-zararlı mücadelesi ve toprak analizi hizmetleri sunarak, çiftçilerimizin başarısını garanti altına alıyoruz. Kaliteli ürün garantisi ve uzman desteği ile yanınızdayız.</p>
-                
-                <div class="row g-4">
-                    <div class="col-md-6">
-                        <div class="d-flex">
-                            <i class="fa fa-check-circle fa-2x text-primary flex-shrink-0 me-3"></i>
-                            <div>
-                                <h5>Kaliteli Ürünler</h5>
-                                <p class="mb-0">Tüm tarımsal girdilerimiz sertifikalı ve kalite garantili.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="d-flex">
-                            <i class="fa fa-check-circle fa-2x text-primary flex-shrink-0 me-3"></i>
-                            <div>
-                                <h5>Uzman Danışmanlık</h5>
-                                <p class="mb-0">Deneyimli tarım uzmanlarından profesyonel danışmanlık.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="d-flex">
-                            <i class="fa fa-check-circle fa-2x text-primary flex-shrink-0 me-3"></i>
-                            <div>
-                                <h5>Uygun Fiyat</h5>
-                                <p class="mb-0">Piyasa koşullarında en uygun fiyat garantisi.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="d-flex">
-                            <i class="fa fa-check-circle fa-2x text-primary flex-shrink-0 me-3"></i>
-                            <div>
-                                <h5>{EXPERIENCE_YEARS} Yıllık Güven</h5>
-                                <p class="mb-0">Sektördeki köklü tecrübemizle güvenilir hizmet.</p>
-                            </div>
-                        </div>
-                    </div>
+          <div class="row g-4">
+            {ADVANTAGES.map((advantage) => (
+              <div class="col-md-6">
+                <div class="d-flex">
+                  <i class="fa fa-check-circle fa-2x text-primary flex-shrink-0 me-3" aria-hidden="true"></i>
+                  <div>
+                    <h5>{advantage.title}</h5>
+                    <p class="mb-0">{advantage.text}</p>
+                  </div>
                 </div>
-            </div>
-            <div class="col-lg-4 pb-4" style="min-height: 400px;">
-                <div class="position-relative h-100 ms-5">
-                    <img class="position-absolute w-100 h-100 mt-5 ms-n5 rounded" src="/img/ziraat.webp" alt="AR-KAR Zirai Ürünler Mağazası" style="object-fit: cover;" loading="lazy">
-                </div>
-            </div>
+              </div>
+            ))}
+          </div>
         </div>
-    </div>
-    <!-- Service Features End -->
-
-
-    <!-- Services Start -->
-    <div class="container-fluid bg-light py-6 px-5">
-        <div class="text-center mx-auto mb-5" style="max-width: 600px;">
-            <h2 class="display-6 text-uppercase mb-4"><span class="text-primary">Ziraat Mağazamızda</span> Satışını Yaptığımız Ürünler</h2>
+        <div class="col-lg-4">
+          <Card padded={false}>
+            <CardMedia src="/img/ziraat.webp" alt="AR-KAR Zirai Ürünler Mağazası" aspectRatio="1 / 1" />
+          </Card>
         </div>
-        <div class="row g-5">
+      </div>
+      <!-- Service Features End -->
 
+      <!-- Services Start -->
+      <div class="category-section">
+        <SectionHeader accent="Ziraat Mağazamızda" title="Satışını Yaptığımız Ürünler" />
+        <div class="row g-4 mb-5">
+          {PRODUCTS.map((product) => (
             <div class="col-lg-4 col-md-6">
-                <div class="service-item bg-white d-flex flex-column align-items-center text-center h-100">
-                    <img class="img-fluid" src="/img/ilac.webp" alt="Bitki Koruma Ürünleri - AR-KAR Mağazası" loading="lazy">
-                    <div class="service-icon bg-white">
-                        <i class="fa fa-3x fa-shield-alt text-primary"></i>
-                    </div>
-                    <div class="px-4 pb-4">
-                        <h3 class="text-uppercase mb-3">Bitki Koruma Ürünleri</h3>
-                        <p>Mağazamızda herbisit, fungisit, insektisit ve diğer bitki koruma ürünleri bulunmaktadır.</p>
-                       
-                    </div>
+              <Card padded={false} class="h-100 d-flex flex-column">
+                <CardMedia src={product.img} alt={product.alt}>
+                  <Badge slot="badge" label={product.badgeLabel} icon={product.badgeIcon} />
+                </CardMedia>
+                <div class="card-surface__body flex-grow-1 d-flex flex-column">
+                  <h3 class="h5 mb-2">{product.title}</h3>
+                  <p class="text-body-secondary mb-0">{product.description}</p>
                 </div>
+              </Card>
             </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="service-item bg-white rounded d-flex flex-column align-items-center text-center h-100">
-                    <img class="img-fluid" src="/img/gubre.webp" alt="Gübre Çeşitleri - AR-KAR Mağazası" loading="lazy">
-                    <div class="service-icon bg-white">
-                        <i class="fa fa-3x fa-leaf text-primary"></i>
-                    </div>
-                    <div class="px-4 pb-4">
-                        <h3 class="text-uppercase mb-3">Gübre Çeşitleri</h3>
-                        <p>Organik, kimyevi ve sıvı gübre çeşitleri mevcuttur. Toprak analizi sonucuna göre uygun gübre önerisi sunuyoruz.</p>
-                        
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="service-item bg-white rounded d-flex flex-column align-items-center text-center h-100">
-                    <img class="img-fluid" src="/img/tohum.webp" alt="Tohum Satışı - AR-KAR Mağazası" loading="lazy">
-                    <div class="service-icon bg-white">
-                        <i class="fa fa-3x fa-seedling text-primary"></i>
-                    </div>
-                    <div class="px-4 pb-4">
-                        <h3 class="text-uppercase mb-3">Tohum Satışı</h3>
-                        <p>Hibrit ve açık tozlanma tohum çeşitleri. Sebze, meyve ve tarla bitkileri için kaliteli tohumlar.</p>
-                       
-                    </div>
-                </div>
-            </div>
-
-          
-
+          ))}
         </div>
-    </div>
-    <!-- Services End -->
+      </div>
+      <!-- Services End -->
 
-   
-    <!-- CTA Section Start -->
-    <div class="container-fluid bg-primary py-6 px-5">
-        <div class="row g-5 align-items-center">
-            <div class="col-lg-8">
-                <h2 class="display-6 text-white mb-4">Kaliteli Zirai Ürün ve Danışmanlık Hizmeti Arıyorsanız</h2>
-                <p class="text-white mb-0">AR-KAR Zirai Ürünler Mağazası ile iletişime geçin. Kalite ve güven bizim önceliğimizdir.</p>
-            </div>
-            <div class="col-lg-4 text-lg-end">
-                <button class="btn btn-light btn-lg py-3 px-5" data-bs-toggle="modal" data-bs-target="#contactModal">
-                    <i class="fa fa-phone me-2"></i>Hemen Arayın
-                </button>
-            </div>
+      <!-- CTA Section Start -->
+      <div class="cta-band">
+        <h3>Kaliteli Zirai Ürün ve Danışmanlık Hizmeti Arıyorsanız</h3>
+        <p>AR-KAR Zirai Ürünler Mağazası ile iletişime geçin. Kalite ve güven bizim önceliğimizdir.</p>
+        <div class="cta-band__actions">
+          <button type="button" class="btn btn-light btn-lg px-4" data-bs-toggle="modal" data-bs-target="#contactModal">
+            <i class="fa fa-phone me-2" aria-hidden="true"></i>Hemen Arayın
+          </button>
         </div>
+      </div>
+      <!-- CTA Section End -->
     </div>
-    <!-- CTA Section End -->
+  </div>
 </BaseLayout>

@@ -2,12 +2,76 @@
 import { EXPERIENCE_YEARS } from '../lib/company';
 import PageHeader from '../components/PageHeader.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeader from '../components/ui/SectionHeader.astro';
+import Card from '../components/ui/Card.astro';
+import CardMedia from '../components/ui/CardMedia.astro';
+import Badge from '../components/ui/Badge.astro';
+import IconBadge from '../components/ui/IconBadge.astro';
+import CtaBand from '../components/ui/CtaBand.astro';
 
 const title = "Tarım Ürünleri Alım Satımı | AR-KAR İnşaat Samsun | Mısır, Buğday, Fındık Alımı";
 const description = "AR-KAR Tarım Ürünleri Alım Satımı: Samsun Çarşamba'da mısır, buğday, fındık alım satımı. Çiftçilerimize adil fiyat, güvenli ödeme, kaliteli hizmet sunuyoruz.";
 const canonical = "https://ar-kar.com/tarim";
 const ogImage = "https://ar-kar.com/img/tarim.webp";
 const keywords = "tarım ürünleri alım satım samsun, mısır alımı çarşamba, buğday alımı samsun, fındık alımı, tarım ürünleri tüccarı, hububat alımı, ürün pazarlama, tarımsal ticaret, çiftçi destekleme";
+
+// Ürün kartları artık Card/CardMedia/Badge bileşenlerinden geliyor; burada
+// yalnızca VERİ var (bkz. insaat.astro/pvc.astro'daki aynı desen).
+const PRODUCTS = [
+  {
+    img: '/img/findik.webp',
+    alt: 'Fındık Alım Satımı - AR-KAR',
+    badgeIcon: 'fa-seedling',
+    badgeLabel: 'Fındık',
+    title: 'Fındık Alım Satımı',
+    description:
+      'Karadeniz bölgesinin en kaliteli fındıklarını alım satımını yapıyoruz. İç ve kabuklu fındık çeşitleri için uygun fiyat teklifi veriyoruz.',
+    features: ['Güncel Piyasa Fiyatı', 'Kalite Kontrol', 'Hızlı Ödeme', 'Nakliye Desteği'],
+  },
+  {
+    img: '/img/misir.webp',
+    alt: 'Mısır Alım Satımı - AR-KAR',
+    badgeIcon: 'fa-leaf',
+    badgeLabel: 'Mısır',
+    title: 'Mısır Alım Satımı',
+    description:
+      'Taze ve kaliteli mısır alım satımı yapıyoruz. Çiftçilerimizden direkt alım, adil fiyat ve hızlı ödeme ile güvenilir ticaret ortağınızız.',
+    features: ['Güncel Piyasa Fiyatı', 'Kalite Kontrol', 'Hızlı Ödeme', 'Nakliye Desteği'],
+  },
+  {
+    img: '/img/bugday.webp',
+    alt: 'Buğday Alım Satımı - AR-KAR',
+    badgeIcon: 'fa-tractor',
+    badgeLabel: 'Buğday',
+    title: 'Buğday Alım Satımı',
+    description:
+      'Kaliteli buğday alım satımı ile çiftçilerimize destek oluyoruz. Protein oranı yüksek buğdaylara özel fiyat avantajı sağlıyoruz.',
+    features: ['Güncel Piyasa Fiyatı', 'Kalite Kontrol', 'Hızlı Ödeme', 'Nakliye Desteği'],
+  },
+];
+
+const FEATURES = [
+  {
+    icon: 'fa-balance-scale',
+    title: 'Adil Fiyatlama',
+    text: 'Güncel piyasa fiyatları ile çiftçilerimize adil fiyat teklifi sunuyoruz.',
+  },
+  {
+    icon: 'fa-clock',
+    title: 'Hızlı Ödeme',
+    text: 'Teslim aldığımız ürünlerin ödemelerini hızlı ve güvenli şekilde yapıyoruz.',
+  },
+  {
+    icon: 'fa-microscope',
+    title: 'Kalite Kontrol',
+    text: 'Modern analiz yöntemleri ile ürün kalitesini test ediyoruz.',
+  },
+  {
+    icon: 'fa-handshake',
+    title: 'Güvenilir Ortaklık',
+    text: `${EXPERIENCE_YEARS} yıllık deneyimimizle çiftçilerimize güvenilir ortaklık sunuyoruz.`,
+  },
+];
 ---
 
 <BaseLayout
@@ -92,538 +156,77 @@ const keywords = "tarım ürünleri alım satım samsun, mısır alımı çarşa
             ]
         }
     }`} />
-    <style is:inline set:html={`/* Critical CSS for above-the-fold content */
-        .navbar-brand img {
-            transition: transform 0.3s ease;
-        }
-        
-        .navbar-brand img:hover {
-            transform: scale(1.05);
-        }
-
-        /* Lazy Loading Enhancement */
-        img[loading="lazy"] {
-            transition: opacity 0.3s ease;
-        }
-
-        /* Agriculture product cards */
-        .agriculture-card {
-            background: var(--surface);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            height: 100%;
-        }
-
-        .agriculture-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-        }
-
-        .agriculture-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .agriculture-card:hover img {
-            transform: scale(1.1);
-        }
-
-        .card-content {
-            padding: 1.5rem;
-        }
-
-        .product-badge {
-            background: var(--bs-primary);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            display: inline-block;
-            margin-bottom: 1rem;
-        }
-
-        /* Process timeline */
-        .process-timeline {
-            position: relative;
-            padding: 2rem 0;
-        }
-
-        .timeline-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 2rem;
-            position: relative;
-        }
-
-        .timeline-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: var(--bs-primary);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            margin-right: 1.5rem;
-            flex-shrink: 0;
-        }
-
-        .timeline-content h4 {
-            color: var(--bs-primary);
-            margin-bottom: 0.5rem;
-        }
-
-        /* Accessibility improvements */
-        .btn:focus,
-        .nav-link:focus,
-        .agriculture-card:focus {
-            outline: 2px solid var(--bs-primary);
-            outline-offset: 2px;
-        }
-
-        /* Reduced motion support */
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-
-        /* Mobile optimizations */
-        @media (max-width: 768px) {
-            .timeline-item {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .timeline-icon {
-                margin-right: 0;
-                margin-bottom: 1rem;
-            }
-            
-            .display-5 {
-                font-size: 2rem;
-            }
-            
-            .py-6 {
-                padding-top: 3rem !important;
-                padding-bottom: 3rem !important;
-            }
-            
-            .footer .navbar-brand img {
-                max-height: 60px !important;
-                width: auto;
-            }
-        }
-        
-        /* WhatsApp floating button */
-        .whatsapp-float {
-            position: fixed;
-            width: 60px;
-            height: 60px;
-            bottom: 20px;
-            right: 20px;
-            background-color: #25d366;
-            color: white;
-            border-radius: 50px;
-            text-align: center;
-            font-size: 30px;
-            box-shadow: 2px 2px 3px #999;
-            z-index: 1000;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-        
-        .whatsapp-float:hover {
-            background-color: #20c55e;
-            color: white;
-            transform: scale(1.1);
-            text-decoration: none;
-        }
-        
-        @media (max-width: 768px) {
-            .whatsapp-float {
-                width: 55px;
-                height: 55px;
-                bottom: 15px;
-                right: 15px;
-                font-size: 25px;
-            }
-        }`} />
-    <style is:inline set:html={`/* Agricultural Product Card Styles */
-        .agri-card {
-            transition: all 0.3s ease;
-            border: none;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .agri-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1) !important;
-        }
-
-        .agri-card .card-img-container {
-            overflow: hidden;
-            position: relative;
-        }
-
-        .agri-card .card-img-top {
-            transition: transform 0.3s ease;
-            height: 250px;
-            object-fit: cover;
-        }
-
-        .agri-card:hover .card-img-top {
-            transform: scale(1.08);
-        }
-
-        .agri-badge {
-            background: linear-gradient(135deg, #28a745, #20c997);
-            font-weight: 600;
-            font-size: 0.9rem;
-            border-radius: 0 0 15px 0 !important;
-            backdrop-filter: blur(10px);
-        }
-
-        .agri-card .card-title {
-            color: var(--ink-900);
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 15px;
-        }
-
-        .agri-card .list-unstyled li {
-            padding: 6px 0;
-            font-size: 0.9rem;
-            transition: all 0.2s ease;
-        }
-
-        .agri-card .list-unstyled li:hover {
-            padding-left: 10px;
-        }
-
-        .agri-card .btn {
-            font-weight: 600;
-            padding: 12px 20px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .agri-card .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(40, 167, 69, 0.3);
-        }
-
-        /* Features Section Styles */
-        .features-section .bg-success .rounded-circle {
-            background: linear-gradient(135deg, #28a745, #20c997) !important;
-            transition: all 0.3s ease;
-        }
-
-        .features-section .rounded-circle:hover {
-            transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 10px 20px rgba(40, 167, 69, 0.3);
-        }
-
-        /* Process Section Styles */
-        .process-section .bg-white {
-            transition: all 0.3s ease;
-        }
-
-        .process-section .rounded-circle:hover {
-            transform: scale(1.1);
-            box-shadow: 0 10px 25px rgba(40, 167, 69, 0.2);
-        }
-
-        /* Responsive Adjustments */
-        @media (max-width: 768px) {
-            .agri-card .card-body {
-                padding: 20px;
-            }
-            
-            .agri-badge {
-                font-size: 0.8rem;
-                padding: 8px 12px;
-            }
-
-            .display-5 {
-                font-size: 2rem;
-            }
-        }
-
-        @media (min-width: 992px) {
-            .agri-card .card-body {
-                padding: 30px;
-            }
-        }
-
-        /* Animation for agricultural cards */
-        .agri-card {
-            opacity: 0;
-            animation: fadeInUp 0.6s ease forwards;
-        }
-
-        .agri-card:nth-child(1) { animation-delay: 0.1s; }
-        .agri-card:nth-child(2) { animation-delay: 0.2s; }
-        .agri-card:nth-child(3) { animation-delay: 0.3s; }
-        .agri-card:nth-child(4) { animation-delay: 0.4s; }
-        .agri-card:nth-child(5) { animation-delay: 0.5s; }
-        .agri-card:nth-child(6) { animation-delay: 0.6s; }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Section background gradients */
-        .agri-services-section {
-            background: linear-gradient(135deg, #f8fffe 0%, #e8f5e8 100%);
-            position: relative;
-        }
-
-        .agri-services-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 100px;
-            background: linear-gradient(to bottom, rgba(40, 167, 69, 0.05), transparent);
-        }
-
-        /* Call to action enhanced styles */
-        .cta-agri {
-            background: linear-gradient(135deg, #28a745, #20c997);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-agri::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
-            animation: float 20s infinite linear;
-        }
-
-        @keyframes float {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-
-        /* Price ticker style */
-        .price-ticker {
-            background: linear-gradient(135deg, #28a745, #20c997);
-            color: white;
-            padding: 10px 0;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .ticker-content {
-            display: inline-block;
-            white-space: nowrap;
-            animation: scroll 30s linear infinite;
-        }
-
-        @keyframes scroll {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }`} />
   </Fragment>
 
   <PageHeader active="Tarım Ürünleri Alım Satımı" />
 
+  <!-- Agricultural Services Section Start -->
+  <div class="container-fluid py-6 px-3 px-md-5 materials-section">
+    <div class="materials-container">
+      <SectionHeader
+        as="h1"
+        accent="Tarım Ürünleri"
+        title="Alım Satımı"
+        lede={`AR-KAR İnşaat olarak ${EXPERIENCE_YEARS} yıllık deneyimimizle Samsun Çarşamba'da tarım ürünleri alım satımı yapıyoruz. Çiftçilerimize adil fiyat, güvenli ödeme, kaliteli hizmet sunarak tarımsal ticarette güvenilir ortağınızız.`}
+      />
 
-    <!-- Agricultural Services Section Start -->
-    <div class="container-fluid agri-services-section py-6 px-3 px-md-5">
-        <div class="text-center mx-auto mb-5" style="max-width: 800px;">
-            <h1 class="display-5 text-uppercase mb-4">
-                <span class="text-success">Tarım Ürünleri</span> Alım Satımı
-            </h1>
-            <p class="mb-4">
-                AR-KAR İnşaat olarak {EXPERIENCE_YEARS} yıllık deneyimimizle Samsun Çarşamba'da tarım ürünleri alım satımı yapıyoruz. 
-                Çiftçilerimize adil fiyat, güvenli ödeme, kaliteli hizmet sunarak tarımsal ticarette güvenilir ortağınızız.
-            </p>
+      <!-- Product Cards -->
+      <div class="row g-4 mb-5">
+        {PRODUCTS.map((product) => (
+          <div class="col-xl-4 col-lg-6 col-md-6">
+            <Card padded={false} class="h-100 d-flex flex-column">
+              <CardMedia src={product.img} alt={product.alt}>
+                <Badge slot="badge" label={product.badgeLabel} icon={product.badgeIcon} />
+              </CardMedia>
+              <div class="card-surface__body flex-grow-1 d-flex flex-column">
+                <h3 class="h4 mb-3">{product.title}</h3>
+                <p class="text-body-secondary mb-3">{product.description}</p>
+                <ul class="list-unstyled mb-0 mt-auto">
+                  {product.features.map((f) => (
+                    <li class="py-1"><i class="fa fa-check text-primary me-2" aria-hidden="true"></i>{f}</li>
+                  ))}
+                </ul>
+              </div>
+            </Card>
+          </div>
+        ))}
+      </div>
+
+      <!-- Features Section -->
+      <div class="row mb-5">
+        <div class="col-12">
+          <div class="bg-light p-4 p-md-5 rounded-3">
+            <div class="section-header section-header--center mb-4">
+              <h2 class="section-title">Neden <span class="text-primary">AR-KAR</span> Tarım Ürünleri?</h2>
+            </div>
+            <div class="row g-4">
+              {FEATURES.map((feature) => (
+                <div class="col-lg-3 col-md-6">
+                  <div class="text-center">
+                    <div class="mb-3 d-flex justify-content-center">
+                      <IconBadge icon={feature.icon} size="lg" tone="solid" />
+                    </div>
+                    <h4>{feature.title}</h4>
+                    <p class="text-muted">{feature.text}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
+      </div>
 
-        <!-- Product Cards -->
-        <div class="row g-4 mb-5">
-
-             <!-- Fındık Alım Satımı -->
-            <div class="col-xl-4 col-lg-6 col-md-6" id="findik-alim">
-                <div class="agri-card card h-100 shadow-sm rounded-3 overflow-hidden">
-                    <div class="card-img-container position-relative">
-                       <img src="/img/findik.webp" alt="Fındık Alım Satımı - AR-KAR" class="card-img-top" loading="lazy">
-                        <div class="agri-badge position-absolute top-0 start-0 text-white px-3 py-2 rounded-end">
-                            <i class="me-2"></i>Fındık
-                        </div>
-                    </div>
-                    <div class="card-body p-4">
-                        <h3 class="card-title h4 text-uppercase mb-3">Fındık Alım Satımı</h3>
-                        <p class="card-text text-muted mb-3">
-                            Karadeniz bölgesinin en kaliteli fındıklarını alım satımını yapıyoruz. 
-                            İç ve kabuklu fındık çeşitleri için uygun fiyat teklifi veriyoruz.
-                        </p>
-                        <ul class="list-unstyled mb-4">
-                            <li><i class="fa fa-check text-success me-2"></i>Güncel Piyasa Fiyatı</li>
-                            <li><i class="fa fa-check text-success me-2"></i>Kalite Kontrol</li>
-                            <li><i class="fa fa-check text-success me-2"></i>Hızlı Ödeme</li>
-                            <li><i class="fa fa-check text-success me-2"></i>Nakliye Desteği</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Mısır Alım Satımı -->
-            <div class="col-xl-4 col-lg-6 col-md-6" id="misir-alim">
-                <div class="agri-card card h-100 shadow-sm rounded-3 overflow-hidden">
-                    <div class="card-img-container position-relative">
-                        <img src="/img/misir.webp" alt="Mısır Alım Satımı - AR-KAR" class="card-img-top" loading="lazy">
-                        <div class="agri-badge position-absolute top-0 start-0 text-white px-3 py-2 rounded-end">
-                            <i class="me-2"></i>Mısır
-                        </div>
-                    </div>
-                    <div class="card-body p-4">
-                        <h3 class="card-title h4 text-uppercase mb-3">Mısır Alım Satımı</h3>
-                        <p class="card-text text-muted mb-3">
-                            Taze ve kaliteli mısır alım satımı yapıyoruz. Çiftçilerimizden direkt alım, 
-                            adil fiyat ve hızlı ödeme ile güvenilir ticaret ortağınızız.
-                        </p>
-                        <ul class="list-unstyled mb-4">
-                            <li><i class="fa fa-check text-success me-2"></i>Güncel Piyasa Fiyatı</li>
-                            <li><i class="fa fa-check text-success me-2"></i>Kalite Kontrol</li>
-                            <li><i class="fa fa-check text-success me-2"></i>Hızlı Ödeme</li>
-                            <li><i class="fa fa-check text-success me-2"></i>Nakliye Desteği</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Buğday Alım Satımı -->
-            <div class="col-xl-4 col-lg-6 col-md-6" id="bugday-alim">
-                <div class="agri-card card h-100 shadow-sm rounded-3 overflow-hidden">
-                    <div class="card-img-container position-relative">
-                        <img src="/img/bugday.webp" alt="Buğday Alım Satımı - AR-KAR" class="card-img-top" loading="lazy">
-                        <div class="agri-badge position-absolute top-0 start-0 text-white px-3 py-2 rounded-end">
-                            <i class="me-2"></i>Buğday
-                        </div>
-                    </div>
-                    <div class="card-body p-4">
-                        <h3 class="card-title h4 text-uppercase mb-3">Buğday Alım Satımı</h3>
-                        <p class="card-text text-muted mb-3">
-                            Kaliteli buğday alım satımı ile çiftçilerimize destek oluyoruz. 
-                            Protein oranı yüksek buğdaylara özel fiyat avantajı sağlıyoruz.
-                        </p>
-                        <ul class="list-unstyled mb-4">
-                            <li><i class="fa fa-check text-success me-2"></i>Güncel Piyasa Fiyatı</li>
-                            <li><i class="fa fa-check text-success me-2"></i>Kalite Kontrol</li>
-                            <li><i class="fa fa-check text-success me-2"></i>Hızlı Ödeme</li>
-                            <li><i class="fa fa-check text-success me-2"></i>Nakliye Desteği</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- Features Section -->
-        <div class="row mb-5">
-            <div class="col-12">
-                <div class="bg-light p-4 p-md-5 rounded-3">
-                    <h2 class="text-center text-uppercase mb-4">
-                        Neden <span class="text-success">AR-KAR</span> Tarım Ürünleri?
-                    </h2>
-                    <div class="row g-4">
-                        <div class="col-lg-3 col-md-6">
-                            <div class="text-center features-section">
-                                <div class="bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
-                                    <i class="fas fa-balance-scale fa-2x"></i>
-                                </div>
-                                <h4>Adil Fiyatlama</h4>
-                                <p class="text-muted">Güncel piyasa fiyatları ile çiftçilerimize adil fiyat teklifi sunuyoruz.</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="text-center features-section">
-                                <div class="bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
-                                    <i class="fas fa-clock fa-2x"></i>
-                                </div>
-                                <h4>Hızlı Ödeme</h4>
-                                <p class="text-muted">Teslim aldığımız ürünlerin ödemelerini hızlı ve güvenli şekilde yapıyoruz.</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="text-center features-section">
-                                <div class="bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
-                                    <i class="fas fa-microscope fa-2x"></i>
-                                </div>
-                                <h4>Kalite Kontrol</h4>
-                                <p class="text-muted">Modern analiz yöntemleri ile ürün kalitesini test ediyoruz.</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="text-center features-section">
-                                <div class="bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
-                                    <i class="fas fa-handshake fa-2x"></i>
-                                </div>
-                                <h4>Güvenilir Ortaklık</h4>
-                                <p class="text-muted">{EXPERIENCE_YEARS} yıllık deneyimimizle çiftçilerimize güvenilir ortaklık sunuyoruz.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <!-- Call to Action -->
-        <div class="row">
-            <div class="col-12">
-                <div class="bg-light p-4 p-md-5 rounded-3 text-center">
-                    <h3 class="mb-3">Tarım Ürünlerinizi Değerlendirin!</h3>
-                    <p class="mb-4 text-muted">Mısır, buğday, fındık ve diğer tarım ürünlerinizi en iyi fiyata satmak için hemen iletişime geçin. Ücretsiz değerlendirme ve fiyat teklifi alın.</p>
-                    <div class="row g-3 justify-content-center">
-                        <div class="col-auto">
-                            <a href="tel:+903628460393" class="btn btn-success btn-lg px-4">
-                                <i class="fa fa-phone me-2"></i>+90 362 846 03 93
-                            </a>
-                        </div>
-                        <div class="col-auto">
-                            <a href="https://wa.me/905421526755" class="btn btn-outline-success btn-lg px-4">
-                                <i class="fab fa-whatsapp me-2"></i>WhatsApp
-                            </a>
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-
+      <CtaBand
+        title="Tarım Ürünlerinizi Değerlendirin!"
+        text="Mısır, buğday, fındık ve diğer tarım ürünlerinizi en iyi fiyata satmak için hemen iletişime geçin. Ücretsiz değerlendirme ve fiyat teklifi alın."
+        primaryHref="tel:+903628460393"
+        primaryLabel="+90 362 846 03 93"
+        primaryIcon="fa-phone"
+        secondaryHref="https://wa.me/905421526755"
+        secondaryLabel="WhatsApp"
+        secondaryIcon="fab fa-whatsapp"
+      />
     </div>
-    <!-- Agricultural Services Section End -->
+  </div>
+  <!-- Agricultural Services Section End -->
 </BaseLayout>

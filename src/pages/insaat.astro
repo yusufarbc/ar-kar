@@ -2,22 +2,284 @@
 import { EXPERIENCE_YEARS } from '../lib/company';
 import PageHeader from '../components/PageHeader.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeader from '../components/ui/SectionHeader.astro';
+import Card from '../components/ui/Card.astro';
+import CardMedia from '../components/ui/CardMedia.astro';
+import Badge from '../components/ui/Badge.astro';
+import CtaBand from '../components/ui/CtaBand.astro';
 
-const title = "Hırdavat & İnşaat Malzemeleri | AR-KAR İnşaat Samsun | Boya, Çimento, Demir Çelik";
+interface MaterialItem {
+  img: string;
+  alt: string;
+  badgeIcon: string;
+  badgeLabel: string;
+  title: string;
+  brands?: string;
+  description: string;
+  features: string[];
+}
+interface MaterialCategory {
+  icon: string;
+  accent: string;
+  title: string;
+  lede: string;
+  items: MaterialItem[];
+}
+
+// Kart markup'ı (görsel + rozet + başlık + özellikler) artık Card/CardMedia/
+// Badge bileşenlerinden geliyor; burada yalnızca VERİ var. Önceden her kart
+// elle yazılmış HTML idi — 19 kart × ~15 satır. Bu hem tekrarı ortadan
+// kaldırıyor hem yeni bir malzeme eklemeyi tek bir nesne eklemeye indiriyor.
+const MATERIAL_CATEGORIES: MaterialCategory[] = [
+  {
+    icon: 'fa-cube',
+    accent: 'Kaba İnşaat',
+    title: 'Malzemeleri',
+    lede: 'Yapının temelini oluşturan kaliteli kaba inşaat malzemeleri',
+    items: [
+      {
+        img: '/img/cimento.webp',
+        alt: 'Çimento, Kireç, Alçı - AR-KAR İnşaat',
+        badgeIcon: 'fa-cube',
+        badgeLabel: 'Bağlayıcı',
+        title: 'Çimento-Kireç-Alçı Grubu',
+        brands: 'Kavçim, Oyak, Akçansa, Akkisan, ABS, Knauf',
+        description: 'Kompoze çimento, sönmüş kireç ve alçı türleri.',
+        features: ['Çimento', 'Kireç', 'Alçı'],
+      },
+      {
+        img: '/img/kum.webp',
+        alt: 'Kum, Çakıl, Mıcır - AR-KAR İnşaat',
+        badgeIcon: 'fa-mountain',
+        badgeLabel: 'Agrega',
+        title: 'Kum-Çakıl-Mıcır Grubu',
+        description:
+          'İnce Sıva Kumu, İnce Beyaz Kum, Elenmiş Irmak Kumu, Sarı Kavak Kumu, Kırma Çakıl - Irmak Çakılı, Mucur ve Sondaj Mucuru türleri.',
+        features: ['Kum', 'Çakıl', 'Mıcır', 'Kırma Taş'],
+      },
+      {
+        img: '/img/duvar.webp',
+        alt: 'Tuğla, Kiremit, Gaz Beton - AR-KAR İnşaat',
+        badgeIcon: 'fa-th-large',
+        badgeLabel: 'Duvar',
+        title: 'Duvar Örgü Grubu',
+        brands: 'Osmancık, Boyabat, Bims, YTONG',
+        description: 'Tuğla, briket, gaz beton ve baca tuğlası türleri.',
+        features: ['Tuğla', 'Briket', 'Gaz Beton'],
+      },
+      {
+        img: '/img/demir.webp',
+        alt: 'İnşaat Demiri, Hasır, Tel - AR-KAR İnşaat',
+        badgeIcon: 'fa-industry',
+        badgeLabel: 'Donatı',
+        title: 'Demir Grubu',
+        brands: 'İçdaş, Kroman, Ekinciler',
+        description: 'Nervürlü inşaat demiri, Hasır Demir, İnce Demir, Bağ Teli, Takviye Teli ve Çivi türleri.',
+        features: ['Demir', 'İnce Demir', 'Hasır Demir', 'Tel', 'Çivi'],
+      },
+    ],
+  },
+  {
+    icon: 'fa-palette',
+    accent: 'İnce İnşaat',
+    title: 'Malzemeleri',
+    lede: 'Yapının estetik ve fonksiyonel bitirme malzemeleri',
+    items: [
+      {
+        img: '/img/kalebodur.webp',
+        alt: 'Zemin ve Duvar Kaplamaları - AR-KAR İnşaat',
+        badgeIcon: 'fa-th',
+        badgeLabel: 'Döşeme',
+        title: 'Seramik-Granit-Fayans Grubu',
+        brands: 'Çanakkale, İda, Termal, Etili, Duratiles, Rino',
+        description: 'Seramik, Granit ve Fayans türleri.',
+        features: ['Fayans', 'Seramik', 'Granit', 'Mermer'],
+      },
+      {
+        img: '/img/alcipan.webp',
+        alt: 'Bölme ve Yüzey Malzemeleri - AR-KAR İnşaat',
+        badgeIcon: 'fa-border-none',
+        badgeLabel: 'Bölme',
+        title: 'Alçıpan - Profil Grubu',
+        brands: 'Rigips, Knauf',
+        description: 'Alçıpan, Yeşil Alçıpan, Boardex, Betopan türleri.',
+        features: ['Alçıpan', 'Profiller', 'Plastik Tavan'],
+      },
+      {
+        img: '/img/boya.webp',
+        alt: 'Boyama Ürünleri - AR-KAR İnşaat',
+        badgeIcon: 'fa-paint-brush',
+        badgeLabel: 'Boya',
+        title: 'Boya Grubu',
+        brands: 'Polisan, Permolit, Asrın, Lens, Stella, Dekor',
+        description: 'İç ve Dış Cephe Boyaları, Astar, Yağlı Boya, Mobilya-Metal Boyası, Tiner, Rulo ve Fırça türleri.',
+        features: ['Su bazlı Boya', 'Yağlı Boya', 'Astar', 'Tiner', 'Fırça'],
+      },
+      {
+        img: '/img/parke-kapi.webp',
+        alt: 'Parke Çeşitleri - AR-KAR İnşaat',
+        badgeIcon: 'fa-layer-group',
+        badgeLabel: 'Parke',
+        title: 'Laminat Parke-Kapı Grubu',
+        brands: 'Peli Parke, Vario',
+        description: 'Kapı, Kapı Kolu, Kilit, Menteşe, Laminant parke ve parke aksesuarı türleri.',
+        features: ['Panel Kapı', 'Çelik Kapı', 'Laminant Parke'],
+      },
+    ],
+  },
+  {
+    icon: 'fa-tools',
+    accent: 'Hırdavat',
+    title: 'Malzemeleri',
+    lede: 'Profesyonel işçilik için kaliteli hırdavat ve el aletleri',
+    items: [
+      {
+        img: '/img/vida.webp',
+        alt: 'Bağlantı Elemanları - AR-KAR İnşaat',
+        badgeIcon: 'fa-cog',
+        badgeLabel: 'Bağlantı',
+        title: 'Bağlantı - Vidalama Elemanları',
+        brands: 'Akdeniz, Hilti, Fixpro, Civtec, Novax, Zenith',
+        description: 'Vida, dübel, çivi, civata, somun ve pul türleri.',
+        features: ['Vida', 'Dübel', 'Çivi', 'Civata', 'Somun', 'Pul'],
+      },
+      {
+        img: '/img/alet.webp',
+        alt: 'El Aletleri - AR-KAR İnşaat',
+        badgeIcon: 'fa-hammer',
+        badgeLabel: 'El Aleti',
+        title: 'El Aletleri',
+        brands: 'Bosch, Makita, Stanley',
+        description:
+          'Tornavida, Yan keski, Pense, Kerpeten, Gönye, Testere, Karga burun, Kontrol Kalemi, Su Terazisi ve Sac Kesme Makası türleri.',
+        features: ['Çekiç', 'Pense', 'Tornavida', 'Maket Bıçağı'],
+      },
+      {
+        img: '/img/elektiriklialet.webp',
+        alt: 'Elektrikli El Aletleri - AR-KAR İnşaat',
+        badgeIcon: 'fa-hammer',
+        badgeLabel: 'Elektrikli El Aleti',
+        title: 'Elektrikli El Aletleri',
+        brands: 'BOSCH, Max Extra, Catpower, Kama',
+        description:
+          'Vidalama, Darbeli Matkap, Kesici, Taşlama, Motorlu Tırpan, Gönye Makinesi, Dekopaj, Lazermetre ve Harç Karıştırıcı türleri.',
+        features: ['Matkap', 'Dekopaj', 'Lazermetre', 'Taşlama'],
+      },
+      {
+        img: '/img/silikon.webp',
+        alt: 'Silikon ve Yapıştırma Malzemeleri - AR-KAR İnşaat',
+        badgeIcon: 'fa-fill-drip',
+        badgeLabel: 'Dolgu',
+        title: 'Silikon ve Yapıştırma Malzemeleri',
+        brands: 'Akfix, Neox, Dayson, Sista, Sibax',
+        description: 'Silikon, Mastik, Hızlı Yapıştırıcı, Köpük ve Yağlayıcı türleri.',
+        features: ['Silikon', 'Köpük', 'Mastik', 'Hızlı Yapıştırıcı'],
+      },
+    ],
+  },
+  {
+    icon: 'fa-wrench',
+    accent: 'Su Tesisatı',
+    title: 'Malzemeleri',
+    lede: 'Güvenilir su tesisatı için kaliteli boru ve bağlantı malzemeleri',
+    items: [
+      {
+        img: '/img/pprc.webp',
+        alt: 'Temiz Su Tesisatı - AR-KAR İnşaat',
+        badgeIcon: 'fa-faucet',
+        badgeLabel: 'Temiz Su',
+        title: 'Temiz Su Tesisatı',
+        brands: 'Hakan Plastik',
+        description: 'PPRC boru, dirsek, vana, rakor ve temiz su sistemi malzemeleri.',
+        features: ['PPRC Boru', 'Dirsek', 'Vana', 'Rakor'],
+      },
+      {
+        img: '/img/gider.webp',
+        alt: 'Pis Su Tesisatı - AR-KAR İnşaat',
+        badgeIcon: 'fa-tint',
+        badgeLabel: 'Pis Su',
+        title: 'Pis Su Tesisatı',
+        brands: 'Hakan Plastik',
+        description: 'PVC boru, lavabo sifonu, gider boruları ve pis su sistemi malzemeleri.',
+        features: ['PVC Boru', 'Lavabo Sifonu', 'Gider Boruları'],
+      },
+      {
+        img: '/img/musluk.webp',
+        alt: 'Armatür Grubu - AR-KAR İnşaat',
+        badgeIcon: 'fa-faucet',
+        badgeLabel: 'Armatür',
+        title: 'Armatür Grubu',
+        brands: 'ACAR, Woya, Lates, ECA, Vitra, Visam',
+        description: 'Musluk, batarya, taharet musluğu ve su armatür ürünleri.',
+        features: ['Musluk', 'Batarya', 'Taharet Musluğu'],
+      },
+    ],
+  },
+  {
+    icon: 'fa-bolt',
+    accent: 'Elektrik',
+    title: 'Malzemeleri',
+    lede: 'Güvenli elektrik tesisatı için sertifikalı elektrik malzemeleri',
+    items: [
+      {
+        img: '/img/kablo.webp',
+        alt: 'Tesisat Malzemeleri - AR-KAR İnşaat',
+        badgeIcon: 'fa-plug',
+        badgeLabel: 'Tesisat',
+        title: 'Tesisat Malzemeleri',
+        brands: 'Legrand, Chint, Borel, Ayan, Babacan, Helios Horoz, ACK',
+        description: 'Kablo, Priz, Anahtar, Sigorta, Buat, Kangal Boru ve diğer elektrik tesisat malzemesi türleri.',
+        features: ['Kablo', 'Priz', 'Anahtar', 'Sigorta', 'Buat'],
+      },
+      {
+        img: '/img/ampul.webp',
+        alt: 'Aydınlatma Ürünleri - AR-KAR İnşaat',
+        badgeIcon: 'fa-lightbulb',
+        badgeLabel: 'Aydınlatma',
+        title: 'Aydınlatma Ürünleri',
+        brands: 'Philips, Osram, Megalux',
+        description: 'Ampul, LED panel, Avize, spot lamba ve aydınlatma ürünü türleri.',
+        features: ['Ampul', 'LED Panel', 'Avize', 'Spot Lamba'],
+      },
+    ],
+  },
+  {
+    icon: 'fa-home',
+    accent: 'Çatı ve Yalıtım',
+    title: 'Malzemeleri',
+    lede: 'Dayanıklı çatı sistemleri ve profesyonel yalıtım çözümleri',
+    items: [
+      {
+        img: '/img/cati.webp',
+        alt: 'Çatı Malzemeleri - AR-KAR İnşaat',
+        badgeIcon: 'fa-layer-group',
+        badgeLabel: 'Çatı',
+        title: 'Çatı Malzemeleri',
+        brands: 'Osmancık, Onduline',
+        description: 'Kiremit, Trapez Sac, Onduline, Membran türleri.',
+        features: ['Kiremit', 'Shingle', 'Trapez Sac', 'Onduline'],
+      },
+      {
+        img: '/img/isiyalitim.webp',
+        alt: 'Çatı Yalıtımı - AR-KAR İnşaat',
+        badgeIcon: 'fa-shield-alt',
+        badgeLabel: 'Yalıtım',
+        title: 'Çatı Yalıtımı ve Ara Katmanlar',
+        brands: 'Knauf, İzocam, İmpor',
+        description: 'Cam Yünü, Taş yünü, Likit Membran, Strafor ve Asmolen türleri.',
+        features: ['OSB Levha', 'Çatı Membranı'],
+      },
+    ],
+  },
+];
+
+const title = 'Hırdavat & İnşaat Malzemeleri | AR-KAR İnşaat Samsun | Boya, Çimento, Demir Çelik';
 const description = `AR-KAR İnşaat Malzemeleri: Samsun Çarşamba'da kaba inşaat, ince inşaat, hırdavat, elektrik, tesisat ve yalıtım malzemeleri. Çimento, gaz beton, seramik, kalebodur, PPRC boru ve daha fazlası. ${EXPERIENCE_YEARS} yıllık deneyimle kaliteli hizmet.`;
-const canonical = "https://ar-kar.com/insaat";
-const ogImage = "https://ar-kar.com/img/boya.webp";
-
+const canonical = 'https://ar-kar.com/insaat';
+const ogImage = 'https://ar-kar.com/img/boya.webp';
 ---
 
-<BaseLayout
-  title={title}
-  description={description}
-  canonical={canonical}
-  ogImage={ogImage}
-  
-  activePage="insaat"
->
+<BaseLayout title={title} description={description} canonical={canonical} ogImage={ogImage} activePage="insaat">
   <Fragment slot="head">
     <script is:inline type="application/ld+json" set:html={`{
         "@context": "https://schema.org",
@@ -122,771 +384,63 @@ const ogImage = "https://ar-kar.com/img/boya.webp";
             ]
         }
     }`} />
-    <style is:inline set:html={`/* Lazy Loading Optimization - Bulanıklık ve sislilik efekti tamamen kaldırıldı */
-        img[loading="lazy"] {
-            opacity: 1;
-            filter: none;
-            transition: none;
-        }
-        
-        /* Preload Critical Images */
-        .logo-img {
-            font-display: swap;
-        }
-        
-        /* Performance Optimizations */
-        .material-card-img {
-            will-change: transform;
-            transform: translateZ(0);
-        }
-        
-        /* Accessibility Improvements */
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            white-space: nowrap;
-            border: 0;
-        }
-        
-        /* Focus improvements */
-        .material-card:focus-within,
-        .contact-card:focus-within {
-            outline: 2px solid var(--primary);
-            outline-offset: 2px;
-        }
-        
-        /* Reduced Motion Support */
-        @media (prefers-reduced-motion: reduce) {
-            .material-card,
-            .material-card img,
-            .material-card-content {
-                transition: none !important;
-                animation: none !important;
-            }
-        }`} />
-    <style is:inline set:html={`/* Material Cards */
-        .material-card{transition:all .3s ease;border:0;background: var(--surface);overflow:hidden;height:100%}
-        .material-card:hover{transform:translateY(-10px);box-shadow:0 15px 35px rgba(0,0,0,.1)}
-        .material-card .card-img-container{position:relative;overflow:hidden;height:400px;aspect-ratio:1/1;background: var(--surface-alt);display:flex;align-items:center;justify-content:center}
-        .material-card .card-img-container img{width:100%;height:100%;object-fit:cover;transition:transform .3s ease}
-        .material-card:hover .card-img-container img{transform:scale(1.05)}
-        .material-category-badge{position:absolute;top:15px;left:15px;background:var(--primary);color:#fff;padding:8px 12px;border-radius:20px;font-size:.85rem;font-weight:600;text-transform:uppercase;
-z-index:2}
-        .material-card-content{padding:25px;height:auto;display:flex;flex-direction:column}
-        .material-card-title{font-size:1.25rem;font-weight:700;color: var(--ink-900);margin-bottom:10px;text-transform:uppercase;line-height:1.3}
-        .material-brand-info{color:var(--primary);font-weight:600;margin-bottom:12px;font-size:.95rem}
-        .material-description{color: var(--ink-500);font-size:.9rem;line-height:1.5;margin-bottom:15px;flex-grow:1}
-        .material-features{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto}
-        .feature-tag{background: var(--surface-alt);color:var(--primary);padding:4px 10px;border-radius:12px;font-size:.8rem;border:1px solid var(--ink-100)}
-        .materials-section{background:linear-gradient(135deg, var(--surface-alt) 0%, var(--surface) 100%);position:relative}
-        .materials-section::before{content:'';position:absolute;top:0;left:0;right:0;height:100px;background:linear-gradient(to bottom,rgba(231,30,36,.05),transparent)}
-        .section-header{position:relative;z-index:2}
-        .section-title{font-size:2.5rem;font-weight:700;color: var(--ink-900);margin-bottom:20px}
-        .section-subtitle{font-size:1.1rem;color: var(--ink-500);line-height:1.6;max-width:800px;margin:0 auto}
-        .section-divider{position:relative;margin:60px 0;text-align:center}
-        .section-divider::before{content:'';position:absolute;top:50%;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent 0%,var(--primary) 20%,var(--primary) 80%,transparent 100%);transform:translateY(-50%)}
-        .section-divider-content{display:inline-block;background: var(--surface);padding:0 30px;color:var(--primary);font-weight:600;font-size:1.1rem}
-        .category-section{position:relative;padding:40px 0}
-        .category-section:not(:first-child){border-top:3px solid var(--ink-100);margin-top:50px;position:relative}
-        .category-section:not(:first-child)::before{content:'';position:absolute;top:-1.5px;left:50%;transform:translateX(-50%);width:100px;height:3px;background:var(--primary)}
-        @media(max-width:768px){.material-card .card-img-container{height:320px}.material-card-content{padding:20px}.material-card-title{font-size:1.1rem}.section-title{font-size:2rem}.section-subtitle{font-size:1rem}.section-divider{margin:40px 0}.section-divider-content{padding:0 20px;font-size:1rem}.category-section{padding:30px 0}.category-section:not(:first-child){margin-top:40px}.category-section:not(:first-child)::before{width:80px}.footer .navbar-brand img{max-height:60px !important;width:auto}}
-        @media(max-width:576px){.material-card .card-img-container{height:280px}.material-card-content{padding:15px}.material-card-title{font-size:1rem}.section-title{font-size:1.8rem}.material-features{gap:5px}.feature-tag{font-size:.75rem;padding:3px 8px}.section-divider{margin:30px 0}.section-divider-content{padding:0 15px;font-size:.9rem}.category-section{padding:25px 0}.category-section:not(:first-child){margin-top:30px}.category-section:not(:first-child)::before{width:60px}}
-        .material-card{opacity:0;animation:fadeInUp .6s ease forwards}
-        .material-card:nth-child(1){animation-delay:.1s}.material-card:nth-child(2){animation-delay:.2s}.material-card:nth-child(3){animation-delay:.3s}.material-card:nth-child(4){animation-delay:.4s}.material-card:nth-child(5){animation-delay:.5s}.material-card:nth-child(6){animation-delay:.6s}.material-card:nth-child(7){animation-delay:.7s}.material-card:nth-child(8){animation-delay:.8s}
-        @keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-        .materials-container{padding:15px}
-        @media(min-width:768px){.materials-container{padding:40px}}
-        @media(min-width:1200px){.materials-container{padding:60px}}
-        
-        /* WhatsApp floating button */
-        .whatsapp-float {
-            position: fixed;
-            width: 60px;
-            height: 60px;
-            bottom: 20px;
-            right: 20px;
-            background-color: #25d366;
-            color: white;
-            border-radius: 50px;
-            text-align: center;
-            font-size: 30px;
-            box-shadow: 2px 2px 3px #999;
-            z-index: 1000;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-        
-        .whatsapp-float:hover {
-            background-color: #20c55e;
-            color: white;
-            transform: scale(1.1);
-            text-decoration: none;
-        }
-        
-        @media (max-width: 768px) {
-            .whatsapp-float {
-                width: 55px;
-                height: 55px;
-                bottom: 15px;
-                right: 15px;
-                font-size: 25px;
-            }
-        }`} />
   </Fragment>
 
   <PageHeader active="Hırdavat & İnşaat Malzemeleri" />
 
-    <!-- Portfolio Start -->
-    <section class="materials-section py-6" aria-labelledby="materials-title">
-        <div class="container-fluid materials-container">
-            <div class="section-header text-center mx-auto mb-5" style="max-width: 800px;">
-                <h1 id="materials-title" class="section-title">
-                    <span class="text-primary">En Kaliteli</span> İnşaat Malzemeleri
-                </h1>
-                <p class="section-subtitle">
-                    AR-KAR İnşaat olarak, {EXPERIENCE_YEARS} yıllık sektör deneyimimizle Samsun Çarşamba'da en kaliteli inşaat malzemelerini sizlere sunuyoruz. 
-                    Kaba inşaattan ince yapı malzemelerine, hırdavattan yalıtım ürünlerine kadar geniş ürün yelpazemizle her türlü inşaat projenizi destekliyoruz.
-                </p>
-            </div>
+  <!-- Materials Start -->
+  <section class="materials-section py-6" aria-labelledby="materials-title">
+    <div class="container-fluid materials-container">
+      <SectionHeader
+        as="h1"
+        id="materials-title"
+        accent="En Kaliteli"
+        title="İnşaat Malzemeleri"
+        lede={`AR-KAR İnşaat olarak, ${EXPERIENCE_YEARS} yıllık sektör deneyimimizle Samsun Çarşamba'da en kaliteli inşaat malzemelerini sizlere sunuyoruz. Kaba inşaattan ince yapı malzemelerine, hırdavattan yalıtım ürünlerine kadar geniş ürün yelpazemizle her türlü inşaat projenizi destekliyoruz.`}
+      />
 
- 
-
-            <!-- KABA İNŞAAT MALZEMELERİ -->
-            <div class="category-section mb-5">
-                <div class="text-center mb-4">
-                    <h2 class="display-6 text-uppercase mb-3">
-                        <i class="fa fa-cube text-primary me-3"></i>
-                        <span class="text-primary">Kaba İnşaat</span> Malzemeleri
-                    </h2>
-                    <p class="text-muted">Yapının temelini oluşturan kaliteli kaba inşaat malzemeleri</p>
-                </div>
-                <div class="row g-4">
-                    <!-- Çimento, Kireç, Alçı -->
-                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-                        <div class="material-card card h-100 shadow-sm rounded-3">
-                            <div class="card-img-container">
-                                <img src="/img/cimento.webp" alt="Çimento, Kireç, Alçı - AR-KAR İnşaat" class="card-img-top" width="300" height="280" loading="lazy">
-                                <div class="material-category-badge">
-                                    <i class="fa fa-cube me-1"></i>Bağlayıcı
-                                </div>
-                            </div>
-                            <div class="material-card-content">
-                                <h3 class="material-card-title">Çimento-Kireç-Alçı Grubu</h3>
-                                <div class="material-brand-info">
-                                    <i class="fa fa-star text-primary me-1"></i>
-                                    Kavçim, Oyak, Akçansa, Akkisan, ABS, Knauf
-                                </div>
-                                <p class="material-description">
-                                    Kompoze çimento, sönmüş kireç ve alçı türleri.
-                                </p>
-                                <div class="material-features">
-                                    <span class="feature-tag">Çimento</span>
-                                    <span class="feature-tag">Kireç</span>
-                                    <span class="feature-tag">Alçı</span>
-                                </div>
-                            </div>
-                        </div>
+      {MATERIAL_CATEGORIES.map((category, i) => (
+        <div class={`category-section ${i > 0 ? 'mt-5' : ''} mb-5`}>
+          <SectionHeader as="h2" accent={category.accent} title={category.title} lede={category.lede} />
+          <div class="row g-4">
+            {category.items.map((item) => (
+              <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
+                <Card padded={false} class="h-100 d-flex flex-column">
+                  <CardMedia src={item.img} alt={item.alt}>
+                    <Badge slot="badge" label={item.badgeLabel} icon={item.badgeIcon} />
+                  </CardMedia>
+                  <div class="card-surface__body flex-grow-1 d-flex flex-column">
+                    <h3 class="h5 mb-2">{item.title}</h3>
+                    {item.brands && (
+                      <p class="small fw-semibold text-primary mb-2">
+                        <i class="fa fa-star me-1" aria-hidden="true"></i>{item.brands}
+                      </p>
+                    )}
+                    <p class="small text-body-secondary mb-3 flex-grow-1">{item.description}</p>
+                    <div class="d-flex flex-wrap gap-2 mt-auto">
+                      {item.features.map((f) => (
+                        <span class="feature-tag">{f}</span>
+                      ))}
                     </div>
-
-                    <!-- Kum, Çakıl, Mıcır -->
-                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-                        <div class="material-card card h-100 shadow-sm rounded-3">
-                            <div class="card-img-container">
-                                <img src="/img/kum.webp" alt="Kum, Çakıl, Mıcır - AR-KAR İnşaat" class="card-img-top" loading="lazy">
-                                <div class="material-category-badge">
-                                    <i class="fa fa-mountain me-1"></i>Agrega
-                                </div>
-                            </div>
-                            <div class="material-card-content">
-                                <h3 class="material-card-title">Kum-Çakıl-Mıcır Grubu</h3>
-                                  <p class="material-description">
-                                    İnce Sıva Kumu, İnce Beyaz Kum, Elenmiş Irmak Kumu, Sarı Kavak Kumu, Kırma Çakıl - Irmak Çakılı, Mucur ve Sondaj Mucuru türleri.
-                                </p>
-                                <div class="material-features">
-                                    <span class="feature-tag">Kum</span>
-                                    <span class="feature-tag">Çakıl</span>
-                                    <span class="feature-tag">Mıcır</span>
-                                    <span class="feature-tag">Kırma Taş</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Tuğla, Briket, Gaz Beton -->
-                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-                        <div class="material-card card h-100 shadow-sm rounded-3">
-                            <div class="card-img-container">
-                                <img src="/img/duvar.webp" alt="Tuğla, Kiremit, Gaz Beton - AR-KAR İnşaat" class="card-img-top" loading="lazy">
-                                <div class="material-category-badge">
-                                    <i class="fa fa-th-large me-1"></i>Duvar
-                                </div>
-                            </div>
-                            <div class="material-card-content">
-                                <h3 class="material-card-title">Duvar Örgü Grubu</h3>
-                                <div class="material-brand-info">
-                                    <i class="fa fa-star text-primary me-1"></i>
-                                    Osmancık, Boyabat, Bims, YTONG
-                                </div>
-                                <p class="material-description">
-                                    Tuğla, briket, gaz beton ve baca tuğlası türleri.
-                                </p>
-                                <div class="material-features">
-                                    <span class="feature-tag">Tuğla</span>
-                                    <span class="feature-tag">Briket</span>
-                                    <span class="feature-tag">Gaz Beton</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- İnşaat Demiri, Hasır, Tel -->
-                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-                        <div class="material-card card h-100 shadow-sm rounded-3">
-                            <div class="card-img-container">
-                                <img src="/img/demir.webp" alt="İnşaat Demiri, Hasır, Tel - AR-KAR İnşaat" class="card-img-top" loading="lazy">
-                                <div class="material-category-badge">
-                                    <i class="fa fa-industry me-1"></i>Donatı
-                                </div>
-                            </div>
-                            <div class="material-card-content">
-                                <h3 class="material-card-title">Demir Grubu</h3>
-                                <div class="material-brand-info">
-                                    <i class="fa fa-star text-primary me-1"></i>
-                                    İçdaş, Kroman, Ekinciler
-                                </div>
-                                <p class="material-description">
-                                    Nervürlü inşaat demiri, Hasır Demir, İnce Demir, Bağ Teli, Takviye Teli ve Çivi türleri.
-                                </p>
-                                <div class="material-features">
-                                    <span class="feature-tag">Demir</span>
-                                    <span class="feature-tag">İnce Demir</span>
-                                    <span class="feature-tag">Hasır Demir</span>
-                                    <span class="feature-tag">Tel</span>
-                                    <span class="feature-tag">çivi</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- İNCE İNŞAAT MALZEMELERİ -->
-            <div class="category-section mb-5">
-                <div class="text-center mb-4">
-                    <h2 class="display-6 text-uppercase mb-3">
-                        <i class="fa fa-palette text-primary me-3"></i>
-                        <span class="text-primary">İnce İnşaat</span> Malzemeleri
-                    </h2>
-                    <p class="text-muted">Yapının estetik ve fonksiyonel bitirme malzemeleri</p>
-                </div>
-                <div class="row g-4">
-                    <!-- Zemin ve Duvar Kaplamaları -->
-                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-                        <div class="material-card card h-100 shadow-sm rounded-3">
-                            <div class="card-img-container">
-                                <img src="/img/kalebodur.webp" alt="Zemin ve Duvar Kaplamaları - AR-KAR İnşaat" class="card-img-top" loading="lazy">
-                                <div class="material-category-badge">
-                                    <i class="fa fa-th me-1"></i>Döşeme
-                                </div>
-                            </div>
-                            <div class="material-card-content">
-                                <h3 class="material-card-title">Seramik-Granit-Fayans Grubu</h3>
-                                <div class="material-brand-info">
-                                    <i class="fa fa-star text-primary me-1"></i>
-                                    Çanakkale, İda, Termal, Etili, Duratiles, Rino
-                                </div>
-                                <p class="material-description">
-                                    Seramik, Granit ve Fayans türleri.
-                                </p>
-                                <div class="material-features">
-                                    <span class="feature-tag">Fayans</span>
-                                    <span class="feature-tag">Seramik</span>
-                                    <span class="feature-tag">Granit</span>
-                                    <span class="feature-tag">Mermer</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Bölme ve Yüzey Malzemeleri -->
-                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-                        <div class="material-card card h-100 shadow-sm rounded-3">
-                            <div class="card-img-container">
-                                <img src="/img/alcipan.webp" alt="Bölme ve Yüzey Malzemeleri - AR-KAR İnşaat" class="card-img-top" loading="lazy">
-                                <div class="material-category-badge">
-                                    <i class="fa fa-border-none me-1"></i>Bölme
-                                </div>
-                            </div>
-                            <div class="material-card-content">
-                                <h3 class="material-card-title">Alçıpan - Profil Grubu</h3>
-                                <div class="material-brand-info">
-                                    <i class="fa fa-star text-primary me-1"></i>
-                                    Rigips, Knauf
-                                </div>
-                                <p class="material-description">
-                                    Alçıpan, Yeşil Alçıpan, Boardex, Betopan türleri.
-                                </p>
-                                <div class="material-features">
-                                    <span class="feature-tag">Alçıpan</span>
-                                    <span class="feature-tag">Profiller</span>
-                                    <span class="feature-tag">Plastik Tavan</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Boyama Ürünleri -->
-                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-                        <div class="material-card card h-100 shadow-sm rounded-3">
-                            <div class="card-img-container">
-                                <img src="/img/boya.webp" alt="Boyama Ürünleri - AR-KAR İnşaat" class="card-img-top" loading="lazy">
-                                <div class="material-category-badge">
-                                    <i class="fa fa-paint-brush me-1"></i>Boya
-                                </div>
-                            </div>
-                            <div class="material-card-content">
-                                <h3 class="material-card-title">Boya Grubu</h3>
-                                <div class="material-brand-info">
-                                    <i class="fa fa-star text-primary me-1"></i>
-                                    Polisan, Permolit, Asrın, Lens, Stella, Dekor
-                                </div>
-                                <p class="material-description">
-                                    İç ve Dış Cephe Boyaları, Astar, Yağlı Boya, Mobilya-Metal Boyası, Tiner, Rulo ve Fırça türleri.
-                                </p>
-                                <div class="material-features">
-                                    <span class="feature-tag">Su bazlı Boya</span>
-                                    <span class="feature-tag">Yağlı Boya</span>
-                                    <span class="feature-tag">Astar</span>
-                                    <span class="feature-tag">Tiner</span>
-                                    <span class="feature-tag">Fırça</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Parke Çeşitleri -->
-                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-                        <div class="material-card card h-100 shadow-sm rounded-3">
-                            <div class="card-img-container">
-                                <img src="/img/parke-kapi.webp" alt="Parke Çeşitleri - AR-KAR İnşaat" class="card-img-top" loading="lazy">
-                                <div class="material-category-badge">
-                                    <i class="fa fa-layer-group me-1"></i>Parke
-                                </div>
-                            </div>
-                            <div class="material-card-content">
-                                <h3 class="material-card-title">Laminat Parke-Kapı Grubu</h3>
-                                <div class="material-brand-info">
-                                    <i class="fa fa-star text-primary me-1"></i>
-                                    Peli Parke, Vario
-                                </div>
-                                <p class="material-description">
-                                    Kapı, Kapı Kolu, Kilit, Menteşe, Laminant parke ve parke aksesuarı türleri
-                                </p>
-                                <div class="material-features">
-                                    <span class="feature-tag">Penel Kapı</span>
-                                    <span class="feature-tag">Çelik Kapı</span>
-                                    <span class="feature-tag">Laminant Parke</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- HIRDAVAT MALZEMELERİ -->
-            <div class="category-section mb-5">
-                <div class="text-center mb-4">
-                    <h2 class="display-6 text-uppercase mb-3">
-                        <i class="fa fa-tools text-primary me-3"></i>
-                        <span class="text-primary">Hırdavat</span> Malzemeleri
-                    </h2>
-                    <p class="text-muted">Profesyonel işçilik için kaliteli hırdavat ve el aletleri</p>
-                </div>
-                <div class="row g-4">
-                    <!-- Bağlantı Elemanları -->
-                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-                        <div class="material-card card h-100 shadow-sm rounded-3">
-                            <div class="card-img-container">
-                                <img src="/img/vida.webp" alt="Bağlantı Elemanları - AR-KAR İnşaat" class="card-img-top" loading="lazy">
-                                <div class="material-category-badge">
-                                    <i class="fa fa-cog me-1"></i>Bağlantı
-                                </div>
-                            </div>
-                            <div class="material-card-content">
-                                <h3 class="material-card-title">Bağlantı - Vidalama Elemanları</h3>
-                                <div class="material-brand-info">
-                                    <i class="fa fa-star text-primary me-1"></i>
-                                    Akdeniz, Hilti, Fixpro, Civtec, Novax, Zenith
-                                </div>
-                                <p class="material-description">
-                                    Vida, dübel, çivi, civata, somun ve pul türleri.
-                                </p>
-                                <div class="material-features">
-                                    <span class="feature-tag">Vida</span>
-                                    <span class="feature-tag">Dübel</span>
-                                    <span class="feature-tag">Çivi</span>
-                                    <span class="feature-tag">Civata</span>
-                                    <span class="feature-tag">Somun</span>
-                                    <span class="feature-tag">Pul</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- El Aletleri -->
-                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-                        <div class="material-card card h-100 shadow-sm rounded-3">
-                            <div class="card-img-container">
-                                <img src="/img/alet.webp" alt="El Aletleri - AR-KAR İnşaat" class="card-img-top" loading="lazy">
-                                <div class="material-category-badge">
-                                    <i class="fa fa-hammer me-1"></i>El Aleti
-                                </div>
-                            </div>
-                            <div class="material-card-content">
-                                <h3 class="material-card-title">El Aletleri</h3>
-                                <div class="material-brand-info">
-                                    <i class="fa fa-star text-primary me-1"></i>
-                                    Bosch, Makita, Stanley
-                                </div>
-                                <p class="material-description">
-                                   Tornavida, Yan keski, Pense, Kerpeten, Gönye, Testere, Karga burun, Kontrol Kalemi, Su Terasizi ve Sac Kesme Makası türleri.
-                                </p>
-                                <div class="material-features">
-                                    <span class="feature-tag">Çekiç</span>
-                                    <span class="feature-tag">Pense</span>
-                                    <span class="feature-tag">Tornavida</span>
-                                    <span class="feature-tag">Maket Bıçağı</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- El Aletleri -->
-                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-                        <div class="material-card card h-100 shadow-sm rounded-3">
-                            <div class="card-img-container">
-                                <img src="/img/elektiriklialet.webp" alt="Elektrikli El Aletleri - AR-KAR İnşaat" class="card-img-top" loading="lazy">
-                                <div class="material-category-badge">
-                                    <i class="fa fa-hammer me-1"></i>Elektrikli El Aleti
-                                </div>
-                            </div>
-                            <div class="material-card-content">
-                                <h3 class="material-card-title">Elektrikli El Aletleri</h3>
-                                <div class="material-brand-info">
-                                    <i class="fa fa-star text-primary me-1"></i>
-                                     BOSCH, Max Extra, Catpower, Kama
-                                </div>
-                                <p class="material-description">
-                                    Vidalama, Darbeli Matkap, Kesici, Taşlama, Motorlu Tırpan, Gönye Makinesi, Dekopaj, Lazermetre ve Harç Karıştırıcı türleri.
-                                </p>
-                                <div class="material-features">
-                                    <span class="feature-tag">Matkap</span>
-                                    <span class="feature-tag">Dekopaj</span>
-                                    <span class="feature-tag">Lazermetre</span>
-                                    <span class="feature-tag">Taşlama</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Yapıştırıcı ve Dolgu Malzemeleri -->
-                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-                        <div class="material-card card h-100 shadow-sm rounded-3">
-                            <div class="card-img-container">
-                                <img src="/img/silikon.webp" alt="Silikon ve Yapıştırma Malzemeleri - AR-KAR İnşaat" class="card-img-top" loading="lazy">
-                                <div class="material-category-badge">
-                                    <i class="fa fa-fill-drip me-1"></i>Dolgu
-                                </div>
-                            </div>
-                            <div class="material-card-content">
-                                <h3 class="material-card-title">Silikon ve Yapıştırma Malzemeleri</h3>
-                                <div class="material-brand-info">
-                                    <i class="fa fa-star text-primary me-1"></i>
-                                    Akfix, Neox, Dayson, Sista, Sibax
-                                </div>
-                                <p class="material-description">
-                                    Silikon, Mastik, Hızlı Yapıştırıcı, Köpük ve Yağlayıcı türleri.
-                                </p>
-                                <div class="material-features">
-                                    <span class="feature-tag">Silikon</span>
-                                    <span class="feature-tag">Köpük</span>
-                                    <span class="feature-tag">Mastik</span>
-                                    <span class="feature-tag">Hızlı Yapıştırıcı</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
- <!-- SU TESİSATI MALZEMELERİ -->
-            <div class="category-section mb-5">
-                <div class="text-center mb-4">
-                    <h2 class="display-6 text-uppercase mb-3">
-                        <i class="fa fa-wrench text-primary me-3"></i>
-                        <span class="text-primary">Su Tesisatı</span> Malzemeleri
-                    </h2>
-                    <p class="text-muted">Güvenilir su tesisatı için kaliteli boru ve bağlantı malzemeleri</p>
-                </div>
-                <div class="row g-4">
-                    <!-- Temiz Su Tesisatı -->
-                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-                        <div class="material-card card h-100 shadow-sm rounded-3">
-                            <div class="card-img-container">
-                                <img src="/img/pprc.webp" alt="Temiz Su Tesisatı - AR-KAR İnşaat" class="card-img-top" loading="lazy">
-                                <div class="material-category-badge">
-                                    <i class="fa fa-pipe me-1"></i>Temiz Su
-                                </div>
-                            </div>
-                            <div class="material-card-content">
-                                <h3 class="material-card-title">Temiz Su Tesisatı</h3>
-                                <div class="material-brand-info">
-                                    <i class="fa fa-star text-primary me-1"></i>
-                                    Hakan Plastik
-                                </div>
-                                <p class="material-description">
-                                    PPRC boru, dirsek, vana, rakor ve temiz su sistemi malzemeleri.
-                                </p>
-                                <div class="material-features">
-                                    <span class="feature-tag">PPRC Boru</span>
-                                    <span class="feature-tag">Dirsek</span>
-                                    <span class="feature-tag">Vana</span>
-                                    <span class="feature-tag">Rakor</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Pis Su Tesisatı -->
-                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-                        <div class="material-card card h-100 shadow-sm rounded-3">
-                            <div class="card-img-container">
-                                <img src="/img/gider.webp" alt="Pis Su Tesisatı - AR-KAR İnşaat" class="card-img-top" loading="lazy">
-                                <div class="material-category-badge">
-                                    <i class="fa fa-drain me-1"></i>Pis Su
-                                </div>
-                            </div>
-                            <div class="material-card-content">
-                                <h3 class="material-card-title">Pis Su Tesisatı</h3>
-                                <div class="material-brand-info">
-                                    <i class="fa fa-star text-primary me-1"></i>
-                                    Hakan Plastik
-                                </div>
-                                <p class="material-description">
-                                    PVC boru, lavabo sifonu, gider boruları ve pis su sistemi malzemeleri.
-                                </p>
-                                <div class="material-features">
-                                    <span class="feature-tag">PVC Boru</span>
-                                    <span class="feature-tag">Lavabo Sifonu</span>
-                                    <span class="feature-tag">Gider Boruları</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Armatür Grubu -->
-                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-                        <div class="material-card card h-100 shadow-sm rounded-3">
-                            <div class="card-img-container">
-                                <img src="/img/musluk.webp" alt="Armatür Grubu - AR-KAR İnşaat" class="card-img-top" loading="lazy">
-                                <div class="material-category-badge">
-                                    <i class="fa fa-faucet me-1"></i>Armatür
-                                </div>
-                            </div>
-                            <div class="material-card-content">
-                                <h3 class="material-card-title">Armatür Grubu</h3>
-                                <div class="material-brand-info">
-                                    <i class="fa fa-star text-primary me-1"></i>
-                                    ACAR, Woya, Lates, ECA, Vitra, Visam
-                                </div>
-                                <p class="material-description">
-                                    Musluk, batarya, taharet musluğu ve su armatur ürünleri.
-                                </p>
-                                <div class="material-features">
-                                    <span class="feature-tag">Musluk</span>
-                                    <span class="feature-tag">Batarya</span>
-                                    <span class="feature-tag">Taharet Musluğu</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-
-
-                </div>
-            </div>
-
-            <!-- ELEKTRİK MALZEMELERİ -->
-            <div class="category-section mb-5">
-                <div class="text-center mb-4">
-                    <h2 class="display-6 text-uppercase mb-3">
-                        <i class="fa fa-bolt text-primary me-3"></i>
-                        <span class="text-primary">Elektrik</span> Malzemeleri
-                    </h2>
-                    <p class="text-muted">Güvenli elektrik tesisatı için sertifikalı elektrik malzemeleri</p>
-                </div>
-                <div class="row g-4">
-                    <!-- Tesisat Malzemeleri -->
-                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-                        <div class="material-card card h-100 shadow-sm rounded-3">
-                            <div class="card-img-container">
-                                <img src="/img/kablo.webp" alt="Tesisat Malzemeleri - AR-KAR İnşaat" class="card-img-top" loading="lazy">
-                                <div class="material-category-badge">
-                                    <i class="fa fa-plug me-1"></i>Tesisat
-                                </div>
-                            </div>
-                            <div class="material-card-content">
-                                <h3 class="material-card-title">Tesisat Malzemeleri</h3>
-                                <div class="material-brand-info">
-                                    <i class="fa fa-star text-primary me-1"></i>
-                                    Legrand, Chint, Borel, Ayan, Babacan, Helios Horoz, ACK
-                                </div>
-                                <p class="material-description">
-                                    Kablo, Priz, Anahtar, Sigorta, Buat, Kangal Boru ve diğer elektrik tesisat malzemesi türleri.
-                                </p>
-                                <div class="material-features">
-                                    <span class="feature-tag">Kablo</span>
-                                    <span class="feature-tag">Priz</span>
-                                    <span class="feature-tag">Anahtar</span>
-                                    <span class="feature-tag">Sigorta</span>
-                                    <span class="feature-tag">Buat</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Aydınlatma Ürünleri -->
-                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-                        <div class="material-card card h-100 shadow-sm rounded-3">
-                            <div class="card-img-container">
-                                <img src="/img/ampul.webp" alt="Aydınlatma Ürünleri - AR-KAR İnşaat" class="card-img-top" loading="lazy">
-                                <div class="material-category-badge">
-                                    <i class="fa fa-lightbulb me-1"></i>Aydınlatma
-                                </div>
-                            </div>
-                            <div class="material-card-content">
-                                <h3 class="material-card-title">Aydınlatma Ürünleri</h3>
-                                <div class="material-brand-info">
-                                    <i class="fa fa-star text-primary me-1"></i>
-                                    Philips, Osram, Megalux
-                                </div>
-                                <p class="material-description">
-                                    Ampul, LED panel, Avize, spot lamba ve aydınlatma ürünü türleri.
-                                </p>
-                                <div class="material-features">
-                                    <span class="feature-tag">Ampul</span>
-                                    <span class="feature-tag">LED Panel</span>
-                                    <span class="feature-tag">Avize</span>
-                                    <span class="feature-tag">Spot Lamba</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-           
-            <!-- ÇATI VE YALITIM MALZEMELERİ -->
-            <div class="category-section mb-5">
-                <div class="text-center mb-4">
-                    <h2 class="display-6 text-uppercase mb-3">
-                        <i class="fa fa-home text-primary me-3"></i>
-                        <span class="text-primary">Çatı ve Yalıtım</span> Malzemeleri
-                    </h2>
-                    <p class="text-muted">Dayanıklı çatı sistemleri ve profesyonel yalıtım çözümleri</p>
-                </div>
-                <div class="row g-4">
-                    <!-- Çatı -->
-                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-                        <div class="material-card card h-100 shadow-sm rounded-3">
-                            <div class="card-img-container">
-                                <img src="/img/cati.webp" alt="Çatı Malzemeleri - AR-KAR İnşaat" class="card-img-top" loading="lazy">
-                                <div class="material-category-badge">
-                                    <i class="fa fa-layer-group me-1"></i>Çatı
-                                </div>
-                            </div>
-                            <div class="material-card-content">
-                                <h3 class="material-card-title">Çatı Malzemeleri</h3>
-                                <div class="material-brand-info">
-                                    <i class="fa fa-star text-primary me-1"></i>
-                                    Osmancık, Onduline
-                                </div>
-                                <p class="material-description">
-                                    Kiremit, Trapez Sac, Onduline, Membran türleri.
-                                </p>
-                                <div class="material-features">
-                                    <span class="feature-tag">Kiremit</span>
-                                    <span class="feature-tag">Shingle</span>
-                                    <span class="feature-tag">Trapez Sac</span>
-                                    <span class="feature-tag">Onduline</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Yalıtım -->
-                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-                        <div class="material-card card h-100 shadow-sm rounded-3">
-                            <div class="card-img-container">
-                                <img src="/img/isiyalitim.webp" alt="Çatı Yalıtımı - AR-KAR İnşaat" class="card-img-top" loading="lazy">
-                                <div class="material-category-badge">
-                                    <i class="fa fa-shield-alt me-1"></i>Yalıtım
-                                </div>
-                            </div>
-                            <div class="material-card-content">
-                                <h3 class="material-card-title">Çatı Yalıtımı ve Ara Katmanlar</h3>
-                                <div class="material-brand-info">
-                                    <i class="fa fa-star text-primary me-1"></i>
-                                    Knauf, İzocam, İmpor
-                                </div>
-                                <p class="material-description">
-                                    Cam Yünü, Taş yünü, Likit Membran, Strafor ve Asmolen türleri.
-                                </p>
-                                <div class="material-features">
-                                    <span class="feature-tag">OSB Levha</span>
-                                    <span class="feature-tag">Çatı Membranı</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                   
-                </div>
-            </div>
-
-          
-            <!-- Call to Action Section -->
-            <div class="row mt-5">
-                <div class="col-12">
-                    <div class="bg-primary text-white p-4 p-md-5 rounded-3 text-center">
-                        <h3 class="text-white mb-3">İhtiyacınız olan malzemeyi bulamadınız mı?</h3>
-                        <p class="mb-4">{EXPERIENCE_YEARS} yıllık deneyimimizle size özel çözümler sunuyoruz. Profesyonel ekibimiz size en uygun malzemeleri bulmanızda yardımcı olacak.</p>
-                        <div class="row g-3 justify-content-center">
-                            <div class="col-auto">
-                                <a href="tel:+905421826855" class="btn btn-light btn-lg px-4">
-                                    <i class="fa fa-phone me-2"></i>Hemen Arayın
-                                </a>
-                            </div>
-                            <div class="col-auto">
-                                <a href="https://wa.me/905421826855" class="btn btn-outline-light btn-lg px-4">
-                                    <i class="fab fa-whatsapp me-2"></i>WhatsApp
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                  </div>
+                </Card>
+              </div>
+            ))}
+          </div>
         </div>
-    </section>
-    <!-- Portfolio End -->
+      ))}
+
+      <CtaBand
+        title="İhtiyacınız olan malzemeyi bulamadınız mı?"
+        text={`${EXPERIENCE_YEARS} yıllık deneyimimizle size özel çözümler sunuyoruz. Profesyonel ekibimiz size en uygun malzemeleri bulmanızda yardımcı olacak.`}
+        primaryHref="tel:+905421826855"
+        primaryLabel="Hemen Arayın"
+        primaryIcon="fa-phone"
+        secondaryHref="https://wa.me/905421826855"
+        secondaryLabel="WhatsApp"
+        secondaryIcon="fab fa-whatsapp"
+      />
+    </div>
+  </section>
+  <!-- Materials End -->
 </BaseLayout>

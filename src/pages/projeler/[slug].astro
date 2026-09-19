@@ -61,15 +61,15 @@ const coverImage = project.data.coverImage || '/img/about.webp';
       <div class="col-lg-9">
         <header class="mb-4">
           <div class="d-flex flex-wrap align-items-center text-muted mb-3 gap-3">
-            <span class="badge bg-primary px-3 py-2">{categoryLabel}</span>
+            <span class="badge-pill">{categoryLabel}</span>
             {project.data.location && (
-              <span><i class="fa fa-map-marker-alt text-primary me-2"></i>{project.data.location}</span>
+              <span><i class="fa fa-map-marker-alt text-primary me-2" aria-hidden="true"></i>{project.data.location}</span>
             )}
             {project.data.specs && (
-              <span><i class="fa fa-home text-primary me-2"></i>{project.data.specs}</span>
+              <span><i class="fa fa-home text-primary me-2" aria-hidden="true"></i>{project.data.specs}</span>
             )}
             {project.data.date && (
-              <span><i class="fa fa-calendar-alt text-primary me-2"></i>{project.data.date}</span>
+              <span><i class="fa fa-calendar-alt text-primary me-2" aria-hidden="true"></i>{project.data.date}</span>
             )}
           </div>
           <h1 class="display-6 fw-bold text-dark mb-4">{project.data.title}</h1>
@@ -116,7 +116,7 @@ const coverImage = project.data.coverImage || '/img/about.webp';
 
         <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
           <a href="/projeler" class="btn btn-outline-primary">
-            <i class="fa fa-arrow-left me-2"></i>Tüm Projeler
+            <i class="fa fa-arrow-left me-2" aria-hidden="true"></i>Tüm Projeler
           </a>
           <button
             type="button"
@@ -124,7 +124,7 @@ const coverImage = project.data.coverImage || '/img/about.webp';
             data-bs-toggle="modal"
             data-bs-target="#contactModal"
           >
-            <i class="fa fa-envelope me-2"></i>Bu Proje Hakkında Bilgi Alın
+            <i class="fa fa-envelope me-2" aria-hidden="true"></i>Bu Proje Hakkında Bilgi Alın
           </button>
         </div>
       </div>

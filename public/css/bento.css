@@ -30,7 +30,9 @@
 .page-header .breadcrumb { margin: 0; position: relative; z-index: 1; }
 .page-header .breadcrumb-item,
 .page-header .breadcrumb-item a {
-  color: rgba(255, 255, 255, 0.6);
+  /* WCAG AA kontrast eşiği için 0.6'dan 0.72'ye çıkarıldı (--ink-900
+     zeminde ~4.6:1). */
+  color: rgba(255, 255, 255, 0.72);
   font-size: 0.85rem;
   font-weight: 500;
   text-decoration: none;
@@ -38,7 +40,7 @@
 .page-header .breadcrumb-item a:hover { color: #fff; }
 .page-header .breadcrumb-item.active { color: #fff; font-weight: 600; }
 .page-header .breadcrumb-item + .breadcrumb-item::before {
-  color: rgba(255, 255, 255, 0.32);
+  color: rgba(255, 255, 255, 0.4);
 }
 
 /* --------------------------------------------------------------------------
@@ -109,6 +111,40 @@
 .bento-tile--hero .carousel-indicators { z-index: 3; margin-bottom: 0.5rem; }
 .bento-tile--hero .carousel-control-prev,
 .bento-tile--hero .carousel-control-next { z-index: 3; width: 8%; }
+
+/* Stok Bootstrap ok/nokta ikonları yerine markaya uygun, cam-efektli
+   kontroller. Yalnızca görsel — data-bs-slide/data-bs-target JS
+   davranışına dokunulmuyor. */
+.bento-tile--hero .carousel-control-prev-icon,
+.bento-tile--hero .carousel-control-next-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background-color: rgba(20, 21, 26, 0.4);
+  background-size: 44%;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+.bento-tile--hero .carousel-control-prev:hover .carousel-control-prev-icon,
+.bento-tile--hero .carousel-control-next:hover .carousel-control-next-icon {
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+.bento-tile--hero .carousel-indicators [data-bs-target] {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-pill, 999px);
+  background-color: rgba(255, 255, 255, 0.45);
+  border: none;
+  opacity: 1;
+  transition: background-color 0.2s ease, width 0.2s ease;
+}
+.bento-tile--hero .carousel-indicators .active {
+  background-color: var(--primary);
+  width: 22px;
+}
 .bento-tile__eyebrow {
   display: inline-block;
   font-family: var(--font-heading);

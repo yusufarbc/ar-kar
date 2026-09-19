@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import { COMPANY, FOUNDING_YEAR, EXPERIENCE_YEARS } from '../lib/company';
+import SectionHeader from '../components/ui/SectionHeader.astro';
 
 const title = "Sık Sorulan Sorular | AR-KAR İnşaat Samsun Çarşamba";
 const description = "AR-KAR İnşaat'a en çok sorulan sorular: inşaat süreleri, PVC garanti ve ölçü alma, anahtar teslim kapsamı, zirai danışmanlık, çalışma saatleri ve iletişim.";
@@ -212,13 +213,12 @@ const faqSchema = {
   <PageHeader active="Sık Sorulan Sorular" />
 
   <div class="container-fluid py-6 px-3 px-md-5">
-    <div class="text-center mx-auto mb-5" style="max-width: 800px;">
-      <h1 class="display-5 text-uppercase mb-3">Sık Sorulan <span class="text-primary">Sorular</span></h1>
-      <p class="mb-0 text-muted">
-        AR-KAR İnşaat hizmetleri hakkında en çok merak edilen {ALL_ITEMS.length} soru ve cevabı.
-        Aradığınızı bulamazsanız bize doğrudan ulaşabilirsiniz.
-      </p>
-    </div>
+    <SectionHeader
+      as="h1"
+      accent="Sık Sorulan"
+      title="Sorular"
+      lede={`AR-KAR İnşaat hizmetleri hakkında en çok merak edilen ${ALL_ITEMS.length} soru ve cevabı. Aradığınızı bulamazsanız bize doğrudan ulaşabilirsiniz.`}
+    />
 
     <div class="row justify-content-center">
       <div class="col-lg-9">
@@ -262,13 +262,13 @@ const faqSchema = {
           <p class="text-muted mb-4">Bize ulaşın, en kısa sürede dönüş yapalım.</p>
           <div class="d-flex flex-wrap gap-2 justify-content-center">
             <a href={COMPANY.branches[0].phoneHref} class="btn btn-primary px-4 py-2">
-              <i class="fa fa-phone me-2"></i>{COMPANY.branches[0].phone}
+              <i class="fa fa-phone me-2" aria-hidden="true"></i>{COMPANY.branches[0].phone}
             </a>
             <a href={`https://wa.me/${COMPANY.whatsapp}`} class="btn btn-outline-secondary px-4 py-2" target="_blank" rel="noopener">
-              <i class="fab fa-whatsapp me-2"></i>WhatsApp
+              <i class="fab fa-whatsapp me-2" aria-hidden="true"></i>WhatsApp
             </a>
             <a href="/iletisim" class="btn btn-outline-secondary px-4 py-2">
-              <i class="fa fa-map-marker-alt me-2"></i>İletişim sayfası
+              <i class="fa fa-map-marker-alt me-2" aria-hidden="true"></i>İletişim sayfası
             </a>
           </div>
         </div>

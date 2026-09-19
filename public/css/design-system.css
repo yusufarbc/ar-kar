@@ -66,8 +66,22 @@
   /* --- Biçim --- */
   --radius-lg: 20px;
   --radius-md: 14px;
+  --radius-sm: 10px;
+  --radius-pill: 999px;
   --shadow-soft: 0 8px 30px rgba(20, 21, 26, 0.07);
   --shadow-soft-hover: 0 16px 40px rgba(20, 21, 26, 0.12);
+  --shadow-modal: 0 24px 60px rgba(20, 21, 26, 0.18);
+
+  /* --- Bileşen boşluk ölçeği --- */
+  --gap-xs: 8px;
+  --gap-sm: 12px;
+  --gap-md: 20px;
+  --gap-lg: 32px;
+
+  /* --- Vurgu tonları (yeni renk değil, --primary/--ink-900'den türetilmiş) --- */
+  --primary-tint-08: rgba(231, 30, 36, 0.08);
+  --primary-tint-10: rgba(231, 30, 36, 0.10);
+  --ink-900-tint-05: rgba(20, 21, 26, 0.05);
 }
 
 html { background: var(--surface-alt); }
@@ -132,6 +146,28 @@ h1, h2, h3, h4, h5, h6,
   border-bottom: 1px solid #1a1a1a;
 }
 
+/* Hizmetler açılır menüsü — masaüstünde Bootstrap'in varsayılan beyaz
+   kutusu yerine navbar'la aynı koyu temayı kullanır (mobildeki koyu
+   stil zaten style.css'te vardı, ikisi artık tek bir görsel dile sahip). */
+.navbar .dropdown-menu {
+  background: #14161b;
+  border: 1px solid #262932;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-soft-hover);
+  padding: 6px;
+}
+.navbar .dropdown-item {
+  color: rgba(255, 255, 255, 0.82);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+}
+.navbar .dropdown-item:hover,
+.navbar .dropdown-item:focus,
+.navbar .dropdown-item.active {
+  background: var(--primary);
+  color: #fff;
+}
+
 /* ==========================================================================
    Google Haritalar gömüleri
    ========================================================================== */
@@ -142,4 +178,237 @@ iframe[src*="google.com/maps"] {
 ::selection {
   background: var(--primary);
   color: var(--arkar-white);
+}
+
+/* ==========================================================================
+   Bileşen "reçeteleri"
+   --------------------------------------------------------------------------
+   src/components/ui/* Astro bileşenlerinin CSS karşılığı. Amaç: .material-card,
+   .contact-card, .hours-box, .fact, .portfolio-box gibi paralel kart
+   sistemlerinin yerine TEK bir kart/başlık/rozet dili koymak. Global stil
+   sayfasında tutuluyor (component-scoped değil) ki hem yeni .astro
+   bileşenleri hem kademeli geçiş sırasında kalan ham markup aynı sınıfları
+   kullanabilsin.
+   ========================================================================== */
+
+/* --- Bölüm başlığı (SectionHeader.astro) --- */
+.section-eyebrow {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+.section-title {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  color: var(--ink-900);
+  /* Bilerek text-transform YOK — uzun Türkçe başlıklarda uppercase hem
+     okunabilirliği düşürür hem İ/ı dönüşümünde sorun çıkarır. Vurgu
+     ihtiyacı kısa .section-eyebrow etiketiyle karşılanıyor. */
+  margin-bottom: 14px;
+}
+.section-lede {
+  color: var(--ink-500);
+  max-width: 640px;
+}
+.section-header--center {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+.section-header--center .section-lede {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* --- Kart kabuğu (Card.astro) --- */
+.card-surface {
+  display: block;
+  background: var(--surface);
+  border: 1px solid var(--ink-100);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-soft);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.card-surface:focus-within {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+a.card-surface:hover,
+.card-surface.is-hoverable:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-soft-hover);
+}
+.card-surface--dark {
+  background: var(--ink-900);
+  border-color: var(--ink-900);
+  color: #fff;
+}
+.card-surface--dark h3,
+.card-surface--dark h4 { color: #fff; }
+.card-surface--dark p { color: rgba(255, 255, 255, 0.72); }
+.card-surface--accent {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+.card-surface__body { padding: 22px; }
+
+/* --- Kart görseli (CardMedia.astro) --- */
+.card-media {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: var(--card-media-ratio, 4 / 3);
+  background: var(--surface-alt);
+}
+.card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+  display: block;
+}
+a.card-surface:hover .card-media img,
+.card-surface.is-hoverable:hover .card-media img { transform: scale(1.05); }
+.card-media__badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 2;
+}
+
+/* --- Rozet (Badge.astro / .badge-pill) --- */
+.badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  background: var(--primary);
+  color: #fff;
+}
+.badge-pill--tint {
+  background: var(--primary-tint-10);
+  color: var(--primary);
+}
+.badge-pill--dark {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+/* --- İkon rozeti (IconBadge.astro) --- */
+.icon-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: var(--primary-tint-10);
+  color: var(--primary);
+  font-size: 1.3rem;
+}
+.icon-badge--sm { width: 40px; height: 40px; border-radius: var(--radius-sm); font-size: 1.05rem; }
+.icon-badge--lg { width: 64px; height: 64px; font-size: 1.6rem; }
+.icon-badge--solid { background: var(--primary); color: #fff; }
+.icon-badge--dark-surface { background: rgba(255, 255, 255, 0.08); color: var(--primary); }
+/* Kırmızı zemin üzerindeki adım/süreç ikonları için (beyaz daire + kırmızı ikon) */
+.icon-badge--invert { background: #fff; color: var(--primary); }
+
+/* --- CTA şeridi (CtaBand.astro) --- */
+.cta-band {
+  background: var(--primary);
+  color: #fff;
+  border-radius: var(--radius-lg);
+  padding: clamp(24px, 4vw, 44px);
+  text-align: center;
+}
+.cta-band h3 { color: #fff; margin-bottom: 10px; }
+.cta-band p { color: rgba(255, 255, 255, 0.88); margin-bottom: 22px; }
+.cta-band__actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+
+/* --- Katalog sayfaları (insaat/pvc/mimar/muteahhitlik/tarim/ziraat) ---
+   Önceden her sayfa bu üç sınıfı kendi inline <style is:inline> bloğunda
+   birebir kopyalıyordu; artık tek yerden geliyor. */
+.materials-section {
+  background: linear-gradient(135deg, var(--surface-alt) 0%, var(--surface) 100%);
+  position: relative;
+}
+.materials-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 100px;
+  background: linear-gradient(to bottom, var(--primary-tint-08), transparent);
+  pointer-events: none;
+}
+.materials-container { padding: 15px; position: relative; z-index: 1; }
+@media (min-width: 768px) { .materials-container { padding: 40px; } }
+@media (min-width: 1200px) { .materials-container { padding: 60px; } }
+.category-section { position: relative; padding: 40px 0; }
+.category-section:not(:first-child) {
+  border-top: 3px solid var(--ink-100);
+  margin-top: 50px;
+}
+.category-section:not(:first-child)::before {
+  content: '';
+  position: absolute;
+  top: -1.5px; left: 50%;
+  transform: translateX(-50%);
+  width: 100px; height: 3px;
+  background: var(--primary);
+}
+@media (max-width: 768px) {
+  .category-section { padding: 30px 0; }
+  .category-section:not(:first-child) { margin-top: 40px; }
+  .category-section:not(:first-child)::before { width: 80px; }
+}
+@media (max-width: 576px) {
+  .category-section { padding: 25px 0; }
+  .category-section:not(:first-child) { margin-top: 30px; }
+  .category-section:not(:first-child)::before { width: 60px; }
+}
+
+/* --- Küçük özellik etiketi (insaat/pvc/tarim gibi katalog sayfalarında
+   malzeme kartlarının altındaki "Çimento", "Kireç" gibi çoklu etiketler).
+   .badge-pill'den bilerek daha hafif: büyük harf/kalın değil, çok sayıda
+   yan yana durduğunda göz yormasın diye nötr renkli. --- */
+.feature-tag {
+  display: inline-block;
+  background: var(--surface-alt);
+  color: var(--ink-500);
+  padding: 4px 11px;
+  border-radius: var(--radius-pill);
+  font-size: 0.78rem;
+  border: 1px solid var(--ink-100);
+}
+
+/* --- Opt-in alt çizgi hover'ı — artık TÜM butonların değil, yalnızca
+   bilerek seçilen 1-2 hero CTA'sının davranışı (bkz. style.css triyajı). --- */
+.btn-underline-hover { position: relative; overflow: hidden; }
+.btn-underline-hover::after {
+  position: absolute; content: ""; width: 0; height: 4px; bottom: 0; left: 50%;
+  background: currentColor; transition: 0.35s; transform: translateX(-50%);
+}
+.btn-underline-hover:hover::after,
+.btn-underline-hover.active::after { width: 50%; }
+
+/* --- Dokunma hedefi genişletmesi: tam-kart linkler ve dropdown öğeleri --- */
+.card-surface > a,
+a.card-surface {
+  min-height: 44px;
+}
+@media (max-width: 991.98px) {
+  .navbar .dropdown-item { min-height: 44px; display: flex; align-items: center; }
 }

@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import { getCollection } from 'astro:content';
 import { COMPANY, FOUNDING_YEAR, INCORPORATION_YEAR, EXPERIENCE_YEARS } from '../lib/company';
+import SectionHeader from '../components/ui/SectionHeader.astro';
 
 /**
  * Ayrı "Hakkımızda" sayfası.
@@ -147,9 +148,7 @@ const aboutSchema = {
     <!-- Giriş -->
     <div class="row g-5 align-items-center mb-6">
       <div class="col-lg-7">
-        <h1 class="display-5 text-uppercase mb-4">
-          <span class="text-primary">{FOUNDING_YEAR}</span>'den Bu Yana Çarşamba'da
-        </h1>
+        <SectionHeader as="h1" align="left" accent={String(FOUNDING_YEAR)} title="'den Bu Yana Çarşamba'da" />
         <p class="about-lead">
           {COMPANY.displayName} olarak 10'dan fazla sektörde, {EXPERIENCE_YEARS} yılı aşkın
           süredir bilgi, birikim ve tecrübemizle Samsun'un Çarşamba ilçesinde hizmet vermekteyiz.
@@ -197,7 +196,7 @@ const aboutSchema = {
     <!-- Kilometre taşları -->
     <div class="row g-5 mb-6">
       <div class="col-lg-6">
-        <h2 class="h3 text-uppercase mb-4">Kilometre <span class="text-primary">Taşları</span></h2>
+        <SectionHeader as="h2" align="left" title="Kilometre Taşları" />
         <ul class="timeline">
           {MILESTONES.map((m) => (
             <li class="timeline__item">
@@ -211,7 +210,7 @@ const aboutSchema = {
       </div>
 
       <div class="col-lg-6">
-        <h2 class="h3 text-uppercase mb-4">Faaliyet <span class="text-primary">Alanlarımız</span></h2>
+        <SectionHeader as="h2" align="left" title="Faaliyet Alanlarımız" />
         <ul class="field-grid">
           {FIELDS.map((f) => (
             <li>

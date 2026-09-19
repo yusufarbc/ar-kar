@@ -1,0 +1,18 @@
+---
+// Kategori/etiket rozeti — projeler.astro kart listesi, material-category
+// rozetleri gibi tekrarlanan <span class="badge ..."> desenlerinin tek
+// noktadan yönetilen hâli.
+interface Props {
+  label: string;
+  icon?: string;
+  tone?: 'solid' | 'tint' | 'dark';
+}
+
+const { label, icon, tone = 'solid' } = Astro.props;
+const toneClass = tone === 'tint' ? 'badge-pill--tint' : tone === 'dark' ? 'badge-pill--dark' : '';
+---
+
+<span class={`badge-pill ${toneClass}`.trim()}>
+  {icon && <i class={icon.includes(' ') ? icon : `fa ${icon}`} aria-hidden="true"></i>}
+  {label}
+</span>

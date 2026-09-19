@@ -67,8 +67,8 @@ const articleSchema = {
       <div class="col-lg-9">
         <header class="mb-4">
           <div class="d-flex align-items-center text-muted mb-3">
-            <span class="me-3"><i class="fa fa-calendar-alt text-primary me-2"></i>{post.data.date}</span>
-            <span><i class="fa fa-user text-primary me-2"></i>AR-KAR İnşaat</span>
+            <span class="me-3"><i class="fa fa-calendar-alt text-primary me-2" aria-hidden="true"></i>{post.data.date}</span>
+            <span><i class="fa fa-user text-primary me-2" aria-hidden="true"></i>AR-KAR İnşaat</span>
           </div>
           <h1 class="display-6 fw-bold text-dark mb-4">{post.data.title}</h1>
           {post.data.description && (
@@ -112,7 +112,7 @@ const articleSchema = {
 
         <div class="d-flex justify-content-between align-items-center">
           <a href="/blog" class="btn btn-outline-primary">
-            <i class="fa fa-arrow-left me-2"></i>Tüm Haberler
+            <i class="fa fa-arrow-left me-2" aria-hidden="true"></i>Tüm Haberler
           </a>
           <button
             type="button"
@@ -120,7 +120,7 @@ const articleSchema = {
             data-bs-toggle="modal"
             data-bs-target="#contactModal"
           >
-            <i class="fa fa-envelope me-2"></i>Bize Danışın
+            <i class="fa fa-envelope me-2" aria-hidden="true"></i>Bize Danışın
           </button>
         </div>
       </div>

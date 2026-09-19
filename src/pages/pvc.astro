@@ -2,12 +2,18 @@
 import { EXPERIENCE_YEARS } from '../lib/company';
 import PageHeader from '../components/PageHeader.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeader from '../components/ui/SectionHeader.astro';
+import Card from '../components/ui/Card.astro';
+import CardMedia from '../components/ui/CardMedia.astro';
+import Badge from '../components/ui/Badge.astro';
+import IconBadge from '../components/ui/IconBadge.astro';
+import CtaBand from '../components/ui/CtaBand.astro';
 
-const title = "PVC Kapı ve Pencere Sistemleri | AR-KAR İnşaat Samsun | Kaliteli PVC Doğrama";
+const title = 'PVC Kapı ve Pencere Sistemleri | AR-KAR İnşaat Samsun | Kaliteli PVC Doğrama';
 const description = `AR-KAR İnşaat PVC kapı ve pencere sistemleri: Samsun Çarşamba'da en kaliteli PVC doğrama, enerji verimli pencere sistemleri, cam balkon çözümleri. ${EXPERIENCE_YEARS} yıllık deneyimle profesyonel montaj.`;
-const canonical = "https://ar-kar.com/pvc";
-const ogImage = "https://ar-kar.com/img/pvc.webp";
-const keywords = "pvc kapı pencere samsun, pvc doğrama çarşamba, pvc pencere sistemleri, pvc kapı montajı, enerji verimli pencere, cam balkon sistemleri, pvc doğrama fiyatları, kaliteli pvc kapı";
+const canonical = 'https://ar-kar.com/pvc';
+const ogImage = 'https://ar-kar.com/img/pvc.webp';
+const keywords = 'pvc kapı pencere samsun, pvc doğrama çarşamba, pvc pencere sistemleri, pvc kapı montajı, enerji verimli pencere, cam balkon sistemleri, pvc doğrama fiyatları, kaliteli pvc kapı';
 
 // Bu sayfada hiç yapısal veri yoktu — diğer tüm hizmet sayfalarında varken
 // PVC sayfası arama motorlarına yalnızca düz metin olarak görünüyordu.
@@ -49,6 +55,46 @@ const serviceSchema = {
     ],
   },
 };
+
+const SERVICES = [
+  {
+    img: '/img/pencere.webp',
+    alt: 'PVC Pencere Sistemleri - AR-KAR İnşaat',
+    badgeIcon: 'fas fa-window-maximize',
+    badgeLabel: 'PVC Pencere',
+    title: 'PVC Pencere Sistemleri',
+    description:
+      'Enerji verimli çift cam PVC pencere sistemleri ile ısı ve ses yalıtımı sağlıyoruz. Modern tasarım ve uzun ömürlü kullanım için kaliteli malzemeler kullanıyoruz.',
+    features: ['Çift Cam Teknolojisi', 'Enerji Verimliliği', 'Ses Yalıtımı', 'UV Dayanıklılığı'],
+  },
+  {
+    img: '/img/kapi.webp',
+    alt: 'PVC Kapı Sistemleri - AR-KAR İnşaat',
+    badgeIcon: 'fas fa-door-open',
+    badgeLabel: 'PVC Kapı',
+    title: 'PVC Kapı Sistemleri',
+    description:
+      'Güvenli ve yalıtımlı PVC kapı sistemleri ile hem estetik hem de fonksiyonel çözümler sunuyoruz. Çeşitli renk ve desen seçenekleriyle ihtiyaçlarınıza uygun kapılar üretiyoruz.',
+    features: ['Güvenlik Sistemleri', 'Termal Kesim', 'Çoklu Kilit Sistemi', 'Renk Seçenekleri'],
+  },
+  {
+    img: '/img/cambalkon.webp',
+    alt: 'Cam Balkon Sistemleri - AR-KAR İnşaat',
+    badgeIcon: 'fas fa-building',
+    badgeLabel: 'Cam Balkon',
+    title: 'Cam Balkon Sistemleri',
+    description:
+      'Modern cam balkon sistemleri ile balkonlarınızı kapatarak yaşam alanınızı genişletiyoruz. Sürme ve katlanır sistem seçenekleriyle pratik çözümler sunuyoruz.',
+    features: ['Sürme Sistem', 'Katlanır Sistem', 'Temperli Cam', 'Hava Koşullarına Dayanıklı'],
+  },
+];
+
+const PROCESS_STEPS = [
+  { icon: 'fas fa-ruler-combined', title: '1. Ölçü Alma', text: 'Uzman ekibimiz ücretsiz keşif yaparak hassas ölçüler alır.' },
+  { icon: 'fas fa-palette', title: '2. Tasarım & Seçim', text: 'İhtiyaçlarınıza uygun model, renk ve cam seçeneklerini belirliyoruz.' },
+  { icon: 'fas fa-industry', title: '3. Üretim', text: 'Modern makinelerle özel ölçüde kaliteli üretim gerçekleştiriyoruz.' },
+  { icon: 'fas fa-wrench', title: '4. Montaj & Teslim', text: 'Profesyonel montaj ile ürünlerinizi güvenle teslim ediyoruz.' },
+];
 ---
 
 <BaseLayout
@@ -61,605 +107,77 @@ const serviceSchema = {
 >
   <Fragment slot="head">
     <script type="application/ld+json" is:inline set:html={JSON.stringify(serviceSchema)} />
-    <style is:inline set:html={`/* Critical CSS for above-the-fold content */
-        .navbar-brand img {
-            transition: transform 0.3s ease;
-        }
-        
-        .navbar-brand img:hover {
-            transform: scale(1.05);
-        }
-
-        /* Lazy Loading Enhancement */
-        img[loading="lazy"] {
-            transition: opacity 0.3s ease;
-        }
-
-        /* PVC product showcase */
-        .pvc-showcase {
-            background: linear-gradient(135deg, var(--surface-alt) 0%, var(--surface-raised) 100%);
-            border-radius: 15px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .pvc-showcase:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-        }
-
-        .pvc-feature-card {
-            background: var(--surface);
-            border-radius: 10px;
-            padding: 2rem;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            height: 100%;
-        }
-
-        .pvc-feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-        }
-
-        .pvc-feature-icon {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: var(--bs-primary);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1rem;
-            font-size: 2rem;
-        }
-
-        /* Gallery grid */
-        .pvc-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 3rem;
-        }
-
-        .gallery-item {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .gallery-item:hover {
-            transform: scale(1.02);
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.1);
-        }
-
-        /* Accessibility improvements */
-        .btn:focus,
-        .nav-link:focus,
-        .gallery-item:focus {
-            outline: 2px solid var(--bs-primary);
-            outline-offset: 2px;
-        }
-
-        /* Reduced motion support */
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-
-        /* Mobile optimizations */
-        @media (max-width: 768px) {
-            .pvc-gallery {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-            
-            .pvc-showcase {
-                padding: 1.5rem;
-            }
-            
-            .display-5 {
-                font-size: 2rem;
-            }
-            
-            .py-6 {
-                padding-top: 3rem !important;
-                padding-bottom: 3rem !important;
-            }
-            
-            .footer .navbar-brand img {
-                max-height: 60px !important;
-                width: auto;
-            }
-        }
-        
-        /* WhatsApp floating button */
-        .whatsapp-float {
-            position: fixed;
-            width: 60px;
-            height: 60px;
-            bottom: 20px;
-            right: 20px;
-            background-color: #25d366;
-            color: white;
-            border-radius: 50px;
-            text-align: center;
-            font-size: 30px;
-            box-shadow: 2px 2px 3px #999;
-            z-index: 1000;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-        
-        .whatsapp-float:hover {
-            background-color: #20c55e;
-            color: white;
-            transform: scale(1.1);
-            text-decoration: none;
-        }
-        
-        @media (max-width: 768px) {
-            .whatsapp-float {
-                width: 55px;
-                height: 55px;
-                bottom: 15px;
-                right: 15px;
-                font-size: 25px;
-            }
-        }`} />
-    <style is:inline set:html={`/* PVC Card Styles */
-        .pvc-card {
-            transition: all 0.3s ease;
-            border: none;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .pvc-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1) !important;
-        }
-
-        .pvc-card .card-img-container {
-            overflow: hidden;
-            position: relative;
-        }
-
-        .pvc-card .card-img-top {
-            transition: transform 0.3s ease;
-        }
-
-        .pvc-card:hover .card-img-top {
-            transform: scale(1.08);
-        }
-
-        .pvc-badge {
-            background: linear-gradient(135deg, var(--primary), #d63384);
-            font-weight: 600;
-            font-size: 0.9rem;
-            border-radius: 0 0 15px 0 !important;
-            backdrop-filter: blur(10px);
-        }
-
-        .pvc-card .card-title {
-            color: var(--ink-900);
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 15px;
-        }
-
-        .pvc-card .list-unstyled li {
-            padding: 6px 0;
-            font-size: 0.9rem;
-            transition: all 0.2s ease;
-        }
-
-        .pvc-card .list-unstyled li:hover {
-            padding-left: 10px;
-        }
-
-        .pvc-card .btn {
-            font-weight: 600;
-            padding: 12px 20px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .pvc-card .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(231, 30, 36, 0.3);
-        }
-
-        .pvc-card .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .pvc-card .btn:hover::before {
-            left: 100%;
-        }
-
-        /* Features Section Styles */
-        .features-section .bg-primary .rounded-circle {
-            background: linear-gradient(135deg, var(--primary), #d63384) !important;
-            transition: all 0.3s ease;
-        }
-
-        .features-section .rounded-circle:hover {
-            transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 10px 20px rgba(231, 30, 36, 0.3);
-        }
-
-        /* Process Section Styles */
-        .process-section .bg-white {
-            transition: all 0.3s ease;
-        }
-
-        .process-section .rounded-circle:hover {
-            transform: scale(1.1);
-            box-shadow: 0 10px 25px rgba(231, 30, 36, 0.2);
-        }
-
-        /* Card Height Adjustments */
-        .pvc-card .card-img-top {
-            height: 400px !important;
-            object-fit: cover;
-        }
-
-        .pvc-card .card-body {
-            padding: 25px;
-            min-height: 250px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* Responsive Adjustments */
-        @media (max-width: 768px) {
-            .pvc-card .card-img-top {
-                height: 350px !important;
-            }
-            
-            .pvc-card .card-body {
-                padding: 20px;
-                min-height: 200px;
-            }
-            
-            .pvc-badge {
-                font-size: 0.8rem;
-                padding: 8px 12px;
-            }
-
-            .display-5 {
-                font-size: 2rem;
-            }
-        }
-
-        @media (min-width: 992px) {
-            .pvc-card .card-img-top {
-                height: 400px !important;
-            }
-            
-            .pvc-card .card-body {
-                padding: 30px;
-                min-height: 280px;
-            }
-        }
-
-        @media (min-width: 1200px) {
-            .pvc-card .card-img-top {
-                height: 400px !important;
-            }
-            
-            .pvc-card .card-body {
-                padding: 35px;
-                min-height: 300px;
-            }
-        }
-
-        /* Animation for PVC cards */
-        .pvc-card {
-            opacity: 0;
-            animation: fadeInUp 0.6s ease forwards;
-        }
-
-        .pvc-card:nth-child(1) { animation-delay: 0.1s; }
-        .pvc-card:nth-child(2) { animation-delay: 0.2s; }
-        .pvc-card:nth-child(3) { animation-delay: 0.3s; }
-        .pvc-card:nth-child(4) { animation-delay: 0.4s; }
-        .pvc-card:nth-child(5) { animation-delay: 0.5s; }
-        .pvc-card:nth-child(6) { animation-delay: 0.6s; }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Section background gradients */
-        .pvc-services-section {
-            background: linear-gradient(135deg, var(--surface-alt) 0%, var(--surface-raised) 100%);
-            position: relative;
-        }
-
-        .pvc-services-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 100px;
-            background: linear-gradient(to bottom, rgba(231, 30, 36, 0.05), transparent);
-        }
-
-        /* Call to action enhanced styles */
-        .cta-enhanced {
-            background: linear-gradient(135deg, var(--surface-alt), var(--surface));
-            border: 2px solid var(--ink-100);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-enhanced::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(231,30,36,0.05)"/></svg>') repeat;
-            animation: float 30s infinite linear;
-        }
-
-        @keyframes float {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-
-        /* Enhanced button styles */
-        .btn-enhanced {
-            position: relative;
-            overflow: hidden;
-            font-weight: 600;
-        }
-
-        .btn-enhanced::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255,255,255,0.2);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-
-        .btn-enhanced:hover::after {
-            width: 300px;
-            height: 300px;
-        }
-
-        /* Icon animations */
-        .icon-bounce {
-            animation: iconBounce 2s infinite;
-        }
-
-        @keyframes iconBounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0);
-            }
-            40% {
-                transform: translateY(-10px);
-            }
-            60% {
-                transform: translateY(-5px);
-            }
-        }`} />
   </Fragment>
 
   <PageHeader active="PVC Kapı ve Pencere Sistemleri" />
 
+  <!-- PVC Services Section Start -->
+  <div class="container-fluid py-6 px-3 px-md-5 materials-section">
+    <div class="materials-container">
+      <SectionHeader
+        as="h1"
+        accent="PVC Kapı ve Pencere"
+        title="Sistemleri"
+        lede={`AR-KAR İnşaat olarak ${EXPERIENCE_YEARS} yıllık deneyimimizle Samsun Çarşamba'da en kaliteli PVC kapı ve pencere sistemlerini sunuyoruz. Enerji verimli, güvenli ve estetik PVC doğrama çözümleriyle yaşam alanlarınızı konforlu hale getiriyoruz.`}
+      />
 
-    <!-- PVC Services Section Start -->
-    <div class="container-fluid py-6 px-3 px-md-5 pvc-services-section">
-        <div class="text-center mx-auto mb-5" style="max-width: 800px;">
-            <h1 class="display-5 text-uppercase mb-4">
-                <span class="text-primary">PVC Kapı ve Pencere</span> Sistemleri
-            </h1>
-            <p class="mb-4">
-                AR-KAR İnşaat olarak {EXPERIENCE_YEARS} yıllık deneyimimizle Samsun Çarşamba'da en kaliteli PVC kapı ve pencere sistemlerini sunuyoruz. 
-                Enerji verimli, güvenli ve estetik PVC doğrama çözümleriyle yaşam alanlarınızı konforlu hale getiriyoruz.
-            </p>
+      <!-- Service Cards -->
+      <div class="row g-4 mb-5">
+        {SERVICES.map((service) => (
+          <div class="col-xl-4 col-lg-6 col-md-6">
+            <Card padded={false} class="h-100 d-flex flex-column">
+              <CardMedia src={service.img} alt={service.alt} aspectRatio="4 / 3">
+                <Badge slot="badge" label={service.badgeLabel} icon={service.badgeIcon} />
+              </CardMedia>
+              <div class="card-surface__body flex-grow-1 d-flex flex-column">
+                <h3 class="h4 mb-3">{service.title}</h3>
+                <p class="text-body-secondary mb-3">{service.description}</p>
+                <ul class="list-unstyled mb-0 mt-auto">
+                  {service.features.map((f) => (
+                    <li class="py-1"><i class="fa fa-check text-primary me-2" aria-hidden="true"></i>{f}</li>
+                  ))}
+                </ul>
+              </div>
+            </Card>
+          </div>
+        ))}
+      </div>
+
+      <!-- Process Section -->
+      <div class="row mb-5">
+        <div class="col-12">
+          <div class="bg-primary text-white p-4 p-md-5 rounded-3">
+            <h2 class="text-center text-white mb-4">
+              PVC Kapı Pencere <span>Montaj Sürecimiz</span>
+            </h2>
+            <div class="row g-4">
+              {PROCESS_STEPS.map((step) => (
+                <div class="col-lg-3 col-md-6">
+                  <div class="text-center">
+                    <div class="mb-3 d-flex justify-content-center">
+                      <IconBadge icon={step.icon} size="lg" tone="invert" />
+                    </div>
+                    <h4 class="text-white h5">{step.title}</h4>
+                    <p class="mb-0" style="color: rgba(255,255,255,0.85)">{step.text}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
+      </div>
 
-        <!-- Service Cards -->
-        <div class="row g-4 mb-5">
-            
-            <!-- PVC Pencere Sistemleri -->
-            <div class="col-xl-4 col-lg-6 col-md-6" id="pvc-pencere">
-                <div class="pvc-card card h-100 shadow-sm rounded-3 overflow-hidden">
-                    <div class="card-img-container position-relative">
-                        <img src="/img/pencere.webp" alt="PVC Pencere Sistemleri - AR-KAR İnşaat" class="card-img-top" loading="lazy">
-                        <div class="pvc-badge position-absolute top-0 start-0 bg-primary text-white px-3 py-2 rounded-end">
-                            <i class="fas fa-window-maximize me-2"></i>PVC Pencere
-                        </div>
-                    </div>
-                    <div class="card-body p-4">
-                        <h3 class="card-title h4 text-uppercase mb-3">PVC Pencere Sistemleri</h3>
-                        <p class="card-text text-muted mb-3">
-                            Enerji verimli çift cam PVC pencere sistemleri ile ısı ve ses yalıtımı sağlıyoruz. 
-                            Modern tasarım ve uzun ömürlü kullanım için kaliteli malzemeler kullanıyoruz.
-                        </p>
-                        <ul class="list-unstyled mb-4">
-                            <li><i class="fa fa-check text-primary me-2"></i>Çift Cam Teknolojisi</li>
-                            <li><i class="fa fa-check text-primary me-2"></i>Enerji Verimliliği</li>
-                            <li><i class="fa fa-check text-primary me-2"></i>Ses Yalıtımı</li>
-                            <li><i class="fa fa-check text-primary me-2"></i>UV Dayanıklılığı</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- PVC Kapı Sistemleri -->
-            <div class="col-xl-4 col-lg-6 col-md-6" id="pvc-kapi">
-                <div class="pvc-card card h-100 shadow-sm rounded-3 overflow-hidden">
-                    <div class="card-img-container position-relative">
-                        <img src="/img/kapi.webp" alt="PVC Kapı Sistemleri - AR-KAR İnşaat" class="card-img-top" loading="lazy">
-                        <div class="pvc-badge position-absolute top-0 start-0 bg-primary text-white px-3 py-2 rounded-end">
-                            <i class="fas fa-door-open me-2"></i>PVC Kapı
-                        </div>
-                    </div>
-                    <div class="card-body p-4">
-                        <h3 class="card-title h4 text-uppercase mb-3">PVC Kapı Sistemleri</h3>
-                        <p class="card-text text-muted mb-3">
-                            Güvenli ve yalıtımlı PVC kapı sistemleri ile hem estetik hem de fonksiyonel çözümler sunuyoruz. 
-                            Çeşitli renk ve desen seçenekleriyle ihtiyaçlarınıza uygun kapılar üretiyoruz.
-                        </p>
-                        <ul class="list-unstyled mb-4">
-                            <li><i class="fa fa-check text-primary me-2"></i>Güvenlik Sistemleri</li>
-                            <li><i class="fa fa-check text-primary me-2"></i>Termal Kesim</li>
-                            <li><i class="fa fa-check text-primary me-2"></i>Çoklu Kilit Sistemi</li>
-                            <li><i class="fa fa-check text-primary me-2"></i>Renk Seçenekleri</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Cam Balkon Sistemleri -->
-            <div class="col-xl-4 col-lg-6 col-md-6" id="cam-balkon">
-                <div class="pvc-card card h-100 shadow-sm rounded-3 overflow-hidden">
-                    <div class="card-img-container position-relative">
-                        <img src="/img/cambalkon.webp" alt="Cam Balkon Sistemleri - AR-KAR İnşaat" class="card-img-top" loading="lazy">
-                        <div class="pvc-badge position-absolute top-0 start-0 bg-primary text-white px-3 py-2 rounded-end">
-                            <i class="fas fa-building me-2"></i>Cam Balkon
-                        </div>
-                    </div>
-                    <div class="card-body p-4">
-                        <h3 class="card-title h4 text-uppercase mb-3">Cam Balkon Sistemleri</h3>
-                        <p class="card-text text-muted mb-3">
-                            Modern cam balkon sistemleri ile balkonlarınızı kapatarak yaşam alanınızı genişletiyoruz. 
-                            Sürme ve katlanır sistem seçenekleriyle praktik çözümler sunuyoruz.
-                        </p>
-                        <ul class="list-unstyled mb-4">
-                            <li><i class="fa fa-check text-primary me-2"></i>Sürme Sistem</li>
-                            <li><i class="fa fa-check text-primary me-2"></i>Katlanır Sistem</li>
-                            <li><i class="fa fa-check text-primary me-2"></i>Temperli Cam</li>
-                            <li><i class="fa fa-check text-primary me-2"></i>Hava Koşullarına Dayanıklı</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- Process Section -->
-        <div class="row mb-5">
-            <div class="col-12">
-                <div class="bg-primary text-white p-4 p-md-5 rounded-3">
-                    <h2 class="text-center text-white text-uppercase mb-4">
-                        PVC Kapı Pencere <span style="color: #ffd700;">Montaj Sürecimiz</span>
-                    </h2>
-                    <div class="row g-4">
-                        <div class="col-lg-3 col-md-6">
-                            <div class="text-center">
-                                <div class="bg-white text-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
-                                    <i class="fas fa-ruler-combined fa-2x"></i>
-                                </div>
-                                <h4 class="text-white">1. Ölçü Alma</h4>
-                                <p>Uzman ekibimiz ücretsiz keşif yaparak hassas ölçüler alır.</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="text-center">
-                                <div class="bg-white text-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
-                                    <i class="fas fa-palette fa-2x"></i>
-                                </div>
-                                <h4 class="text-white">2. Tasarım & Seçim</h4>
-                                <p>İhtiyaçlarınıza uygun model, renk ve cam seçeneklerini belirliyoruz.</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="text-center">
-                                <div class="bg-white text-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
-                                    <i class="fas fa-industry fa-2x"></i>
-                                </div>
-                                <h4 class="text-white">3. Üretim</h4>
-                                <p>Modern makinelerle özel ölçüde kaliteli üretim gerçekleştiriyoruz.</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="text-center">
-                                <div class="bg-white text-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
-                                    <i class="fas fa-wrench fa-2x"></i>
-                                </div>
-                                <h4 class="text-white">4. Montaj & Teslim</h4>
-                                <p>Profesyonel montaj ile ürünlerinizi güvenle teslim ediyoruz.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Call to Action -->
-        <div class="row">
-            <div class="col-12">
-                <div class="bg-light p-4 p-md-5 rounded-3 text-center cta-enhanced">
-                    <h3 class="mb-3">PVC Kapı Pencere Sistemleri İçin Hemen İletişime Geçin!</h3>
-                    <p class="mb-4 text-muted">{EXPERIENCE_YEARS} yıllık deneyimimizle en kaliteli PVC doğrama sistemlerini sizlere sunuyoruz. Ücretsiz keşif ve fiyat teklifi için hemen arayın.</p>
-                    <div class="row g-3 justify-content-center">
-                        <div class="col-auto">
-                            <a href="tel:+905421526755" class="btn btn-primary btn-lg px-4 btn-enhanced">
-                                <i class="fa fa-phone me-2"></i>0542 152 67 55
-                            </a>
-                        </div>
-                        <div class="col-auto">
-                            <a href="https://wa.me/90542526755" class="btn btn-outline-primary btn-lg px-4 btn-enhanced">
-                                <i class="fab fa-whatsapp me-2"></i>WhatsApp
-                            </a>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
+      <CtaBand
+        title="PVC Kapı Pencere Sistemleri İçin Hemen İletişime Geçin!"
+        text={`${EXPERIENCE_YEARS} yıllık deneyimimizle en kaliteli PVC doğrama sistemlerini sizlere sunuyoruz. Ücretsiz keşif ve fiyat teklifi için hemen arayın.`}
+        primaryHref="tel:+905421526755"
+        primaryLabel="0542 152 67 55"
+        primaryIcon="fa-phone"
+        secondaryHref="https://wa.me/90542526755"
+        secondaryLabel="WhatsApp"
+        secondaryIcon="fab fa-whatsapp"
+      />
     </div>
-    <!-- PVC Services Section End -->
+  </div>
+  <!-- PVC Services Section End -->
 </BaseLayout>

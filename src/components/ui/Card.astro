@@ -1,0 +1,39 @@
+---
+// Tek kart kabuğu — .material-card, .contact-card, .hours-box, .fact,
+// .portfolio-box gibi paralel kart sistemlerinin yerini alır.
+// `href` verilirse <a>, verilmezse <div> render eder.
+interface Props {
+  href?: string;
+  variant?: 'default' | 'dark' | 'accent';
+  padded?: boolean;
+  hoverable?: boolean;
+  class?: string;
+  id?: string;
+}
+
+const {
+  href,
+  variant = 'default',
+  padded = true,
+  hoverable = Boolean(href),
+  class: className = '',
+  ...rest
+} = Astro.props;
+
+const variantClass =
+  variant === 'dark' ? 'card-surface--dark' : variant === 'accent' ? 'card-surface--accent' : '';
+const classes = [
+  'card-surface',
+  variantClass,
+  hoverable ? 'is-hoverable' : '',
+  className,
+]
+  .filter(Boolean)
+  .join(' ');
+
+const Tag = href ? 'a' : 'div';
+---
+
+<Tag class={classes} href={href} {...rest}>
+  {padded ? <div class="card-surface__body"><slot /></div> : <slot />}
+</Tag>

@@ -1,0 +1,22 @@
+---
+// .service-icon-badge ve sayfalara serpiştirilmiş ad-hoc ikon
+// öneklerinin (<i class="fa ... text-primary">) tek noktadan yönetilen
+// hâli. İkon dekoratiftir — aria-hidden varsayılan olarak gömülü.
+interface Props {
+  icon: string; // örn. "fa-building" ya da "fab fa-whatsapp"
+  size?: 'sm' | 'md' | 'lg';
+  tone?: 'tint' | 'solid' | 'dark-surface' | 'invert';
+}
+
+const { icon, size = 'md', tone = 'tint' } = Astro.props;
+const sizeClass = size === 'sm' ? 'icon-badge--sm' : size === 'lg' ? 'icon-badge--lg' : '';
+const toneClass =
+  tone === 'solid' ? 'icon-badge--solid' :
+  tone === 'dark-surface' ? 'icon-badge--dark-surface' :
+  tone === 'invert' ? 'icon-badge--invert' : '';
+const iconClass = icon.includes(' ') ? icon : `fa ${icon}`;
+---
+
+<span class={`icon-badge ${sizeClass} ${toneClass}`.trim()}>
+  <i class={iconClass} aria-hidden="true"></i>
+</span>

@@ -1,0 +1,30 @@
+---
+// Tekrarlanan bölüm başlığı üçlüsünün (eyebrow + başlık + lede) tek
+// noktadan yönetilen hâli. ~20+ sayfada elle kopyalanan
+// `<h2 class="display-6 text-uppercase">` + <p> ikilisinin yerini alır.
+//
+// `accent`, başlığın kırmızı vurgulu ilk bölümüdür (mevcut sitede her
+// yerde tekrarlanan "<span class='text-primary'>Kelime</span> Gerisi"
+// deseni) — ayrı bir prop olarak tutulur ki mekanik geçiş sırasında
+// eski markup'tan doğrudan eşlenebilsin.
+interface Props {
+  eyebrow?: string;
+  accent?: string;
+  title: string;
+  lede?: string;
+  align?: 'center' | 'left';
+  as?: 'h1' | 'h2';
+  id?: string;
+}
+
+const { eyebrow, accent, title, lede, align = 'center', as = 'h2', id } = Astro.props;
+const Tag = as;
+---
+
+<div class={`section-header ${align === 'center' ? 'section-header--center' : ''}`}>
+  {eyebrow && <span class="section-eyebrow">{eyebrow}</span>}
+  <Tag class="section-title" id={id}>
+    {accent && <span class="text-primary">{accent}</span>}{accent && ' '}{title}
+  </Tag>
+  {lede && <p class="section-lede">{lede}</p>}
+</div>

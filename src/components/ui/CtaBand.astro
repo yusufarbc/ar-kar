@@ -1,0 +1,43 @@
+---
+// Her iç hizmet sayfasının altında tekrarlanan kırmızı CTA bloğunun
+// (insaat.astro, pvc.astro, tarim.astro, ziraat.astro, mimar.astro,
+// muteahhitlik.astro) tek noktadan yönetilen hâli.
+interface Props {
+  title: string;
+  text?: string;
+  primaryHref: string;
+  primaryLabel: string;
+  primaryIcon?: string;
+  secondaryHref?: string;
+  secondaryLabel?: string;
+  secondaryIcon?: string;
+}
+
+const {
+  title,
+  text,
+  primaryHref,
+  primaryLabel,
+  primaryIcon = 'fa-phone',
+  secondaryHref,
+  secondaryLabel,
+  secondaryIcon = 'fab fa-whatsapp',
+} = Astro.props;
+---
+
+<div class="cta-band">
+  <h3>{title}</h3>
+  {text && <p>{text}</p>}
+  <div class="cta-band__actions">
+    <a href={primaryHref} class="btn btn-light btn-lg px-4">
+      <i class={primaryIcon.includes(' ') ? primaryIcon : `fa ${primaryIcon}`} aria-hidden="true"></i>
+      <span class="ms-2">{primaryLabel}</span>
+    </a>
+    {secondaryHref && secondaryLabel && (
+      <a href={secondaryHref} class="btn btn-outline-light btn-lg px-4">
+        <i class={secondaryIcon.includes(' ') ? secondaryIcon : `fa ${secondaryIcon}`} aria-hidden="true"></i>
+        <span class="ms-2">{secondaryLabel}</span>
+      </a>
+    )}
+  </div>
+</div>

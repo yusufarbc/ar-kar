@@ -2,10 +2,29 @@
 import { getCollection } from 'astro:content';
 import { COMPANY, EXPERIENCE_YEARS } from '../lib/company';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeader from '../components/ui/SectionHeader.astro';
+import Card from '../components/ui/Card.astro';
+
+const allProjects = await getCollection('projects');
 
 // Proje sayısı elle "9+" yazılıydı; artık koleksiyondan sayılır, yeni bir
 // proje panelden eklendiğinde ana sayfadaki sayaç kendiliğinden güncellenir.
-const projectCount = (await getCollection('projects')).length;
+const projectCount = allProjects.length;
+
+// Ana sayfadaki 8 proje kartı eskiden koleksiyondan bağımsız, elle
+// yazılmıştı (projeler.astro'nunkinden AYRI bir veri kaynağı) — tıpkı
+// "tecrübe yılı" ve "proje sayısı"nın daha önce elle yazılıp yanlış
+// düşmesi gibi bir "iki gerçeklik kaynağı" riskiydi. Artık aynı koleksiyon
+// kullanılıyor, en güncel 8 kayıt gösteriliyor.
+//
+// NOT: "insaat" slug'lı kayıt panelden atılmış görünen bir deneme
+// kaydı (başlık "inşaat", açıklama "proje") — ana sayfada gerçek bir
+// proje gibi görünmemesi için burada bilerek dışlandı. Kalıcı çözüm
+// panelden bu kaydın silinmesi; bkz. panel > Projeler.
+const homeProjects = allProjects
+  .filter((p) => p.id.replace(/\/index$/, '') !== 'insaat')
+  .sort((a, b) => String(b.data.date ?? '').localeCompare(String(a.data.date ?? '')))
+  .slice(0, 8);
 
 // İş ortağı markalar. Eskiden 19 logo tek tek dönen bir carousel içindeydi;
 // ziyaretçi hepsini görmek için ~95 saniye beklemek zorundaydı. Artık hepsi
@@ -258,10 +277,9 @@ const ogImage = "https://ar-kar.com/img/og-default.webp";
     <div class="container-fluid py-6 px-5" id="about">
         <div class="row g-5">
             <div class="col-lg-7">
-                <h1 class="display-5 text-uppercase mb-4"><span class="text-primary">{EXPERIENCE_YEARS} Yıllık</span> Güven ve Tecrübe
-                </h1>
-                <h3 class="text-uppercase mb-3 text-body">Faaliyet gösterdiğimiz tüm sektörlerde başarımızı kanıtlayarak
-                    müşteri memnuniyeti ve sektör takdirini kazanıyoruz.</h3>
+                <SectionHeader as="h1" align="left" accent={`${EXPERIENCE_YEARS} Yıllık`} title="Güven ve Tecrübe" />
+                <p class="lead fw-semibold text-body mb-3">Faaliyet gösterdiğimiz tüm sektörlerde başarımızı kanıtlayarak
+                    müşteri memnuniyeti ve sektör takdirini kazanıyoruz.</p>
                 <p>{COMPANY.displayName} olarak 10'dan fazla sektörde, {EXPERIENCE_YEARS} yılı
                     aşkın süredir bilgi, birikim ve tecrübemizle Samsun'un Çarşamba ilçesinde hizmet vermekteyiz. İlk
                     olarak Nurettin Arabacı tarafından Arabacı Ticaret olarak kurulan firmamız, 1996 yılında Ar-kar
@@ -281,123 +299,27 @@ const ogImage = "https://ar-kar.com/img/og-default.webp";
 
     <!-- Projects Start -->
     <div class="container-fluid bg-light py-6 px-5" id="projects">
-        <div class="text-center mx-auto mb-5" style="max-width: 600px;">
-            <h2 class="display-6 text-uppercase mb-4"><span class="text-primary">İnşaat</span> Projelerimiz</h2>
-            <p class="mb-0">{EXPERIENCE_YEARS} yıllık tecrübemizle hayata geçirdiğimiz kaliteli konut projeleri</p>
-        </div>
+        <SectionHeader accent="İnşaat" title="Projelerimiz" lede={`${EXPERIENCE_YEARS} yıllık tecrübemizle hayata geçirdiğimiz kaliteli konut projeleri`} />
         <div class="row g-4">
-            <div class="col-12 col-sm-6 col-lg-3">
-                <div class="project-item position-relative overflow-hidden rounded">
-                    <img class="img-fluid w-100" src="/img/kirazlikcay-960.webp" srcset="/img/kirazlikcay-480.webp 480w, /img/kirazlikcay-960.webp 960w, /img/kirazlikcay.webp 1600w" sizes="(max-width: 575px) 100vw, (max-width: 991px) 50vw, 25vw"
-                        alt="Kirazlıkçay Konut Projesi - AR-KAR İnşaat" style="height: 300px; object-fit: cover;"
-                        loading="lazy">
-                    <div class="project-overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-white text-center p-4"
-                        style="background: rgba(231, 30, 36, 0.8); opacity: 0; transition: all 0.3s;">
-                        <h4 class="text-white mb-3">Çarşamba Kirazlıkçay Mahallesi Konut Projesi</h4>
-                        <p class="mb-3">Doğayla iç içe, manzaralı konumda tasarlanmış huzurlu yaşam alanları. 8 adet 2+1
-                            - 10 adet 1+1 toplam 18 daireden oluşan projemiz Çarşamba TOKİ'nin arka tarafında yer
-                            almaktadır.</p>
-                        <a href="/projeler" class="btn btn-light">Detayları Gör</a>
+            {homeProjects.map((project) => {
+                const slug = project.id.replace(/\/index$/, '');
+                const cover = project.data.coverImage || '/img/about.webp';
+                const overlayText = [project.data.specs, project.data.description].filter(Boolean).join('. ');
+                return (
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="project-item position-relative overflow-hidden rounded">
+                            <img class="img-fluid w-100" src={cover} alt={`${project.data.title} - AR-KAR İnşaat`}
+                                style="height: 300px; object-fit: cover;" loading="lazy">
+                            <div class="project-overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-white text-center p-4"
+                                style="background: rgba(231, 30, 36, 0.8); opacity: 0; transition: all 0.3s;">
+                                <h4 class="text-white mb-3">{project.data.title}</h4>
+                                {overlayText && <p class="mb-3">{overlayText}</p>}
+                                <a href={`/projeler/${slug}`} class="btn btn-light">Detayları Gör</a>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-12 col-sm-6 col-lg-3">
-                <div class="project-item position-relative overflow-hidden rounded">
-                    <img class="img-fluid w-100" src="/img/beypinar-960.webp" srcset="/img/beypinar-480.webp 480w, /img/beypinar-960.webp 960w, /img/beypinar.webp 1600w" sizes="(max-width: 575px) 100vw, (max-width: 991px) 50vw, 25vw" alt="Beypınar Konut Projesi - AR-KAR İnşaat"
-                        style="height: 300px; object-fit: cover;" loading="lazy">
-                    <div class="project-overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-white text-center p-4"
-                        style="background: rgba(231, 30, 36, 0.8); opacity: 0; transition: all 0.3s;">
-                        <h4 class="text-white mb-3">Atakum Beypınar Mahallesi Konut Projesi</h4>
-                        <p class="mb-3">Modern mimari anlayışla tasarlanmış, konforlu yaşam alanları sunan konut
-                            projemiz. 18 adet 2+1 daireden oluşan projemiz Gökdelenler bölgesi, Recep Tayyip Erdoğan
-                            bulvarına yakın konumda.</p>
-                        <a href="/projeler" class="btn btn-light">Detayları Gör</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-sm-6 col-lg-3">
-                <div class="project-item position-relative overflow-hidden rounded">
-                    <img class="img-fluid w-100" src="/img/alaplus.webp" srcset="/img/alaplus-480.webp 480w, /img/alaplus.webp 800w" sizes="(max-width: 575px) 100vw, (max-width: 991px) 50vw, 25vw" alt="Ala Plus Konut Projesi - AR-KAR İnşaat"
-                        style="height: 300px; object-fit: cover;" loading="lazy">
-                    <div class="project-overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-white text-center p-4"
-                        style="background: rgba(231, 30, 36, 0.8); opacity: 0; transition: all 0.3s;">
-                        <h4 class="text-white mb-3">Ala Plus Konut Projesi</h4>
-                        <p class="mb-3">Modern mimari anlayışla tasarlanmış, yüksek konfor standartlarına sahip konut
-                            projemiz. Premium kalitede malzemeler ve çağdaş tasarım detaylarıyla bölgenin öncü
-                            projelerinden biridir.</p>
-                        <a href="/projeler" class="btn btn-light">Detayları Gör</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-sm-6 col-lg-3">
-                <div class="project-item position-relative overflow-hidden rounded">
-                    <img class="img-fluid w-100" src="/img/korfez.webp" srcset="/img/korfez-480.webp 480w, /img/korfez.webp 800w" sizes="(max-width: 575px) 100vw, (max-width: 991px) 50vw, 25vw" alt="Körfez Konut Projesi - AR-KAR İnşaat"
-                        style="height: 300px; object-fit: cover;" loading="lazy">
-                    <div class="project-overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-white text-center p-4"
-                        style="background: rgba(231, 30, 36, 0.8); opacity: 0; transition: all 0.3s;">
-                        <h4 class="text-white mb-3">Atakum Körfez Konut Projesi</h4>
-                        <p class="mb-3">Modern mimari anlayışla tasarlanmış, konforlu yaşam alanları sunan konut
-                            projemiz. 19 adet 1+1 daireden oluşan projemiz Pelitköy tramvay durağına 1 dakika, Körfez
-                            marinaya 5 dakika yürüme mesafesindedir.</p>
-                        <a href="/projeler" class="btn btn-light">Detayları Gör</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-sm-6 col-lg-3">
-                <div class="project-item position-relative overflow-hidden rounded">
-                    <img class="img-fluid w-100" src="/img/bulutoglu.webp" srcset="/img/bulutoglu-480.webp 480w, /img/bulutoglu.webp 800w" sizes="(max-width: 575px) 100vw, (max-width: 991px) 50vw, 25vw" alt="Bulutoğlu Konut Projesi - AR-KAR İnşaat"
-                        style="height: 300px; object-fit: cover;" loading="lazy">
-                    <div class="project-overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-white text-center p-4"
-                        style="background: rgba(231, 30, 36, 0.8); opacity: 0; transition: all 0.3s;">
-                        <h4 class="text-white mb-3">Çarşamba Orta Mahalle Bulutoğlu Konut Projesi</h4>
-                        <p class="mb-3">Stratejik konumda, modern tasarım ve kaliteli malzemelerle inşa edilen konut
-                            projemiz. 8 adet 3+1 - 1 adet dükkandan oluşan projemiz bölgenin en işlevli köy ve şehri
-                            birleştiren caddesinde bulunmaktadır.</p>
-                        <a href="/projeler" class="btn btn-light">Detayları Gör</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-sm-6 col-lg-3">
-                <div class="project-item position-relative overflow-hidden rounded">
-                    <img class="img-fluid w-100" src="/img/ala.webp" srcset="/img/ala-480.webp 480w, /img/ala.webp 800w" sizes="(max-width: 575px) 100vw, (max-width: 991px) 50vw, 25vw" alt="Adapark Ala Konut Projesi - AR-KAR İnşaat"
-                        style="height: 300px; object-fit: cover;" loading="lazy">
-                    <div class="project-overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-white text-center p-4"
-                        style="background: rgba(231, 30, 36, 0.8); opacity: 0; transition: all 0.3s;">
-                        <h4 class="text-white mb-3">Çarşamba Adapark Ala Konut Projesi</h4>
-                        <p class="mb-3">Doğayla iç içe, manzaralı konumda tasarlanmış huzurlu yaşam alanları. 12 adet
-                            160 m² 3+1 ve 2 adet dükkandan oluşan projemiz akıllı ev sistemi ile donatılmıştır.</p>
-                        <a href="/projeler" class="btn btn-light">Detayları Gör</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-sm-6 col-lg-3">
-                <div class="project-item position-relative overflow-hidden rounded">
-                    <img class="img-fluid w-100" src="/img/adapark2-0-960.webp" srcset="/img/adapark2-0-480.webp 480w, /img/adapark2-0-960.webp 960w, /img/adapark2-0.webp 1600w" sizes="(max-width: 575px) 100vw, (max-width: 991px) 50vw, 25vw"
-                        alt="Adapark 2+0 Konut Projesi - AR-KAR İnşaat" style="height: 300px; object-fit: cover;"
-                        loading="lazy">
-                    <div class="project-overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-white text-center p-4"
-                        style="background: rgba(231, 30, 36, 0.8); opacity: 0; transition: all 0.3s;">
-                        <h4 class="text-white mb-3">Çarşamba Adapark 2+0 Konut Projesi</h4>
-                        <p class="mb-3">Doğayla iç içe, manzaralı konumda tasarlanmış huzurlu yaşam alanları. 6 adet 80
-                            m² 2+0 daire ve 1 dükkan bölgenin en prestijli konumunda.</p>
-                        <a href="/projeler" class="btn btn-light">Detayları Gör</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-sm-6 col-lg-3">
-                <div class="project-item position-relative overflow-hidden rounded">
-                    <img class="img-fluid w-100" src="/img/tekstilkent-960.webp" srcset="/img/tekstilkent-480.webp 480w, /img/tekstilkent-960.webp 960w, /img/tekstilkent.webp 1600w" sizes="(max-width: 575px) 100vw, (max-width: 991px) 50vw, 25vw" alt="Tekstilkent Projesi - AR-KAR İnşaat"
-                        style="height: 300px; object-fit: cover;" loading="lazy">
-                    <div class="project-overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-white text-center p-4"
-                        style="background: rgba(231, 30, 36, 0.8); opacity: 0; transition: all 0.3s;">
-                        <h4 class="text-white mb-3">Tekstilkent Projesi</h4>
-                        <p class="mb-3">975 m² idare binası + 2900 m² üretim alanı olmak üzere toplamda 3875 m².
-                            Bölgenin en büyük tekstil üretim tesislerinden biri.</p>
-                        <a href="/projeler" class="btn btn-light">Detayları Gör</a>
-                    </div>
-                </div>
-            </div>
-
+                );
+            })}
         </div>
         <div class="text-center mt-5">
             <a href="/projeler" class="btn btn-primary btn-lg px-5 py-3">
@@ -410,14 +332,12 @@ const ogImage = "https://ar-kar.com/img/og-default.webp";
 
     <!-- Dealerships Start -->
     <section class="container-fluid py-6 px-0" id="dealerships" aria-labelledby="dealerships-title">
-        <div class="text-center mx-auto mb-5 px-3 px-md-5" style="max-width: 720px;">
-            <h2 class="display-6 text-uppercase mb-3" id="dealerships-title">
-                <span class="text-primary">Güvenilir</span> İş Ortaklarımız
-            </h2>
+        <div class="px-3 px-md-5">
             {/* Marka sayısı BİLEREK yazılmıyor — panelden yeni bayilik
                 eklendiğinde/çıkarıldığında burası elle güncellenmesi
                 gereken bir sayı bırakmasın. */}
-            <p class="mb-0">Bayiliğini yaptığımız ve birlikte çalıştığımız güvenilir markalar</p>
+            <SectionHeader accent="Güvenilir" title="İş Ortaklarımız" id="dealerships-title"
+                lede="Bayiliğini yaptığımız ve birlikte çalıştığımız güvenilir markalar" />
         </div>
 
         {/* Kayan marka şeridi. Eskiden Bootstrap carousel'i tek logo
@@ -467,10 +387,7 @@ const ogImage = "https://ar-kar.com/img/og-default.webp";
 
     <!-- Services Start -->
     <div class="container-fluid bg-light py-6 px-5" id="service">
-        <div class="text-center mx-auto mb-5" style="max-width: 600px;">
-            <h2 class="display-6 text-uppercase mb-4"><span class="text-primary">AR-KAR Güvencesiyle</span> Sağladığımız
-                Hizmetler </h2>
-        </div>
+        <SectionHeader accent="AR-KAR Güvencesiyle" title="Sağladığımız Hizmetler" />
 
         <div class="services-bento">
             <a href="/projeler" class="bento-tile bento-tile--service">
@@ -529,73 +446,75 @@ const ogImage = "https://ar-kar.com/img/og-default.webp";
 
     <!-- Contact Start -->
     <div class="container-fluid py-6 px-5" id="contact">
-        <div class="text-center mx-auto mb-5" style="max-width: 600px;">
-            <h2 class="display-5 text-uppercase mb-4"><span class="text-primary">İletişim</span> Bilgilerimiz</h2>
-        </div>
+        <SectionHeader accent="İletişim" title="Bilgilerimiz" />
         <div class="row g-4">
             <!-- Şube -->
             <div class="col-12 col-lg-6" id="sube">
-                <div class="bg-light p-4 h-100 rounded shadow-sm d-flex flex-column">
-                    <h3 class="mb-3 text-uppercase"><i class="fa fa-map-marker-alt text-primary me-2"></i>Şube</h3>
-                    <div class="mb-2">
-                        <strong><i class="fa fa-map-marker-alt text-primary me-2"></i>Adres:</strong>
-                        <span>Orta Mah. Dr. Orhan Atılgan Cad. No:24/A Çarşamba, Samsun</span>
+                <Card padded={false} hoverable={false} class="h-100">
+                    <div class="card-surface__body h-100 d-flex flex-column">
+                        <h3 class="mb-3"><i class="fa fa-map-marker-alt text-primary me-2" aria-hidden="true"></i>{COMPANY.branches[0].name}</h3>
+                        <div class="mb-2">
+                            <strong><i class="fa fa-map-marker-alt text-primary me-2" aria-hidden="true"></i>Adres:</strong>
+                            <span>{COMPANY.branches[0].street} {COMPANY.branches[0].district}, {COMPANY.branches[0].city}</span>
+                        </div>
+                        <div class="mb-2">
+                            <strong><i class="fa fa-phone-alt text-primary me-2" aria-hidden="true"></i>Telefon:</strong>
+                            <span>{COMPANY.branches[0].phone}</span>
+                        </div>
+                        <div class="mb-2">
+                            <strong><i class="fa fa-mobile-alt text-primary me-2" aria-hidden="true"></i>Mobil:</strong>
+                            <span>{COMPANY.branches[0].mobile}</span>
+                        </div>
+                        <div class="mb-2">
+                            <strong><i class="fa fa-envelope text-primary me-2" aria-hidden="true"></i>E-posta:</strong>
+                            <span>{COMPANY.email}</span>
+                        </div>
+                        <div class="mb-2">
+                            <strong><i class="fa fa-clock text-primary me-2" aria-hidden="true"></i>Çalışma Saatleri:</strong>
+                            <span>{COMPANY.openingHours.days}: {COMPANY.openingHours.opens} - {COMPANY.openingHours.closes}</span>
+                        </div>
+                        <div class="mt-3 flex-grow-1 d-flex align-items-end">
+                            <iframe class="w-100 rounded" height="200"
+                                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d772.468571026306!2d36.73518574680688!3d41.20190120018642!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x408805eef4150237%3A0xacad6d76d6d10c25!2zQVItS0FSIMSwTsWeQUFULCBHSURBLCBUQVJJTSDDnFLDnE5MRVLEsCBWRSBUQcWeLiBUxLBDLiBMVEQuIMWeVMSw!5e0!3m2!1str!2str!4v1752059976203!5m2!1str!2str"
+                                frameborder="0" style="border:0;" allowfullscreen="" loading="lazy"
+                                title={`${COMPANY.branches[0].name} konum haritası`}></iframe>
+                        </div>
                     </div>
-                    <div class="mb-2">
-                        <strong><i class="fa fa-phone-alt text-primary me-2"></i>Telefon:</strong>
-                        <span>+90 362 834 18 48</span>
-                    </div>
-                    <div class="mb-2">
-                        <strong><i class="fa fa-mobile-alt text-primary me-2"></i>Mobil:</strong>
-                        <span>+90 542 182 68 55</span>
-                    </div>
-                    <div class="mb-2">
-                        <strong><i class="fa fa-envelope text-primary me-2"></i>E-posta:</strong>
-                        <span>arkargida@gmail.com</span>
-                    </div>
-                    <div class="mb-2">
-                        <strong><i class="fa fa-clock text-primary me-2"></i>Çalışma Saatleri:</strong>
-                        <span>Pazartesi - Cumartesi: 08:00 - 18:00</span>
-                    </div>
-                    <div class="mt-3 flex-grow-1 d-flex align-items-end">
-                        <iframe class="w-100 rounded" height="200"
-                            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d772.468571026306!2d36.73518574680688!3d41.20190120018642!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x408805eef4150237%3A0xacad6d76d6d10c25!2zQVItS0FSIMSwTsWeQUFULCBHSURBLCBUQVJJTSDDnFLDnE5MRVLEsCBWRSBUQcWeLiBUxLBDLiBMVEQuIMWeVMSw!5e0!3m2!1str!2str!4v1752059976203!5m2!1str!2str"
-                            frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false"
-                            tabindex="0"></iframe>
-                    </div>
-                </div>
+                </Card>
             </div>
             <!-- Merkez -->
             <div class="col-12 col-lg-6" id="merkez">
-                <div class="bg-light p-4 h-100 rounded shadow-sm d-flex flex-column">
-                    <h3 class="mb-3 text-uppercase"><i class="fa fa-map-marker-alt text-primary me-2"></i>Merkez</h3>
-                    <div class="mb-2">
-                        <strong><i class="fa fa-map-marker-alt text-primary me-2"></i>Adres:</strong>
-                        <span>Aşağı Kavacık Mah. No:46/A Çarşamba, Samsun</span>
+                <Card padded={false} hoverable={false} class="h-100">
+                    <div class="card-surface__body h-100 d-flex flex-column">
+                        <h3 class="mb-3"><i class="fa fa-map-marker-alt text-primary me-2" aria-hidden="true"></i>{COMPANY.branches[1].name}</h3>
+                        <div class="mb-2">
+                            <strong><i class="fa fa-map-marker-alt text-primary me-2" aria-hidden="true"></i>Adres:</strong>
+                            <span>{COMPANY.branches[1].street} {COMPANY.branches[1].district}, {COMPANY.branches[1].city}</span>
+                        </div>
+                        <div class="mb-2">
+                            <strong><i class="fa fa-phone-alt text-primary me-2" aria-hidden="true"></i>Telefon:</strong>
+                            <span>{COMPANY.branches[1].phone}</span>
+                        </div>
+                        <div class="mb-2">
+                            <strong><i class="fa fa-mobile-alt text-primary me-2" aria-hidden="true"></i>Mobil:</strong>
+                            <span>{COMPANY.branches[1].mobile}</span>
+                        </div>
+                        <div class="mb-2">
+                            <strong><i class="fa fa-envelope text-primary me-2" aria-hidden="true"></i>E-posta:</strong>
+                            <span>{COMPANY.email}</span>
+                        </div>
+                        <div class="mb-2">
+                            <strong><i class="fa fa-clock text-primary me-2" aria-hidden="true"></i>Çalışma Saatleri:</strong>
+                            <span>{COMPANY.openingHours.days}: {COMPANY.openingHours.opens} - {COMPANY.openingHours.closes}</span>
+                        </div>
+                        <div class="mt-3 flex-grow-1 d-flex align-items-end">
+                            <iframe class="w-100 rounded" height="200"
+                                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11998.885509682566!2d36.7301586!3d41.2496267!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4087d815c0000001%3A0x93edfdd88f6e6692!2zQXIta2FyIMSwbsWfYWF0!5e0!3m2!1str!2str!4v1752059871580!5m2!1str!2str"
+                                frameborder="0" style="border:0;" allowfullscreen="" loading="lazy"
+                                title={`${COMPANY.branches[1].name} konum haritası`}></iframe>
+                        </div>
                     </div>
-                    <div class="mb-2">
-                        <strong><i class="fa fa-phone-alt text-primary me-2"></i>Telefon:</strong>
-                        <span>+90 362 846 03 93</span>
-                    </div>
-                    <div class="mb-2">
-                        <strong><i class="fa fa-mobile-alt text-primary me-2"></i>Mobil:</strong>
-                        <span>+90 542 152 67 55</span>
-                    </div>
-                    <div class="mb-2">
-                        <strong><i class="fa fa-envelope text-primary me-2"></i>E-posta:</strong>
-                        <span>arkargida@gmail.com</span>
-                    </div>
-                    <div class="mb-2">
-                        <strong><i class="fa fa-clock text-primary me-2"></i>Çalışma Saatleri:</strong>
-                        <span>Pazartesi - Cumartesi: 08:00 - 18:00</span>
-                    </div>
-                    <div class="mt-3 flex-grow-1 d-flex align-items-end">
-                        <iframe class="w-100 rounded" height="200"
-                            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11998.885509682566!2d36.7301586!3d41.2496267!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4087d815c0000001%3A0x93edfdd88f6e6692!2zQXIta2FyIMSwbsWfYWF0!5e0!3m2!1str!2str!4v1752059871580!5m2!1str!2str"
-                            frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false"
-                            tabindex="0"></iframe>
-                    </div>
-                </div>
+                </Card>
             </div>
         </div>
     </div>

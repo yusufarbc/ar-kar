@@ -4,193 +4,534 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="robots" content="noindex, nofollow" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="theme-color" content="#15171c" />
   <title>AR-KAR İçerik Paneli</title>
   <style>
+    /* ====================================================================
+       AR-KAR İçerik Paneli — arayüz
+       --------------------------------------------------------------------
+       Tek dosya, bağımlılık yok. Derleme adımı olmadığı için doğrudan
+       Cloudflare Pages'e statik olarak yüklenir.
+
+       Düzen: masaüstünde iki sütun (kayıt listesi + düzenleyici), mobilde
+       tek sütun; <body data-view> ile hangi sütunun görüneceği belirlenir.
+       ==================================================================== */
+
     :root{
-      --bg:#f4f5f7; --card:#fff; --ink:#15171c; --muted:#6b7280;
-      --line:#e3e5ea; --brand:#cc272b; --ok:#15734a; --danger:#b42318;
-      color-scheme: light;
+      --bg:#f3f4f6;
+      --panel:#ffffff;
+      --panel-2:#fafbfc;
+      --ink:#14161b;
+      --ink-2:#4b5159;
+      --muted:#767d88;
+      --line:#e2e5ea;
+      --line-2:#eef0f3;
+      --brand:#E71E24;
+      --brand-ink:#ffffff;
+      --ok:#0f6b44;
+      --ok-bg:#e7f5ee;
+      --ok-line:#bfe3d1;
+      --danger:#b42318;
+      --danger-bg:#fdecea;
+      --danger-line:#f4c7c2;
+      --warn:#8a6100;
+      --warn-bg:#fdf5e2;
+      --warn-line:#f0dca6;
+      --shadow:0 1px 2px rgba(16,18,22,.05), 0 8px 24px rgba(16,18,22,.06);
+      --radius:12px;
     }
+
+    @media (prefers-color-scheme: dark){
+      :root{
+        --bg:#0f1115;
+        --panel:#171a20;
+        --panel-2:#1d2128;
+        --ink:#eceef2;
+        --ink-2:#b9bec7;
+        --muted:#8b929d;
+        --line:#2a2f38;
+        --line-2:#232831;
+        --brand:#E71E24;
+        --ok:#6ee7b7;
+        --ok-bg:#12241c;
+        --ok-line:#1f4536;
+        --danger:#fca5a5;
+        --danger-bg:#2a1618;
+        --danger-line:#4d2427;
+        --warn:#fcd34d;
+        --warn-bg:#2a2313;
+        --warn-line:#4b3d16;
+        --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35);
+      }
+    }
+
     *{box-sizing:border-box}
+    html,body{height:100%}
     body{
       margin:0; background:var(--bg); color:var(--ink);
       font:15px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-      padding-bottom:calc(24px + env(safe-area-inset-bottom,0px));
+      -webkit-font-smoothing:antialiased;
     }
-    header{
-      background:#15171c; color:#fff; position:sticky; top:0; z-index:20;
-      padding:calc(13px + env(safe-area-inset-top,0px)) 16px 13px;
-      display:flex; align-items:center; gap:12px; flex-wrap:wrap;
+    a{color:inherit}
+
+    /* ---------- Üst şerit ---------- */
+    .topbar{
+      background:#14161b; color:#fff;
+      padding:calc(10px + env(safe-area-inset-top,0px)) 16px 10px;
+      display:flex; align-items:center; gap:12px;
+      border-bottom:1px solid #000;
     }
-    header h1{font-size:.98rem;margin:0;font-weight:700;letter-spacing:.02em}
-    header .who{margin-left:auto;font-size:.78rem;color:#9aa1ac}
-    .wrap{max-width:820px;margin:0 auto;padding:16px}
-    .tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+    .topbar__brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:.95rem;letter-spacing:.01em}
+    .topbar__dot{width:9px;height:9px;border-radius:50%;background:var(--brand);flex:none}
+    .topbar__spacer{margin-left:auto}
+    .topbar__who{
+      font-size:.78rem;color:#aab1bb;display:flex;align-items:center;gap:7px;
+      max-width:44vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+    }
+    .topbar__link{
+      font-size:.78rem;color:#dfe3e8;text-decoration:none;border:1px solid #333944;
+      padding:5px 11px;border-radius:999px;white-space:nowrap;
+    }
+    .topbar__link:hover{background:#222833}
+
+    /* ---------- İskelet ---------- */
+    .shell{
+      display:grid; grid-template-columns:330px minmax(0,1fr);
+      gap:18px; max-width:1360px; margin:0 auto; padding:18px 18px 40px;
+      align-items:start;
+    }
+
+    .panel{
+      background:var(--panel); border:1px solid var(--line);
+      border-radius:var(--radius); box-shadow:var(--shadow);
+    }
+
+    /* ---------- Kenar çubuğu ---------- */
+    .side{position:sticky; top:18px; overflow:hidden}
+    .side__head{padding:14px 14px 12px; border-bottom:1px solid var(--line-2)}
+    .tabs{display:flex;gap:6px;background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:4px}
     .tab{
-      border:1px solid var(--line); background:var(--card); color:var(--ink);
-      padding:9px 16px;border-radius:999px;cursor:pointer;font:inherit;font-weight:600;font-size:.9rem;
+      flex:1; border:0; background:transparent; color:var(--ink-2);
+      padding:8px 10px; border-radius:7px; cursor:pointer;
+      font:inherit; font-weight:600; font-size:.86rem;
     }
-    .tab[aria-selected="true"]{background:var(--brand);border-color:var(--brand);color:#fff}
-    .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:16px}
-    .card h2{margin:0 0 12px;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+    .tab[aria-selected="true"]{background:var(--brand);color:var(--brand-ink)}
+    .tab:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+
+    .search{position:relative;margin-top:11px}
+    .search input{
+      width:100%; padding:9px 12px 9px 33px; border:1px solid var(--line);
+      border-radius:9px; font:inherit; font-size:.88rem; background:var(--panel-2); color:var(--ink);
+    }
+    .search::before{
+      content:"⌕"; position:absolute; left:11px; top:50%; transform:translateY(-50%);
+      color:var(--muted); font-size:1.05rem; line-height:1; pointer-events:none;
+    }
+
+    .side__new{
+      margin-top:10px; width:100%; display:flex; align-items:center; justify-content:center; gap:7px;
+      padding:10px; border-radius:9px; border:1px dashed var(--line);
+      background:transparent; color:var(--ink-2); font:inherit; font-weight:600; font-size:.88rem; cursor:pointer;
+    }
+    .side__new:hover{border-color:var(--brand);color:var(--brand)}
+
+    .side__count{padding:9px 15px;font-size:.73rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+
+    .entries{list-style:none;margin:0;padding:0 8px 10px;max-height:min(58vh,560px);overflow:auto}
+    .entry{
+      display:flex; align-items:center; gap:10px; width:100%; text-align:left;
+      padding:10px 10px; border:0; border-radius:9px; background:transparent;
+      color:inherit; font:inherit; cursor:pointer;
+    }
+    .entry:hover{background:var(--panel-2)}
+    .entry[aria-current="true"]{background:var(--brand);color:var(--brand-ink)}
+    .entry[aria-current="true"] .entry__meta{color:rgba(255,255,255,.82)}
+    .entry__body{min-width:0;flex:1}
+    .entry__title{font-weight:600;font-size:.9rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .entry__meta{font-size:.76rem;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .entry__chev{color:var(--muted);flex:none;font-size:.9rem}
+    .entry[aria-current="true"] .entry__chev{color:rgba(255,255,255,.75)}
+
+    .side__empty{padding:16px 15px 22px;color:var(--muted);font-size:.87rem}
+
+    .skeleton{height:14px;border-radius:5px;background:var(--line-2);animation:pulse 1.3s ease-in-out infinite}
+    .skeleton+.skeleton{margin-top:8px}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.45}}
+
+    /* ---------- Düzenleyici ---------- */
+    .editor{overflow:hidden}
+    .editor__head{
+      display:flex; align-items:flex-start; gap:12px; flex-wrap:wrap;
+      padding:15px 18px; border-bottom:1px solid var(--line-2); background:var(--panel-2);
+    }
+    .editor__back{
+      display:none; border:1px solid var(--line); background:var(--panel); color:var(--ink);
+      border-radius:8px; padding:7px 11px; font:inherit; font-size:.84rem; font-weight:600; cursor:pointer;
+    }
+    .editor__titles{min-width:0;flex:1}
+    .badge{
+      display:inline-block; font-size:.68rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase;
+      padding:3px 8px; border-radius:999px; margin-bottom:5px;
+    }
+    .badge--new{background:var(--ok-bg);color:var(--ok);border:1px solid var(--ok-line)}
+    .badge--edit{background:var(--warn-bg);color:var(--warn);border:1px solid var(--warn-line)}
+    .editor__name{font-size:1.05rem;font-weight:700;margin:0;overflow-wrap:anywhere}
+    .editor__url{font-size:.79rem;color:var(--muted);margin-top:3px;overflow-wrap:anywhere}
+    .editor__url code{background:var(--line-2);padding:1px 5px;border-radius:4px}
+    .editor__actions{display:flex;gap:8px;flex-wrap:wrap;margin-left:auto}
+
+    .editor__body{padding:18px}
+
+    .field{margin-bottom:16px}
+    .field--split{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    @media (max-width:700px){ .field--split{grid-template-columns:1fr} }
     label{display:block;font-weight:600;font-size:.85rem;margin:0 0 6px}
-    input[type=text],input[type=date],textarea,select,input[type=file]{
-      width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;
-      font:inherit;background:#fff;color:var(--ink)
+    .req{color:var(--brand)}
+    input[type=text],input[type=date],textarea,select{
+      width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:9px;
+      font:inherit; background:var(--panel); color:var(--ink);
+    }
+    input:focus-visible,textarea:focus-visible,select:focus-visible{
+      outline:2px solid var(--brand); outline-offset:1px; border-color:var(--brand);
     }
     textarea{resize:vertical}
-    .field{margin-bottom:14px}
-    .hint{font-size:.78rem;color:var(--muted);margin-top:5px}
-    .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-    button{font:inherit;font-weight:600;border-radius:8px;padding:10px 18px;border:1px solid transparent;cursor:pointer}
-    .primary{background:var(--brand);color:#fff}
-    .ghost{background:#fff;border-color:var(--line);color:var(--ink)}
-    .danger{background:#fff;border-color:#f2c4c0;color:var(--danger)}
-    button:disabled{opacity:.55;cursor:not-allowed}
-    ul.entries{list-style:none;margin:0;padding:0}
-    ul.entries li{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:11px 0;border-bottom:1px solid var(--line)}
-    ul.entries li:last-child{border-bottom:0}
-    .entry-main{flex:1 1 220px;min-width:0}
-    .entry-title{font-weight:600}
-    .entry-meta{font-size:.78rem;color:var(--muted)}
-    .msg{padding:11px 14px;border-radius:8px;margin-bottom:14px;font-size:.9rem;display:none}
-    .msg.ok{display:block;background:#e6f5ee;color:var(--ok);border:1px solid #bde2cf}
-    .msg.err{display:block;background:#fdeceb;color:var(--danger);border:1px solid #f4c8c4}
-    .empty{color:var(--muted);font-size:.9rem;padding:10px 0}
-    img.preview{max-width:200px;border-radius:8px;margin-top:8px;display:block}
+    .hint{font-size:.78rem;color:var(--muted);margin-top:6px}
+    .hint strong{color:var(--ink-2)}
 
-    /* --- Markdown editör --- */
+    button{font:inherit;font-weight:600;border-radius:9px;padding:9px 16px;border:1px solid transparent;cursor:pointer}
+    .btn-primary{background:var(--brand);color:var(--brand-ink)}
+    .btn-ghost{background:var(--panel);border-color:var(--line);color:var(--ink)}
+    .btn-danger{background:var(--panel);border-color:var(--danger-line);color:var(--danger)}
+    button:disabled{opacity:.5;cursor:not-allowed}
+    button:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+
+    /* ---------- Adres (slug) ---------- */
+    .slug-row{display:flex;align-items:center;gap:0}
+    .slug-row .slug-prefix{
+      padding:10px 10px; border:1px solid var(--line); border-right:0;
+      border-radius:9px 0 0 9px; background:var(--panel-2); color:var(--muted);
+      font-size:.85rem; white-space:nowrap;
+    }
+    .slug-row input{border-radius:0 9px 9px 0}
+    .slug-row input[readonly]{background:var(--panel-2);color:var(--muted)}
+
+    /* ---------- Görsel yükleme ---------- */
+    .drop{
+      border:1.5px dashed var(--line); border-radius:11px; padding:16px;
+      text-align:center; color:var(--muted); font-size:.87rem;
+      background:var(--panel-2); cursor:pointer; transition:border-color .15s, background .15s;
+    }
+    .drop:hover,.drop.is-over{border-color:var(--brand);background:var(--panel);color:var(--ink-2)}
+    .drop input[type=file]{display:none}
+    .drop__title{font-weight:600;color:var(--ink-2);display:block;margin-bottom:2px}
+
+    .cover{display:flex;gap:12px;align-items:flex-start;margin-top:11px}
+    .cover img{width:132px;height:88px;object-fit:cover;border-radius:9px;border:1px solid var(--line);background:var(--line-2)}
+    .cover__info{font-size:.8rem;color:var(--muted);min-width:0}
+
+    .thumbs{display:flex;flex-wrap:wrap;gap:10px;margin-top:11px}
+    .thumb{position:relative;width:92px;height:92px;border-radius:9px;overflow:hidden;border:1px solid var(--line);background:var(--line-2)}
+    .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+    .thumb__x{
+      position:absolute;top:3px;right:3px;width:23px;height:23px;padding:0;
+      border-radius:50%;background:rgba(10,12,16,.78);color:#fff;font-size:.8rem;line-height:1;border:0;
+    }
+    .thumb--new::after{
+      content:"yeni";position:absolute;left:0;bottom:0;right:0;
+      background:rgba(15,107,68,.9);color:#fff;font-size:.64rem;text-align:center;padding:2px 0;letter-spacing:.04em;
+    }
+
+    /* ---------- Markdown editör ---------- */
     .md-toolbar{
-      display:flex;flex-wrap:wrap;gap:4px;background:#f4f5f7;border:1px solid var(--line);
-      border-bottom:0;border-radius:8px 8px 0 0;padding:6px;
+      display:flex;flex-wrap:wrap;gap:4px;background:var(--panel-2);
+      border:1px solid var(--line);border-bottom:0;border-radius:9px 9px 0 0;padding:6px;
     }
     .md-toolbar button{
-      padding:6px 10px;font-size:.82rem;font-weight:600;background:#fff;
-      border:1px solid var(--line);border-radius:6px;color:var(--ink);line-height:1;
+      padding:6px 10px;font-size:.81rem;font-weight:600;background:var(--panel);
+      border:1px solid var(--line);border-radius:6px;color:var(--ink);line-height:1.2;
     }
-    .md-toolbar button:hover{background:#eee}
-    .md-toolbar .sep{width:1px;background:var(--line);margin:2px 2px}
+    .md-toolbar button:hover{border-color:var(--brand)}
+    .md-toolbar button.is-on{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+    .md-toolbar .sep{width:1px;background:var(--line);margin:3px 3px}
     .md-toolbar .push{margin-left:auto}
-    .md-toolbar button.active{background:var(--brand);color:#fff;border-color:var(--brand)}
-    .md-wrap textarea{border-radius:0 0 8px 8px;border-top:0;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88rem}
+    .md-area textarea{
+      border-radius:0 0 9px 9px;border-top:0;
+      font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88rem;line-height:1.6;
+    }
     .md-preview{
-      display:none;border:1px solid var(--line);border-top:0;border-radius:0 0 8px 8px;
-      padding:14px;background:#fff;min-height:120px;font-size:.92rem;line-height:1.6;
+      display:none;border:1px solid var(--line);border-top:0;border-radius:0 0 9px 9px;
+      padding:16px;background:var(--panel);min-height:180px;font-size:.93rem;line-height:1.65;
     }
-    .md-preview.active{display:block}
-    .md-preview h2,.md-preview h3{margin:.6em 0 .3em}
-    .md-preview p{margin:0 0 .8em}
-    .md-preview ul,.md-preview ol{margin:0 0 .8em;padding-left:1.4em}
-    .md-preview img{max-width:100%;border-radius:6px}
-    .md-editor-area[hidden]{display:none}
+    .md-preview.is-on{display:block}
+    .md-preview h2,.md-preview h3,.md-preview h4{margin:.7em 0 .35em;line-height:1.3}
+    .md-preview p{margin:0 0 .85em}
+    .md-preview ul,.md-preview ol{margin:0 0 .85em;padding-left:1.45em}
+    .md-preview img{max-width:100%;border-radius:7px}
+    .md-area[hidden]{display:none}
 
-    /* --- Galeri --- */
-    .gallery-thumbs{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
-    .gallery-thumb{position:relative;width:88px;height:88px;border-radius:8px;overflow:hidden;border:1px solid var(--line)}
-    .gallery-thumb img{width:100%;height:100%;object-fit:cover;display:block}
-    .gallery-thumb button{
-      position:absolute;top:2px;right:2px;width:22px;height:22px;padding:0;
-      border-radius:50%;background:rgba(20,20,20,.72);color:#fff;font-size:.85rem;line-height:1;border:0;
+    /* ---------- Alt bilgi çubuğu ---------- */
+    .pipeline{
+      display:flex;gap:9px;align-items:flex-start;
+      margin-top:4px;padding:12px 14px;border-radius:10px;
+      background:var(--panel-2);border:1px solid var(--line-2);
+      font-size:.81rem;color:var(--muted);line-height:1.5;
     }
-    .gallery-thumb.is-new::after{
-      content:"yeni";position:absolute;left:0;bottom:0;right:0;background:rgba(21,115,74,.85);
-      color:#fff;font-size:.65rem;text-align:center;padding:1px 0;
-    }
+    .pipeline strong{color:var(--ink-2)}
 
-    @media (max-width:480px){
-      .wrap{padding:12px}
-      button{width:100%}
-      .row button{width:auto;flex:1 1 auto}
-      .md-toolbar button{width:auto}
-      .gallery-thumb{width:72px;height:72px}
+    /* ---------- Bildirimler ---------- */
+    .toasts{
+      position:fixed;right:16px;bottom:16px;z-index:60;
+      display:flex;flex-direction:column;gap:9px;max-width:min(400px,calc(100vw - 32px));
+    }
+    .toast{
+      padding:12px 14px;border-radius:10px;box-shadow:var(--shadow);
+      font-size:.88rem;line-height:1.45;border:1px solid var(--line);background:var(--panel);color:var(--ink);
+      animation:slidein .18s ease-out;
+    }
+    .toast--ok{background:var(--ok-bg);border-color:var(--ok-line);color:var(--ok)}
+    .toast--err{background:var(--danger-bg);border-color:var(--danger-line);color:var(--danger)}
+    .toast a{font-weight:700}
+    @keyframes slidein{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+    /* ---------- Onay kutusu ---------- */
+    dialog{
+      border:1px solid var(--line);border-radius:14px;padding:0;max-width:420px;width:calc(100vw - 36px);
+      background:var(--panel);color:var(--ink);box-shadow:var(--shadow);
+    }
+    dialog::backdrop{background:rgba(8,10,14,.5)}
+    .dlg__body{padding:20px 20px 6px}
+    .dlg__title{margin:0 0 7px;font-size:1.03rem}
+    .dlg__text{margin:0;color:var(--ink-2);font-size:.9rem;line-height:1.55}
+    .dlg__actions{display:flex;gap:9px;justify-content:flex-end;padding:16px 20px 18px}
+
+    /* ---------- Mobil ---------- */
+    @media (max-width:900px){
+      .shell{grid-template-columns:1fr;padding:12px 12px 32px;gap:12px}
+      .side{position:static;max-height:none}
+      .entries{max-height:none}
+      .editor__back{display:inline-block}
+      .editor__actions{width:100%;margin-left:0}
+      .editor__actions button{flex:1 1 auto}
+      body[data-view="list"] .editor{display:none}
+      body[data-view="editor"] .side{display:none}
+      .toasts{left:12px;right:12px;bottom:12px;max-width:none}
     }
   </style>
 </head>
-<body>
-  <header>
-    <h1>AR-KAR İçerik Paneli</h1>
-    <span class="who" id="who"></span>
+<body data-view="list">
+
+  <header class="topbar">
+    <span class="topbar__brand"><span class="topbar__dot"></span>AR-KAR İçerik Paneli</span>
+    <span class="topbar__spacer"></span>
+    <span class="topbar__who" id="who" title="Cloudflare Access kimliği"></span>
+    <a class="topbar__link" href="https://ar-kar.com" target="_blank" rel="noopener">Siteyi aç ↗</a>
   </header>
 
-  <div class="wrap">
-    <div class="msg" id="msg"></div>
-    <div class="tabs" id="tabs" role="tablist"></div>
+  <main class="shell">
 
-    <div class="card">
-      <h2 id="listTitle">Kayıtlar</h2>
+    <!-- ---------------- Kenar çubuğu: kayıt listesi ---------------- -->
+    <aside class="panel side">
+      <div class="side__head">
+        <div class="tabs" id="tabs" role="tablist"></div>
+        <div class="search">
+          <input type="text" id="search" placeholder="Kayıtlarda ara…" autocomplete="off" aria-label="Kayıtlarda ara" />
+        </div>
+        <button type="button" class="side__new" id="newBtn">＋ Yeni kayıt</button>
+      </div>
+      <div class="side__count" id="count"></div>
       <ul class="entries" id="entries"></ul>
-      <div class="empty" id="listEmpty">Yükleniyor…</div>
-    </div>
+      <div class="side__empty" id="sideEmpty" hidden></div>
+    </aside>
 
-    <div class="card">
-      <h2 id="formTitle">Yeni Kayıt</h2>
-      <form id="form" novalidate>
-        <div id="fields"></div>
-        <div class="row">
-          <button type="submit" class="primary" id="saveBtn">Yayınla</button>
-          <button type="button" class="ghost" id="resetBtn">Temizle</button>
+    <!-- ---------------- Düzenleyici ---------------- -->
+    <section class="panel editor">
+      <div class="editor__head">
+        <button type="button" class="editor__back" id="backBtn">← Kayıtlar</button>
+        <div class="editor__titles">
+          <span class="badge" id="modeBadge"></span>
+          <h1 class="editor__name" id="editorName">Yeni kayıt</h1>
+          <div class="editor__url" id="editorUrl"></div>
         </div>
-        <div class="hint">
-          Kaydettiğinizde içerik <code>production</code> dalına commit edilir,
-          testler geçtikten sonra site otomatik güncellenir (1-2 dakika).
-          Görseller yüklenirken otomatik olarak WebP'ye çevrilir.
+        <div class="editor__actions">
+          <button type="button" class="btn-danger" id="deleteBtn" hidden>Sil</button>
+          <button type="button" class="btn-ghost" id="cancelBtn">Vazgeç</button>
+          <button type="button" class="btn-primary" id="saveBtn">Yayınla</button>
         </div>
-      </form>
+      </div>
+
+      <div class="editor__body">
+        <form id="form" novalidate>
+          <div id="fields"></div>
+          <div class="pipeline">
+            <span aria-hidden="true">⚙</span>
+            <span>
+              <strong>Yayınladığınızda ne oluyor?</strong> İçerik <code>production</code> dalına commit edilir,
+              testler çalışır, ardından site otomatik olarak yeniden yayınlanır — genellikle <strong>1–2 dakika</strong>.
+              Görseller tarayıcınızda WebP'ye çevrilip küçültülerek yüklenir.
+              Kaydetmek için <strong>Ctrl/⌘ + S</strong> kısayolunu da kullanabilirsiniz.
+            </span>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+
+  <dialog id="confirmDlg">
+    <div class="dlg__body">
+      <h2 class="dlg__title" id="dlgTitle">Emin misiniz?</h2>
+      <p class="dlg__text" id="dlgText"></p>
     </div>
-  </div>
+    <div class="dlg__actions">
+      <button type="button" class="btn-ghost" id="dlgCancel">Vazgeç</button>
+      <button type="button" class="btn-danger" id="dlgOk">Evet</button>
+    </div>
+  </dialog>
 
 <script>
+/* ======================================================================
+   Koleksiyon tanımları — ana sitedeki Zod şeması ve publish.ts ile
+   birebir uyumlu olmalıdır. Buradaki alan adları doğrudan API gövdesine
+   yazılır.
+   ====================================================================== */
 const COLLECTIONS = {
   blog: {
     label: 'Haberler',
+    urlBase: '/blog/',
     fields: [
-      {name:'title',       label:'Başlık',          type:'text',     required:true},
-      {name:'date',        label:'Tarih',           type:'date',     required:true},
-      {name:'description', label:'Özet Açıklama',   type:'textarea'},
-      {name:'coverImage',  label:'Kapak Görseli',   type:'image'},
-      {name:'gallery',     label:'Ek Görseller (Galeri)', type:'gallery'},
-      {name:'content',     label:'İçerik', type:'markdown', required:true},
+      {name:'title',       label:'Başlık',                type:'text',     required:true},
+      {name:'date',        label:'Tarih',                 type:'date',     required:true},
+      {name:'description', label:'Özet açıklama',         type:'textarea', hint:'Liste sayfasında ve arama sonuçlarında görünür. 1–2 cümle yeterli.'},
+      {name:'coverImage',  label:'Kapak görseli',         type:'image'},
+      {name:'gallery',     label:'Ek görseller (galeri)', type:'gallery'},
+      {name:'content',     label:'İçerik',                type:'markdown', required:true},
     ],
   },
   projects: {
     label: 'Projeler',
+    urlBase: '/projeler/',
     fields: [
-      {name:'title',    label:'Proje Adı', type:'text', required:true},
+      {name:'title',    label:'Proje adı', type:'text', required:true},
       {name:'category', label:'Kategori',  type:'select', required:true, options:[
-        {value:'insaat',     label:'İnşaat'},
-        {value:'pvc',        label:'PVC & Alüminyum'},
-        {value:'mimar',      label:'Mimarlık'},
+        {value:'insaat', label:'İnşaat'},
+        {value:'pvc',    label:'PVC & Alüminyum'},
+        {value:'mimar',  label:'Mimarlık'},
       ]},
-      {name:'location',    label:'Konum',            type:'text', placeholder:'Çarşamba, Samsun'},
-      {name:'specs',       label:'Daire / Teknik Bilgi', type:'text', placeholder:'18 Daire (8x2+1, 10x1+1)'},
-      {name:'date',        label:'Tarih',            type:'date', required:true},
-      {name:'description', label:'Kısa Açıklama',    type:'textarea'},
-      {name:'coverImage',  label:'Proje Görseli',    type:'image'},
-      {name:'gallery',     label:'Ek Görseller (Galeri)', type:'gallery'},
-      {name:'content',     label:'Detaylı Bilgi', type:'markdown', required:true},
+      {name:'location', label:'Konum', type:'text', placeholder:'Çarşamba, Samsun'},
+      {name:'specs',    label:'Daire / teknik bilgi', type:'text', placeholder:'18 daire (8× 2+1, 10× 1+1)'},
+      {name:'date',     label:'Tarih', type:'date', required:true},
+      {name:'description', label:'Kısa açıklama',      type:'textarea', hint:'Proje listesinde kartın altında görünür.'},
+      {name:'coverImage',  label:'Proje görseli',      type:'image'},
+      {name:'gallery',     label:'Ek görseller (galeri)', type:'gallery'},
+      {name:'content',     label:'Detaylı bilgi',      type:'markdown', required:true},
     ],
   },
 };
 
-const keys = Object.keys(COLLECTIONS);
-let current = keys[0];
-let editingSlug = null;
-let pendingImage = null;      // {base64, name} — kapak görseli
-let galleryState = { existing: [], newFiles: [] }; // existing: string[] yollar, newFiles: {base64,name}[]
+const SITE = 'https://ar-kar.com';
+const MAX_GALLERY = 8;
+
+/* ======================================================================
+   Durum
+   ====================================================================== */
+const state = {
+  collection: Object.keys(COLLECTIONS)[0],
+  entries: [],
+  filter: '',
+  editingSlug: null,   // null => yeni kayıt
+  dirty: false,        // kaydedilmemiş değişiklik var mı
+  pendingImage: null,  // {base64, name}
+  gallery: { existing: [], newFiles: [] },
+};
 
 const $ = (id) => document.getElementById(id);
-const esc = (s) => String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+const esc = (s) => String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 const today = () => new Date().toISOString().slice(0,10);
 
-function showMsg(text, kind){
-  const m = $('msg');
-  m.textContent = text;
-  m.className = 'msg ' + kind;
-  if (kind === 'ok') setTimeout(() => { m.className = 'msg'; }, 7000);
+/**
+ * publish.ts içindeki slugify ile BİREBİR aynı olmalıdır; aksi hâlde
+ * kullanıcıya gösterdiğimiz adres önizlemesi gerçekte oluşacak adresten
+ * farklı çıkar.
+ */
+function slugify(input){
+  const map = {'ç':'c','Ç':'c','ğ':'g','Ğ':'g','ı':'i','İ':'i','ö':'o','Ö':'o','ş':'s','Ş':'s','ü':'u','Ü':'u'};
+  return String(input ?? '')
+    .split('').map(c => map[c] ?? c).join('')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g,'-')
+    .replace(/^-+|-+$/g,'')
+    .slice(0,80);
 }
 
-/** Görseli tarayıcıda WebP'ye çevirir; büyük görselleri 1600px'e küçültür. */
+/* ======================================================================
+   Bildirimler ve onay kutusu
+   ====================================================================== */
+function toast(html, kind='ok', ms=7000){
+  const el = document.createElement('div');
+  el.className = 'toast toast--' + kind;
+  el.innerHTML = html;
+  $('toasts').appendChild(el);
+  setTimeout(() => el.remove(), ms);
+}
+
+/** confirm() yerine; başlık + açıklama gösterir, Promise<boolean> döner. */
+function confirmBox(title, text, okLabel='Evet'){
+  return new Promise((resolve) => {
+    const dlg = $('confirmDlg');
+    $('dlgTitle').textContent = title;
+    $('dlgText').textContent = text;
+    $('dlgOk').textContent = okLabel;
+    const done = (v) => { dlg.close(); cleanup(); resolve(v); };
+    const onOk = () => done(true);
+    const onCancel = () => done(false);
+    function cleanup(){
+      $('dlgOk').removeEventListener('click', onOk);
+      $('dlgCancel').removeEventListener('click', onCancel);
+      dlg.removeEventListener('cancel', onCancel);
+    }
+    $('dlgOk').addEventListener('click', onOk);
+    $('dlgCancel').addEventListener('click', onCancel);
+    dlg.addEventListener('cancel', onCancel);
+    dlg.showModal();
+  });
+}
+
+/**
+ * Kaydedilmemiş değişiklik varken yön değiştirmeye çalışan her eylem
+ * buradan geçer. Panelin en sık yaşanan veri kaybı senaryosu buydu:
+ * yazı yazarken listeden başka bir kayda tıklayınca her şey siliniyordu.
+ */
+async function guard(){
+  if (!state.dirty) return true;
+  return confirmBox(
+    'Kaydedilmemiş değişiklikler var',
+    'Bu kayıtta yayınlanmamış değişiklikleriniz var. Devam ederseniz bu değişiklikler kaybolur.',
+    'Değişiklikleri at'
+  );
+}
+
+function markDirty(){
+  state.dirty = true;
+  $('saveBtn').textContent = 'Yayınla •';
+}
+function clearDirty(){
+  state.dirty = false;
+  $('saveBtn').textContent = 'Yayınla';
+}
+
+window.addEventListener('beforeunload', (e) => {
+  if (!state.dirty) return;
+  e.preventDefault();
+  e.returnValue = '';
+});
+
+/* ======================================================================
+   Görsel işleme — tarayıcıda WebP'ye çevir ve küçült
+   ====================================================================== */
 async function toWebp(file, maxWidth = 1600, quality = 0.82){
+  if (!file.type.startsWith('image/')) throw new Error('Bu bir görsel dosyası değil.');
   const bitmap = await createImageBitmap(file);
   const scale = Math.min(1, maxWidth / bitmap.width);
   const w = Math.round(bitmap.width * scale);
@@ -209,19 +550,21 @@ async function toWebp(file, maxWidth = 1600, quality = 0.82){
     r.onerror = rej;
     r.readAsDataURL(blob);
   });
-  return { dataUrl, width: w, height: h, size: blob.size };
+  return { dataUrl, width:w, height:h, size:blob.size };
 }
 
-/* ------------------------------------------------------------------------
-   Küçük Markdown -> HTML dönüştürücü (yalnızca panel önizlemesi için).
-   Sitedeki gerçek render Astro/Markdoc üzerinden yapılır; bu yalnızca
-   editörde hızlı bir fikir vermek amaçlıdır, tam uyum garanti etmez.
-   ------------------------------------------------------------------------ */
+const kb = (bytes) => (bytes/1024).toFixed(0) + ' KB';
+
+/* ======================================================================
+   Küçük Markdown -> HTML (yalnızca panel önizlemesi için).
+   Sitedeki gerçek render Astro üzerinden yapılır; bu yalnızca hızlı bir
+   fikir vermek içindir, tam uyum garanti etmez.
+   ====================================================================== */
 function mdToHtml(src){
   const escHtml = (s) => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   const lines = escHtml(src).split(/\r?\n/);
   let html = '';
-  let inList = null; // 'ul' | 'ol' | null
+  let inList = null;
   const closeList = () => { if (inList) { html += `</${inList}>`; inList = null; } };
 
   const inline = (t) => t
@@ -229,8 +572,7 @@ function mdToHtml(src){
     .replace(/\*(.+?)\*/g, '<em>$1</em>')
     .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
 
-  for (const raw of lines){
-    const line = raw;
+  for (const line of lines){
     if (/^\s*$/.test(line)) { closeList(); continue; }
     let m;
     if ((m = line.match(/^###\s+(.*)$/))) { closeList(); html += `<h4>${inline(m[1])}</h4>`; continue; }
@@ -248,294 +590,591 @@ function mdToHtml(src){
     html += `<p>${inline(line)}</p>`;
   }
   closeList();
-  return html || '<p style="color:#9aa1ac">Önizlenecek içerik yok…</p>';
+  return html || '<p style="color:var(--muted)">Önizlenecek içerik yok…</p>';
 }
 
-/** Markdown editörüne toolbar + önizleme bağlar. */
-function setupMarkdownField(name){
+/* ======================================================================
+   Kenar çubuğu
+   ====================================================================== */
+function renderTabs(){
+  $('tabs').innerHTML = Object.keys(COLLECTIONS).map(k =>
+    `<button class="tab" role="tab" type="button" data-key="${k}" aria-selected="${k===state.collection}">${esc(COLLECTIONS[k].label)}</button>`
+  ).join('');
+  $('tabs').querySelectorAll('.tab').forEach(b => {
+    b.onclick = async () => {
+      if (b.dataset.key === state.collection) return;
+      if (!(await guard())) return;
+      state.collection = b.dataset.key;
+      state.editingSlug = null;
+      state.filter = '';
+      $('search').value = '';
+      renderTabs();
+      renderForm();
+      loadEntries();
+    };
+  });
+}
+
+function visibleEntries(){
+  const q = state.filter.trim().toLocaleLowerCase('tr');
+  if (!q) return state.entries;
+  return state.entries.filter(e =>
+    String(e.title).toLocaleLowerCase('tr').includes(q) ||
+    String(e.slug).toLocaleLowerCase('tr').includes(q)
+  );
+}
+
+function renderEntries(){
+  const list = visibleEntries();
+  const total = state.entries.length;
+
+  $('count').textContent = state.filter
+    ? `${list.length} / ${total} kayıt`
+    : `${total} kayıt`;
+
+  if (!list.length){
+    $('entries').innerHTML = '';
+    $('sideEmpty').hidden = false;
+    $('sideEmpty').textContent = total
+      ? 'Aramanızla eşleşen kayıt yok.'
+      : 'Bu koleksiyonda henüz kayıt yok. “Yeni kayıt” ile başlayın.';
+    return;
+  }
+
+  $('sideEmpty').hidden = true;
+  $('entries').innerHTML = list.map(e => `
+    <li>
+      <button type="button" class="entry" data-slug="${esc(e.slug)}" aria-current="${e.slug === state.editingSlug}">
+        <span class="entry__body">
+          <span class="entry__title">${esc(e.title)}</span>
+          <span class="entry__meta">${esc(e.date || 'tarihsiz')} · ${esc(e.slug)}</span>
+        </span>
+        <span class="entry__chev" aria-hidden="true">›</span>
+      </button>
+    </li>`).join('');
+
+  $('entries').querySelectorAll('.entry').forEach(b => {
+    b.onclick = () => openEntry(b.dataset.slug);
+  });
+}
+
+async function loadEntries(){
+  $('sideEmpty').hidden = true;
+  $('count').textContent = 'Yükleniyor…';
+  $('entries').innerHTML = Array.from({length:4}, () =>
+    '<li style="padding:10px"><div class="skeleton" style="width:70%"></div><div class="skeleton" style="width:45%"></div></li>'
+  ).join('');
+
+  try{
+    const res = await fetch(`/api/entries?collection=${state.collection}`);
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Liste alınamadı.');
+    state.entries = data.entries || [];
+    renderEntries();
+  }catch(err){
+    state.entries = [];
+    $('entries').innerHTML = '';
+    $('count').textContent = '';
+    $('sideEmpty').hidden = false;
+    $('sideEmpty').textContent = 'Liste yüklenemedi: ' + err.message;
+  }
+}
+
+/* ======================================================================
+   Düzenleyici
+   ====================================================================== */
+function currentSlugPreview(){
+  if (state.editingSlug) return state.editingSlug;
+  const manual = $('f_slug');
+  if (manual && manual.value.trim()) return slugify(manual.value);
+  const titleEl = $('f_title');
+  return slugify(titleEl ? titleEl.value : '') || '…';
+}
+
+function refreshHeader(){
+  const isEdit = Boolean(state.editingSlug);
+  const badge = $('modeBadge');
+  badge.className = 'badge ' + (isEdit ? 'badge--edit' : 'badge--new');
+  badge.textContent = isEdit ? 'Düzenleniyor' : 'Yeni kayıt';
+
+  const titleEl = $('f_title');
+  const name = (titleEl && titleEl.value.trim()) || (isEdit ? state.editingSlug : 'Yeni kayıt');
+  $('editorName').textContent = name;
+
+  const slug = currentSlugPreview();
+  const url = SITE + COLLECTIONS[state.collection].urlBase + slug;
+  $('editorUrl').innerHTML = isEdit
+    ? `Yayın adresi: <a href="${esc(url)}" target="_blank" rel="noopener"><code>${esc(url)}</code></a>`
+    : `Yayınlanacak adres: <code>${esc(url)}</code>`;
+
+  $('deleteBtn').hidden = !isEdit;
+}
+
+function fieldHtml(f, values){
+  const v = values[f.name] != null ? String(values[f.name]) : (f.type === 'date' ? today() : '');
+  const req = f.required ? 'required' : '';
+  const star = f.required ? ' <span class="req">*</span>' : '';
+  const hint = f.hint ? `<div class="hint">${esc(f.hint)}</div>` : '';
+  let input;
+
+  if (f.type === 'textarea'){
+    input = `<textarea id="f_${f.name}" rows="3" ${req}>${esc(v)}</textarea>`;
+
+  } else if (f.type === 'markdown'){
+    input = `
+      <div class="md-toolbar" id="f_${f.name}_toolbar">
+        <button type="button" data-cmd="h2" title="Başlık 2">H2</button>
+        <button type="button" data-cmd="h3" title="Başlık 3">H3</button>
+        <span class="sep"></span>
+        <button type="button" data-cmd="bold" title="Kalın (Ctrl+B)"><strong>K</strong></button>
+        <button type="button" data-cmd="italic" title="İtalik (Ctrl+I)"><em>İ</em></button>
+        <span class="sep"></span>
+        <button type="button" data-cmd="ul" title="Madde listesi">• Liste</button>
+        <button type="button" data-cmd="ol" title="Numaralı liste">1. Liste</button>
+        <button type="button" data-cmd="link" title="Bağlantı ekle">🔗 Bağlantı</button>
+        <button type="button" data-cmd="preview" class="push" title="Önizleme">👁 Önizleme</button>
+      </div>
+      <div class="md-area" id="f_${f.name}_area">
+        <textarea id="f_${f.name}" rows="16" ${req}>${esc(v)}</textarea>
+      </div>
+      <div class="md-preview" id="f_${f.name}_preview"></div>`;
+
+  } else if (f.type === 'select'){
+    input = `<select id="f_${f.name}" ${req}>` +
+      f.options.map(o => `<option value="${esc(o.value)}"${o.value===v?' selected':''}>${esc(o.label)}</option>`).join('') +
+      `</select>`;
+
+  } else if (f.type === 'image'){
+    input = `
+      <label class="drop" id="f_${f.name}_drop">
+        <span class="drop__title">Görsel seçin veya buraya sürükleyin</span>
+        <span>JPG / PNG / WebP — otomatik olarak WebP'ye çevrilir ve 1600px'e küçültülür</span>
+        <input type="file" id="f_${f.name}_file" accept="image/*" />
+      </label>
+      <input type="hidden" id="f_${f.name}" value="${esc(v)}" />
+      <div class="cover" id="f_${f.name}_cover"${v ? '' : ' hidden'}>
+        <img id="f_${f.name}_img" src="${v ? esc(SITE + v) : ''}" alt="" />
+        <div class="cover__info" id="f_${f.name}_info">Mevcut görsel. Yeni bir dosya seçmezseniz korunur.</div>
+      </div>`;
+
+  } else if (f.type === 'gallery'){
+    input = `
+      <label class="drop" id="f_${f.name}_drop">
+        <span class="drop__title">Görselleri seçin veya buraya sürükleyin</span>
+        <span>En fazla ${MAX_GALLERY} görsel — hepsi otomatik WebP'ye çevrilir</span>
+        <input type="file" id="f_${f.name}_file" accept="image/*" multiple />
+      </label>
+      <div class="thumbs" id="f_${f.name}_thumbs"></div>
+      <div class="hint" id="f_${f.name}_info"></div>`;
+
+  } else if (f.type === 'date'){
+    input = `<input type="date" id="f_${f.name}" value="${esc(v)}" ${req} />`;
+
+  } else {
+    input = `<input type="text" id="f_${f.name}" value="${esc(v)}" placeholder="${esc(f.placeholder||'')}" ${req} />`;
+  }
+
+  return `<div class="field"><label for="f_${f.name}">${esc(f.label)}${star}</label>${input}${hint}</div>`;
+}
+
+function renderForm(values){
+  values = values || {};
+  state.pendingImage = null;
+  state.gallery = {
+    existing: Array.isArray(values.gallery) ? [...values.gallery] : [],
+    newFiles: [],
+  };
+
+  const isEdit = Boolean(state.editingSlug);
+  const cfg = COLLECTIONS[state.collection];
+
+  // Adres alanı: YENİ kayıtta düzenlenebilir, DÜZENLEMEDE salt okunur.
+  // Düzenlemede adresi değiştirmek eski dosyayı silmez, ikinci bir kayıt
+  // oluşturur — bu yüzden bilinçli olarak kilitli.
+  const slugField = `
+    <div class="field">
+      <label for="f_slug">Adres (slug)</label>
+      <div class="slug-row">
+        <span class="slug-prefix">${esc(cfg.urlBase)}</span>
+        <input type="text" id="f_slug" value="${esc(isEdit ? state.editingSlug : '')}"
+               placeholder="basliktan-otomatik-uretilir" ${isEdit ? 'readonly' : ''} />
+      </div>
+      <div class="hint">${isEdit
+        ? 'Yayınlanmış bir kaydın adresi değiştirilemez — eski adres kırılır ve arama motorlarındaki bağlantı kaybolur.'
+        : 'Boş bırakırsanız başlıktan otomatik üretilir.'}</div>
+    </div>`;
+
+  const parts = cfg.fields.map(f => {
+    const html = fieldHtml(f, values);
+    // Adres alanını başlığın hemen ardına yerleştir.
+    return f.name === 'title' ? html + slugField : html;
+  });
+
+  $('fields').innerHTML = parts.join('');
+
+  // --- alan davranışlarını bağla ---
+  for (const f of cfg.fields){
+    if (f.type === 'markdown') setupMarkdown(f.name);
+    if (f.type === 'image')    setupCover(f.name);
+    if (f.type === 'gallery')  { setupGallery(f.name); renderThumbs(f.name); }
+  }
+
+  const titleEl = $('f_title');
+  if (titleEl) titleEl.addEventListener('input', refreshHeader);
+
+  const slugEl = $('f_slug');
+  if (slugEl && !isEdit) slugEl.addEventListener('input', refreshHeader);
+
+  // NOT: "kaydedilmemiş değişiklik" dinleyicileri #fields konteynerine
+  // BİR KEZ, açılışta bağlanır (bkz. en alttaki bağlantılar bölümü).
+  // Burada bağlansaydı her renderForm çağrısında bir yenisi eklenir ve
+  // dinleyiciler birikirdi — innerHTML değişse de konteyner aynı öğedir.
+  clearDirty();
+  refreshHeader();
+}
+
+/* ---------- Markdown alanı ---------- */
+function setupMarkdown(name){
   const ta = $(`f_${name}`);
   const toolbar = $(`f_${name}_toolbar`);
   const preview = $(`f_${name}_preview`);
+  const area = $(`f_${name}_area`);
   if (!ta || !toolbar) return;
 
-  function wrapSelection(before, after = before){
-    const start = ta.selectionStart, end = ta.selectionEnd;
-    const sel = ta.value.slice(start, end) || 'metin';
-    ta.value = ta.value.slice(0, start) + before + sel + after + ta.value.slice(end);
+  function wrap(before, after = before){
+    const s = ta.selectionStart, e = ta.selectionEnd;
+    const sel = ta.value.slice(s, e) || 'metin';
+    ta.value = ta.value.slice(0, s) + before + sel + after + ta.value.slice(e);
     ta.focus();
-    ta.selectionStart = start + before.length;
-    ta.selectionEnd = start + before.length + sel.length;
+    ta.selectionStart = s + before.length;
+    ta.selectionEnd = s + before.length + sel.length;
+    markDirty();
   }
 
-  function insertLinePrefix(prefix){
-    const start = ta.selectionStart;
-    const lineStart = ta.value.lastIndexOf('\n', start - 1) + 1;
+  function linePrefix(prefix){
+    const s = ta.selectionStart;
+    const lineStart = ta.value.lastIndexOf('\n', s - 1) + 1;
     ta.value = ta.value.slice(0, lineStart) + prefix + ta.value.slice(lineStart);
     ta.focus();
-    ta.selectionStart = ta.selectionEnd = start + prefix.length;
+    ta.selectionStart = ta.selectionEnd = s + prefix.length;
+    markDirty();
   }
 
   toolbar.querySelectorAll('[data-cmd]').forEach(btn => {
     btn.addEventListener('click', () => {
       const cmd = btn.dataset.cmd;
-      if (cmd === 'bold') wrapSelection('**');
-      else if (cmd === 'italic') wrapSelection('*');
-      else if (cmd === 'h2') insertLinePrefix('## ');
-      else if (cmd === 'h3') insertLinePrefix('### ');
-      else if (cmd === 'ul') insertLinePrefix('- ');
-      else if (cmd === 'ol') insertLinePrefix('1. ');
-      else if (cmd === 'link') {
+      if (cmd === 'bold') wrap('**');
+      else if (cmd === 'italic') wrap('*');
+      else if (cmd === 'h2') linePrefix('## ');
+      else if (cmd === 'h3') linePrefix('### ');
+      else if (cmd === 'ul') linePrefix('- ');
+      else if (cmd === 'ol') linePrefix('1. ');
+      else if (cmd === 'link'){
         const url = prompt('Bağlantı adresi (https://…):');
-        if (url) wrapSelection('[', `](${url})`);
-      } else if (cmd === 'preview') {
-        const on = preview.classList.toggle('active');
-        ta.parentElement.querySelector('.md-editor-area').hidden = on;
-        btn.classList.toggle('active', on);
+        if (url) wrap('[', `](${url})`);
+      } else if (cmd === 'preview'){
+        const on = preview.classList.toggle('is-on');
+        area.hidden = on;
+        btn.classList.toggle('is-on', on);
         btn.textContent = on ? '✏️ Düzenle' : '👁 Önizleme';
         if (on) preview.innerHTML = mdToHtml(ta.value);
       }
     });
   });
-}
 
-function renderGalleryThumbs(name){
-  const box = $(`f_${name}_thumbs`);
-  if (!box) return;
-  const existingHtml = galleryState.existing.map((path, i) => `
-    <div class="gallery-thumb">
-      <img src="https://ar-kar.com${esc(path)}" alt="" onerror="this.closest('.gallery-thumb').style.display='none'" />
-      <button type="button" data-remove-existing="${i}" title="Kaldır">✕</button>
-    </div>`).join('');
-  const newHtml = galleryState.newFiles.map((f, i) => `
-    <div class="gallery-thumb is-new">
-      <img src="${f.base64}" alt="" />
-      <button type="button" data-remove-new="${i}" title="Kaldır">✕</button>
-    </div>`).join('');
-  box.innerHTML = existingHtml + newHtml;
-
-  box.querySelectorAll('[data-remove-existing]').forEach(b => {
-    b.onclick = () => {
-      galleryState.existing.splice(Number(b.dataset.removeExisting), 1);
-      renderGalleryThumbs(name);
-    };
-  });
-  box.querySelectorAll('[data-remove-new]').forEach(b => {
-    b.onclick = () => {
-      galleryState.newFiles.splice(Number(b.dataset.removeNew), 1);
-      renderGalleryThumbs(name);
-    };
+  // Ctrl+B / Ctrl+I
+  ta.addEventListener('keydown', (e) => {
+    if (!(e.ctrlKey || e.metaKey)) return;
+    const k = e.key.toLowerCase();
+    if (k === 'b'){ e.preventDefault(); wrap('**'); }
+    else if (k === 'i'){ e.preventDefault(); wrap('*'); }
   });
 }
 
-function setupGalleryField(name){
+/* ---------- Kapak görseli ---------- */
+function setupCover(name){
   const fileEl = $(`f_${name}_file`);
+  const drop = $(`f_${name}_drop`);
+  const box = $(`f_${name}_cover`);
+  const img = $(`f_${name}_img`);
+  const info = $(`f_${name}_info`);
   if (!fileEl) return;
-  fileEl.onchange = async () => {
-    const files = Array.from(fileEl.files || []);
-    fileEl.value = '';
-    const remainingSlots = 8 - galleryState.existing.length - galleryState.newFiles.length;
-    if (files.length > remainingSlots) {
-      showMsg(`En fazla ${remainingSlots} görsel daha ekleyebilirsiniz (toplam sınır: 8).`, 'err');
+
+  async function accept(file){
+    if (!file) return;
+    info.textContent = 'WebP formatına çevriliyor…';
+    box.hidden = false;
+    try{
+      const out = await toWebp(file);
+      state.pendingImage = { base64: out.dataUrl, name: file.name };
+      img.src = out.dataUrl;
+      info.innerHTML = `<strong>Yeni görsel hazır.</strong><br>${out.width}×${out.height}px · ${kb(out.size)} · WebP`;
+      markDirty();
+    }catch(err){
+      state.pendingImage = null;
+      info.textContent = 'Hata: ' + err.message;
     }
-    const info = $(`f_${name}_info`);
-    for (const file of files.slice(0, Math.max(0, remainingSlots))) {
-      info.textContent = `${file.name} WebP'ye çevriliyor…`;
-      try {
-        const out = await toWebp(file);
-        galleryState.newFiles.push({ base64: out.dataUrl, name: file.name });
-      } catch (err) {
-        showMsg(`${file.name}: ${err.message}`, 'err');
-      }
-    }
-    info.textContent = 'Görseller otomatik WebP\'ye çevrilir. En fazla 8 görsel.';
-    renderGalleryThumbs(name);
-  };
+  }
+
+  fileEl.onchange = () => accept(fileEl.files && fileEl.files[0]);
+  bindDrop(drop, (files) => accept(files[0]));
 }
 
-function renderTabs(){
-  $('tabs').innerHTML = keys.map(k =>
-    `<button class="tab" role="tab" data-key="${k}" aria-selected="${k===current}">${COLLECTIONS[k].label}</button>`
-  ).join('');
-  $('tabs').querySelectorAll('.tab').forEach(b => {
-    b.onclick = () => { current = b.dataset.key; editingSlug = null; pendingImage = null; renderTabs(); renderFields(); loadEntries(); };
+/* ---------- Galeri ---------- */
+function setupGallery(name){
+  const fileEl = $(`f_${name}_file`);
+  const drop = $(`f_${name}_drop`);
+  const info = $(`f_${name}_info`);
+  if (!fileEl) return;
+
+  async function accept(files){
+    const free = MAX_GALLERY - state.gallery.existing.length - state.gallery.newFiles.length;
+    if (files.length > free){
+      toast(`En fazla ${free} görsel daha ekleyebilirsiniz (toplam sınır ${MAX_GALLERY}).`, 'err');
+    }
+    for (const file of files.slice(0, Math.max(0, free))){
+      info.textContent = `${file.name} çevriliyor…`;
+      try{
+        const out = await toWebp(file);
+        state.gallery.newFiles.push({ base64: out.dataUrl, name: file.name });
+        markDirty();
+      }catch(err){
+        toast(`${esc(file.name)}: ${esc(err.message)}`, 'err');
+      }
+    }
+    renderThumbs(name);
+  }
+
+  fileEl.onchange = () => { const f = Array.from(fileEl.files || []); fileEl.value = ''; accept(f); };
+  bindDrop(drop, accept);
+}
+
+function renderThumbs(name){
+  const box = $(`f_${name}_thumbs`);
+  const info = $(`f_${name}_info`);
+  if (!box) return;
+
+  const used = state.gallery.existing.length + state.gallery.newFiles.length;
+  info.textContent = `${used} / ${MAX_GALLERY} görsel`;
+
+  box.innerHTML =
+    state.gallery.existing.map((path, i) => `
+      <div class="thumb">
+        <img src="${esc(SITE + path)}" alt="" loading="lazy" />
+        <button type="button" class="thumb__x" data-rm-old="${i}" title="Kaldır" aria-label="Görseli kaldır">✕</button>
+      </div>`).join('') +
+    state.gallery.newFiles.map((f, i) => `
+      <div class="thumb thumb--new">
+        <img src="${f.base64}" alt="" />
+        <button type="button" class="thumb__x" data-rm-new="${i}" title="Kaldır" aria-label="Görseli kaldır">✕</button>
+      </div>`).join('');
+
+  box.querySelectorAll('[data-rm-old]').forEach(b => b.onclick = () => {
+    state.gallery.existing.splice(Number(b.dataset.rmOld), 1);
+    markDirty(); renderThumbs(name);
+  });
+  box.querySelectorAll('[data-rm-new]').forEach(b => b.onclick = () => {
+    state.gallery.newFiles.splice(Number(b.dataset.rmNew), 1);
+    markDirty(); renderThumbs(name);
   });
 }
 
-function renderFields(values){
-  values = values || {};
-  pendingImage = null;
-  galleryState = { existing: Array.isArray(values.gallery) ? [...values.gallery] : [], newFiles: [] };
-
-  $('fields').innerHTML = COLLECTIONS[current].fields.map(f => {
-    const v = values[f.name] != null ? String(values[f.name]) : (f.type === 'date' ? today() : '');
-    const req = f.required ? 'required' : '';
-    let input;
-    if (f.type === 'textarea') {
-      input = `<textarea id="f_${f.name}" rows="3" ${req}>${esc(v)}</textarea>`;
-    } else if (f.type === 'markdown') {
-      input = `
-        <div class="md-toolbar" id="f_${f.name}_toolbar">
-          <button type="button" data-cmd="h2" title="Alt Başlık">H2</button>
-          <button type="button" data-cmd="h3" title="Alt Başlık">H3</button>
-          <span class="sep"></span>
-          <button type="button" data-cmd="bold" title="Kalın"><strong>K</strong></button>
-          <button type="button" data-cmd="italic" title="İtalik"><em>İ</em></button>
-          <span class="sep"></span>
-          <button type="button" data-cmd="ul" title="Madde Listesi">• Liste</button>
-          <button type="button" data-cmd="ol" title="Numaralı Liste">1. Liste</button>
-          <button type="button" data-cmd="link" title="Bağlantı">🔗 Link</button>
-          <button type="button" data-cmd="preview" class="push" title="Önizleme">👁 Önizleme</button>
-        </div>
-        <div class="md-editor-area">
-          <textarea id="f_${f.name}" rows="12" ${req}>${esc(v)}</textarea>
-        </div>
-        <div class="md-preview" id="f_${f.name}_preview"></div>`;
-    } else if (f.type === 'select') {
-      input = `<select id="f_${f.name}" ${req}>` +
-        f.options.map(o => `<option value="${esc(o.value)}" ${o.value===v?'selected':''}>${esc(o.label)}</option>`).join('') + `</select>`;
-    } else if (f.type === 'image') {
-      input = `<input type="file" id="f_${f.name}_file" accept="image/*" />
-       <input type="hidden" id="f_${f.name}" value="${esc(v)}" />
-       <div id="f_${f.name}_info" class="hint">Yüklediğiniz görsel otomatik WebP'ye çevrilir. Boş bırakırsanız mevcut görsel korunur.</div>
-       ${v ? `<img class="preview" src="https://ar-kar.com${esc(v)}" alt="" onerror="this.style.display='none'" />` : ''}`;
-    } else if (f.type === 'gallery') {
-      input = `<input type="file" id="f_${f.name}_file" accept="image/*" multiple />
-       <div id="f_${f.name}_info" class="hint">Görseller otomatik WebP'ye çevrilir. En fazla 8 görsel.</div>
-       <div class="gallery-thumbs" id="f_${f.name}_thumbs"></div>`;
-    } else if (f.type === 'date') {
-      input = `<input type="date" id="f_${f.name}" value="${esc(v)}" ${req} />`;
-    } else {
-      input = `<input type="text" id="f_${f.name}" value="${esc(v)}" placeholder="${esc(f.placeholder||'')}" ${req} />`;
-    }
-    return `<div class="field"><label for="f_${f.name}">${f.label}${f.required?' *':''}</label>${input}</div>`;
-  }).join('');
-
-  $('formTitle').textContent = editingSlug ? `Düzenleniyor: ${editingSlug}` : 'Yeni Kayıt';
-
-  const fileEl = $('f_coverImage_file');
-  if (fileEl) {
-    fileEl.onchange = async () => {
-      const file = fileEl.files && fileEl.files[0];
-      if (!file) { pendingImage = null; return; }
-      const info = $('f_coverImage_info');
-      info.textContent = 'WebP formatına çevriliyor…';
-      try {
-        const out = await toWebp(file);
-        pendingImage = { base64: out.dataUrl, name: file.name };
-        info.textContent = `Hazır: ${out.width}×${out.height}px, ${(out.size/1024).toFixed(0)} KB (WebP)`;
-      } catch (err) {
-        pendingImage = null;
-        info.textContent = 'Hata: ' + err.message;
-      }
-    };
-  }
-
-  for (const f of COLLECTIONS[current].fields) {
-    if (f.type === 'markdown') setupMarkdownField(f.name);
-    if (f.type === 'gallery') { setupGalleryField(f.name); renderGalleryThumbs(f.name); }
-  }
+/** Bir öğeye sürükle-bırak davranışı ekler. */
+function bindDrop(el, onFiles){
+  if (!el) return;
+  ['dragenter','dragover'].forEach(ev =>
+    el.addEventListener(ev, (e) => { e.preventDefault(); el.classList.add('is-over'); }));
+  ['dragleave','drop'].forEach(ev =>
+    el.addEventListener(ev, (e) => { e.preventDefault(); el.classList.remove('is-over'); }));
+  el.addEventListener('drop', (e) => {
+    const files = Array.from(e.dataTransfer?.files || []).filter(f => f.type.startsWith('image/'));
+    if (files.length) onFiles(files);
+  });
 }
 
-async function loadEntries(){
-  $('entries').innerHTML = '';
-  $('listEmpty').textContent = 'Yükleniyor…';
-  $('listEmpty').style.display = 'block';
-  $('listTitle').textContent = COLLECTIONS[current].label;
+/* ======================================================================
+   Eylemler
+   ====================================================================== */
+function showEditor(){ document.body.dataset.view = 'editor'; }
+function showList(){ document.body.dataset.view = 'list'; }
+
+async function openEntry(slug){
+  if (slug === state.editingSlug){ showEditor(); return; }
+  if (!(await guard())) return;
   try{
-    const res = await fetch(`/api/entries?collection=${current}`);
+    const res = await fetch(`/api/entries?collection=${state.collection}&slug=${encodeURIComponent(slug)}`);
     const data = await res.json();
-    if (!res.ok) throw new Error(data.error || 'Liste alınamadı');
-    if (!data.entries.length){ $('listEmpty').textContent = 'Henüz kayıt yok.'; return; }
-    $('listEmpty').style.display = 'none';
-    $('entries').innerHTML = data.entries.map(e => `
-      <li>
-        <div class="entry-main">
-          <div class="entry-title">${esc(e.title)}</div>
-          <div class="entry-meta">${esc(e.date)} · ${esc(e.slug)}</div>
-        </div>
-        <button class="ghost"  data-edit="${esc(e.slug)}">Düzenle</button>
-        <button class="danger" data-del="${esc(e.slug)}">Sil</button>
-      </li>`).join('');
-    $('entries').querySelectorAll('[data-edit]').forEach(b => b.onclick = () => editEntry(b.dataset.edit));
-    $('entries').querySelectorAll('[data-del]').forEach(b => b.onclick = () => deleteEntry(b.dataset.del));
+    if (!res.ok) throw new Error(data.error || 'Kayıt alınamadı.');
+    state.editingSlug = slug;
+    renderForm({ ...data.data, gallery: data.gallery || [], content: data.body });
+    renderEntries();
+    showEditor();
+    window.scrollTo({ top:0, behavior:'smooth' });
   }catch(err){
-    $('listEmpty').textContent = 'Hata: ' + err.message;
+    toast(esc(err.message), 'err');
   }
 }
 
-async function editEntry(slug){
-  try{
-    const res = await fetch(`/api/entries?collection=${current}&slug=${encodeURIComponent(slug)}`);
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.error || 'Kayıt alınamadı');
-    editingSlug = slug;
-    renderFields({ ...data.data, gallery: data.gallery || [], content: data.body });
-    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-  }catch(err){ showMsg(err.message, 'err'); }
+async function newEntry(){
+  if (!(await guard())) return;
+  state.editingSlug = null;
+  renderForm();
+  renderEntries();
+  showEditor();
+  const t = $('f_title');
+  if (t) t.focus();
 }
 
-async function deleteEntry(slug){
-  if (!confirm(`"${slug}" kaydı silinecek. Emin misiniz?`)) return;
+async function deleteEntry(){
+  const slug = state.editingSlug;
+  if (!slug) return;
+  const ok = await confirmBox(
+    'Kaydı sil',
+    `“${slug}” kaydı depodan silinecek ve site yeniden yayınlandığında adresi 404 verecek. Bu işlem geri alınamaz.`,
+    'Kalıcı olarak sil'
+  );
+  if (!ok) return;
   try{
-    const res = await fetch(`/api/entries?collection=${current}&slug=${encodeURIComponent(slug)}`, { method:'DELETE' });
+    const res = await fetch(`/api/entries?collection=${state.collection}&slug=${encodeURIComponent(slug)}`, { method:'DELETE' });
     const data = await res.json();
-    if (!res.ok) throw new Error(data.error || 'Silinemedi');
-    showMsg('Kayıt silindi. Site birkaç dakika içinde güncellenecek.', 'ok');
-    if (editingSlug === slug){ editingSlug = null; renderFields(); }
-    loadEntries();
-  }catch(err){ showMsg(err.message, 'err'); }
+    if (!res.ok) throw new Error(data.error || 'Silinemedi.');
+    toast('Kayıt silindi. Site birkaç dakika içinde güncellenecek.', 'ok');
+    state.editingSlug = null;
+    clearDirty();
+    renderForm();
+    await loadEntries();
+    showList();
+  }catch(err){
+    toast(esc(err.message), 'err');
+  }
 }
 
-$('form').addEventListener('submit', async (e) => {
-  e.preventDefault();
+async function save(){
   const btn = $('saveBtn');
-  const label = btn.textContent;
-  btn.disabled = true; btn.textContent = 'Kaydediliyor…';
+  const cfg = COLLECTIONS[state.collection];
+
+  // --- kaydetmeden önce zorunlu alanları kendimiz kontrol edelim; form
+  // novalidate olduğu için tarayıcı uyarısı çıkmıyor ve sunucudan dönen
+  // hata mesajı hangi alan olduğunu söylemiyor.
+  for (const f of cfg.fields){
+    if (!f.required || f.type === 'gallery' || f.type === 'image') continue;
+    const el = $(`f_${f.name}`);
+    if (el && !String(el.value).trim()){
+      toast(`<strong>${esc(f.label)}</strong> alanı zorunlu.`, 'err');
+      el.focus();
+      return;
+    }
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Yayınlanıyor…';
+
   try{
-    const payload = { collection: current };
-    if (editingSlug) payload.slug = editingSlug;
-    for (const f of COLLECTIONS[current].fields){
+    const payload = { collection: state.collection };
+
+    if (state.editingSlug) {
+      payload.slug = state.editingSlug;
+    } else {
+      const manual = $('f_slug');
+      if (manual && manual.value.trim()) payload.slug = slugify(manual.value);
+    }
+
+    for (const f of cfg.fields){
       if (f.type === 'gallery') continue;
       const el = $(`f_${f.name}`);
       if (el) payload[f.name] = el.value;
     }
-    if (pendingImage){
-      payload.imageBase64 = pendingImage.base64;
-      payload.imageName   = pendingImage.name;
+
+    if (state.pendingImage){
+      payload.imageBase64 = state.pendingImage.base64;
+      payload.imageName   = state.pendingImage.name;
     }
-    if (COLLECTIONS[current].fields.some(f => f.type === 'gallery')) {
-      payload.existingGallery = galleryState.existing;
-      payload.galleryImages = galleryState.newFiles;
+    if (cfg.fields.some(f => f.type === 'gallery')){
+      payload.existingGallery = state.gallery.existing;
+      payload.galleryImages   = state.gallery.newFiles;
     }
+
     const res = await fetch('/api/publish', {
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body: JSON.stringify(payload),
     });
     const data = await res.json();
-    if (!res.ok) throw new Error(data.error || 'Kaydedilemedi');
-    showMsg('Yayınlandı. Testler geçtikten sonra site güncellenecek (1-2 dk).', 'ok');
-    editingSlug = null;
-    renderFields();
-    loadEntries();
+    if (!res.ok) throw new Error(data.error || 'Kaydedilemedi.');
+
+    const url = SITE + cfg.urlBase + data.slug;
+    toast(
+      `<strong>Yayınlandı.</strong><br>Testler geçtikten sonra site güncellenecek (1–2 dk).<br>
+       <a href="${esc(url)}" target="_blank" rel="noopener">Sayfayı aç ↗</a>`,
+      'ok', 12000
+    );
+
+    // Yeni kayıt artık mevcut bir kayıt: adres alanını kilitle ki kullanıcı
+    // ikinci bir yayında farklı bir adrese ikinci bir kopya oluşturmasın.
+    state.editingSlug = data.slug;
+    const slugEl = $('f_slug');
+    if (slugEl){ slugEl.value = data.slug; slugEl.readOnly = true; }
+
+    clearDirty();
+    await loadEntries();
+    refreshHeader();
   }catch(err){
-    showMsg(err.message, 'err');
+    // Kayıt BAŞARISIZ olduysa değişiklikler hâlâ kaydedilmemiş durumda;
+    // dirty bayrağı bilerek temizlenmez, aksi hâlde kullanıcı sayfadan
+    // ayrılırken uyarı almaz ve yazdıklarını kaybeder.
+    toast(esc(err.message), 'err', 12000);
   }finally{
-    btn.disabled = false; btn.textContent = label;
+    btn.disabled = false;
+    btn.textContent = state.dirty ? 'Yayınla •' : 'Yayınla';
+  }
+}
+
+async function cancel(){
+  if (!(await guard())) return;
+  state.editingSlug = null;
+  renderForm();
+  renderEntries();
+  showList();
+}
+
+/* ======================================================================
+   Bağlantılar
+   ====================================================================== */
+// Form alanları her renderForm'da yeniden üretilir ama konteyner sabittir;
+// bu yüzden dinleyiciler burada BİR KEZ bağlanır ve olay yükselmesiyle
+// (event bubbling) yeni alanlara da uygulanır.
+$('fields').addEventListener('input', markDirty);
+$('fields').addEventListener('change', markDirty);
+
+$('newBtn').onclick = newEntry;
+$('backBtn').onclick = async () => { if (await guard()) showList(); };
+$('cancelBtn').onclick = cancel;
+$('deleteBtn').onclick = deleteEntry;
+$('saveBtn').onclick = save;
+$('form').addEventListener('submit', (e) => { e.preventDefault(); save(); });
+
+$('search').addEventListener('input', (e) => {
+  state.filter = e.target.value;
+  renderEntries();
+});
+
+// Ctrl/⌘ + S ile kaydet
+document.addEventListener('keydown', (e) => {
+  if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's'){
+    e.preventDefault();
+    save();
   }
 });
 
-$('resetBtn').onclick = () => { editingSlug = null; renderFields(); };
-
-function renderAll(){ renderTabs(); renderFields(); loadEntries(); }
-
-// Access kimliğini göster (Cloudflare bu uç noktayı otomatik sağlar)
+// Cloudflare Access kimliği (bu uç noktayı Cloudflare otomatik sağlar)
 fetch('/cdn-cgi/access/get-identity')
   .then(r => r.ok ? r.json() : null)
   .then(id => { if (id && id.email) $('who').textContent = id.email; })
   .catch(() => {});
 
-renderAll();
+renderTabs();
+renderForm();
+loadEntries();
 </script>
 </body>
 </html>

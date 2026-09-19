@@ -168,7 +168,7 @@ const ADVANTAGES = [
           {PRODUCTS.map((product) => (
             <div class="col-lg-4 col-md-6">
               <Card padded={false} class="h-100 d-flex flex-column">
-                <CardMedia src={product.img} alt={product.alt}>
+                <CardMedia src={product.img} alt={product.alt} aspectRatio="1 / 1">
                   <Badge slot="badge" label={product.badgeLabel} icon={product.badgeIcon} />
                 </CardMedia>
                 <div class="card-surface__body flex-grow-1 d-flex flex-column">

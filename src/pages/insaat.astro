@@ -11,6 +11,9 @@ import CtaBand from '../components/ui/CtaBand.astro';
 interface MaterialItem {
   img: string;
   alt: string;
+  /** Görselin gerçek eni/boyu — verilmezse CardMedia varsayılanı (1:1)
+   * kullanılır. Kare olmayan birkaç istisna (cimento/kum/boya) için. */
+  ratio?: string;
   badgeIcon: string;
   badgeLabel: string;
   title: string;
@@ -40,6 +43,7 @@ const MATERIAL_CATEGORIES: MaterialCategory[] = [
       {
         img: '/img/cimento.webp',
         alt: 'Çimento, Kireç, Alçı - AR-KAR İnşaat',
+        ratio: '3 / 2',
         badgeIcon: 'fa-cube',
         badgeLabel: 'Bağlayıcı',
         title: 'Çimento-Kireç-Alçı Grubu',
@@ -50,6 +54,7 @@ const MATERIAL_CATEGORIES: MaterialCategory[] = [
       {
         img: '/img/kum.webp',
         alt: 'Kum, Çakıl, Mıcır - AR-KAR İnşaat',
+        ratio: '3 / 2',
         badgeIcon: 'fa-mountain',
         badgeLabel: 'Agrega',
         title: 'Kum-Çakıl-Mıcır Grubu',
@@ -108,6 +113,7 @@ const MATERIAL_CATEGORIES: MaterialCategory[] = [
       {
         img: '/img/boya.webp',
         alt: 'Boyama Ürünleri - AR-KAR İnşaat',
+        ratio: '442 / 320',
         badgeIcon: 'fa-paint-brush',
         badgeLabel: 'Boya',
         title: 'Boya Grubu',
@@ -406,7 +412,7 @@ const ogImage = 'https://ar-kar.com/img/boya.webp';
             {category.items.map((item) => (
               <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
                 <Card padded={false} class="h-100 d-flex flex-column">
-                  <CardMedia src={item.img} alt={item.alt}>
+                  <CardMedia src={item.img} alt={item.alt} aspectRatio={item.ratio}>
                     <Badge slot="badge" label={item.badgeLabel} icon={item.badgeIcon} />
                   </CardMedia>
                   <div class="card-surface__body flex-grow-1 d-flex flex-column">

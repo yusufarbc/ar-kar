@@ -126,7 +126,7 @@ const PROCESS_STEPS = [
         {SERVICES.map((service) => (
           <div class="col-xl-4 col-lg-6 col-md-6">
             <Card padded={false} class="h-100 d-flex flex-column">
-              <CardMedia src={service.img} alt={service.alt} aspectRatio="4 / 3">
+              <CardMedia src={service.img} alt={service.alt}>
                 <Badge slot="badge" label={service.badgeLabel} icon={service.badgeIcon} />
               </CardMedia>
               <div class="card-surface__body flex-grow-1 d-flex flex-column">

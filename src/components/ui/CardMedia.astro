@@ -16,7 +16,12 @@ interface Props {
   fit?: 'contain' | 'cover';
 }
 
-const { src, alt, aspectRatio = '4 / 3', loading = 'lazy', fit = 'cover' } = Astro.props;
+// Varsayılan 1:1 — statik katalog görsellerinin (insaat/pvc/mimar/
+// muteahhitlik/tarim/ziraat) büyük çoğunluğu (25 görselden 21'i) zaten
+// tam kare (1600×1600). Kutu oranı görselin gerçek oranıyla eşleşince
+// 'cover' hiçbir şey kırpmaz — kare olmayan istisnalar çağıran sayfada
+// kendi gerçek oranını (ör. aspectRatio="3 / 2") açıkça verir.
+const { src, alt, aspectRatio = '1 / 1', loading = 'lazy', fit = 'cover' } = Astro.props;
 const hasBadge = Astro.slots.has('badge');
 ---
 

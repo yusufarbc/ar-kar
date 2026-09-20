@@ -25,7 +25,7 @@ const description =
   project.data.description ||
   `${project.data.title} - AR-KAR İnşaat ${categoryLabel} projesi.`;
 const canonical = `https://ar-kar.com/projeler/${slug}`;
-const coverImage = project.data.coverImage || '/img/about.webp';
+const coverImage = project.data.coverImage || '/img/card-default.webp';
 ---
 
 <BaseLayout
@@ -104,7 +104,7 @@ const coverImage = project.data.coverImage || '/img/about.webp';
               {project.data.gallery.map((img) => (
                 <div class="col-6 col-md-4">
                   <a href={img} data-lightbox="project-gallery" class="d-block rounded overflow-hidden shadow-sm" style="background: var(--surface-alt);">
-                    <img src={img} alt={project.data.title} class="w-100" style="aspect-ratio: 4 / 5; object-fit: cover;" loading="lazy" />
+                    <img src={img} alt={project.data.title} class="w-100" style="aspect-ratio: 4 / 3; object-fit: cover;" loading="lazy" />
                   </a>
                 </div>
               ))}

@@ -11,9 +11,6 @@ import CtaBand from '../components/ui/CtaBand.astro';
 interface MaterialItem {
   img: string;
   alt: string;
-  /** Görselin gerçek eni/boyu — verilmezse CardMedia varsayılanı (1:1)
-   * kullanılır. Kare olmayan birkaç istisna (cimento/kum/boya) için. */
-  ratio?: string;
   badgeIcon: string;
   badgeLabel: string;
   title: string;
@@ -41,9 +38,8 @@ const MATERIAL_CATEGORIES: MaterialCategory[] = [
     lede: 'Yapının temelini oluşturan kaliteli kaba inşaat malzemeleri',
     items: [
       {
-        img: '/img/cimento.webp',
+        img: '/img/insaat/cimento.webp',
         alt: 'Çimento, Kireç, Alçı - AR-KAR İnşaat',
-        ratio: '3 / 2',
         badgeIcon: 'fa-cube',
         badgeLabel: 'Bağlayıcı',
         title: 'Çimento-Kireç-Alçı Grubu',
@@ -52,9 +48,8 @@ const MATERIAL_CATEGORIES: MaterialCategory[] = [
         features: ['Çimento', 'Kireç', 'Alçı'],
       },
       {
-        img: '/img/kum.webp',
+        img: '/img/insaat/kum.webp',
         alt: 'Kum, Çakıl, Mıcır - AR-KAR İnşaat',
-        ratio: '3 / 2',
         badgeIcon: 'fa-mountain',
         badgeLabel: 'Agrega',
         title: 'Kum-Çakıl-Mıcır Grubu',
@@ -63,7 +58,7 @@ const MATERIAL_CATEGORIES: MaterialCategory[] = [
         features: ['Kum', 'Çakıl', 'Mıcır', 'Kırma Taş'],
       },
       {
-        img: '/img/duvar.webp',
+        img: '/img/insaat/duvar.webp',
         alt: 'Tuğla, Kiremit, Gaz Beton - AR-KAR İnşaat',
         badgeIcon: 'fa-th-large',
         badgeLabel: 'Duvar',
@@ -73,7 +68,7 @@ const MATERIAL_CATEGORIES: MaterialCategory[] = [
         features: ['Tuğla', 'Briket', 'Gaz Beton'],
       },
       {
-        img: '/img/demir.webp',
+        img: '/img/insaat/demir.webp',
         alt: 'İnşaat Demiri, Hasır, Tel - AR-KAR İnşaat',
         badgeIcon: 'fa-industry',
         badgeLabel: 'Donatı',
@@ -91,7 +86,7 @@ const MATERIAL_CATEGORIES: MaterialCategory[] = [
     lede: 'Yapının estetik ve fonksiyonel bitirme malzemeleri',
     items: [
       {
-        img: '/img/kalebodur.webp',
+        img: '/img/insaat/kalebodur.webp',
         alt: 'Zemin ve Duvar Kaplamaları - AR-KAR İnşaat',
         badgeIcon: 'fa-th',
         badgeLabel: 'Döşeme',
@@ -101,7 +96,7 @@ const MATERIAL_CATEGORIES: MaterialCategory[] = [
         features: ['Fayans', 'Seramik', 'Granit', 'Mermer'],
       },
       {
-        img: '/img/alcipan.webp',
+        img: '/img/insaat/alcipan.webp',
         alt: 'Bölme ve Yüzey Malzemeleri - AR-KAR İnşaat',
         badgeIcon: 'fa-border-none',
         badgeLabel: 'Bölme',
@@ -111,9 +106,8 @@ const MATERIAL_CATEGORIES: MaterialCategory[] = [
         features: ['Alçıpan', 'Profiller', 'Plastik Tavan'],
       },
       {
-        img: '/img/boya.webp',
+        img: '/img/insaat/boya.webp',
         alt: 'Boyama Ürünleri - AR-KAR İnşaat',
-        ratio: '442 / 320',
         badgeIcon: 'fa-paint-brush',
         badgeLabel: 'Boya',
         title: 'Boya Grubu',
@@ -122,7 +116,7 @@ const MATERIAL_CATEGORIES: MaterialCategory[] = [
         features: ['Su bazlı Boya', 'Yağlı Boya', 'Astar', 'Tiner', 'Fırça'],
       },
       {
-        img: '/img/parke-kapi.webp',
+        img: '/img/insaat/parke-kapi.webp',
         alt: 'Parke Çeşitleri - AR-KAR İnşaat',
         badgeIcon: 'fa-layer-group',
         badgeLabel: 'Parke',
@@ -140,7 +134,7 @@ const MATERIAL_CATEGORIES: MaterialCategory[] = [
     lede: 'Profesyonel işçilik için kaliteli hırdavat ve el aletleri',
     items: [
       {
-        img: '/img/vida.webp',
+        img: '/img/insaat/vida.webp',
         alt: 'Bağlantı Elemanları - AR-KAR İnşaat',
         badgeIcon: 'fa-cog',
         badgeLabel: 'Bağlantı',
@@ -150,7 +144,7 @@ const MATERIAL_CATEGORIES: MaterialCategory[] = [
         features: ['Vida', 'Dübel', 'Çivi', 'Civata', 'Somun', 'Pul'],
       },
       {
-        img: '/img/alet.webp',
+        img: '/img/insaat/alet.webp',
         alt: 'El Aletleri - AR-KAR İnşaat',
         badgeIcon: 'fa-hammer',
         badgeLabel: 'El Aleti',
@@ -161,7 +155,7 @@ const MATERIAL_CATEGORIES: MaterialCategory[] = [
         features: ['Çekiç', 'Pense', 'Tornavida', 'Maket Bıçağı'],
       },
       {
-        img: '/img/elektiriklialet.webp',
+        img: '/img/insaat/elektiriklialet.webp',
         alt: 'Elektrikli El Aletleri - AR-KAR İnşaat',
         badgeIcon: 'fa-hammer',
         badgeLabel: 'Elektrikli El Aleti',
@@ -172,7 +166,7 @@ const MATERIAL_CATEGORIES: MaterialCategory[] = [
         features: ['Matkap', 'Dekopaj', 'Lazermetre', 'Taşlama'],
       },
       {
-        img: '/img/silikon.webp',
+        img: '/img/insaat/silikon.webp',
         alt: 'Silikon ve Yapıştırma Malzemeleri - AR-KAR İnşaat',
         badgeIcon: 'fa-fill-drip',
         badgeLabel: 'Dolgu',
@@ -190,7 +184,7 @@ const MATERIAL_CATEGORIES: MaterialCategory[] = [
     lede: 'Güvenilir su tesisatı için kaliteli boru ve bağlantı malzemeleri',
     items: [
       {
-        img: '/img/pprc.webp',
+        img: '/img/insaat/pprc.webp',
         alt: 'Temiz Su Tesisatı - AR-KAR İnşaat',
         badgeIcon: 'fa-faucet',
         badgeLabel: 'Temiz Su',
@@ -200,7 +194,7 @@ const MATERIAL_CATEGORIES: MaterialCategory[] = [
         features: ['PPRC Boru', 'Dirsek', 'Vana', 'Rakor'],
       },
       {
-        img: '/img/gider.webp',
+        img: '/img/insaat/gider.webp',
         alt: 'Pis Su Tesisatı - AR-KAR İnşaat',
         badgeIcon: 'fa-tint',
         badgeLabel: 'Pis Su',
@@ -210,7 +204,7 @@ const MATERIAL_CATEGORIES: MaterialCategory[] = [
         features: ['PVC Boru', 'Lavabo Sifonu', 'Gider Boruları'],
       },
       {
-        img: '/img/musluk.webp',
+        img: '/img/insaat/armatur.webp',
         alt: 'Armatür Grubu - AR-KAR İnşaat',
         badgeIcon: 'fa-faucet',
         badgeLabel: 'Armatür',
@@ -228,7 +222,7 @@ const MATERIAL_CATEGORIES: MaterialCategory[] = [
     lede: 'Güvenli elektrik tesisatı için sertifikalı elektrik malzemeleri',
     items: [
       {
-        img: '/img/kablo.webp',
+        img: '/img/insaat/kablo.webp',
         alt: 'Tesisat Malzemeleri - AR-KAR İnşaat',
         badgeIcon: 'fa-plug',
         badgeLabel: 'Tesisat',
@@ -238,7 +232,7 @@ const MATERIAL_CATEGORIES: MaterialCategory[] = [
         features: ['Kablo', 'Priz', 'Anahtar', 'Sigorta', 'Buat'],
       },
       {
-        img: '/img/ampul.webp',
+        img: '/img/insaat/aydinlatma.webp',
         alt: 'Aydınlatma Ürünleri - AR-KAR İnşaat',
         badgeIcon: 'fa-lightbulb',
         badgeLabel: 'Aydınlatma',
@@ -256,7 +250,7 @@ const MATERIAL_CATEGORIES: MaterialCategory[] = [
     lede: 'Dayanıklı çatı sistemleri ve profesyonel yalıtım çözümleri',
     items: [
       {
-        img: '/img/cati.webp',
+        img: '/img/insaat/cati.webp',
         alt: 'Çatı Malzemeleri - AR-KAR İnşaat',
         badgeIcon: 'fa-layer-group',
         badgeLabel: 'Çatı',
@@ -266,7 +260,7 @@ const MATERIAL_CATEGORIES: MaterialCategory[] = [
         features: ['Kiremit', 'Shingle', 'Trapez Sac', 'Onduline'],
       },
       {
-        img: '/img/isiyalitim.webp',
+        img: '/img/insaat/isiyalitim.webp',
         alt: 'Çatı Yalıtımı - AR-KAR İnşaat',
         badgeIcon: 'fa-shield-alt',
         badgeLabel: 'Yalıtım',
@@ -282,7 +276,7 @@ const MATERIAL_CATEGORIES: MaterialCategory[] = [
 const title = 'Hırdavat & İnşaat Malzemeleri | AR-KAR İnşaat Samsun | Boya, Çimento, Demir Çelik';
 const description = `AR-KAR İnşaat Malzemeleri: Samsun Çarşamba'da kaba inşaat, ince inşaat, hırdavat, elektrik, tesisat ve yalıtım malzemeleri. Çimento, gaz beton, seramik, kalebodur, PPRC boru ve daha fazlası. ${EXPERIENCE_YEARS} yıllık deneyimle kaliteli hizmet.`;
 const canonical = 'https://ar-kar.com/insaat';
-const ogImage = 'https://ar-kar.com/img/boya.webp';
+const ogImage = 'https://ar-kar.com/img/insaat/boya.webp';
 ---
 
 <BaseLayout title={title} description={description} canonical={canonical} ogImage={ogImage} activePage="insaat">
@@ -412,7 +406,7 @@ const ogImage = 'https://ar-kar.com/img/boya.webp';
             {category.items.map((item) => (
               <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
                 <Card padded={false} class="h-100 d-flex flex-column">
-                  <CardMedia src={item.img} alt={item.alt} aspectRatio={item.ratio}>
+                  <CardMedia src={item.img} alt={item.alt}>
                     <Badge slot="badge" label={item.badgeLabel} icon={item.badgeIcon} />
                   </CardMedia>
                   <div class="card-surface__body flex-grow-1 d-flex flex-column">

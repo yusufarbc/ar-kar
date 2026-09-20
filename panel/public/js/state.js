@@ -44,7 +44,7 @@ export const MAX_GALLERY = 8;
  * Sitede kart görselleri artık bu orana göre 'cover' ile gösteriliyor
  * (bkz. CardMedia.astro) — her gönderi farklı boyutta gelmesin diye
  * yükleme anında bu orana göre ortadan kırpılır. */
-export const IMAGE_ASPECT_RATIO = 4 / 5;
+export const IMAGE_ASPECT_RATIO = 4 / 3;
 
 /* ======================================================================
    Durum — tek paylaşımlı nesne. Diğer modüller `import { state } from

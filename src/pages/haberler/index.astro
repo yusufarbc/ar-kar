@@ -69,13 +69,13 @@ const blogSchema = {
           {sortedPosts.map((post) => {
             const slug = post.id.replace(/\/index$/, '');
             const postUrl = `/haberler/${slug}`;
-            const coverImage = post.data.coverImage || '/img/about.webp';
+            const coverImage = post.data.coverImage || '/img/card-default.webp';
 
             return (
               <div class="col-12 col-md-6 col-lg-4">
                 <Card padded={false} class="h-100 d-flex flex-column">
                   <a href={postUrl}>
-                    <CardMedia src={coverImage} alt={post.data.title} aspectRatio="4 / 5">
+                    <CardMedia src={coverImage} alt={post.data.title}>
                       <Badge slot="badge" label={post.data.date} icon="fa-calendar-alt" />
                     </CardMedia>
                   </a>

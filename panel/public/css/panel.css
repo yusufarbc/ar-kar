@@ -203,11 +203,11 @@ button:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
 .drop__title{font-weight:600;color:var(--ink-2);display:block;margin-bottom:2px}
 
 .cover{display:flex;gap:12px;align-items:flex-start;margin-top:11px}
-.cover img{width:96px;height:120px;object-fit:cover;border-radius:9px;border:1px solid var(--line);background:var(--line-2)}
+.cover img{width:120px;aspect-ratio:4/3;object-fit:cover;border-radius:9px;border:1px solid var(--line);background:var(--line-2)}
 .cover__info{font-size:.8rem;color:var(--muted);min-width:0}
 
 .thumbs{display:flex;flex-wrap:wrap;gap:10px;margin-top:11px}
-.thumb{position:relative;width:80px;height:100px;border-radius:9px;overflow:hidden;border:1px solid var(--line);background:var(--line-2)}
+.thumb{position:relative;width:104px;aspect-ratio:4/3;border-radius:9px;overflow:hidden;border:1px solid var(--line);background:var(--line-2)}
 .thumb img{width:100%;height:100%;object-fit:cover;display:block}
 .thumb__x{
   position:absolute;top:3px;right:3px;width:32px;height:32px;padding:0;

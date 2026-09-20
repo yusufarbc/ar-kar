@@ -26,25 +26,25 @@ const homeProjects = allProjects
 // ziyaretçi hepsini görmek için ~95 saniye beklemek zorundaydı. Artık hepsi
 // tek bakışta görünen statik bir ızgarada.
 const PARTNERS = [
-  { src: '/img/1.webp', name: "Polisan Boya" },
-  { src: '/img/2.webp', name: "Deckon" },
-  { src: '/img/3.webp', name: "Atakum Kimya" },
-  { src: '/img/4.webp', name: "Kale Seramik" },
-  { src: '/img/5.webp', name: "Termal Seramik" },
-  { src: '/img/6.webp', name: "Rino" },
-  { src: '/img/7.webp', name: "Kavçim Çimento" },
-  { src: '/img/8.webp', name: "ABS" },
-  { src: '/img/9.webp', name: "DOĞUPEN" },
-  { src: '/img/10.webp', name: "KARPEN" },
-  { src: '/img/11.webp', name: "Gemlik Gübre" },
-  { src: '/img/12.webp', name: "İGSAŞ" },
-  { src: '/img/13.webp', name: "Peli Parke" },
-  { src: '/img/14.webp', name: "M&R" },
-  { src: '/img/15.webp', name: "Turavit" },
-  { src: '/img/16.webp', name: "KYK" },
-  { src: '/img/17.webp', name: "Birlik Galvaniz" },
-  { src: '/img/18.webp', name: "Filiz" },
-  { src: '/img/19.webp', name: "Akçansa Çimento" },
+  { src: '/img/bayi/1.webp', name: "Polisan Boya" },
+  { src: '/img/bayi/2.webp', name: "Deckon" },
+  { src: '/img/bayi/3.webp', name: "Atakum Kimya" },
+  { src: '/img/bayi/4.webp', name: "Kale Seramik" },
+  { src: '/img/bayi/5.webp', name: "Termal Seramik" },
+  { src: '/img/bayi/6.webp', name: "Rino" },
+  { src: '/img/bayi/7.webp', name: "Kavçim Çimento" },
+  { src: '/img/bayi/8.webp', name: "ABS" },
+  { src: '/img/bayi/9.webp', name: "DOĞUPEN" },
+  { src: '/img/bayi/10.webp', name: "KARPEN" },
+  { src: '/img/bayi/11.webp', name: "Gemlik Gübre" },
+  { src: '/img/bayi/12.webp', name: "İGSAŞ" },
+  { src: '/img/bayi/13.webp', name: "Peli Parke" },
+  { src: '/img/bayi/14.webp', name: "M&R" },
+  { src: '/img/bayi/15.webp', name: "Turavit" },
+  { src: '/img/bayi/16.webp', name: "KYK" },
+  { src: '/img/bayi/17.webp', name: "Birlik Galvaniz" },
+  { src: '/img/bayi/18.webp', name: "Filiz" },
+  { src: '/img/bayi/19.webp', name: "Akçansa Çimento" },
 ];
 
 const title = `AR-KAR İnşaat Samsun | ${EXPERIENCE_YEARS} Yıllık Güvenilir İnşaat, Tarım ve PVC Firması | Çarşamba`;
@@ -282,13 +282,13 @@ const ogImage = "https://ar-kar.com/img/og-default.webp";
         <div class="row g-4">
             {homeProjects.map((project) => {
                 const slug = project.id.replace(/\/index$/, '');
-                const cover = project.data.coverImage || '/img/about.webp';
+                const cover = project.data.coverImage || '/img/card-default.webp';
                 const overlayText = [project.data.specs, project.data.description].filter(Boolean).join('. ');
                 return (
                     <div class="col-12 col-sm-6 col-lg-3">
                         <div class="project-item position-relative overflow-hidden rounded">
                             <img class="img-fluid w-100" src={cover} alt={`${project.data.title} - AR-KAR İnşaat`}
-                                style="aspect-ratio: 4 / 5; object-fit: cover;" loading="lazy">
+                                style="aspect-ratio: 4 / 3; object-fit: cover;" loading="lazy">
                             <div class="project-overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-white text-center p-4"
                                 style="background: rgba(231, 30, 36, 0.8); opacity: 0; transition: all 0.3s;">
                                 <h4 class="text-white mb-3">{project.data.title}</h4>

@@ -18,7 +18,7 @@ const keywords = "zirai ilaç mağazası samsun, gübre satışı çarşamba, to
 // insaat.astro/tarim.astro'daki aynı desen).
 const PRODUCTS = [
   {
-    img: '/img/ilac.webp',
+    img: '/img/ziraat/ilac.webp',
     alt: 'Bitki Koruma Ürünleri - AR-KAR Mağazası',
     badgeIcon: 'fa-shield-alt',
     badgeLabel: 'Bitki Koruma',
@@ -26,7 +26,7 @@ const PRODUCTS = [
     description: 'Mağazamızda herbisit, fungisit, insektisit ve diğer bitki koruma ürünleri bulunmaktadır.',
   },
   {
-    img: '/img/gubre.webp',
+    img: '/img/ziraat/gubre.webp',
     alt: 'Gübre Çeşitleri - AR-KAR Mağazası',
     badgeIcon: 'fa-leaf',
     badgeLabel: 'Gübre',
@@ -35,7 +35,7 @@ const PRODUCTS = [
       'Organik, kimyevi ve sıvı gübre çeşitleri mevcuttur. Toprak analizi sonucuna göre uygun gübre önerisi sunuyoruz.',
   },
   {
-    img: '/img/tohum.webp',
+    img: '/img/ziraat/tohum.webp',
     alt: 'Tohum Satışı - AR-KAR Mağazası',
     badgeIcon: 'fa-seedling',
     badgeLabel: 'Tohum',
@@ -155,7 +155,7 @@ const ADVANTAGES = [
         </div>
         <div class="col-lg-4">
           <Card padded={false}>
-            <CardMedia src="/img/ziraat.webp" alt="AR-KAR Zirai Ürünler Mağazası" aspectRatio="1 / 1" />
+            <CardMedia src="/img/ziraat.webp" alt="AR-KAR Zirai Ürünler Mağazası" aspectRatio="4 / 3" />
           </Card>
         </div>
       </div>
@@ -168,7 +168,7 @@ const ADVANTAGES = [
           {PRODUCTS.map((product) => (
             <div class="col-lg-4 col-md-6">
               <Card padded={false} class="h-100 d-flex flex-column">
-                <CardMedia src={product.img} alt={product.alt} aspectRatio="1 / 1">
+                <CardMedia src={product.img} alt={product.alt}>
                   <Badge slot="badge" label={product.badgeLabel} icon={product.badgeIcon} />
                 </CardMedia>
                 <div class="card-surface__body flex-grow-1 d-flex flex-column">

@@ -21,7 +21,7 @@ const { Content } = await render(post);
 const title = `${post.data.title} | AR-KAR İnşaat`;
 const description = post.data.description || `${post.data.title} - AR-KAR İnşaat'tan haber.`;
 const canonical = `https://ar-kar.com/haberler/${slug}`;
-const coverImage = post.data.coverImage || '/img/about.webp';
+const coverImage = post.data.coverImage || '/img/card-default.webp';
 
 // Haber yazılarında hiç yapısal veri yoktu; arama sonuçlarında tarih, yazar
 // ve görsel bilgisi taşıyan makale kartları bu şema olmadan oluşmuyor.
@@ -100,7 +100,7 @@ const articleSchema = {
               {post.data.gallery.map((img) => (
                 <div class="col-6 col-md-4">
                   <a href={img} data-lightbox="blog-gallery" class="d-block rounded overflow-hidden shadow-sm" style="background: var(--surface-alt);">
-                    <img src={img} alt={post.data.title} class="w-100" style="aspect-ratio: 4 / 5; object-fit: cover;" loading="lazy" />
+                    <img src={img} alt={post.data.title} class="w-100" style="aspect-ratio: 4 / 3; object-fit: cover;" loading="lazy" />
                   </a>
                 </div>
               ))}

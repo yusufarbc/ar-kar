@@ -27,12 +27,15 @@ export async function toWebp(file, { maxWidth = 1600, quality = 0.82, aspectRati
   }
 
   const scale = Math.min(1, maxWidth / sw);
-  const w = Math.round(sw * scale);
-  const h = Math.round(sh * scale);
+  const w = Math.max(1, Math.round(sw * scale));
+  // Sabit oranlı çıktıda yüksekliği doğrudan hedeften türetmek, kaynak
+  // boyutları tek sayı olduğunda oluşabilen 1px'lik oran sapmasını engeller.
+  const h = Math.max(1, aspectRatio ? Math.round(w / aspectRatio) : Math.round(sh * scale));
 
   const canvas = document.createElement('canvas');
   canvas.width = w; canvas.height = h;
   canvas.getContext('2d').drawImage(bitmap, sx, sy, sw, sh, 0, 0, w, h);
+  bitmap.close();
 
   const blob = await new Promise((res) => canvas.toBlob(res, 'image/webp', quality));
   if (!blob) throw new Error('Görsel WebP formatına çevrilemedi.');

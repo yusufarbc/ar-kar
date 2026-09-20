@@ -61,7 +61,7 @@ const coverImage = project.data.coverImage || '/img/card-default.webp';
       <div class="col-lg-9">
         <header class="mb-4">
           <div class="d-flex flex-wrap align-items-center text-muted mb-3 gap-3">
-            <span class={`badge-pill ${project.data.status === 'guncel' ? '' : 'badge-pill--dark'}`}>
+            <span class={`badge-pill ${project.data.status === 'guncel' ? 'badge-pill--current' : 'badge-pill--completed'}`}>
               <i class={`fa ${project.data.status === 'guncel' ? 'fa-spinner' : 'fa-check-circle'} me-1`} aria-hidden="true"></i>
               {project.data.status === 'guncel' ? 'Güncel Proje' : 'Tamamlanan Proje'}
             </span>

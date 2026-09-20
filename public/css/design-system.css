@@ -304,8 +304,19 @@ a.card-surface:hover .card-media img,
   color: var(--primary);
 }
 .badge-pill--dark {
-  background: rgba(255, 255, 255, 0.12);
+  background: #14161f;
   color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.22);
+}
+.badge-pill--completed {
+  background: #14161f;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.22);
+}
+.badge-pill--current {
+  background: var(--primary);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(231, 30, 36, 0.25);
 }
 
 /* --- İkon rozeti (IconBadge.astro) --- */

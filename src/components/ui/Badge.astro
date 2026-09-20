@@ -5,11 +5,18 @@
 interface Props {
   label: string;
   icon?: string;
-  tone?: 'solid' | 'tint' | 'dark';
+  tone?: 'solid' | 'tint' | 'dark' | 'completed' | 'current';
 }
 
 const { label, icon, tone = 'solid' } = Astro.props;
-const toneClass = tone === 'tint' ? 'badge-pill--tint' : tone === 'dark' ? 'badge-pill--dark' : '';
+const toneClass =
+  tone === 'tint'
+    ? 'badge-pill--tint'
+    : tone === 'dark' || tone === 'completed'
+      ? 'badge-pill--completed'
+      : tone === 'current'
+        ? 'badge-pill--current'
+        : '';
 ---
 
 <span class={`badge-pill ${toneClass}`.trim()}>

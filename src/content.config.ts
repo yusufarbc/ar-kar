@@ -13,8 +13,8 @@ const blog = defineCollection({
   schema: z.object({
     title: z.string(),
     date: dateField,
-    description: z.string().optional(),
-    coverImage: z.string().optional(),
+    description: z.string().min(1),
+    coverImage: z.string().min(1),
     gallery: z.array(z.string()).optional(),
   }),
 });
@@ -26,9 +26,9 @@ const projects = defineCollection({
     category: z.enum(['insaat', 'pvc', 'mimar']).default('insaat'),
     location: z.string().optional(),
     specs: z.string().optional(),
-    date: dateField.optional(),
-    description: z.string().optional(),
-    coverImage: z.string().optional(),
+    date: dateField,
+    description: z.string().min(1),
+    coverImage: z.string().min(1),
     gallery: z.array(z.string()).optional(),
   }),
 });

@@ -94,10 +94,10 @@ export function fieldHtml(f, values){
 
   } else if (f.type === 'image'){
     input = `
-      <label class="drop" id="f_${f.name}_drop">
+      <label class="drop" id="f_${f.name}_drop" tabindex="0">
         <span class="drop__title">Görsel seçin veya buraya sürükleyin <span class="drop__badge">4:3 WebP</span></span>
         <span>JPG / PNG / WebP — otomatik olarak 4:3 orana ortadan kırpılır, WebP'ye çevrilir ve en fazla 1600px genişliğe küçültülür</span>
-        <input type="file" id="f_${f.name}_file" accept="image/*" />
+        <input type="file" id="f_${f.name}_file" accept="image/jpeg,image/png,image/webp" />
       </label>
       <input type="hidden" id="f_${f.name}" value="${esc(v)}" />
       <div class="cover" id="f_${f.name}_cover"${v ? '' : ' hidden'}>
@@ -112,10 +112,10 @@ export function fieldHtml(f, values){
 
   } else if (f.type === 'gallery'){
     input = `
-      <label class="drop" id="f_${f.name}_drop">
+      <label class="drop" id="f_${f.name}_drop" tabindex="0">
         <span class="drop__title">Görselleri seçin veya buraya sürükleyin</span>
         <span>En fazla ${MAX_GALLERY} görsel — hepsi otomatik 4:3 orana kırpılıp WebP'ye çevrilir</span>
-        <input type="file" id="f_${f.name}_file" accept="image/*" multiple />
+        <input type="file" id="f_${f.name}_file" accept="image/jpeg,image/png,image/webp" multiple />
       </label>
       <div class="thumbs" id="f_${f.name}_thumbs"></div>
       <div class="hint" id="f_${f.name}_info"></div>`;
@@ -213,13 +213,16 @@ export function validateForm(cfg){
         const errEl = wrap.querySelector('.field__error');
         if (errEl) errEl.textContent = `${f.label} zorunludur. Lütfen 4:3 oranında bir görsel yükleyin.`;
         missing.push(f.label);
-        if (!firstInvalid) firstInvalid = $(`f_${f.name}_file`) || wrap;
-      } else if (hasExisting && !hasNew && state.coverValid === false){
+        if (!firstInvalid) firstInvalid = $(`f_${f.name}_drop`) || wrap;
+      } else if (hasExisting && !hasNew && state.coverValid !== true){
         wrap.classList.add('field--error');
         const errEl = wrap.querySelector('.field__error');
-        if (errEl) errEl.textContent = 'Mevcut kapak görseli 4:3 standart oranına uymuyor. Lütfen yeni bir 4:3 görsel yükleyin.';
-        missing.push(`${f.label} (4:3 oranında yeni görsel gerekli)`);
-        if (!firstInvalid) firstInvalid = $(`f_${f.name}_file`) || wrap;
+        const stillChecking = state.coverValid === null;
+        if (errEl) errEl.textContent = stillChecking
+          ? 'Kapak görseli henüz kontrol ediliyor. Kontrol tamamlandıktan sonra tekrar yayınlayın.'
+          : 'Mevcut kapak görseli tam 4:3 standart oranına uymuyor. Lütfen yeni bir 4:3 görsel yükleyin.';
+        missing.push(stillChecking ? `${f.label} (kontrol ediliyor)` : `${f.label} (4:3 oranında yeni görsel gerekli)`);
+        if (!firstInvalid) firstInvalid = $(`f_${f.name}_drop`) || wrap;
       }
       continue;
     }

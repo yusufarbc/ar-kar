@@ -154,8 +154,11 @@ import etmek derlemeyi bozar.
 koleksiyon sekmeleri, markdown araç çubuğu ve önizleme, kapak görseli ile
 en fazla 8 görsellik galeri, düzenleme ve silme.
 
-Görseller **tarayıcıda** `canvas.toBlob` ile WebP'ye çevrilip base64 olarak
-gönderilir; sunucu tarafında görüntü işleme yapılmaz.
+Görseller **tarayıcıda** ortadan tam 4:3 orana kırpılır, `canvas.toBlob` ile
+WebP'ye çevrilip base64 olarak gönderilir. Sunucu tarafında yeniden boyutlandırma
+yapılmaz; yayın API'si dosyanın gerçek WebP imzasını, piksel ölçüsünü, 4:3
+oranını, en fazla 1600 px genişlik ve 5 MB sınırını ayrıca doğrular. Kapak
+görseli olmadan veya doğrulama tamamlanmadan yayın yapılamaz.
 
 ### Güvenlik zinciri
 

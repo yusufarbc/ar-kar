@@ -8,7 +8,10 @@ import { toast } from './ui-toast.js';
    birbirinden farklı boy/en oranlarıyla gelip tutarsız durmaz.
    ====================================================================== */
 export async function toWebp(file, { maxWidth = 1600, quality = 0.82, aspectRatio = null } = {}){
-  if (!file.type.startsWith('image/')) throw new Error('Bu bir görsel dosyası değil.');
+  const supportedTypes = new Set(['image/jpeg', 'image/png', 'image/webp']);
+  if (!supportedTypes.has(file.type)) {
+    throw new Error('Yalnızca JPG, PNG veya WebP görselleri desteklenir.');
+  }
   const bitmap = await createImageBitmap(file);
 
   // Kaynak görselden, istenen orana uyan en büyük dikdörtgeni ortadan seç.
@@ -27,10 +30,15 @@ export async function toWebp(file, { maxWidth = 1600, quality = 0.82, aspectRati
   }
 
   const scale = Math.min(1, maxWidth / sw);
-  const w = Math.max(1, Math.round(sw * scale));
+  const scaledWidth = Math.max(1, Math.round(sw * scale));
+  // Panel standardı tam 4:3'tür. Genişliği 4'ün katına indirerek yüksekliğin
+  // tam sayı olmasını ve API'nin piksel bazlı kontrolüyle birebir eşleşmesini
+  // garanti ederiz (ör. 1599px yerine 1596×1197px).
+  const isFourThree = aspectRatio && Math.abs(aspectRatio - (4 / 3)) < Number.EPSILON;
+  const w = isFourThree ? Math.max(4, Math.floor(scaledWidth / 4) * 4) : scaledWidth;
   // Sabit oranlı çıktıda yüksekliği doğrudan hedeften türetmek, kaynak
   // boyutları tek sayı olduğunda oluşabilen 1px'lik oran sapmasını engeller.
-  const h = Math.max(1, aspectRatio ? Math.round(w / aspectRatio) : Math.round(sh * scale));
+  const h = Math.max(1, isFourThree ? (w / 4) * 3 : (aspectRatio ? Math.round(w / aspectRatio) : Math.round(sh * scale)));
 
   const canvas = document.createElement('canvas');
   canvas.width = w; canvas.height = h;
@@ -69,8 +77,7 @@ export function setupCover(name){
     const w = img.naturalWidth;
     const h = img.naturalHeight;
     if (w && h) {
-      const ratio = w / h;
-      const is43 = Math.abs(ratio - (4 / 3)) < 0.05;
+      const is43 = w * 3 === h * 4;
       if (is43) {
         state.coverValid = true;
         info.innerHTML = `
@@ -108,11 +115,14 @@ export function setupCover(name){
 
   async function accept(file){
     if (!file) return;
+    state.pendingImage = null;
+    state.coverValid = null;
+    state.processingImages++;
     info.textContent = '4:3 WebP formatına çevriliyor…';
     box.hidden = false;
     try{
       const out = await toWebp(file, { aspectRatio: IMAGE_ASPECT_RATIO });
-      state.pendingImage = { base64: out.dataUrl, name: file.name };
+      state.pendingImage = { base64: out.dataUrl, name: file.name, width: out.width, height: out.height };
       state.coverValid = true;
       img.src = out.dataUrl;
       info.innerHTML = `
@@ -130,6 +140,8 @@ export function setupCover(name){
       info.innerHTML = `<span class="cover__badge cover__badge--warn">Hata: ${esc(err.message)}</span>`;
       box.classList.remove('cover--ok');
       box.classList.add('cover--warn');
+    }finally{
+      state.processingImages = Math.max(0, state.processingImages - 1);
     }
   }
 
@@ -164,17 +176,24 @@ export function setupGallery(name){
     if (files.length > free){
       toast(`En fazla ${free} görsel daha ekleyebilirsiniz (toplam sınır ${MAX_GALLERY}).`, 'err');
     }
-    for (const file of files.slice(0, Math.max(0, free))){
-      info.textContent = `${file.name} çevriliyor…`;
-      try{
-        const out = await toWebp(file, { aspectRatio: IMAGE_ASPECT_RATIO });
-        state.gallery.newFiles.push({ base64: out.dataUrl, name: file.name });
-        markDirty();
-      }catch(err){
-        toast(`${esc(file.name)}: ${esc(err.message)}`, 'err');
+    const acceptedFiles = files.slice(0, Math.max(0, free));
+    if (!acceptedFiles.length) return;
+    state.processingImages++;
+    try{
+      for (const file of acceptedFiles){
+        info.textContent = `${file.name} çevriliyor…`;
+        try{
+          const out = await toWebp(file, { aspectRatio: IMAGE_ASPECT_RATIO });
+          state.gallery.newFiles.push({ base64: out.dataUrl, name: file.name, width: out.width, height: out.height });
+          markDirty();
+        }catch(err){
+          toast(`${esc(file.name)}: ${esc(err.message)}`, 'err');
+        }
       }
+    }finally{
+      state.processingImages = Math.max(0, state.processingImages - 1);
+      renderThumbs(name);
     }
-    renderThumbs(name);
   }
 
   fileEl.onchange = () => { const f = Array.from(fileEl.files || []); fileEl.value = ''; accept(f); };
@@ -247,12 +266,18 @@ export function renderThumbs(name){
 /** Bir öğeye sürükle-bırak davranışı ekler (dosya yükleme alanı için). */
 export function bindDrop(el, onFiles){
   if (!el) return;
+  el.addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    e.preventDefault();
+    el.querySelector('input[type="file"]')?.click();
+  });
   ['dragenter','dragover'].forEach(ev =>
     el.addEventListener(ev, (e) => { e.preventDefault(); el.classList.add('is-over'); }));
   ['dragleave','drop'].forEach(ev =>
     el.addEventListener(ev, (e) => { e.preventDefault(); el.classList.remove('is-over'); }));
   el.addEventListener('drop', (e) => {
-    const files = Array.from(e.dataTransfer?.files || []).filter(f => f.type.startsWith('image/'));
+    const files = Array.from(e.dataTransfer?.files || [])
+      .filter(f => ['image/jpeg', 'image/png', 'image/webp'].includes(f.type));
     if (files.length) onFiles(files);
   });
 }

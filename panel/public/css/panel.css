@@ -199,6 +199,7 @@ button:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
   background:var(--panel-2); cursor:pointer; transition:border-color .15s, background .15s;
 }
 .drop:hover,.drop.is-over{border-color:var(--brand);background:var(--panel);color:var(--ink-2)}
+.drop:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
 .drop input[type=file]{display:none}
 .drop__title{font-weight:600;color:var(--ink-2);display:block;margin-bottom:2px}
 .drop__badge{

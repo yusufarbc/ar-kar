@@ -58,8 +58,9 @@ export const state = {
   filter: '',
   editingSlug: null,   // null => yeni kayıt
   dirty: false,        // kaydedilmemiş değişiklik var mı
-  pendingImage: null,  // {base64, name}
+  pendingImage: null,  // {base64, name, width, height}
   coverValid: true,    // kapak görseli 4:3 standardına uygun mu
+  processingImages: 0, // asenkron kırpma/dönüştürme işlemi sayısı
   gallery: { existing: [], newFiles: [] },
   selected: new Set(), // toplu silme için seçili slug'lar
 };

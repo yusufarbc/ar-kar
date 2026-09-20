@@ -141,6 +141,11 @@ async function save(){
   const btn = $('saveBtn');
   const cfg = COLLECTIONS[state.collection];
 
+  if (state.processingImages > 0){
+    toast('Görseller hâlâ 4:3 WebP formatına hazırlanıyor. İşlem tamamlanınca tekrar yayınlayın.', 'err');
+    return;
+  }
+
   const missing = validateForm(cfg);
   if (missing.length){
     toast(`<strong>${missing.length} alan eksik veya standart dışı:</strong> ${esc(missing.join(', '))}`, 'err');
@@ -179,7 +184,7 @@ async function save(){
 
     const url = SITE + cfg.urlBase + data.slug;
     toast(
-      `<strong>Yayınlandı.</strong><br>Testler geçtikten sonra site güncellenecek (1–2 dk).<br>
+      `<strong>Yayınlandı.</strong><br>Site otomatik hazırlanıp güncellenecek (yaklaşık 1–2 dk).<br>
        <a href="${esc(url)}" target="_blank" rel="noopener">Sayfayı aç ↗</a>`,
       'ok', 12000
     );

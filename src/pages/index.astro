@@ -283,16 +283,16 @@ const ogImage = "https://ar-kar.com/img/og-default.webp";
             {homeProjects.map((project) => {
                 const slug = project.id.replace(/\/index$/, '');
                 const cover = project.data.coverImage || '/img/card-default.webp';
-                const overlayText = [project.data.specs, project.data.description].filter(Boolean).join('. ');
                 return (
-                    <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
                         <div class="project-item position-relative overflow-hidden rounded">
                             <img class="img-fluid w-100" src={cover} alt={`${project.data.title} - AR-KAR İnşaat`}
                                 style="aspect-ratio: 4 / 3; object-fit: cover;" loading="lazy">
                             <div class="project-overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-white text-center p-4"
                                 style="background: rgba(231, 30, 36, 0.8); opacity: 0; transition: all 0.3s;">
                                 <h4 class="text-white mb-3">{project.data.title}</h4>
-                                {overlayText && <p class="mb-3">{overlayText}</p>}
+                                {project.data.specs && <p class="project-overlay__specs">{project.data.specs}</p>}
+                                {project.data.description && <p class="project-overlay__description">{project.data.description}</p>}
                                 <a href={`/projeler/${slug}`} class="btn btn-light">Detayları Gör</a>
                             </div>
                         </div>

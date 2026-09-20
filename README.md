@@ -54,9 +54,9 @@ site yeniden derlenip yayına çıkar. Yani **Git, içerik veritabanının kendi
                               ▼
   ┌──────────────────────────────────────────────────────────┐
   │ GitHub Actions — ci-cd.yml                               │
-  │   1) test         astro check + build + tsc (panel)      │
-  │   2) deploy-site  wrangler pages deploy dist → ar-kar    │
-  │   3) deploy-panel yalnızca panel/ değiştiyse             │
+  │   Kod: test → build → deploy                             │
+  │   CMS: doğrudan build → deploy                           │
+  │   Panel deploy: yalnızca panel/ değiştiyse               │
   └───────────────────────────┬──────────────────────────────┘
                               ▼
                          ar-kar.com
@@ -185,13 +185,19 @@ işlemi yapan editörün e-postasıyla birlikte kayda geçer.
 
 | İş | Koşul | Yaptığı |
 | --- | --- | --- |
-| `test` | her zaman | `astro check && astro build`, `tsc -p tsconfig.panel.json`, `dist/index.html` + `dist/sitemap.xml` doğrulaması |
-| `deploy-site` | push, `test` geçtiyse | `wrangler pages deploy dist --project-name=ar-kar` |
-| `deploy-panel` | push + `production` + `panel/` değiştiyse | `wrangler pages deploy public --project-name=ar-kar-admin` |
+| `test` | PR'lar ve normal kod push'ları | `astro check && astro build`, `tsc -p tsconfig.panel.json`, `dist/index.html` + `dist/sitemap.xml` doğrulaması |
+| `deploy-site` | normal push'ta test sonrası; `cms:` commitinde doğrudan | Zorunlu production build'i alır ve `wrangler pages deploy dist --project-name=ar-kar` çalıştırır |
+| `deploy-panel` | normal push + `production` + `panel/` değiştiyse | `wrangler pages deploy public --project-name=ar-kar-admin` |
 
 Notlar:
 
-- `test` zorunlu kapıdır; başarısız olursa hiçbir dağıtım çalışmaz.
+- Normal kod değişikliklerinde `test` zorunlu kapıdır; başarısız olursa dağıtım çalışmaz.
+- Panelin son içerik commit'i `cms:` ile başlar; quality gate atlanır ve site
+  gerekli tek build'in ardından doğrudan yayınlanır. Görsel yüklerken oluşan
+  ara `media:` commitleri test/deploy başlatmaz; son `cms:` deploy'u bunları da içerir.
+- Bu hızlı yol yalnızca değişen dosyaların tamamı `src/content/**` veya
+  `public/img/**` altındaysa açılır. Aynı push kod değişikliği de içeriyorsa
+  commit mesajından bağımsız olarak tam quality gate zorunludur.
 - Dağıtımda `cloudflare/wrangler-action` yerine projenin kendi `wrangler`'ı
   kullanılır — action kendi sürümünü kurup `@cloudflare/workers-types` ile
   peer çakışması yaratıyordu.
@@ -199,7 +205,7 @@ Notlar:
   `POST /pages/assets/check-missing` uç noktası kalıcı 500 vermeye başladı.
   Bayrak dosya-hash önbelleğini atlar; proje küçük olduğu için (~143 dosya)
   maliyeti önemsizdir.
-- `deploy-panel`, `HEAD^..HEAD` farkına bakarak yalnızca `panel/` değiştiğinde
+- `deploy-panel`, push öncesi ve sonrası farkına bakarak yalnızca `panel/` değiştiğinde
   koşar; içerik commit'leri paneli gereksiz yere yeniden dağıtmaz.
 - `codeql.yml`, `src/content/**` ve `public/img/**` yollarını yoksayar —
   panelden gelen içerik commit'leri kod değiştirmediği için tarama atlanır.

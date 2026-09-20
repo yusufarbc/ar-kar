@@ -95,14 +95,19 @@ export function fieldHtml(f, values){
   } else if (f.type === 'image'){
     input = `
       <label class="drop" id="f_${f.name}_drop">
-        <span class="drop__title">Görsel seçin veya buraya sürükleyin</span>
+        <span class="drop__title">Görsel seçin veya buraya sürükleyin <span class="drop__badge">4:3 WebP</span></span>
         <span>JPG / PNG / WebP — otomatik olarak 4:3 orana ortadan kırpılır, WebP'ye çevrilir ve en fazla 1600px genişliğe küçültülür</span>
         <input type="file" id="f_${f.name}_file" accept="image/*" />
       </label>
       <input type="hidden" id="f_${f.name}" value="${esc(v)}" />
       <div class="cover" id="f_${f.name}_cover"${v ? '' : ' hidden'}>
-        <img id="f_${f.name}_img" src="${v ? esc(SITE + v) : ''}" alt="" />
-        <div class="cover__info" id="f_${f.name}_info">Mevcut görsel. Yeni bir dosya seçmezseniz korunur.</div>
+        <div class="cover__media">
+          <img id="f_${f.name}_img" src="${v ? esc(SITE + v) : ''}" alt="" />
+        </div>
+        <div class="cover__content">
+          <div class="cover__info" id="f_${f.name}_info">Görsel kontrol ediliyor…</div>
+          <button type="button" class="cover__remove" id="f_${f.name}_remove" title="Kapak görselini kaldır">✕ Kaldır</button>
+        </div>
       </div>`;
 
   } else if (f.type === 'gallery'){
@@ -128,6 +133,7 @@ export function fieldHtml(f, values){
 export function renderForm(values){
   values = values || {};
   state.pendingImage = null;
+  state.coverValid = values.coverImage ? null : false;
   state.gallery = {
     existing: Array.isArray(values.gallery) ? [...values.gallery] : [],
     newFiles: [],
@@ -184,9 +190,9 @@ export function renderForm(values){
 
 /**
  * Tüm zorunlu alanları kontrol eder, eksik olanları `.field--error` ile
- * işaretler ve ilkine odaklanır. Eskiden yalnızca ilk eksik alanda tek bir
- * toast gösteriliyordu; artık tüm eksikler aynı anda görünür.
- * @returns {string[]} eksik alan etiketleri
+ * işaretler ve ilkine odaklanır/kaydırır.
+ * Kapak görseli için hem varlık hem 4:3 oran standardı kontrol edilir.
+ * @returns {string[]} eksik veya hatalı alan etiketleri
  */
 export function validateForm(cfg){
   const missing = [];
@@ -195,7 +201,29 @@ export function validateForm(cfg){
     const wrap = document.querySelector(`.field[data-field="${f.name}"]`);
     if (!wrap) continue;
     wrap.classList.remove('field--error');
-    if (!f.required || f.type === 'gallery' || f.type === 'image') continue;
+    if (!f.required || f.type === 'gallery') continue;
+
+    if (f.type === 'image'){
+      const hidden = $(`f_${f.name}`);
+      const hasExisting = Boolean(hidden && hidden.value.trim());
+      const hasNew = Boolean(state.pendingImage);
+
+      if (!hasNew && !hasExisting){
+        wrap.classList.add('field--error');
+        const errEl = wrap.querySelector('.field__error');
+        if (errEl) errEl.textContent = `${f.label} zorunludur. Lütfen 4:3 oranında bir görsel yükleyin.`;
+        missing.push(f.label);
+        if (!firstInvalid) firstInvalid = $(`f_${f.name}_file`) || wrap;
+      } else if (hasExisting && !hasNew && state.coverValid === false){
+        wrap.classList.add('field--error');
+        const errEl = wrap.querySelector('.field__error');
+        if (errEl) errEl.textContent = 'Mevcut kapak görseli 4:3 standart oranına uymuyor. Lütfen yeni bir 4:3 görsel yükleyin.';
+        missing.push(`${f.label} (4:3 oranında yeni görsel gerekli)`);
+        if (!firstInvalid) firstInvalid = $(`f_${f.name}_file`) || wrap;
+      }
+      continue;
+    }
+
     const el = $(`f_${f.name}`);
     if (el && !String(el.value).trim()){
       wrap.classList.add('field--error');
@@ -205,6 +233,11 @@ export function validateForm(cfg){
       if (!firstInvalid) firstInvalid = el;
     }
   }
-  if (firstInvalid) firstInvalid.focus();
+  if (firstInvalid){
+    if (typeof firstInvalid.focus === 'function') firstInvalid.focus();
+    if (typeof firstInvalid.scrollIntoView === 'function') {
+      firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
   return missing;
 }

@@ -58,22 +58,94 @@ export function setupCover(name){
   const box = $(`f_${name}_cover`);
   const img = $(`f_${name}_img`);
   const info = $(`f_${name}_info`);
+  const rmBtn = $(`f_${name}_remove`);
   if (!fileEl) return;
+
+  function evaluateExistingImage(){
+    if (state.pendingImage) {
+      state.coverValid = true;
+      return;
+    }
+    const w = img.naturalWidth;
+    const h = img.naturalHeight;
+    if (w && h) {
+      const ratio = w / h;
+      const is43 = Math.abs(ratio - (4 / 3)) < 0.05;
+      if (is43) {
+        state.coverValid = true;
+        info.innerHTML = `
+          <span class="cover__badge cover__badge--ok">✓ 4:3 Standart Kapak</span>
+          <div class="cover__meta">Mevcut görsel (${w}×${h}px). Yeni bir dosya seçmezseniz korunur.</div>`;
+        box.classList.remove('cover--warn');
+        box.classList.add('cover--ok');
+      } else {
+        state.coverValid = false;
+        info.innerHTML = `
+          <span class="cover__badge cover__badge--warn">⚠️ 4:3 Standart Dışı (${w}×${h}px)</span>
+          <div class="cover__warn-text">Mevcut görsel 4:3 standart oranına uymuyor. Kart düzeni için lütfen yeni bir görsel yükleyin.</div>`;
+        box.classList.remove('cover--ok');
+        box.classList.add('cover--warn');
+      }
+    }
+  }
+
+  img.onload = evaluateExistingImage;
+  img.onerror = () => {
+    if (!state.pendingImage) {
+      state.coverValid = false;
+      info.innerHTML = `
+        <span class="cover__badge cover__badge--warn">❌ Görsel yüklenemedi</span>
+        <div class="cover__warn-text">Kapak görseli yüklenemedi. Lütfen geçerli bir 4:3 görsel seçin.</div>`;
+      box.classList.remove('cover--ok');
+      box.classList.add('cover--warn');
+    }
+  };
+
+  // Resim zaten yüklenmişse (önbellekten) onload hemen tetiklenmeyebilir
+  if (img.complete && img.naturalWidth) {
+    evaluateExistingImage();
+  }
 
   async function accept(file){
     if (!file) return;
-    info.textContent = 'WebP formatına çevriliyor…';
+    info.textContent = '4:3 WebP formatına çevriliyor…';
     box.hidden = false;
     try{
       const out = await toWebp(file, { aspectRatio: IMAGE_ASPECT_RATIO });
       state.pendingImage = { base64: out.dataUrl, name: file.name };
+      state.coverValid = true;
       img.src = out.dataUrl;
-      info.innerHTML = `<strong>Yeni görsel hazır.</strong><br>${out.width}×${out.height}px · ${kb(out.size)} · WebP`;
+      info.innerHTML = `
+        <span class="cover__badge cover__badge--ok">✓ 4:3 WebP Görsel Hazır</span>
+        <div class="cover__meta">${out.width}×${out.height}px · ${kb(out.size)} · WebP</div>`;
+      box.classList.remove('cover--warn');
+      box.classList.add('cover--ok');
+
+      const fieldWrap = box.closest('.field');
+      if (fieldWrap) fieldWrap.classList.remove('field--error');
       markDirty();
     }catch(err){
       state.pendingImage = null;
-      info.textContent = 'Hata: ' + err.message;
+      state.coverValid = false;
+      info.innerHTML = `<span class="cover__badge cover__badge--warn">Hata: ${esc(err.message)}</span>`;
+      box.classList.remove('cover--ok');
+      box.classList.add('cover--warn');
     }
+  }
+
+  if (rmBtn){
+    rmBtn.onclick = () => {
+      state.pendingImage = null;
+      state.coverValid = false;
+      const hidden = $(`f_${name}`);
+      if (hidden) hidden.value = '';
+      if (fileEl) fileEl.value = '';
+      img.src = '';
+      box.hidden = true;
+      box.classList.remove('cover--ok', 'cover--warn');
+      info.textContent = '';
+      markDirty();
+    };
   }
 
   fileEl.onchange = () => accept(fileEl.files && fileEl.files[0]);

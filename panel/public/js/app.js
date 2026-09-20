@@ -143,7 +143,7 @@ async function save(){
 
   const missing = validateForm(cfg);
   if (missing.length){
-    toast(`<strong>${missing.length} alan eksik:</strong> ${esc(missing.join(', '))}`, 'err');
+    toast(`<strong>${missing.length} alan eksik veya standart dışı:</strong> ${esc(missing.join(', '))}`, 'err');
     return;
   }
 
@@ -218,8 +218,14 @@ async function cancel(){
 // Form alanları her renderForm'da yeniden üretilir ama konteyner sabittir;
 // bu yüzden dinleyiciler burada BİR KEZ bağlanır ve olay yükselmesiyle
 // (event bubbling) yeni alanlara da uygulanır.
-$('fields').addEventListener('input', markDirty);
-$('fields').addEventListener('change', markDirty);
+$('fields').addEventListener('input', (e) => {
+  markDirty();
+  e.target.closest?.('.field')?.classList.remove('field--error');
+});
+$('fields').addEventListener('change', (e) => {
+  markDirty();
+  e.target.closest?.('.field')?.classList.remove('field--error');
+});
 
 $('newBtn').onclick = () => newEntry();
 $('backBtn').onclick = async () => { if (await guard()) showList(); };

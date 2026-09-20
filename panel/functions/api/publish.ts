@@ -141,15 +141,18 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   const slug = slugify(String(body.slug ?? '') || title);
   if (!slug) return json({ error: 'Geçerli bir adres (slug) üretilemedi.' }, 400);
 
-  const date = String(body.date ?? '').trim() || new Date().toISOString().slice(0, 10);
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
-    return json({ error: 'Tarih YYYY-AA-GG biçiminde olmalı.' }, 400);
+  const date = String(body.date ?? '').trim();
+  if (!date || !/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+    return json({ error: 'Geçerli bir tarih zorunludur (YYYY-AA-GG).' }, 400);
   }
+
+  const description = String(body.description ?? '').trim();
+  if (!description) return json({ error: 'Özet açıklama zorunludur.' }, 400);
 
   const MAX_GALLERY_IMAGES = 8;
 
   try {
-    // 1) Kapak görseli (tarayıcıda webp'ye çevrilmiş olarak gelir)
+    // 1) Kapak görseli (tarayıcıda 4:3 webp'ye çevrilmiş olarak gelir)
     let coverImage = String(body.coverImage ?? '').trim();
     if (body.imageBase64) {
       const payload = String(body.imageBase64).split(',').pop() ?? '';
@@ -164,6 +167,10 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
         `media: ${fileName} (${editor})`
       );
       coverImage = `${collection.mediaPublic}/${fileName}`;
+    }
+
+    if (!coverImage) {
+      return json({ error: 'Kapak görseli zorunludur (4:3 WebP formatında).' }, 400);
     }
 
     // 1b) Galeri görselleri: düzenlemede korunan mevcut yollar (existingGallery)
@@ -200,10 +207,12 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     }
 
     // 2) Frontmatter — alanlar ana sitedeki Zod şemasıyla uyumlu olmalı
-    const fm: Record<string, string> = { title, date };
-    const description = String(body.description ?? '').trim();
-    if (description) fm.description = description;
-    if (coverImage) fm.coverImage = coverImage;
+    const fm: Record<string, string> = {
+      title,
+      date,
+      description,
+      coverImage,
+    };
 
     if (body.collection === 'projects') {
       const category = String(body.category ?? 'insaat').trim();

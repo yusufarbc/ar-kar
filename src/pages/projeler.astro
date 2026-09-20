@@ -3,7 +3,6 @@ import { EXPERIENCE_YEARS } from '../lib/company';
 import PageHeader from '../components/PageHeader.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
-import { PROJECT_CATEGORIES } from '../lib/projects';
 import SectionHeader from '../components/ui/SectionHeader.astro';
 import Card from '../components/ui/Card.astro';
 import CardMedia from '../components/ui/CardMedia.astro';
@@ -217,13 +216,17 @@ const keywords = "konut projeleri samsun, çarşamba konut inşaat, atakum konut
             {cmsProjects.map((project) => {
                 const slug = project.id.replace(/\/index$/, '');
                 const cover = project.data.coverImage || '/img/card-default.webp';
-                const categoryLabel = PROJECT_CATEGORIES[project.data.category];
                 return (
                     <div class="col d-flex">
                         <Card padded={false} hoverable={true} class="flex-fill d-flex flex-column h-100">
                             <a href={cover} data-lightbox="portfolio" aria-label={`${project.data.title} görselini büyüt`}>
                                 <CardMedia src={cover} alt={project.data.title}>
-                                    {categoryLabel && <Badge slot="badge" label={categoryLabel} />}
+                                    <Badge
+                                        slot="badge"
+                                        label={project.data.status === 'guncel' ? 'Güncel Proje' : 'Tamamlanan Proje'}
+                                        icon={project.data.status === 'guncel' ? 'fa-spinner' : 'fa-check-circle'}
+                                        tone={project.data.status === 'guncel' ? 'solid' : 'dark'}
+                                    />
                                 </CardMedia>
                             </a>
                             <div class="card-surface__body flex-grow-1 d-flex flex-column">

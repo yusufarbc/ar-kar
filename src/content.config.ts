@@ -24,6 +24,7 @@ const projects = defineCollection({
   schema: z.object({
     title: z.string(),
     category: z.enum(['insaat', 'pvc', 'mimar']).default('insaat'),
+    status: z.enum(['tamamlandi', 'guncel']).default('tamamlandi'),
     location: z.string().optional(),
     specs: z.string().optional(),
     date: dateField,

@@ -27,6 +27,10 @@ export const COLLECTIONS = {
         {value:'pvc',    label:'PVC & Alüminyum', icon:'fa-th-large'},
         {value:'mimar',  label:'Mimarlık',        icon:'fa-drafting-compass'},
       ]},
+      {name:'status',   label:'Proje Durumu', type:'pillselect', required:true, options:[
+        {value:'tamamlandi', label:'Tamamlanan Proje', icon:'fa-check-circle'},
+        {value:'guncel',     label:'Güncel Proje',     icon:'fa-clock'},
+      ]},
       {name:'location', label:'Konum', type:'text', placeholder:'Çarşamba, Samsun'},
       {name:'specs',    label:'Daire / teknik bilgi', type:'text', placeholder:'18 daire (8× 2+1, 10× 1+1)'},
       {name:'date',     label:'Tarih', type:'date', required:true},

@@ -290,6 +290,10 @@ const ogImage = "https://ar-kar.com/img/og-default.webp";
                                 style="aspect-ratio: 4 / 3; object-fit: cover;" loading="lazy">
                             <div class="project-overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-white text-center p-4"
                                 style="background: rgba(231, 30, 36, 0.8); opacity: 0; transition: all 0.3s;">
+                                <span class="badge bg-white text-dark mb-2 px-3 py-1 fw-semibold">
+                                    <i class={`fa ${project.data.status === 'guncel' ? 'fa-spinner' : 'fa-check-circle'} text-primary me-1`} aria-hidden="true"></i>
+                                    {project.data.status === 'guncel' ? 'Güncel Proje' : 'Tamamlanan Proje'}
+                                </span>
                                 <h4 class="text-white mb-3">{project.data.title}</h4>
                                 {project.data.specs && <p class="project-overlay__specs">{project.data.specs}</p>}
                                 {project.data.description && <p class="project-overlay__description">{project.data.description}</p>}

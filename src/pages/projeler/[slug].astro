@@ -61,7 +61,11 @@ const coverImage = project.data.coverImage || '/img/card-default.webp';
       <div class="col-lg-9">
         <header class="mb-4">
           <div class="d-flex flex-wrap align-items-center text-muted mb-3 gap-3">
-            <span class="badge-pill">{categoryLabel}</span>
+            <span class={`badge-pill ${project.data.status === 'guncel' ? '' : 'badge-pill--dark'}`}>
+              <i class={`fa ${project.data.status === 'guncel' ? 'fa-spinner' : 'fa-check-circle'} me-1`} aria-hidden="true"></i>
+              {project.data.status === 'guncel' ? 'Güncel Proje' : 'Tamamlanan Proje'}
+            </span>
+            {categoryLabel && <span class="badge-pill badge-pill--tint">{categoryLabel}</span>}
             {project.data.location && (
               <span><i class="fa fa-map-marker-alt text-primary me-2" aria-hidden="true"></i>{project.data.location}</span>
             )}
@@ -81,13 +85,13 @@ const coverImage = project.data.coverImage || '/img/card-default.webp';
         </header>
 
         {project.data.coverImage && (
-          <div class="mb-5 rounded shadow-sm text-center" style="background: var(--surface-alt); padding: 14px;">
-            <a href={coverImage} data-lightbox="project">
+          <div class="mb-5 rounded overflow-hidden shadow-sm">
+            <a href={coverImage} data-lightbox="project" class="d-block">
               <img
                 src={coverImage}
                 alt={project.data.title}
-                class="img-fluid rounded"
-                style="max-height: 520px; width: auto; max-width: 100%;"
+                class="w-100 d-block"
+                style="aspect-ratio: 4 / 3; object-fit: cover;"
               />
             </a>
           </div>

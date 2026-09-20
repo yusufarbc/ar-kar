@@ -1,6 +1,7 @@
 ---
 title: "Bulutoğlu Konut Projesi"
 category: "insaat"
+status: "tamamlandi"
 location: "Çarşamba, Samsun"
 specs: "8 Daire (3+1) + Dükkan"
 date: "2026-01-18"

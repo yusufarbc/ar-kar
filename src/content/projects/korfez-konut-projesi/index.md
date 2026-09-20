@@ -1,6 +1,7 @@
 ---
 title: "Körfez Konut Projesi"
 category: "insaat"
+status: "tamamlandi"
 location: "Atakum, Samsun"
 specs: "19 Daire (1+1)"
 date: "2026-01-18"

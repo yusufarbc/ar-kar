@@ -1,6 +1,7 @@
 ---
 title: "Adapark Ala Konut Projesi"
 category: "insaat"
+status: "tamamlandi"
 location: "Çarşamba, Samsun"
 specs: "12 Daire (3+1, 160 m²) + 2 Dükkan"
 date: "2026-01-18"

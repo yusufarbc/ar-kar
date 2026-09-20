@@ -1,6 +1,7 @@
 ---
 title: "Adapark 2+0 Konut Projesi"
 category: "insaat"
+status: "tamamlandi"
 location: "Çarşamba, Samsun"
 specs: "6 Daire (2+0, 80 m²) + Dükkan"
 date: "2026-01-18"

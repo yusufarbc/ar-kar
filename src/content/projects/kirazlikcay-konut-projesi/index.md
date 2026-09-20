@@ -1,6 +1,7 @@
 ---
 title: "Kirazlıkçay Konut Projesi"
 category: "insaat"
+status: "tamamlandi"
 location: "Çarşamba, Samsun"
 specs: "18 Daire (8x2+1, 10x1+1)"
 date: "2026-01-18"

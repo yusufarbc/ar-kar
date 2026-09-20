@@ -272,10 +272,15 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     // Tüm alan ve görseller, GitHub'a herhangi bir dosya yazılmadan önce
     // doğrulanır. Böylece hatalı bir istek yarım kalmış medya commit'i bırakmaz.
     let projectCategory = '';
+    let projectStatus = 'tamamlandi';
     if (body.collection === 'projects') {
       projectCategory = String(body.category ?? 'insaat').trim();
       if (!PROJECT_CATEGORIES.includes(projectCategory)) {
         return json({ error: `Geçersiz kategori: ${projectCategory}` }, 400);
+      }
+      projectStatus = String(body.status ?? 'tamamlandi').trim();
+      if (!['tamamlandi', 'guncel'].includes(projectStatus)) {
+        return json({ error: `Geçersiz proje durumu: ${projectStatus}` }, 400);
       }
     }
 
@@ -353,6 +358,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
 
     if (body.collection === 'projects') {
       fm.category = projectCategory;
+      fm.status = projectStatus;
       const location = String(body.location ?? '').trim();
       if (location) fm.location = location;
       const specs = String(body.specs ?? '').trim();

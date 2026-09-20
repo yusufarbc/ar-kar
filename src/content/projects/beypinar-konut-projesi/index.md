@@ -1,6 +1,7 @@
 ---
 title: "Beypınar Konut Projesi"
 category: "insaat"
+status: "tamamlandi"
 location: "Atakum, Samsun"
 specs: "18 Daire (2+1, 120 m²)"
 date: "2026-01-18"

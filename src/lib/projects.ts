@@ -1,5 +1,5 @@
 /**
- * Proje kategorileri — Keystatic `category` select alanı ile birebir aynı.
+ * Projeler yalnızca inşaat kategorisinde yayınlanır.
  *
  * Bu sabit bilerek `content.config.ts` dışında tutulur: içerik yapılandırma
  * dosyası Astro tarafından özel olarak ele alınır ve sayfalardan import
@@ -7,8 +7,6 @@
  */
 export const PROJECT_CATEGORIES = {
   insaat: 'İnşaat',
-  pvc: 'PVC & Alüminyum',
-  mimar: 'Mimarlık',
 } as const;
 
 export type ProjectCategory = keyof typeof PROJECT_CATEGORIES;

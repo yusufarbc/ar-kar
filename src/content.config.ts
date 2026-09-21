@@ -23,7 +23,7 @@ const projects = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdoc}', base: 'src/content/projects' }),
   schema: z.object({
     title: z.string(),
-    category: z.enum(['insaat', 'pvc', 'mimar']).default('insaat'),
+    category: z.literal('insaat').default('insaat'),
     status: z.enum(['tamamlandi', 'guncel']).default('tamamlandi'),
     location: z.string().optional(),
     specs: z.string().optional(),

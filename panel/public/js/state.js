@@ -22,11 +22,6 @@ export const COLLECTIONS = {
     urlBase: '/projeler/',
     fields: [
       {name:'title',    label:'Proje adı', type:'text', required:true},
-      {name:'category', label:'Kategori',  type:'pillselect', required:true, options:[
-        {value:'insaat', label:'İnşaat',          icon:'fa-building'},
-        {value:'pvc',    label:'PVC & Alüminyum', icon:'fa-th-large'},
-        {value:'mimar',  label:'Mimarlık',        icon:'fa-drafting-compass'},
-      ]},
       {name:'status',   label:'Proje Durumu', type:'pillselect', required:true, options:[
         {value:'tamamlandi', label:'Tamamlanan Proje', icon:'fa-check-circle'},
         {value:'guncel',     label:'Güncel Proje',     icon:'fa-clock'},

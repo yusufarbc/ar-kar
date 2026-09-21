@@ -36,7 +36,6 @@ const COLLECTIONS: Record<string, { dir: string; mediaDir: string; mediaPublic: 
   },
 };
 
-const PROJECT_CATEGORIES = ['insaat', 'pvc', 'mimar'];
 const MAX_IMAGE_BYTES = 5 * 1024 * 1024;
 const MAX_IMAGE_WIDTH = 1600;
 const MAX_GALLERY_IMAGES = 8;
@@ -274,10 +273,9 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     let projectCategory = '';
     let projectStatus = 'tamamlandi';
     if (body.collection === 'projects') {
-      projectCategory = String(body.category ?? 'insaat').trim();
-      if (!PROJECT_CATEGORIES.includes(projectCategory)) {
-        return json({ error: `Geçersiz kategori: ${projectCategory}` }, 400);
-      }
+      // Panel yalnızca inşaat projeleri için kullanılır; kategori seçimi
+      // kullanıcıya gösterilmez ve istemciden gelen değer kabul edilmez.
+      projectCategory = 'insaat';
       projectStatus = String(body.status ?? 'tamamlandi').trim();
       if (!['tamamlandi', 'guncel'].includes(projectStatus)) {
         return json({ error: `Geçersiz proje durumu: ${projectStatus}` }, 400);

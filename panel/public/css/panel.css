@@ -277,7 +277,7 @@ button:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
 .md-preview img{max-width:100%;border-radius:7px}
 .md-area[hidden]{display:none}
 
-/* ---------- Kategori pill-seçici (projects.category) ---------- */
+/* ---------- Pill-seçici (proje durumu vb.) ---------- */
 .pill-select{display:flex;flex-wrap:wrap;gap:8px}
 .pill-select__option{
   display:flex;align-items:center;gap:7px;
@@ -316,15 +316,6 @@ button:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
 .bulkbar.is-on{display:flex}
 .bulkbar__count{font-weight:700;margin-right:auto}
 .entry__check{flex:none;width:16px;height:16px;accent-color:var(--brand)}
-
-/* ---------- Alt bilgi çubuğu ---------- */
-.pipeline{
-  display:flex;gap:9px;align-items:flex-start;
-  margin-top:4px;padding:12px 14px;border-radius:10px;
-  background:var(--panel-2);border:1px solid var(--line-2);
-  font-size:.81rem;color:var(--muted);line-height:1.5;
-}
-.pipeline strong{color:var(--ink-2)}
 
 /* ---------- Bildirimler ---------- */
 .toasts{

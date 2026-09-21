@@ -4,6 +4,8 @@ import PageHeader from '../components/PageHeader.astro';
 import { getCollection } from 'astro:content';
 import { COMPANY, FOUNDING_YEAR, INCORPORATION_YEAR, EXPERIENCE_YEARS } from '../lib/company';
 import SectionHeader from '../components/ui/SectionHeader.astro';
+import Card from '../components/ui/Card.astro';
+import CardMedia from '../components/ui/CardMedia.astro';
 
 /**
  * Ayrı "Hakkımızda" sayfası.
@@ -45,13 +47,13 @@ const MILESTONES = [
 ];
 
 const FIELDS = [
-  { icon: 'fa-building', name: 'Konut İnşaat Projeleri', href: '/projeler' },
-  { icon: 'fa-handshake', name: 'Anahtar Teslim İnşaat', href: '/muteahhitlik' },
-  { icon: 'fa-tools', name: 'Hırdavat & İnşaat Malzemeleri', href: '/insaat' },
-  { icon: 'fa-cube', name: 'PVC Kapı ve Pencere Sistemleri', href: '/pvc' },
-  { icon: 'fa-seedling', name: 'Tarım Ürünleri Alım Satımı', href: '/tarim' },
-  { icon: 'fa-leaf', name: 'Zirai Ürünler ve Danışmanlık', href: '/ziraat' },
-  { icon: 'fa-palette', name: 'Mimari Proje Hizmetleri', href: '/mimar' },
+  { icon: 'fa-building', name: 'Konut İnşaat Projeleri', href: '/projeler', img: '/img/konut.webp', alt: 'Konut inşaat projeleri' },
+  { icon: 'fa-handshake', name: 'Anahtar Teslim İnşaat', href: '/muteahhitlik', img: '/img/anahtarteslim.webp', alt: 'Anahtar teslim inşaat hizmeti' },
+  { icon: 'fa-tools', name: 'Hırdavat & İnşaat Malzemeleri', href: '/insaat', img: '/img/nalbur.webp', alt: 'Hırdavat ve inşaat malzemeleri' },
+  { icon: 'fa-cube', name: 'PVC Kapı ve Pencere Sistemleri', href: '/pvc', img: '/img/pvc-kapi-pencere.webp', alt: 'PVC kapı ve pencere sistemleri' },
+  { icon: 'fa-seedling', name: 'Tarım Ürünleri Alım Satımı', href: '/tarim', img: '/img/tarim.webp', alt: 'Tarım ürünleri alım satımı' },
+  { icon: 'fa-leaf', name: 'Zirai Ürünler ve Danışmanlık', href: '/ziraat', img: '/img/ziraat.webp', alt: 'Zirai ürünler ve danışmanlık' },
+  { icon: 'fa-palette', name: 'Mimari Proje Hizmetleri', href: '/mimar', img: '/img/mimariproje.webp', alt: 'Mimari proje hizmetleri' },
 ];
 
 const aboutSchema = {
@@ -118,18 +120,6 @@ const aboutSchema = {
       .timeline__title { font-size: 1.05rem; font-weight: 700; margin: .15rem 0 .35rem; }
       .timeline__text { color: var(--ink-500, #5b5e68); margin: 0; }
 
-      .field-grid { list-style: none; margin: 0; padding: 0; display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
-      .field-grid a {
-        display: flex; align-items: center; gap: .75rem;
-        padding: 1rem 1.1rem; text-decoration: none; color: inherit;
-        background: var(--surface, #ffffff);
-        border: 1px solid var(--ink-100, #e7e8eb); border-radius: 12px;
-        transition: border-color .2s ease, transform .2s ease;
-      }
-      .field-grid a:hover { border-color: var(--primary, #E71E24); transform: translateY(-2px); }
-      .field-grid i { color: var(--primary, #E71E24); font-size: 1.15rem; width: 1.4rem; text-align: center; }
-
       .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
       .fact {
         background: var(--surface-alt, #f6f6f8);
@@ -194,8 +184,8 @@ const aboutSchema = {
     </div>
 
     <!-- Kilometre taşları -->
-    <div class="row g-5 mb-6">
-      <div class="col-lg-6">
+    <div class="row justify-content-center mb-6">
+      <div class="col-lg-8">
         <SectionHeader as="h2" align="left" title="Kilometre Taşları" />
         <ul class="timeline">
           {MILESTONES.map((m) => (
@@ -209,20 +199,25 @@ const aboutSchema = {
         </ul>
       </div>
 
-      <div class="col-lg-6">
-        <SectionHeader as="h2" align="left" title="Faaliyet Alanlarımız" />
-        <ul class="field-grid">
-          {FIELDS.map((f) => (
-            <li>
-              <a href={f.href}>
-                <i class={`fa ${f.icon}`} aria-hidden="true"></i>
-                <span>{f.name}</span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
     </div>
+
+    <!-- Faaliyet alanları -->
+    <section class="mb-6" aria-labelledby="fields-title">
+      <SectionHeader as="h2" id="fields-title" title="Faaliyet Alanlarımız" />
+      <div class="row g-4">
+        {FIELDS.map((field) => (
+          <div class="col-xl-4 col-lg-4 col-md-6">
+            <Card href={field.href} padded={false} class="h-100 d-flex flex-column">
+              <CardMedia src={field.img} alt={field.alt} aspectRatio="4 / 3" />
+              <div class="card-surface__body flex-grow-1 d-flex align-items-center">
+                <i class={`fa ${field.icon} text-primary me-3 fs-4`} aria-hidden="true"></i>
+                <h3 class="h5 mb-0">{field.name}</h3>
+              </div>
+            </Card>
+          </div>
+        ))}
+      </div>
+    </section>
 
     <!-- İletişim yönlendirmesi -->
     <div class="text-center">

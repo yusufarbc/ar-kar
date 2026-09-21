@@ -5,6 +5,7 @@ description: "Pazar yeri konumunda bulunan projemiz; her biri 77 m² büyüklü�
 coverImage: "/img/projects/2026-09-21-orta-mahalle-pazaryeri-evleri.webp"
 category: "insaat"
 status: "guncel"
+location: "Çarşamba, Samsun"
 specs: "6 Daire (2+0  77m2 ) ve 1 Dükkan"
 ---
 

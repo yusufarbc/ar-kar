@@ -1,6 +1,6 @@
 ---
 title: "BMT Fabrika Bayiliğimiz hayırlı olsun."
-date: "2026-09-19"
+date: "2026-08-25"
 description: "BMT ALÇI\nBMT BORD\nBMT KİM\nFabrika Bayiliğimiz hayırlı olsun."
 coverImage: "/img/blog/2026-09-19-bmt-fabrika-bayiligimiz-hayirli-olsun.webp"
 ---

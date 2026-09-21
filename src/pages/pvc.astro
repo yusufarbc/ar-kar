@@ -87,16 +87,6 @@ const SERVICES = [
       'Modern cam balkon sistemleri ile balkonlarınızı kapatarak yaşam alanınızı genişletiyoruz. Sürme ve katlanır sistem seçenekleriyle pratik çözümler sunuyoruz.',
     features: ['Sürme Sistem', 'Katlanır Sistem', 'Temperli Cam', 'Hava Koşullarına Dayanıklı'],
   },
-  {
-    img: '/img/pvc-kapi-pencere.webp',
-    alt: 'PVC Kapı ve Pencere Doğrama Çözümleri - AR-KAR İnşaat',
-    badgeIcon: 'fas fa-border-all',
-    badgeLabel: 'PVC Doğrama',
-    title: 'PVC Doğrama Çözümleri',
-    description:
-      'Kapı, pencere ve profil seçeneklerini projenize uygun şekilde bir araya getirerek uzun ömürlü PVC doğrama çözümleri sunuyoruz.',
-    features: ['Kapı ve Pencere', 'Profil Seçenekleri', 'Çift Cam', 'Profesyonel Montaj'],
-  },
 ];
 
 const PROCESS_STEPS = [
@@ -134,7 +124,7 @@ const PROCESS_STEPS = [
       <!-- Service Cards -->
       <div class="row g-4 mb-5">
         {SERVICES.map((service) => (
-          <div class="col-xl-3 col-lg-6 col-md-6">
+          <div class="col-xl-4 col-lg-6 col-md-6">
             <Card padded={false} class="h-100 d-flex flex-column">
               <CardMedia src={service.img} alt={service.alt}>
                 <Badge slot="badge" label={service.badgeLabel} icon={service.badgeIcon} />

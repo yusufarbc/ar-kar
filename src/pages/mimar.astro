@@ -111,42 +111,12 @@ const WHY_US_FEATURES = [
 
   <PageHeader active="Mimari Proje Hizmetleri" parents={[{ label: "Hizmetler", href: "/#service" }]} />
 
-    <!-- Hero Section Start -->
-    <div class="container-fluid py-6 px-5" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/img/projects/tekstilkent.webp'); background-size: cover; background-position: center;">
-        <div class="row justify-content-center">
-            <div class="col-lg-8 text-center">
-                <h1 class="display-4 text-white mb-4">Profesyonel <span class="text-primary">Mimari Proje</span> Hizmetleri</h1>
-                <p class="text-white mb-4 fs-5">{EXPERIENCE_YEARS} yıllık tecrübemizle hayalinizdeki projeleri gerçeğe dönüştürüyoruz. Modern tasarım anlayışı ile işlevsel ve estetik projeler üretiyoruz.</p>
-                <div class="row g-3 mt-4">
-                    <div class="col-md-4">
-                        <div class="bg-primary bg-opacity-75 p-3 rounded">
-                            <h5 class="text-white mb-0"><i class="fa fa-home me-2" aria-hidden="true"></i>Konut Projeleri</h5>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="bg-primary bg-opacity-75 p-3 rounded">
-                            <h5 class="text-white mb-0"><i class="fa fa-building me-2" aria-hidden="true"></i>Ticari Projeler</h5>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="bg-primary bg-opacity-75 p-3 rounded">
-                            <h5 class="text-white mb-0"><i class="fa fa-file-contract me-2" aria-hidden="true"></i>Ruhsat İşlemleri</h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Hero Section End -->
-
     <!-- Service Overview Start -->
     <div class="container-fluid py-6 px-5">
-        <div class="row g-5">
+        <div class="row g-5 align-items-center">
             <div class="col-lg-7">
                 <SectionHeader as="h2" align="left" accent="AR-KAR" title="Mimari Proje Hizmetleri" />
-                <h4 class="mb-4 text-primary">Hayallerinizi Profesyonel Projelere Dönüştürüyoruz</h4>
-                <p class="mb-4">AR-KAR İnşaat olarak, {EXPERIENCE_YEARS} yıllık tecrübemizle mimari proje alanında da uzman hizmet sunuyoruz. Konut, ticari ve endüstriyel yapılar için profesyonel mimari projeler hazırlar, yapı ruhsatı işlemlerinizi takip ederiz.</p>
-                <p class="mb-4">Uzman mimar kadromuz ile modern tasarım anlayışını geleneksel Türk mimarisi ile harmanlayarak, işlevsel ve estetik projeler üretiyoruz. Müşterilerimizin ihtiyaçlarını ve bütçelerini göz önünde bulundurarak en uygun çözümleri sunuyoruz.</p>
+                <p class="mb-4">Konut ve ticari yapılar için mimari proje, teknik çizim, 3D görselleştirme ve ruhsat takibi hizmetleri sunuyoruz. İhtiyaçlarınızı, bütçenizi ve kullanım alanını birlikte değerlendirerek uygulanabilir çözümler hazırlıyoruz.</p>
 
                 <div class="row g-4">
                     {OVERVIEW_FEATURES.map((feature) => (
@@ -162,43 +132,12 @@ const WHY_US_FEATURES = [
                     ))}
                 </div>
             </div>
-            <div class="col-lg-5 pb-4 d-flex align-items-center justify-content-center" style="min-height: 400px;">
-                <img class="img-fluid w-100 h-auto rounded" src="/img/mimariproje.webp" style="object-fit: contain; border: none; max-height: 380px;" alt="Mimari Proje Hizmetleri" loading="lazy">
+            <div class="col-lg-5 d-flex align-items-center justify-content-center">
+                <img class="img-fluid w-100 rounded" src="/img/mimariproje.webp" alt="Mimari proje planları ve tasarım örnekleri" loading="lazy">
             </div>
         </div>
     </div>
     <!-- Service Overview End -->
-
-    <!-- Design Solutions Start -->
-    <section class="container-fluid bg-light py-6 px-5">
-        <SectionHeader
-          as="h2"
-          accent="Estetik ve İşlevsel"
-          title="Tasarım Çözümleri"
-          lede="Mekânın ihtiyaçlarına uygun, işlevsel ve estetik tasarım yaklaşımımızla projelerinizi bütüncül olarak ele alıyoruz."
-        />
-        <div class="row g-4 justify-content-center">
-            <div class="col-lg-5 col-md-6">
-                <figure class="mb-0">
-                    <img class="img-fluid w-100 rounded" src="/img/dekorasyon.webp" alt="İç mekân dekorasyon tasarımı" loading="lazy">
-                    <figcaption class="pt-3 text-center">
-                        <h3 class="h5 mb-1">İç Mekân Dekorasyonu</h3>
-                        <p class="mb-0 text-body-secondary">Yaşam alanlarınıza uyumlu, dengeli ve estetik çözümler.</p>
-                    </figcaption>
-                </figure>
-            </div>
-            <div class="col-lg-5 col-md-6">
-                <figure class="mb-0">
-                    <img class="img-fluid w-100 rounded" src="/img/mimari.webp" alt="Mimari proje tasarımı" loading="lazy">
-                    <figcaption class="pt-3 text-center">
-                        <h3 class="h5 mb-1">Yaşam Alanı Tasarımı</h3>
-                        <p class="mb-0 text-body-secondary">Kullanım alışkanlıklarınıza uygun, özenle planlanmış mekânlar.</p>
-                    </figcaption>
-                </figure>
-            </div>
-        </div>
-    </section>
-    <!-- Design Solutions End -->
 
     <!-- Why Choose Us Start -->
     <div class="container-fluid bg-light py-6 px-5">
